@@ -1,0 +1,24 @@
+[package]
+name        = "sagan"
+version     = "0.0.0"
+description = "Observability tool for Cosmos and other Tendermint applications"
+authors     = ["Tony Arcieri <tony@iqlusion.io>", "Shella Stephens <shella@iqlusion.io>"]
+license     = "Apache-2.0"
+repository  = "https://github.com/iqlusioninc/sagan"
+readme      = "README.md"
+edition     = "2018"
+keywords    = ["cosmos", "tendermint"]
+
+[dependencies]
+failure = "0.1"
+gumdrop = "0.6"
+lazy_static = "1"
+serde = { version = "1", features = ["serde_derive"] }
+
+[dependencies.abscissa_core]
+version = "0.2.0"
+
+[dev-dependencies.abscissa_core]
+version = "0.2.0"
+features = ["testing"]
+
