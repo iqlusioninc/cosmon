@@ -1,5 +1,6 @@
 //! `start` subcommand
 
+use crate::prelude::*;
 use abscissa_core::{Command, Options, Runnable};
 
 /// `start` subcommand
@@ -13,9 +14,7 @@ pub struct StartCommand {
 impl Runnable for StartCommand {
     /// Start the application.
     fn run(&self) {
-        println!(
-            "The cosmos is full beyond measure of elegant truths; \
-             of exquisite interrelationships; of the awesome machinery of nature."
-        );
+        let app = app_reader();
+        println!("Tendermint config: {:?}", app.tendermint_config());
     }
 }

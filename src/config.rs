@@ -1,9 +1,16 @@
-//! Sagan configuration file
+//! `sagan.toml` configuration file
 
+pub mod node;
+pub mod tendermint;
+
+pub use self::{node::NodeConfig, tendermint::TendermintConfig};
 use abscissa_core::Config;
 use serde::{Deserialize, Serialize};
 
-/// Sagan config
+/// `sagan.toml` configuration settings
 #[derive(Clone, Config, Debug, Default, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
-pub struct SaganConfig {}
+pub struct SaganConfig {
+    /// Monitored node configuration
+    pub node: NodeConfig,
+}
