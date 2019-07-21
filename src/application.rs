@@ -1,6 +1,9 @@
 //! Sagan Abscissa Application
 
-use crate::{commands::SaganCommand, config::SaganConfig};
+use crate::{
+    commands::SaganCommand,
+    config::{SaganConfig, TendermintConfig},
+};
 use abscissa_core::{
     application, config, logging, Application, EntryPoint, FrameworkError, StandardPaths,
 };
@@ -30,11 +33,14 @@ pub fn app_config() -> config::Reader<SaganApplication> {
     config::Reader::new(&APPLICATION)
 }
 
-/// Sagan Application
+/// Abscissa `Application` type
 #[derive(Debug, Default)]
 pub struct SaganApplication {
-    /// Application configuration.
+    /// Application's `sagan.toml` config settings
     config: Option<SaganConfig>,
+
+    /// Tendermint `config.toml` settings for monitored node
+    tendermint_config: Option<TendermintConfig>,
 
     /// Application state.
     state: application::State<Self>,
@@ -52,7 +58,7 @@ impl Application for SaganApplication {
 
     /// Accessor for application configuration.
     fn config(&self) -> &SaganConfig {
-        self.config.as_ref().expect("config not loaded")
+        self.config.as_ref().expect("`sagan.toml` not loaded")
     }
 
     /// Borrow the application state immutably.
@@ -73,7 +79,7 @@ impl Application for SaganApplication {
 
     /// Post-configuration lifecycle callback.
     fn after_config(&mut self, config: Self::Cfg) -> Result<(), FrameworkError> {
-        // Configure components
+        self.tendermint_config = Some(config.node.load_tendermint_config()?);
         self.state.components.after_config(&config)?;
         self.config = Some(config);
         Ok(())
@@ -86,5 +92,14 @@ impl Application for SaganApplication {
         } else {
             logging::Config::default()
         }
+    }
+}
+
+impl SaganApplication {
+    /// Borrow the loaded Tendermint configuration
+    pub fn tendermint_config(&self) -> &TendermintConfig {
+        self.tendermint_config
+            .as_ref()
+            .expect("Tendermint `config.toml` not loaded")
     }
 }
