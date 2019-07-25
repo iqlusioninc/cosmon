@@ -1,13 +1,11 @@
 //! Sagan Abscissa Application
 
-use crate::{
-    commands::SaganCommand,
-    config::{SaganConfig, TendermintConfig},
-};
+use crate::{commands::SaganCommand, config::SaganConfig};
 use abscissa_core::{
     application, config, logging, Application, EntryPoint, FrameworkError, StandardPaths,
 };
 use lazy_static::lazy_static;
+use tendermint::config::TendermintConfig;
 
 lazy_static! {
     /// Application state
@@ -79,7 +77,12 @@ impl Application for SaganApplication {
 
     /// Post-configuration lifecycle callback.
     fn after_config(&mut self, config: Self::Cfg) -> Result<(), FrameworkError> {
-        self.tendermint_config = Some(config.node.load_tendermint_config()?);
+        if let Some(agent_config) = &config.agent {
+            // If we are configured as a monitoring agent, load the
+            // monitored node's Tendermint config (i.e. `config.toml`)
+            self.tendermint_config = Some(agent_config.load_tendermint_config()?);
+        }
+
         self.state.components.after_config(&config)?;
         self.config = Some(config);
         Ok(())

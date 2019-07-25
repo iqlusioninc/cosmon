@@ -15,6 +15,9 @@ impl Runnable for StartCommand {
     /// Start the application.
     fn run(&self) {
         let app = app_reader();
-        println!("Tendermint config: {:?}", app.tendermint_config());
+
+        if app.config().is_agent() {
+            println!("Tendermint config: {:?}", app.tendermint_config());
+        }
     }
 }

@@ -15,7 +15,7 @@ gumdrop = "0.6"
 home = "0.3"
 lazy_static = "1"
 serde = { version = "1", features = ["serde_derive"] }
-tendermint = { version = "0.9", features = ["rpc"] }
+tendermint = { version = "0.10.0-rc0", features = ["config", "rpc"] }
 toml = "0.5"
 
 [dependencies.abscissa_core]
@@ -25,3 +25,5 @@ version = "0.2.0"
 version = "0.2.0"
 features = ["testing"]
 
+[patch.crates-io]
+tendermint = { git = "https://github.com/tendermint/kms" }
