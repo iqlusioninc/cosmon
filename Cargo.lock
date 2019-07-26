@@ -648,7 +648,7 @@ dependencies = [
 [[package]]
 name = "tendermint"
 version = "0.10.0-rc0"
-source = "git+https://github.com/tendermint/kms#0ed2e1f967ed68e32be5ae41adc794d81d6fe5c8"
+source = "git+https://github.com/tendermint/kms#8341528f44720f0b02ef77dfd3a1cff4e5765eda"
 dependencies = [
  "bytes 0.4.12 (registry+https://github.com/rust-lang/crates.io-index)",
  "chrono 0.4.7 (registry+https://github.com/rust-lang/crates.io-index)",

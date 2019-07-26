@@ -2,10 +2,11 @@
 
 use crate::{commands::SaganCommand, config::SaganConfig};
 use abscissa_core::{
-    application, config, logging, Application, EntryPoint, FrameworkError, StandardPaths,
+    application, config, logging, Application, EntryPoint, FrameworkError,
+    FrameworkErrorKind::ConfigError, StandardPaths,
 };
 use lazy_static::lazy_static;
-use tendermint::config::TendermintConfig;
+use tendermint::{config::TendermintConfig, Genesis};
 
 lazy_static! {
     /// Application state
@@ -39,6 +40,9 @@ pub struct SaganApplication {
 
     /// Tendermint `config.toml` settings for monitored node
     tendermint_config: Option<TendermintConfig>,
+
+    /// Genesis file (i.e. `genesis.json`) for the monitored node
+    genesis: Option<Genesis>,
 
     /// Application state.
     state: application::State<Self>,
@@ -76,13 +80,8 @@ impl Application for SaganApplication {
     }
 
     /// Post-configuration lifecycle callback.
-    fn after_config(&mut self, config: Self::Cfg) -> Result<(), FrameworkError> {
-        if let Some(agent_config) = &config.agent {
-            // If we are configured as a monitoring agent, load the
-            // monitored node's Tendermint config (i.e. `config.toml`)
-            self.tendermint_config = Some(agent_config.load_tendermint_config()?);
-        }
-
+    fn after_config(&mut self, config: SaganConfig) -> Result<(), FrameworkError> {
+        self.load_node_config(&config)?;
         self.state.components.after_config(&config)?;
         self.config = Some(config);
         Ok(())
@@ -99,10 +98,32 @@ impl Application for SaganApplication {
 }
 
 impl SaganApplication {
+    /// Load node configuration files (if applicable)
+    pub fn load_node_config(&mut self, config: &SaganConfig) -> Result<(), FrameworkError> {
+        let agent_config = match &config.agent {
+            Some(cfg) => cfg,
+            None => return Ok(()),
+        };
+
+        self.tendermint_config = Some(agent_config.load_tendermint_config()?);
+        self.genesis = Some(
+            self.tendermint_config()
+                .load_genesis_file(&agent_config.node_home)
+                .map_err(|e| err!(ConfigError, "{}", e))?,
+        );
+
+        Ok(())
+    }
+
     /// Borrow the loaded Tendermint configuration
     pub fn tendermint_config(&self) -> &TendermintConfig {
         self.tendermint_config
             .as_ref()
             .expect("Tendermint `config.toml` not loaded")
+    }
+
+    /// Borrow the loaded `tendermint::Genesis`
+    pub fn genesis(&self) -> &Genesis {
+        self.genesis.as_ref().expect("`genesis.json` not loaded")
     }
 }
