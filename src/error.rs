@@ -18,6 +18,10 @@ pub enum ErrorKind {
     /// Input/output error
     #[fail(display = "I/O error")]
     Io,
+
+    /// Error performing an RPC to the Tendermint node
+    #[fail(display = "RPC request error")]
+    Rpc,
 }
 
 impl fmt::Display for Error {
@@ -35,5 +39,19 @@ impl From<abscissa_core::Error<ErrorKind>> for Error {
 impl From<io::Error> for Error {
     fn from(other: io::Error) -> Self {
         err!(ErrorKind::Io, other).into()
+    }
+}
+
+impl From<tendermint::Error> for Error {
+    fn from(other: tendermint::Error) -> Error {
+        // TODO(tarcieri): better error conversions
+        err!(ErrorKind::Config, "{}", other).into()
+    }
+}
+
+impl From<tendermint::rpc::Error> for Error {
+    fn from(other: tendermint::rpc::Error) -> Error {
+        // TODO(tarcieri): better error conversions
+        err!(ErrorKind::Rpc, "{}", other).into()
     }
 }

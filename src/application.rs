@@ -2,11 +2,10 @@
 
 use crate::{commands::SaganCommand, config::SaganConfig};
 use abscissa_core::{
-    application, config, logging, Application, EntryPoint, FrameworkError,
-    FrameworkErrorKind::ConfigError, StandardPaths,
+    application, config, logging, Application, EntryPoint, FrameworkError, StandardPaths,
 };
 use lazy_static::lazy_static;
-use tendermint::{config::TendermintConfig, Genesis};
+use tendermint::config::TendermintConfig;
 
 lazy_static! {
     /// Application state
@@ -40,9 +39,6 @@ pub struct SaganApplication {
 
     /// Tendermint `config.toml` settings for monitored node
     tendermint_config: Option<TendermintConfig>,
-
-    /// Genesis file (i.e. `genesis.json`) for the monitored node
-    genesis: Option<Genesis>,
 
     /// Application state.
     state: application::State<Self>,
@@ -100,17 +96,11 @@ impl Application for SaganApplication {
 impl SaganApplication {
     /// Load node configuration files (if applicable)
     pub fn load_node_config(&mut self, config: &SaganConfig) -> Result<(), FrameworkError> {
-        let agent_config = match &config.agent {
-            Some(cfg) => cfg,
-            None => return Ok(()),
-        };
-
-        self.tendermint_config = Some(agent_config.load_tendermint_config()?);
-        self.genesis = Some(
-            self.tendermint_config()
-                .load_genesis_file(&agent_config.node_home)
-                .map_err(|e| err!(ConfigError, "{}", e))?,
-        );
+        self.tendermint_config = config
+            .agent
+            .as_ref()
+            .map(|agent_config| agent_config.load_tendermint_config())
+            .transpose()?;
 
         Ok(())
     }
@@ -120,10 +110,5 @@ impl SaganApplication {
         self.tendermint_config
             .as_ref()
             .expect("Tendermint `config.toml` not loaded")
-    }
-
-    /// Borrow the loaded `tendermint::Genesis`
-    pub fn genesis(&self) -> &Genesis {
-        self.genesis.as_ref().expect("`genesis.json` not loaded")
     }
 }
