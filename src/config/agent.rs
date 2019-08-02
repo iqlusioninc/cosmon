@@ -3,7 +3,7 @@
 use crate::error::{Error, ErrorKind};
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
-use tendermint::{net, config::TendermintConfig};
+use tendermint::{config::TendermintConfig, net};
 
 /// Tendermint node-related config settings from `sagan.toml`
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -13,7 +13,7 @@ pub struct AgentConfig {
     pub node_home: PathBuf,
 
     /// Location of collector
-    pub collector: CollectorConfig,
+    pub collector: CollectorAddr,
 }
 
 impl AgentConfig {
@@ -37,7 +37,7 @@ impl AgentConfig {
 /// Collector config
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
-pub enum CollectorConfig {
+pub enum CollectorAddr {
     /// Collector HTTP config
     #[serde(rename = "http")]
     Http(HttpConfig),

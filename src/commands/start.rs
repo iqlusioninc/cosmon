@@ -39,9 +39,10 @@ impl StartCommand {
     fn init_collector(&self) -> Option<net::Address> {
         let app = app_reader();
 
-        app.config().collector.as_ref().map(|collector_config| {
-            collector_config.listen_addr.clone()
-        })
+        app.config()
+            .collector
+            .as_ref()
+            .map(|collector_config| collector_config.listen_addr.clone())
     }
 
     /// Initialize the monitor (if configured)
@@ -55,6 +56,4 @@ impl StartCommand {
             })
         })
     }
-
-
 }

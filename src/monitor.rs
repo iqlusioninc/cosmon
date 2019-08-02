@@ -6,13 +6,16 @@ pub mod net_info;
 pub mod status;
 
 use self::{data::Data, net_info::NetInfo, status::Status};
-use crate::{config::agent::AgentConfig, error::Error};
+use crate::{
+    config::agent::{AgentConfig, CollectorAddr, HttpConfig},
+    error::{Error, ErrorKind},
+};
 use message::Message;
 use std::{
     thread,
     time::{Duration, Instant},
 };
-use tendermint::rpc;
+use tendermint::{net, rpc};
 
 /// Default interval at which to poll a Tendermint node
 pub const DEFAULT_POLL_INTERVAL: Duration = Duration::from_millis(100);
@@ -43,6 +46,9 @@ pub struct Monitor {
 
     /// Last time a full report was made
     last_full_report: Instant,
+
+    /// Collector address
+    collector_addr: CollectorAddr,
 }
 
 impl Monitor {
@@ -66,6 +72,7 @@ impl Monitor {
             poll_interval: DEFAULT_POLL_INTERVAL,
             full_report_interval: DEFAULT_FULL_REPORT_INTERVAL,
             last_full_report: Instant::now() - DEFAULT_FULL_REPORT_INTERVAL,
+            collector_addr: agent_config.collector.clone(),
         })
     }
 
@@ -75,7 +82,7 @@ impl Monitor {
             match self.poll() {
                 Ok(msg) => {
                     if let Some(env) = message::Envelope::new(self.status.node.id, msg) {
-                        println!("{}", env.to_json());
+                        self.report(env).unwrap();
                     }
                 }
                 Err(e) => {
@@ -107,5 +114,25 @@ impl Monitor {
         } else {
             false
         }
+    }
+
+    fn report(&self, msg: message::Envelope) -> Result<(), Error> {
+        let url = match &self.collector_addr {
+            CollectorAddr::Http(HttpConfig {
+                addr: net::Address::Tcp { host, port, .. },
+            }) => format!("http://{}:{}/collector", host, port),
+            other => fail!(ErrorKind::Config, "unsupported collector: {:?}", other),
+        };
+
+        let client = reqwest::Client::new();
+        let res = client
+            .post(&url)
+            .body(msg.to_json())
+            .send()
+            .map_err(|e| err!(ErrorKind::Report, "{}", e))?;
+
+        res.error_for_status()
+            .map_err(|e| err!(ErrorKind::Report, "{}", e))?;
+        Ok(())
     }
 }

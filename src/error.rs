@@ -19,6 +19,10 @@ pub enum ErrorKind {
     #[fail(display = "I/O error")]
     Io,
 
+    /// Error reporting events to the collector
+    #[fail(display = "error reporting to collector")]
+    Report,
+
     /// Error performing an RPC to the Tendermint node
     #[fail(display = "RPC request error")]
     Rpc,

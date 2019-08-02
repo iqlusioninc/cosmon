@@ -87,4 +87,3 @@ impl Application for SaganApplication {
         }
     }
 }
-
