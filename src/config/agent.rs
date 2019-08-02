@@ -1,9 +1,9 @@
 //! `sagan.toml` monitoring agent configuration settings
 
-use abscissa_core::{FrameworkError, FrameworkErrorKind::ConfigError};
+use crate::error::{Error, ErrorKind};
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
-use tendermint::config::TendermintConfig;
+use tendermint::{net, config::TendermintConfig};
 
 /// Tendermint node-related config settings from `sagan.toml`
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -11,6 +11,9 @@ use tendermint::config::TendermintConfig;
 pub struct AgentConfig {
     /// Location of monitored Tendermint node's `--home` directory
     pub node_home: PathBuf,
+
+    /// Location of collector
+    pub collector: CollectorConfig,
 }
 
 impl AgentConfig {
@@ -25,8 +28,25 @@ impl AgentConfig {
     }
 
     /// Load `TendermintConfig` using this node configuration
-    pub fn load_tendermint_config(&self) -> Result<TendermintConfig, FrameworkError> {
+    pub fn load_tendermint_config(&self) -> Result<TendermintConfig, Error> {
         Ok(TendermintConfig::load_toml_file(&self.config_toml_path())
-            .map_err(|e| err!(ConfigError, "{}", e))?)
+            .map_err(|e| err!(ErrorKind::Config, "{}", e))?)
     }
+}
+
+/// Collector config
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+pub enum CollectorConfig {
+    /// Collector HTTP config
+    #[serde(rename = "http")]
+    Http(HttpConfig),
+}
+
+/// Http config
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct HttpConfig {
+    /// Address of collector http service
+    pub addr: net::Address,
 }

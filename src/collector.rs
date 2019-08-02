@@ -1,10 +1,11 @@
 //! HTTP collector
 
 use crate::monitor::message;
+use tendermint::net;
 use warp::Filter;
 
 /// Run the HTTP collector
-pub fn run() {
+pub fn run(_listen_addr: &net::Address) {
     // POST /collector
     let collector = warp::post2()
         .and(warp::path("collector"))

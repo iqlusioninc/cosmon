@@ -28,7 +28,9 @@ impl SaganConfig {
 
 impl Default for SaganConfig {
     fn default() -> Self {
-        Self { agent: None, collector: None }
+        Self {
+            agent: None,
+            collector: None,
+        }
     }
 }
-
