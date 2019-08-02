@@ -7,6 +7,7 @@
 extern crate abscissa_core;
 
 pub mod application;
+pub mod collector;
 pub mod commands;
 pub mod config;
 pub mod error;

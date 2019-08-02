@@ -1,8 +1,10 @@
 //! `sagan.toml` configuration file
 
 pub mod agent;
+pub mod collector;
 
 use self::agent::AgentConfig;
+use self::collector::CollectorConfig;
 use abscissa_core::Config;
 use serde::{Deserialize, Serialize};
 
@@ -12,6 +14,9 @@ use serde::{Deserialize, Serialize};
 pub struct SaganConfig {
     /// Monitoring agent configuration
     pub agent: Option<AgentConfig>,
+
+    /// Collector configuration
+    pub collector: Option<CollectorConfig>,
 }
 
 impl SaganConfig {
@@ -23,6 +28,9 @@ impl SaganConfig {
 
 impl Default for SaganConfig {
     fn default() -> Self {
-        Self { agent: None }
+        Self {
+            agent: None,
+            collector: None,
+        }
     }
 }

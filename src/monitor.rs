@@ -6,14 +6,16 @@ pub mod net_info;
 pub mod status;
 
 use self::{data::Data, net_info::NetInfo, status::Status};
-use crate::error::Error;
+use crate::{
+    config::agent::{AgentConfig, CollectorAddr, HttpConfig},
+    error::{Error, ErrorKind},
+};
 use message::Message;
 use std::{
-    path::Path,
     thread,
     time::{Duration, Instant},
 };
-use tendermint::{config::TendermintConfig, rpc};
+use tendermint::{net, rpc};
 
 /// Default interval at which to poll a Tendermint node
 pub const DEFAULT_POLL_INTERVAL: Duration = Duration::from_millis(100);
@@ -44,18 +46,22 @@ pub struct Monitor {
 
     /// Last time a full report was made
     last_full_report: Instant,
+
+    /// Collector address
+    collector_addr: CollectorAddr,
 }
 
 impl Monitor {
     /// Create a new `Monitor`
-    pub fn new(home_dir: impl AsRef<Path>, config: &TendermintConfig) -> Result<Self, Error> {
-        let rpc_client = rpc::Client::new(&config.rpc.laddr)?;
-        let home_dir = home_dir.as_ref();
+    pub fn new(agent_config: &AgentConfig) -> Result<Self, Error> {
+        let home_dir = &agent_config.node_home;
+        let node_config = agent_config.load_tendermint_config()?;
+        let rpc_client = rpc::Client::new(&node_config.rpc.laddr)?;
         let status = Status::new(&rpc_client)?;
-        let data = Data::new(home_dir.join(&config.db_dir));
+        let data = Data::new(home_dir.join(&node_config.db_dir));
         let net_info = NetInfo::new(
-            config.p2p.persistent_peers.clone(),
-            config.p2p.private_peer_ids.clone(),
+            node_config.p2p.persistent_peers.clone(),
+            node_config.p2p.private_peer_ids.clone(),
         );
 
         Ok(Self {
@@ -66,6 +72,7 @@ impl Monitor {
             poll_interval: DEFAULT_POLL_INTERVAL,
             full_report_interval: DEFAULT_FULL_REPORT_INTERVAL,
             last_full_report: Instant::now() - DEFAULT_FULL_REPORT_INTERVAL,
+            collector_addr: agent_config.collector.clone(),
         })
     }
 
@@ -75,7 +82,7 @@ impl Monitor {
             match self.poll() {
                 Ok(msg) => {
                     if let Some(env) = message::Envelope::new(self.status.node.id, msg) {
-                        println!("{}", env.to_json());
+                        self.report(env).unwrap();
                     }
                 }
                 Err(e) => {
@@ -107,5 +114,25 @@ impl Monitor {
         } else {
             false
         }
+    }
+
+    fn report(&self, msg: message::Envelope) -> Result<(), Error> {
+        let url = match &self.collector_addr {
+            CollectorAddr::Http(HttpConfig {
+                addr: net::Address::Tcp { host, port, .. },
+            }) => format!("http://{}:{}/collector", host, port),
+            other => fail!(ErrorKind::Config, "unsupported collector: {:?}", other),
+        };
+
+        let client = reqwest::Client::new();
+        let res = client
+            .post(&url)
+            .body(msg.to_json())
+            .send()
+            .map_err(|e| err!(ErrorKind::Report, "{}", e))?;
+
+        res.error_for_status()
+            .map_err(|e| err!(ErrorKind::Report, "{}", e))?;
+        Ok(())
     }
 }

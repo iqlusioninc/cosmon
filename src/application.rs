@@ -5,7 +5,6 @@ use abscissa_core::{
     application, config, logging, Application, EntryPoint, FrameworkError, StandardPaths,
 };
 use lazy_static::lazy_static;
-use tendermint::config::TendermintConfig;
 
 lazy_static! {
     /// Application state
@@ -36,9 +35,6 @@ pub fn app_config() -> config::Reader<SaganApplication> {
 pub struct SaganApplication {
     /// Application's `sagan.toml` config settings
     config: Option<SaganConfig>,
-
-    /// Tendermint `config.toml` settings for monitored node
-    tendermint_config: Option<TendermintConfig>,
 
     /// Application state.
     state: application::State<Self>,
@@ -77,7 +73,6 @@ impl Application for SaganApplication {
 
     /// Post-configuration lifecycle callback.
     fn after_config(&mut self, config: SaganConfig) -> Result<(), FrameworkError> {
-        self.load_node_config(&config)?;
         self.state.components.after_config(&config)?;
         self.config = Some(config);
         Ok(())
@@ -90,25 +85,5 @@ impl Application for SaganApplication {
         } else {
             logging::Config::default()
         }
-    }
-}
-
-impl SaganApplication {
-    /// Load node configuration files (if applicable)
-    pub fn load_node_config(&mut self, config: &SaganConfig) -> Result<(), FrameworkError> {
-        self.tendermint_config = config
-            .agent
-            .as_ref()
-            .map(|agent_config| agent_config.load_tendermint_config())
-            .transpose()?;
-
-        Ok(())
-    }
-
-    /// Borrow the loaded Tendermint configuration
-    pub fn tendermint_config(&self) -> &TendermintConfig {
-        self.tendermint_config
-            .as_ref()
-            .expect("Tendermint `config.toml` not loaded")
     }
 }

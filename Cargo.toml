@@ -17,7 +17,9 @@ lazy_static = "1"
 serde = { version = "1", features = ["serde_derive"] }
 serde_json = { version = "1" }
 tendermint = { version = "0.10", features = ["config", "rpc"] }
+reqwest = "0.9"
 toml = "0.5"
+warp = "0.1"
 
 [dependencies.abscissa_core]
 version = "0.2.0"
