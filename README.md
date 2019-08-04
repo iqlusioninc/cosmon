@@ -1,6 +1,6 @@
-# sagan 🌌 <a href="https://www.iqlusion.io"><img src="https://storage.googleapis.com/iqlusion-production-web/img/logo/iqlusion-rings-sm.png" alt="iqlusion" width="24" height="24"></a>
+# <img src="https://storage.googleapis.com/iqlusion-production-web/github/sagan/sagan-logo.svg" width="450px" alt="Sagan"> 
 
-Observability tool for [Cosmos] and other [Tendermint] applications.
+Observability tool for [Cosmos] and other [Tendermint] applications. <a href="https://www.iqlusion.io"><img src="https://storage.googleapis.com/iqlusion-production-web/img/logo/iqlusion-rings-sm.png" alt="iqlusion" width="24" height="24" style="vertical-align: top"></a>
 
 ## License
 
