@@ -81,7 +81,9 @@ impl Monitor {
         loop {
             match self.poll() {
                 Ok(msg) => {
-                    if let Some(env) = message::Envelope::new(self.status.node.id, msg) {
+                    if let Some(env) =
+                        message::Envelope::new(self.status.node.network, self.status.node.id, msg)
+                    {
                         self.report(env).unwrap();
                     }
                 }
