@@ -3,7 +3,7 @@
 use super::{net_info::Peer, status::ChainStatus};
 use abscissa_core::time::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
-use tendermint::node;
+use tendermint::{chain, node};
 
 /// Every event reported to the collector is a sequence of messages
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -53,6 +53,9 @@ impl From<Vec<Peer>> for Message {
 /// originating from.
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Envelope {
+    /// Chain ID reporting in
+    pub network: chain::Id,
+
     /// Node ID reporting in
     pub node: node::Id,
 
@@ -65,11 +68,12 @@ pub struct Envelope {
 
 impl Envelope {
     /// Create a new message envelope from the given messages
-    pub fn new(node_id: node::Id, msg: Vec<Message>) -> Option<Envelope> {
+    pub fn new(network: chain::Id, node_id: node::Id, msg: Vec<Message>) -> Option<Envelope> {
         if msg.is_empty() {
             None
         } else {
             Some(Self {
+                network,
                 node: node_id,
                 ts: Utc::now(),
                 msg,
