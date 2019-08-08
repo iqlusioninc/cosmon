@@ -1,10 +1,17 @@
 //! Sagan Abscissa Application
 
-use crate::{commands::SaganCommand, config::SaganConfig};
+use crate::{
+    commands::SaganCommand,
+    config::{collector::CollectorConfig, SaganConfig},
+    message,
+    network::{self, Network},
+    prelude::*,
+};
 use abscissa_core::{
     application, config, logging, Application, EntryPoint, FrameworkError, StandardPaths,
 };
 use lazy_static::lazy_static;
+use std::{collections::BTreeMap as Map, process};
 
 lazy_static! {
     /// Application state
@@ -36,8 +43,11 @@ pub struct SaganApplication {
     /// Application's `sagan.toml` config settings
     config: Option<SaganConfig>,
 
-    /// Application state.
+    /// Application state
     state: application::State<Self>,
+
+    /// Network state
+    networks: Map<network::Id, Network>,
 }
 
 impl Application for SaganApplication {
@@ -74,6 +84,11 @@ impl Application for SaganApplication {
     /// Post-configuration lifecycle callback.
     fn after_config(&mut self, config: SaganConfig) -> Result<(), FrameworkError> {
         self.state.components.after_config(&config)?;
+
+        if let Some(collector_config) = &config.collector {
+            self.init_collector(collector_config);
+        }
+
         self.config = Some(config);
         Ok(())
     }
@@ -84,6 +99,33 @@ impl Application for SaganApplication {
             logging::Config::verbose()
         } else {
             logging::Config::default()
+        }
+    }
+}
+
+impl SaganApplication {
+    /// Initialize collector state
+    fn init_collector(&mut self, collector_config: &CollectorConfig) {
+        for network in Network::from_config(&collector_config.networks) {
+            let network_id = network.id();
+            if self.networks.insert(network_id.clone(), network).is_some() {
+                status_err!("duplicate networks in config: {}", &network_id);
+                process::exit(1);
+            }
+        }
+    }
+
+    /// Borrow a network registered with this application
+    pub fn network(&self, network_id: impl Into<network::Id>) -> Option<&Network> {
+        self.networks.get(&network_id.into())
+    }
+
+    /// Handle an incoming status message from a monitor
+    pub fn handle_message(&mut self, message: message::Envelope) {
+        if let Some(network) = self.networks.get_mut(&message.network.into()) {
+            network.handle_message(message);
+        } else {
+            warn!("got message for unregistered network: {}", &message.network);
         }
     }
 }

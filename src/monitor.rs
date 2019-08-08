@@ -1,7 +1,6 @@
 //! Tendermint node monitoring support
 
 pub mod data;
-pub mod message;
 pub mod net_info;
 pub mod status;
 
@@ -9,8 +8,8 @@ use self::{data::Data, net_info::NetInfo, status::Status};
 use crate::{
     config::agent::{AgentConfig, CollectorAddr, HttpConfig},
     error::{Error, ErrorKind},
+    message::{self, Message},
 };
-use message::Message;
 use std::{
     thread,
     time::{Duration, Instant},

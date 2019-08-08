@@ -11,5 +11,7 @@ pub mod collector;
 pub mod commands;
 pub mod config;
 pub mod error;
+pub mod message;
 pub mod monitor;
+pub mod network;
 pub mod prelude;

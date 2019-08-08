@@ -1,6 +1,6 @@
 //! `start` subcommand
 
-use crate::{collector, monitor::Monitor, prelude::*};
+use crate::{collector::HttpServer, monitor::Monitor, prelude::*};
 use abscissa_core::{Command, Options, Runnable};
 use std::{process, thread};
 use tendermint::net;
@@ -14,7 +14,12 @@ impl Runnable for StartCommand {
     fn run(&self) {
         let collector_thread = self.init_collector().map(|listen_addr| {
             thread::spawn(move || {
-                collector::run(&listen_addr);
+                let collector = HttpServer::new(&listen_addr).unwrap_or_else(|e| {
+                    status_err!("couldn't initialize HTTP collector: {}", e);
+                    process::exit(1);
+                });
+
+                collector.run();
             })
         });
 
