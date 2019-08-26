@@ -4,19 +4,12 @@ use crate::{
     error::{Error, ErrorKind},
     message,
     prelude::*,
+    response,
 };
 use abscissa_core::Runnable;
-use serde::Serialize;
 use std::{net::IpAddr, str::FromStr};
 use tendermint::net;
-use warp::http::StatusCode;
-use warp::{path, Filter, Rejection, Reply};
-
-#[derive(Serialize)]
-struct ErrorMessage {
-    code: u16,
-    message: String,
-}
+use warp::{path, Filter};
 
 /// HTTP service exposed by the collector
 pub struct HttpServer {
@@ -44,13 +37,14 @@ impl Runnable for HttpServer {
     /// Run the HTTP collector
     fn run(&self) {
         // GET /net/:network_id
-        let network = warp::get2()
-            .and(path!("net" / String).map(|network_id| {
-                let app = app_reader();
-                let network = app.network(network_id).unwrap();
-                Ok(warp::reply::json(&network.to_json()))
-            }))
-            .recover(network_not_found_error);
+        let network = warp::get2().and(path!("net" / String).map(|network_id| {
+            let app = app_reader();
+            let result = app
+                .network(network_id)
+                .map(|network| network.to_json())
+                .ok_or_else(|| response::Error {});
+            warp::reply::json(&response::Wrapper::from_result(result))
+        }));
 
         // POST /collector
         let collector = warp::post2()
@@ -67,12 +61,4 @@ impl Runnable for HttpServer {
 
         warp::serve(routes).run((self.addr, self.port));
     }
-}
-
-fn network_not_found_error(_err: Rejection) -> Result<impl Reply, Rejection> {
-    let json = warp::reply::json(&ErrorMessage {
-        code: StatusCode::NOT_FOUND.as_u16(),
-        message: "network not found!".to_string(),
-    });
-    Ok(warp::reply::with_status(json, StatusCode::NOT_FOUND))
 }
