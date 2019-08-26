@@ -4,6 +4,7 @@ use crate::{
     error::{Error, ErrorKind},
     message,
     prelude::*,
+    response,
 };
 use abscissa_core::Runnable;
 use std::{net::IpAddr, str::FromStr};
@@ -38,12 +39,11 @@ impl Runnable for HttpServer {
         // GET /net/:network_id
         let network = warp::get2().and(path!("net" / String).map(|network_id| {
             let app = app_reader();
-            if let Some(network) = app.network(network_id) {
-                warp::reply::json(&network.to_json())
-            } else {
-                // TODO(tarcieri): 404 error here?
-                panic!("no such network");
-            }
+            let result = app
+                .network(network_id)
+                .map(|network| network.to_json())
+                .ok_or_else(|| response::Error {});
+            warp::reply::json(&response::Wrapper::from_result(result))
         }));
 
         // POST /collector
