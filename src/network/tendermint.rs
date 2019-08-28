@@ -79,7 +79,7 @@ impl Network {
         }
     }
 
-    fn update_peer(&mut self, peer_info: &Vec<Peer>) {
+    fn update_peer(&mut self, peer_info: &[Peer]) {
         info!("got peer status update from: {:?} ", peer_info);
     }
 
