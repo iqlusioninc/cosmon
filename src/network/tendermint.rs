@@ -3,6 +3,7 @@
 use super::Id;
 use crate::{
     message::{Envelope, Message},
+    monitor::{net_info::Peer, status::ChainStatus},
     prelude::*,
 };
 use serde::Serialize;
@@ -16,6 +17,12 @@ pub struct Network {
 
     /// Nodes in this network
     nodes: Map<tendermint::node::Id, Node>,
+
+    peers: Vec<Peer>,
+
+    chain: Option<ChainStatus>,
+
+    validators: Option<tendermint::validator::Info>,
 }
 
 impl Network {
@@ -24,6 +31,9 @@ impl Network {
         Self {
             id,
             nodes: Map::new(),
+            peers: vec![],
+            chain: None,
+            validators: None,
         }
     }
 
@@ -45,8 +55,11 @@ impl Network {
 
         // Extract node information in advance
         for msg in &envelope.msg {
-            if let Message::Node(ref node_info) = msg {
-                self.update_node(node_info)
+            match msg {
+                Message::Node(ref node_info) => self.update_node(node_info),
+                Message::Peers(ref peer_info) => self.update_peer(peer_info),
+                Message::Chain(ref chain_info) => self.update_chain(chain_info),
+                Message::Validator(ref validator_info) => self.update_validator(validator_info),
             }
         }
     }
@@ -64,6 +77,18 @@ impl Network {
             let node = Node::from(node_info);
             self.nodes.insert(node.id, node);
         }
+    }
+
+    fn update_peer(&mut self, peer_info: &Vec<Peer>) {
+        info!("got peer status update from: {:?} ", peer_info);
+    }
+
+    fn update_chain(&mut self, chain_info: &ChainStatus) {
+        info!("got chain status update from: {:?}", chain_info);
+    }
+
+    fn update_validator(&mut self, validator_info: &tendermint::validator::Info) {
+        info!("got validator update from: {:?}", validator_info);
     }
 }
 
