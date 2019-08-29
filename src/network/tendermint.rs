@@ -3,6 +3,7 @@
 use super::Id;
 use crate::{
     message::{Envelope, Message},
+    monitor::{net_info::Peer, status::ChainStatus},
     prelude::*,
 };
 use serde::Serialize;
@@ -16,6 +17,12 @@ pub struct Network {
 
     /// Nodes in this network
     nodes: Map<tendermint::node::Id, Node>,
+
+    peers: Vec<Peer>,
+
+    chain: Option<ChainStatus>,
+
+    validators: Option<tendermint::validator::Info>,
 }
 
 impl Network {
@@ -24,6 +31,9 @@ impl Network {
         Self {
             id,
             nodes: Map::new(),
+            peers: vec![],
+            chain: None,
+            validators: None,
         }
     }
 
@@ -33,8 +43,8 @@ impl Network {
     }
 
     /// Serialize information about this network as JSON
-    pub fn to_json(&self) -> Vec<Node> {
-        self.nodes.iter().map(|(_, node)| node.clone()).collect()
+    pub fn state(&self) -> State {
+        State::new(self)
     }
 
     /// Update internal state from incoming messages
@@ -45,8 +55,11 @@ impl Network {
 
         // Extract node information in advance
         for msg in &envelope.msg {
-            if let Message::Node(ref node_info) = msg {
-                self.update_node(node_info)
+            match msg {
+                Message::Node(ref node_info) => self.update_node(node_info),
+                Message::Peers(ref peer_info) => self.update_peer(peer_info),
+                Message::Chain(ref chain_info) => self.update_chain(chain_info),
+                Message::Validator(ref validator_info) => self.update_validator(validator_info),
             }
         }
     }
@@ -65,6 +78,27 @@ impl Network {
             self.nodes.insert(node.id, node);
         }
     }
+
+    /// Update information about peers
+    fn update_peer(&mut self, peer_info: &[Peer]) {
+        info!("peers update: {:?} ", peer_info);
+
+        self.peers = peer_info.to_vec().clone();
+    }
+
+    /// Update information about chain status
+    fn update_chain(&mut self, chain_info: &ChainStatus) {
+        info!("chain status update: {:?}", chain_info);
+
+        self.chain = Some(chain_info.clone());
+    }
+
+    /// Update information about validators
+    fn update_validator(&mut self, validator_info: &tendermint::validator::Info) {
+        info!("validator update: {:?}", validator_info);
+
+        self.validators = Some(validator_info.clone());
+    }
 }
 
 /// Nodes in Tendermint networks
@@ -82,6 +116,26 @@ impl<'a> From<&'a tendermint::node::Info> for Node {
         Node {
             id: node_info.id,
             moniker: node_info.moniker.clone(),
+        }
+    }
+}
+
+/// Snapshot of current network state
+#[derive(Debug, Serialize)]
+pub struct State {
+    nodes: Vec<Node>,
+    peers: Vec<Peer>,
+    chain: Option<ChainStatus>,
+    validators: Option<tendermint::validator::Info>,
+}
+
+impl State {
+    fn new(network: &Network) -> Self {
+        Self {
+            nodes: network.nodes.iter().map(|(_, node)| node.clone()).collect(),
+            peers: network.peers.clone(),
+            chain: network.chain.clone(),
+            validators: network.validators.clone(),
         }
     }
 }

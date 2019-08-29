@@ -41,7 +41,7 @@ impl Runnable for HttpServer {
             let app = app_reader();
             let result = app
                 .network(network_id)
-                .map(|network| network.to_json())
+                .map(|network| network.state())
                 .ok_or_else(|| response::Error {});
             warp::reply::json(&response::Wrapper::from_result(result))
         }));
