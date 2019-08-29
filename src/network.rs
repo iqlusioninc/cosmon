@@ -70,9 +70,9 @@ impl Network {
     }
 
     /// Return JSON serialization of this network's information
-    pub fn to_json(&self) -> impl Serialize {
+    pub fn state(&self) -> impl Serialize {
         match self {
-            Network::Tendermint(tm) => tm.to_json(),
+            Network::Tendermint(tm) => tm.state(),
         }
     }
 }
