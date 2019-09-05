@@ -6,6 +6,7 @@ use crate::{
     monitor::{net_info::Peer, status::ChainStatus},
     prelude::*,
 };
+use chrono::{DateTime, Utc};
 use serde::Serialize;
 use std::collections::BTreeMap as Map;
 
@@ -67,14 +68,22 @@ impl Network {
     /// Update information about a particular node
     fn update_node(&mut self, node_info: &tendermint::node::Info) {
         info!(
-            "got node status update from: {} (moniker: {})",
+            "node status update from: {} (moniker: {})",
             &node_info.id, &node_info.moniker
         );
 
-        if let Some(_node) = self.nodes.get(&node_info.id) {
-            // TODO(tarcieri): update existing node information
+        if let Some(node) = self.nodes.get_mut(&node_info.id) {
+            node.update(node_info);
+            info!(
+                "existing node status update from: {} (moniker: {}): {:?}",
+                &node.id, &node.moniker, &node
+            );
         } else {
             let node = Node::from(node_info);
+            info!(
+                "new node status update from: {} (moniker: {}): {:?}",
+                &node.id, &node.moniker, &node
+            );
             self.nodes.insert(node.id, node);
         }
     }
@@ -109,6 +118,19 @@ pub struct Node {
 
     /// Node moniker
     pub moniker: tendermint::Moniker,
+
+    /// First seen timestamp
+    pub first_seen: DateTime<Utc>,
+
+    /// Last seen timestamp
+    pub last_seen: DateTime<Utc>,
+}
+
+impl Node {
+    fn update(&mut self, node_info: &tendermint::node::Info) {
+        self.moniker = node_info.moniker.clone();
+        self.last_seen = Utc::now();
+    }
 }
 
 impl<'a> From<&'a tendermint::node::Info> for Node {
@@ -116,6 +138,8 @@ impl<'a> From<&'a tendermint::node::Info> for Node {
         Node {
             id: node_info.id,
             moniker: node_info.moniker.clone(),
+            first_seen: Utc::now(),
+            last_seen: Utc::now(),
         }
     }
 }

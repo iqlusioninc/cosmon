@@ -5,6 +5,7 @@
 
 #[macro_use]
 extern crate abscissa_core;
+extern crate chrono;
 
 pub mod application;
 pub mod collector;
