@@ -3,12 +3,13 @@
 use super::Id;
 use crate::{
     message::{Envelope, Message},
-    monitor::{net_info::Peer, status::ChainStatus},
+    monitor::{net_info, status::ChainStatus},
     prelude::*,
 };
 use chrono::{DateTime, Utc};
 use serde::Serialize;
 use std::collections::BTreeMap as Map;
+use tendermint::node;
 
 /// Tendermint networks
 #[derive(Debug)]
@@ -17,12 +18,15 @@ pub struct Network {
     id: tendermint::chain::Id,
 
     /// Nodes in this network
-    nodes: Map<tendermint::node::Id, Node>,
+    nodes: Map<node::Id, Node>,
 
+    /// Peers in this network
     peers: Vec<Peer>,
 
+    /// Chain status
     chain: Option<ChainStatus>,
 
+    /// Validators in this network
     validators: Option<tendermint::validator::Info>,
 }
 
@@ -67,11 +71,6 @@ impl Network {
 
     /// Update information about a particular node
     fn update_node(&mut self, node_info: &tendermint::node::Info) {
-        info!(
-            "node status update from: {} (moniker: {})",
-            &node_info.id, &node_info.moniker
-        );
-
         if let Some(node) = self.nodes.get_mut(&node_info.id) {
             node.update(node_info);
             info!(
@@ -89,7 +88,7 @@ impl Network {
     }
 
     /// Update information about peers
-    fn update_peer(&mut self, peer_info: &[Peer]) {
+    fn update_peer(&mut self, peer_info: &[net_info::Peer]) {
         info!("peers update: {:?} ", peer_info);
 
         self.peers = peer_info.to_vec().clone();
@@ -142,6 +141,11 @@ impl<'a> From<&'a tendermint::node::Info> for Node {
             last_seen: Utc::now(),
         }
     }
+}
+
+#[derive(Clone, Debug)]
+pub struct Peer {
+    pub id:  tendermint::node::Id
 }
 
 /// Snapshot of current network state

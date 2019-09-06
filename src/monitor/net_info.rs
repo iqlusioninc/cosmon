@@ -134,7 +134,7 @@ impl NetInfo {
             if let Some(peer) = map.get_mut(id) {
                 peer.private = true;
             } else {
-                fail!(ErrorKind::Config, "unkown private_peer_id: {}", id);
+                fail!(ErrorKind::Config, "unknown private_peer_id: {}", id);
             }
         }
 
