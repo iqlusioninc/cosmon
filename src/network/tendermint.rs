@@ -7,7 +7,7 @@ use crate::{
     prelude::*,
 };
 use chrono::{DateTime, Utc};
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap as Map;
 use tendermint::node;
 
@@ -91,7 +91,7 @@ impl Network {
     fn update_peer(&mut self, peer_info: &[net_info::Peer]) {
         info!("peers update: {:?} ", peer_info);
 
-        self.peers = peer_info.to_vec().clone();
+        self.peers = peer_info.iter().map(Peer::new).collect();
     }
 
     /// Update information about chain status
@@ -143,9 +143,14 @@ impl<'a> From<&'a tendermint::node::Info> for Node {
     }
 }
 
-#[derive(Clone, Debug)]
-pub struct Peer {
-    pub id:  tendermint::node::Id
+/// Peer info
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct Peer(net_info::Peer);
+
+impl Peer {
+    fn new(peer: &net_info::Peer) -> Self {
+        Peer(peer.clone())
+    }
 }
 
 /// Snapshot of current network state
