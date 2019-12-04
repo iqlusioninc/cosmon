@@ -11,7 +11,7 @@ keywords    = ["cosmos", "tendermint"]
 
 [dependencies]
 failure = "0.1"
-gumdrop = "0.6"
+gumdrop = "0.7"
 home = "0.5"
 lazy_static = "1"
 serde = { version = "1", features = ["serde_derive"] }
@@ -22,8 +22,8 @@ toml = "0.5"
 warp = "0.1"
 
 [dependencies.abscissa_core]
-version = "0.3.0"
+version = "0.4.0"
 
 [dev-dependencies.abscissa_core]
-version = "0.3.0"
+version = "0.4.0"
 features = ["testing"]
