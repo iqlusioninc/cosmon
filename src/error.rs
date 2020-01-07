@@ -1,31 +1,47 @@
 //! Error types
 
-use abscissa_core::err;
-use failure::Fail;
+use abscissa_core::error::{BoxError, Context};
+use std::ops::Deref;
 use std::{fmt, io};
+use thiserror::Error;
 
 /// Error type
 #[derive(Debug)]
-pub struct Error(abscissa_core::Error<ErrorKind>);
+pub struct Error(Box<Context<ErrorKind>>);
 
 /// Kinds of errors
-#[derive(Copy, Clone, Eq, PartialEq, Debug, Fail)]
+#[derive(Copy, Clone, Eq, PartialEq, Debug, Error)]
 pub enum ErrorKind {
     /// Error in configuration file
-    #[fail(display = "config error")]
-    Config,
+    #[error("config error")]
+    ConfigError,
 
     /// Input/output error
-    #[fail(display = "I/O error")]
-    Io,
+    #[error("I/O error")]
+    IoError,
 
     /// Error reporting events to the collector
-    #[fail(display = "error reporting to collector")]
-    Report,
+    #[error("error reporting to collector")]
+    ReportError,
 
     /// Error performing an RPC to the Tendermint node
-    #[fail(display = "RPC request error")]
-    Rpc,
+    #[error("RPC request error")]
+    RpcError,
+}
+
+impl ErrorKind {
+    /// Create an error context from this error
+    pub fn context(self, source: impl Into<BoxError>) -> Context<ErrorKind> {
+        Context::new(self, Some(source.into()))
+    }
+}
+
+impl Deref for Error {
+    type Target = Context<ErrorKind>;
+
+    fn deref(&self) -> &Context<ErrorKind> {
+        &self.0
+    }
 }
 
 impl fmt::Display for Error {
@@ -34,28 +50,34 @@ impl fmt::Display for Error {
     }
 }
 
-impl From<abscissa_core::Error<ErrorKind>> for Error {
-    fn from(other: abscissa_core::Error<ErrorKind>) -> Self {
-        Error(other)
+impl From<Context<ErrorKind>> for Error {
+    fn from(context: Context<ErrorKind>) -> Self {
+        Error(Box::new(context))
+    }
+}
+
+impl std::error::Error for Error {
+    fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+        self.0.source()
     }
 }
 
 impl From<io::Error> for Error {
     fn from(other: io::Error) -> Self {
-        err!(ErrorKind::Io, other).into()
+        ErrorKind::IoError.context(other).into()
     }
 }
 
 impl From<tendermint::Error> for Error {
     fn from(other: tendermint::Error) -> Error {
         // TODO(tarcieri): better error conversions
-        err!(ErrorKind::Config, "{}", other).into()
+        format_err!(ErrorKind::ConfigError, "{}", other).into()
     }
 }
 
 impl From<tendermint::rpc::Error> for Error {
     fn from(other: tendermint::rpc::Error) -> Error {
         // TODO(tarcieri): better error conversions
-        err!(ErrorKind::Rpc, "{}", other).into()
+        format_err!(ErrorKind::RpcError, "{}", other).into()
     }
 }

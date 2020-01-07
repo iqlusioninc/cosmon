@@ -5,11 +5,10 @@ pub mod collector;
 
 use self::agent::AgentConfig;
 use self::collector::CollectorConfig;
-use abscissa_core::Config;
 use serde::{Deserialize, Serialize};
 
 /// `sagan.toml` configuration settings
-#[derive(Clone, Config, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct SaganConfig {
     /// Monitoring agent configuration

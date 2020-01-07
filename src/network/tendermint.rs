@@ -83,7 +83,7 @@ impl Network {
     fn update_peer(&mut self, peer_info: &[Peer]) {
         info!("peers update: {:?} ", peer_info);
 
-        self.peers = peer_info.to_vec().clone();
+        self.peers = peer_info.to_vec();
     }
 
     /// Update information about chain status

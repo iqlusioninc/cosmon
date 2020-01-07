@@ -60,7 +60,7 @@ impl Monitor {
         let data = Data::new(home_dir.join(&node_config.db_dir));
         let net_info = NetInfo::new(
             node_config.p2p.persistent_peers.clone(),
-            node_config.p2p.private_peer_ids.clone(),
+            node_config.p2p.private_peer_ids,
         );
 
         Ok(Self {
@@ -122,7 +122,7 @@ impl Monitor {
             CollectorAddr::Http(HttpConfig {
                 addr: net::Address::Tcp { host, port, .. },
             }) => format!("http://{}:{}/collector", host, port),
-            other => fail!(ErrorKind::Config, "unsupported collector: {:?}", other),
+            other => fail!(ErrorKind::ConfigError, "unsupported collector: {:?}", other),
         };
 
         let client = reqwest::Client::new();
@@ -130,10 +130,10 @@ impl Monitor {
             .post(&url)
             .body(msg.to_json())
             .send()
-            .map_err(|e| err!(ErrorKind::Report, "{}", e))?;
+            .map_err(|e| format_err!(ErrorKind::ReportError, "{}", e))?;
 
         res.error_for_status()
-            .map_err(|e| err!(ErrorKind::Report, "{}", e))?;
+            .map_err(|e| format_err!(ErrorKind::ReportError, "{}", e))?;
         Ok(())
     }
 }

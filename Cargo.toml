@@ -10,20 +10,19 @@ edition     = "2018"
 keywords    = ["cosmos", "tendermint"]
 
 [dependencies]
-failure = "0.1"
 gumdrop = "0.7"
 home = "0.5"
-lazy_static = "1"
 serde = { version = "1", features = ["serde_derive"] }
 serde_json = { version = "1" }
 tendermint = { version = "0.10", features = ["config", "rpc"] }
 reqwest = "0.9"
+thiserror = "1"
 toml = "0.5"
 warp = "0.1"
 
 [dependencies.abscissa_core]
-version = "0.4.0"
+version = "0.5.0"
 
 [dev-dependencies.abscissa_core]
-version = "0.4.0"
+version = "0.5.0"
 features = ["testing"]
