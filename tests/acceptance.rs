@@ -4,12 +4,10 @@
 #![forbid(unsafe_code)]
 
 use abscissa_core::testing::prelude::*;
-use lazy_static::lazy_static;
+use once_cell::sync::Lazy;
 use sagan::config::SaganConfig;
 
-lazy_static! {
-    pub static ref RUNNER: CmdRunner = CmdRunner::default();
-}
+pub static RUNNER: Lazy<CmdRunner> = Lazy::new(|| CmdRunner::default());
 
 #[test]
 fn start() {
