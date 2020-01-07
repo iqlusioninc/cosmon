@@ -30,7 +30,7 @@ impl AgentConfig {
     /// Load `TendermintConfig` using this node configuration
     pub fn load_tendermint_config(&self) -> Result<TendermintConfig, Error> {
         Ok(TendermintConfig::load_toml_file(&self.config_toml_path())
-            .map_err(|e| err!(ErrorKind::Config, "{}", e))?)
+            .map_err(|e| format_err!(ErrorKind::ConfigError, "{}", e))?)
     }
 }
 

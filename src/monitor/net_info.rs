@@ -44,8 +44,8 @@ impl NetInfo {
                 .listen_addr
                 .to_net_address()
                 .ok_or_else(|| {
-                    err!(
-                        ErrorKind::Config,
+                    format_err!(
+                        ErrorKind::ConfigError,
                         "can't parse peer's listen address: {}",
                         &peer_info.node_info.listen_addr
                     )
@@ -79,7 +79,7 @@ impl NetInfo {
                 assert_eq!(peer_map.insert(*node_id, peer), None);
             } else {
                 fail!(
-                    ErrorKind::Config,
+                    ErrorKind::ConfigError,
                     "unsupported peer listen addr: {}",
                     listen_addr
                 );
@@ -116,14 +116,14 @@ impl NetInfo {
 
                 if map.insert(*id, peer).is_some() {
                     fail!(
-                        ErrorKind::Config,
+                        ErrorKind::ConfigError,
                         "duplicate persistent_peer node ID: {}",
                         id
                     );
                 }
             } else {
                 fail!(
-                    ErrorKind::Config,
+                    ErrorKind::ConfigError,
                     "unsupported persistent_peer addr: {}",
                     addr
                 );
@@ -134,7 +134,7 @@ impl NetInfo {
             if let Some(peer) = map.get_mut(id) {
                 peer.private = true;
             } else {
-                fail!(ErrorKind::Config, "unkown private_peer_id: {}", id);
+                fail!(ErrorKind::ConfigError, "unkown private_peer_id: {}", id);
             }
         }
 

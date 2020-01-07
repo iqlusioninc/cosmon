@@ -8,15 +8,14 @@ use crate::{
     prelude::*,
 };
 use abscissa_core::{
-    application, config, logging, Application, EntryPoint, FrameworkError, StandardPaths,
+    application, application::AppCell, config, trace, Application, EntryPoint, FrameworkError,
+    StandardPaths,
 };
-use lazy_static::lazy_static;
+
 use std::{collections::BTreeMap as Map, process};
 
-lazy_static! {
-    /// Application state
-    pub static ref APPLICATION: application::Lock<SaganApplication> = application::Lock::default();
-}
+/// Application state
+pub static APPLICATION: AppCell<SaganApplication> = AppCell::new();
 
 /// Obtain a read-only (multi-reader) lock on the application state.
 ///
@@ -94,11 +93,11 @@ impl Application for SaganApplication {
     }
 
     /// Get logging configuration from command-line options.
-    fn logging_config(&self, command: &EntryPoint<SaganCommand>) -> logging::Config {
+    fn tracing_config(&self, command: &EntryPoint<SaganCommand>) -> trace::Config {
         if command.verbose {
-            logging::Config::verbose()
+            trace::Config::verbose()
         } else {
-            logging::Config::default()
+            trace::Config::default()
         }
     }
 }

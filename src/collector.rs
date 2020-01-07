@@ -28,7 +28,11 @@ impl HttpServer {
                 addr: IpAddr::from_str(host).unwrap(),
                 port: *port,
             }),
-            other => fail!(ErrorKind::Config, "unsupported listen address: {}", other),
+            other => fail!(
+                ErrorKind::ConfigError,
+                "unsupported listen address: {}",
+                other
+            ),
         }
     }
 }
