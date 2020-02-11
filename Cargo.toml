@@ -16,7 +16,7 @@ gumdrop = "0.7"
 home = "0.5"
 serde = { version = "1", features = ["serde_derive"] }
 serde_json = { version = "1" }
-tendermint = { version = "0.10", features = ["config", "rpc"] }
+tendermint = "0.11"
 reqwest = "0.9"
 thiserror = "1"
 toml = "0.5"
