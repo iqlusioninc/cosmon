@@ -1,9 +1,11 @@
 //! `start` subcommand
 
-use crate::{collector::HttpServer, monitor::Monitor, prelude::*};
+use crate::{application::APPLICATION, collector::HttpServer, monitor::Monitor, prelude::*};
 use abscissa_core::{Command, Options, Runnable};
+use abscissa_tokio;
 use std::{process, thread};
 use tendermint::net;
+use tokio::prelude::*;
 
 /// `start` subcommand
 #[derive(Command, Debug, Options)]
@@ -12,30 +14,33 @@ pub struct StartCommand {}
 impl Runnable for StartCommand {
     /// Start the application.
     fn run(&self) {
-        let collector_thread = self.init_collector().map(|listen_addr| {
-            thread::spawn(move || {
-                let collector = HttpServer::new(&listen_addr).unwrap_or_else(|e| {
-                    status_err!("couldn't initialize HTTP collector: {}", e);
-                    process::exit(1);
-                });
+        abscissa_tokio::run(&APPLICATION, async {
+            let collector_thread = self.init_collector().map(|listen_addr| {
+                tokio::spawn(async move || {
+                    let collector = HttpServer::new(&listen_addr).unwrap_or_else(|e| {
+                        status_err!("couldn't initialize HTTP collector: {}", e);
+                        process::exit(1);
+                    });
 
-                collector.run();
-            })
-        });
+                    collector.run();
+                })
+            });
 
-        let monitor_thread = self.init_monitor().map(|mut monitor| {
-            thread::spawn(move || {
-                monitor.run();
-            })
-        });
+/*            let monitor_thread = self.init_monitor().map(|mut monitor| {
+                thread::spawn(move || {
+                    monitor.run();
+                })
+            });
 
-        if let Some(child) = collector_thread {
-            child.join().unwrap();
-        }
+            if let Some(child) = collector_thread {
+                child.join().unwrap();
+            }
 
-        if let Some(child) = monitor_thread {
-            child.join().unwrap();
-        }
+            if let Some(child) = monitor_thread {
+                child.join().unwrap();
+            }*/
+        })
+        .unwrap();
     }
 }
 

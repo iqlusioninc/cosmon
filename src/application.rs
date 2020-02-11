@@ -8,10 +8,10 @@ use crate::{
     prelude::*,
 };
 use abscissa_core::{
-    application, application::AppCell, config, trace, Application, EntryPoint, FrameworkError,
-    StandardPaths,
+    application, application::AppCell, config, trace, Application, Component, EntryPoint,
+    FrameworkError, StandardPaths,
 };
-
+use abscissa_tokio::TokioComponent;
 use std::{collections::BTreeMap as Map, process};
 
 /// Application state
@@ -76,7 +76,8 @@ impl Application for SaganApplication {
 
     /// Register all components used by this application.
     fn register_components(&mut self, command: &Self::Cmd) -> Result<(), FrameworkError> {
-        let components = self.framework_components(command)?;
+        let mut components = self.framework_components(command)?;
+        components.push(Box::new(TokioComponent::new()?));
         self.state.components.register(components)
     }
 
