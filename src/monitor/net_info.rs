@@ -34,10 +34,14 @@ impl NetInfo {
 
     /// Update internal state using the given RPC client, returning any changes
     // TODO(tarcieri): don't error out on attacker-controlled values; log instead
-    pub fn update(&mut self, rpc_client: &rpc::Client, force: bool) -> Result<Vec<Message>, Error> {
+    pub async fn update(
+        &mut self,
+        rpc_client: &rpc::Client,
+        force: bool,
+    ) -> Result<Vec<Message>, Error> {
         let mut peer_map = self.peer_map()?;
 
-        for peer_info in rpc_client.net_info()?.peers {
+        for peer_info in rpc_client.net_info().await?.peers {
             let node_id = &peer_info.node_info.id;
             let listen_addr = peer_info
                 .node_info

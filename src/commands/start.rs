@@ -1,8 +1,9 @@
 //! `start` subcommand
 
-use crate::{collector::HttpServer, monitor::Monitor, prelude::*};
+use crate::{application::APPLICATION, collector::HttpServer, monitor::Monitor, prelude::*};
 use abscissa_core::{Command, Options, Runnable};
-use std::{process, thread};
+use abscissa_tokio;
+use std::process;
 use tendermint::net;
 
 /// `start` subcommand
@@ -12,30 +13,25 @@ pub struct StartCommand {}
 impl Runnable for StartCommand {
     /// Start the application.
     fn run(&self) {
-        let collector_thread = self.init_collector().map(|listen_addr| {
-            thread::spawn(move || {
-                let collector = HttpServer::new(&listen_addr).unwrap_or_else(|e| {
-                    status_err!("couldn't initialize HTTP collector: {}", e);
-                    process::exit(1);
-                });
+        abscissa_tokio::run(&APPLICATION, async {
+            self.init_collector().map(|listen_addr| {
+                tokio::spawn(async move {
+                    let collector = HttpServer::new(&listen_addr).unwrap_or_else(|e| {
+                        status_err!("couldn't initialize HTTP collector: {}", e);
+                        process::exit(1);
+                    });
 
-                collector.run();
-            })
-        });
+                    collector.run();
+                })
+            });
 
-        let monitor_thread = self.init_monitor().map(|mut monitor| {
-            thread::spawn(move || {
-                monitor.run();
-            })
-        });
-
-        if let Some(child) = collector_thread {
-            child.join().unwrap();
-        }
-
-        if let Some(child) = monitor_thread {
-            child.join().unwrap();
-        }
+            self.init_monitor().await.map(|mut monitor| {
+                tokio::spawn(async move {
+                    monitor.run().await;
+                })
+            });
+        })
+        .unwrap();
     }
 }
 
@@ -51,14 +47,16 @@ impl StartCommand {
     }
 
     /// Initialize the monitor (if configured)
-    fn init_monitor(&self) -> Option<Monitor> {
+    async fn init_monitor(&self) -> Option<Monitor> {
         let app = app_reader();
 
-        app.config().agent.as_ref().map(|agent_config| {
-            Monitor::new(agent_config).unwrap_or_else(|e| {
+        if let Some(agent_config) = &app.config().agent {
+            Some(Monitor::new(agent_config).await.unwrap_or_else(|e| {
                 status_err!("couldn't initialize monitor: {}", e);
                 process::exit(1);
-            })
-        })
+            }))
+        } else {
+            None
+        }
     }
 }

@@ -22,13 +22,17 @@ pub struct Status {
 
 impl Status {
     /// Create a new `/status` endpoint monitor
-    pub fn new(rpc_client: &rpc::Client) -> Result<Self, Error> {
-        Ok(Self::from(rpc_client.status()?))
+    pub async fn new(rpc_client: &rpc::Client) -> Result<Self, Error> {
+        Ok(Self::from(rpc_client.status().await?))
     }
 
     /// Update internal state using the given RPC client, returning any changes
-    pub fn update(&mut self, rpc_client: &rpc::Client, force: bool) -> Result<Vec<Message>, Error> {
-        let status = rpc_client.status()?;
+    pub async fn update(
+        &mut self,
+        rpc_client: &rpc::Client,
+        force: bool,
+    ) -> Result<Vec<Message>, Error> {
+        let status = rpc_client.status().await?;
         let mut output = vec![];
 
         let chain_status = ChainStatus(status.sync_info);
@@ -42,8 +46,8 @@ impl Status {
             output.push(status.node_info.into());
         }
 
-        if status.validator_info != self.validator || force {
-            self.validator = status.validator_info.clone();
+        if !status.validator_info.eq(&self.validator) || force {
+            self.validator = status.validator_info;
             output.push(status.validator_info.into());
         }
 
