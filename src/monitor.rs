@@ -52,11 +52,11 @@ pub struct Monitor {
 
 impl Monitor {
     /// Create a new `Monitor`
-    pub fn new(agent_config: &AgentConfig) -> Result<Self, Error> {
+    pub async fn new(agent_config: &AgentConfig) -> Result<Self, Error> {
         let home_dir = &agent_config.node_home;
         let node_config = agent_config.load_tendermint_config()?;
-        let rpc_client = rpc::Client::new(&node_config.rpc.laddr)?;
-        let status = Status::new(&rpc_client)?;
+        let rpc_client = rpc::Client::new(&node_config.rpc.laddr).await?;
+        let status = Status::new(&rpc_client).await?;
         let data = Data::new(home_dir.join(&node_config.db_dir));
         let net_info = NetInfo::new(
             node_config.p2p.persistent_peers.clone(),
@@ -76,9 +76,9 @@ impl Monitor {
     }
 
     /// Run the monitor
-    pub fn run(&mut self) {
+    pub async fn run(&mut self) {
         loop {
-            match self.poll() {
+            match self.poll().await {
                 Ok(msg) => {
                     if let Some(env) =
                         message::Envelope::new(self.status.node.network, self.status.node.id, msg)
@@ -97,12 +97,12 @@ impl Monitor {
     }
 
     /// Poll the node, collecting messages about events we're interested in
-    fn poll(&mut self) -> Result<Vec<Message>, Error> {
+    async fn poll(&mut self) -> Result<Vec<Message>, Error> {
         let force = self.should_force();
 
         let mut messages = vec![];
-        messages.extend(self.status.update(&self.rpc_client, force)?);
-        messages.extend(self.net_info.update(&self.rpc_client, force)?);
+        messages.extend(self.status.update(&self.rpc_client, force).await?);
+        messages.extend(self.net_info.update(&self.rpc_client, force).await?);
         messages.extend(self.data.update(force)?);
         Ok(messages)
     }

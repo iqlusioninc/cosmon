@@ -8,8 +8,8 @@ use crate::{
     prelude::*,
 };
 use abscissa_core::{
-    application, application::AppCell, config, trace, Application, Component, EntryPoint,
-    FrameworkError, StandardPaths,
+    application, application::AppCell, config, trace, Application, EntryPoint, FrameworkError,
+    StandardPaths,
 };
 use abscissa_tokio::TokioComponent;
 use std::{collections::BTreeMap as Map, process};
