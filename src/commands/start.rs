@@ -2,7 +2,6 @@
 
 use crate::{application::APPLICATION, collector::HttpServer, monitor::Monitor, prelude::*};
 use abscissa_core::{Command, Options, Runnable};
-use abscissa_tokio;
 use std::process;
 use tendermint::net;
 
