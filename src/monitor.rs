@@ -83,7 +83,7 @@ impl Monitor {
                     if let Some(env) =
                         message::Envelope::new(self.status.node.network, self.status.node.id, msg)
                     {
-                        self.report(env).unwrap();
+                        self.report(env).await.unwrap();
                     }
                 }
                 Err(e) => {
@@ -117,7 +117,7 @@ impl Monitor {
         }
     }
 
-    fn report(&self, msg: message::Envelope) -> Result<(), Error> {
+    async fn report(&self, msg: message::Envelope) -> Result<(), Error> {
         let url = match &self.collector_addr {
             CollectorAddr::Http(HttpConfig {
                 addr: net::Address::Tcp { host, port, .. },
@@ -130,6 +130,7 @@ impl Monitor {
             .post(&url)
             .body(msg.to_json())
             .send()
+            .await
             .map_err(|e| format_err!(ErrorKind::ReportError, "{}", e))?;
 
         res.error_for_status()
