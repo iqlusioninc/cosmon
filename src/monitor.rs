@@ -53,26 +53,53 @@ pub struct Monitor {
 impl Monitor {
     /// Create a new `Monitor`
     pub async fn new(agent_config: &AgentConfig) -> Result<Self, Error> {
-        let home_dir = &agent_config.node_home;
-        let node_config = agent_config.load_tendermint_config()?;
-        let rpc_client = rpc::Client::new(&node_config.rpc.laddr).await?;
-        let status = Status::new(&rpc_client).await?;
-        let data = Data::new(home_dir.join(&node_config.db_dir));
-        let net_info = NetInfo::new(
-            node_config.p2p.persistent_peers.clone(),
-            node_config.p2p.private_peer_ids,
-        );
 
-        Ok(Self {
-            rpc_client,
-            status,
-            net_info,
-            data,
-            poll_interval: DEFAULT_POLL_INTERVAL,
-            full_report_interval: DEFAULT_FULL_REPORT_INTERVAL,
-            last_full_report: Instant::now() - DEFAULT_FULL_REPORT_INTERVAL,
-            collector_addr: agent_config.collector.clone(),
-        })
+        match &agent_config.node_home{
+            Some(home_dir)=>{
+                if let Some(node_config) = agent_config.load_tendermint_config()?{
+                    let rpc_client = rpc::Client::new(&node_config.rpc.laddr).await?;
+                    let status = Status::new(&rpc_client).await?;
+                    let data = Data::new(home_dir.join(&node_config.db_dir));
+                    let net_info = NetInfo::new(
+                        node_config.p2p.persistent_peers.clone(),
+                        node_config.p2p.private_peer_ids,
+                    );
+            
+                    Ok(Self {
+                        rpc_client,
+                        status,
+                        net_info,
+                        data,
+                        poll_interval: DEFAULT_POLL_INTERVAL,
+                        full_report_interval: DEFAULT_FULL_REPORT_INTERVAL,
+                        last_full_report: Instant::now() - DEFAULT_FULL_REPORT_INTERVAL,
+                        collector_addr: agent_config.collector.clone(),
+                    })
+                }else{
+                    unreachable!();
+                }
+
+            }
+            None => {
+                let rpc_client = rpc::Client::new(&agent_config.rpc).await?;
+                let status = Status::new(&rpc_client).await?;
+                let data = Data::new(std::env::current_dir()?);
+                let net_info = NetInfo::new(
+                    vec![],
+                    vec![],
+                );
+                Ok(Self {
+                    rpc_client,
+                    status,
+                    net_info,
+                    data,
+                    poll_interval: DEFAULT_POLL_INTERVAL,
+                    full_report_interval: DEFAULT_FULL_REPORT_INTERVAL,
+                    last_full_report: Instant::now() - DEFAULT_FULL_REPORT_INTERVAL,
+                    collector_addr: agent_config.collector.clone(),
+                })            }
+        }
+
     }
 
     /// Run the monitor
