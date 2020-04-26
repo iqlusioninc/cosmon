@@ -14,7 +14,7 @@ use std::{
     thread,
     time::{Duration, Instant},
 };
-use tendermint::{net, rpc};
+use tendermint::{chain, net, node, rpc};
 
 /// Default interval at which to poll a Tendermint node
 pub const DEFAULT_POLL_INTERVAL: Duration = Duration::from_millis(100);
@@ -53,18 +53,18 @@ pub struct Monitor {
 impl Monitor {
     /// Create a new `Monitor`
     pub async fn new(agent_config: &AgentConfig) -> Result<Self, Error> {
+        match &agent_config.node_home {
+            Some(home_dir) => {
+                if let Some(node_config) = agent_config.load_tendermint_config()? {
+                    let rpc_client = rpc::Client::new(node_config.rpc.laddr.clone());
 
-        match &agent_config.node_home{
-            Some(home_dir)=>{
-                if let Some(node_config) = agent_config.load_tendermint_config()?{
-                    let rpc_client = rpc::Client::new(&node_config.rpc.laddr).await?;
                     let status = Status::new(&rpc_client).await?;
                     let data = Data::new(home_dir.join(&node_config.db_dir));
                     let net_info = NetInfo::new(
                         node_config.p2p.persistent_peers.clone(),
                         node_config.p2p.private_peer_ids,
                     );
-            
+
                     Ok(Self {
                         rpc_client,
                         status,
@@ -75,19 +75,17 @@ impl Monitor {
                         last_full_report: Instant::now() - DEFAULT_FULL_REPORT_INTERVAL,
                         collector_addr: agent_config.collector.clone(),
                     })
-                }else{
+                } else {
+                    //If the home dir is
                     unreachable!();
                 }
-
             }
             None => {
-                let rpc_client = rpc::Client::new(&agent_config.rpc).await?;
+                let rpc_client = rpc::Client::new(agent_config.rpc.clone());
                 let status = Status::new(&rpc_client).await?;
                 let data = Data::new(std::env::current_dir()?);
-                let net_info = NetInfo::new(
-                    vec![],
-                    vec![],
-                );
+                let net_info = NetInfo::new(vec![], vec![]);
+
                 Ok(Self {
                     rpc_client,
                     status,
@@ -97,9 +95,14 @@ impl Monitor {
                     full_report_interval: DEFAULT_FULL_REPORT_INTERVAL,
                     last_full_report: Instant::now() - DEFAULT_FULL_REPORT_INTERVAL,
                     collector_addr: agent_config.collector.clone(),
-                })            }
+                })
+            }
         }
+    }
 
+    /// id function for getting the network id mostly useful for populating the reporter loop
+    pub fn id(&self) -> (chain::Id, node::Id) {
+        (self.status.node.network, self.status.node.id)
     }
 
     /// Run the monitor

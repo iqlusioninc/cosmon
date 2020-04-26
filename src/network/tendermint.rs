@@ -9,6 +9,8 @@ use crate::{
 use serde::Serialize;
 use std::collections::BTreeMap as Map;
 
+use relayer_modules::ics02_client::events::CreateClientEvent;
+
 /// Tendermint networks
 #[derive(Debug)]
 pub struct Network {
@@ -23,6 +25,8 @@ pub struct Network {
     chain: Option<ChainStatus>,
 
     validators: Option<tendermint::validator::Info>,
+
+    events: Vec<CreateClientEvent>,
 }
 
 impl Network {
@@ -34,6 +38,7 @@ impl Network {
             peers: vec![],
             chain: None,
             validators: None,
+            events: vec![],
         }
     }
 
@@ -60,6 +65,7 @@ impl Network {
                 Message::Peers(ref peer_info) => self.update_peer(peer_info),
                 Message::Chain(ref chain_info) => self.update_chain(chain_info),
                 Message::Validator(ref validator_info) => self.update_validator(validator_info),
+                Message::EventIBCCreateClient(ref event) => self.events.push(event.clone()),
             }
         }
     }
