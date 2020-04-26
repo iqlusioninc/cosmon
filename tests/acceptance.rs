@@ -7,7 +7,7 @@ use abscissa_core::testing::prelude::*;
 use once_cell::sync::Lazy;
 use sagan::config::SaganConfig;
 
-pub static RUNNER: Lazy<CmdRunner> = Lazy::new(|| CmdRunner::default());
+pub static RUNNER: Lazy<CmdRunner> = Lazy::new(CmdRunner::default);
 
 #[test]
 fn start() {
