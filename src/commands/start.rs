@@ -31,7 +31,9 @@ impl Runnable for StartCommand {
                 })
             });
 
-            if let Some((mut monitor, mut event_monitor, mut event_listener)) = self.init_monitor().await{
+            if let Some((mut monitor, mut event_monitor, mut event_listener)) =
+                self.init_monitor().await
+            {
                 tokio::spawn(async move {
                     monitor.run().await;
                 });
