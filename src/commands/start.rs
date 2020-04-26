@@ -31,21 +31,19 @@ impl Runnable for StartCommand {
                 })
             });
 
-            self.init_monitor().await.map(
-                |(mut monitor, mut event_monitor, mut event_listener)| {
-                    tokio::spawn(async move {
-                        monitor.run().await;
-                    });
+            if let Some((mut monitor, mut event_monitor, mut event_listener)) = self.init_monitor().await{
+                tokio::spawn(async move {
+                    monitor.run().await;
+                });
 
-                    tokio::spawn(async move {
-                        event_monitor.run().await;
-                    });
+                tokio::spawn(async move {
+                    event_monitor.run().await;
+                });
 
-                    tokio::spawn(async move {
-                        event_listener.run().await;
-                    });
-                },
-            );
+                tokio::spawn(async move {
+                    event_listener.run().await;
+                });
+            }
         })
         .unwrap();
     }
