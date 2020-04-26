@@ -1,9 +1,16 @@
 //! `start` subcommand
 
-use crate::{application::APPLICATION, collector::HttpServer, monitor::Monitor, prelude::*};
+use crate::{
+    application::APPLICATION,
+    collector::HttpServer,
+    event_monitor::{EventMonitor, EventReporter},
+    monitor::Monitor,
+    prelude::*,
+};
 use abscissa_core::{Command, Options, Runnable};
 use std::process;
 use tendermint::net;
+use tokio::sync::mpsc::channel;
 
 /// `start` subcommand
 #[derive(Command, Debug, Options)]
@@ -24,11 +31,21 @@ impl Runnable for StartCommand {
                 })
             });
 
-            self.init_monitor().await.map(|mut monitor| {
-                tokio::spawn(async move {
-                    monitor.run().await;
-                })
-            });
+            self.init_monitor().await.map(
+                |(mut monitor, mut event_monitor, mut event_listener)| {
+                    tokio::spawn(async move {
+                        monitor.run().await;
+                    });
+
+                    tokio::spawn(async move {
+                        event_monitor.run().await;
+                    });
+
+                    tokio::spawn(async move {
+                        event_listener.run().await;
+                    });
+                },
+            );
         })
         .unwrap();
     }
@@ -46,14 +63,24 @@ impl StartCommand {
     }
 
     /// Initialize the monitor (if configured)
-    async fn init_monitor(&self) -> Option<Monitor> {
+    async fn init_monitor(&self) -> Option<(Monitor, EventMonitor, EventReporter)> {
         let app = app_reader();
 
         if let Some(agent_config) = &app.config().agent {
-            Some(Monitor::new(agent_config).await.unwrap_or_else(|e| {
+            let monitor = Monitor::new(agent_config).await.unwrap_or_else(|e| {
                 status_err!("couldn't initialize monitor: {}", e);
                 process::exit(1);
-            }))
+            });
+            let (chain_id, node_id) = monitor.id();
+            let (tx, rx) = channel(100);
+            let event_monitor = EventMonitor::new(agent_config, tx)
+                .await
+                .unwrap_or_else(|e| {
+                    status_err!("couldn't initialize event listener: {}", e);
+                    process::exit(1);
+                });
+            let event_reporter = EventReporter::new(agent_config, rx, node_id, chain_id);
+            Some((monitor, event_monitor, event_reporter))
         } else {
             None
         }
