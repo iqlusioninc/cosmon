@@ -20,16 +20,18 @@ impl Runnable for StartCommand {
     /// Start the application.
     fn run(&self) {
         abscissa_tokio::run(&APPLICATION, async {
-            self.init_collector().map(|listen_addr| {
-                tokio::spawn(async move {
-                    let collector = HttpServer::new(&listen_addr).unwrap_or_else(|e| {
-                        status_err!("couldn't initialize HTTP collector: {}", e);
-                        process::exit(1);
-                    });
 
-                    collector.run();
-                })
-            });
+            if let Some(listen_addr) = self.init_collector(){
+                let c_handle =tokio::spawn(async move {
+                     let collector = HttpServer::new(&listen_addr).unwrap_or_else(|e| {
+                         status_err!("couldn't initialize HTTP collector: {}", e);
+                         process::exit(1);
+                     });
+ 
+                     collector.run();
+                 });
+                 c_handle.await.unwrap();
+            }
 
             if let Some((mut monitor, mut event_monitor, mut event_reporter)) =
                 self.init_monitor().await
@@ -62,7 +64,7 @@ impl StartCommand {
         app.config()
             .collector
             .as_ref()
-            .map(|collector_config| collector_config.listen_addr.clone())
+            .map(|collector_config| { dbg!(collector_config); collector_config.listen_addr.clone()})
     }
 
     /// Initialize the monitor (if configured)
