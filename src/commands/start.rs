@@ -31,20 +31,23 @@ impl Runnable for StartCommand {
                 })
             });
 
-            if let Some((mut monitor, mut event_monitor, mut event_listener)) =
+            if let Some((mut monitor, mut event_monitor, mut event_reporter)) =
                 self.init_monitor().await
             {
-                tokio::spawn(async move {
-                    monitor.run().await;
+                let m_handle = tokio::spawn(async move {
+                    monitor.run().await
                 });
 
-                tokio::spawn(async move {
-                    event_monitor.run().await;
+                let e_handle = tokio::spawn(async move {
+                    event_monitor.run().await
                 });
 
-                tokio::spawn(async move {
-                    event_listener.run().await;
+                let r_handle = tokio::spawn(async move {
+                    event_reporter.run().await
                 });
+                m_handle.await.unwrap();
+                e_handle.await.unwrap();
+                r_handle.await.unwrap();
             }
         })
         .unwrap();
@@ -82,6 +85,7 @@ impl StartCommand {
             let event_reporter = EventReporter::new(agent_config, rx, node_id, chain_id);
             Some((monitor, event_monitor, event_reporter))
         } else {
+            trace!("Agent config not found");
             None
         }
     }
