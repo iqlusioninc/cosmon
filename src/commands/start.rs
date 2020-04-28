@@ -47,9 +47,7 @@ impl Runnable for StartCommand {
                 let r_handle = tokio::spawn(async move {
                     event_reporter.run().await
                 });
-                m_handle.await.unwrap();
-                e_handle.await.unwrap();
-                r_handle.await.unwrap();
+                futures::join!(m_handle, e_handle, r_handle)
             }
         })
         .unwrap();
