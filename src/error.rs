@@ -27,6 +27,10 @@ pub enum ErrorKind {
     /// Error performing an RPC to the Tendermint node
     #[error("RPC request error")]
     RpcError,
+
+    /// Error performing an RPC to the Tendermint node
+    #[error("Metrics Error")]
+    MetricError,
 }
 
 impl ErrorKind {
@@ -79,5 +83,11 @@ impl From<tendermint::rpc::Error> for Error {
     fn from(other: tendermint::rpc::Error) -> Error {
         // TODO(tarcieri): better error conversions
         format_err!(ErrorKind::RpcError, "{}", other).into()
+    }
+}
+
+impl From<cadence::MetricError> for Error {
+    fn from(other: cadence::MetricError) -> Error {
+        format_err!(ErrorKind::MetricError, "{}", other).into()
     }
 }

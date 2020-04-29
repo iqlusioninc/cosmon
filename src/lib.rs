@@ -13,6 +13,7 @@ pub mod config;
 pub mod error;
 pub mod event_monitor;
 pub mod message;
+pub mod metrics;
 pub mod monitor;
 pub mod network;
 pub mod prelude;

@@ -12,6 +12,9 @@ pub struct CollectorConfig {
 
     /// Networks this collector is collecting information about
     pub networks: NetworkConfig,
+
+    /// Host ip for the StatsD Deserver
+    pub statsd: String,
 }
 
 /// Types of networks this collector is collecting information about

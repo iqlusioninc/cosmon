@@ -5,6 +5,7 @@ pub mod tendermint;
 use crate::{config::collector::NetworkConfig, message};
 use serde::Serialize;
 use std::fmt::{self, Display};
+use std::process;
 
 /// Network IDs
 #[derive(Clone, Debug, Eq, Hash, PartialEq, PartialOrd, Ord)]
@@ -43,12 +44,16 @@ pub enum Network {
 
 impl Network {
     /// Initialize networks from the given configuration
-    pub fn from_config(config: &NetworkConfig) -> Vec<Network> {
+    pub fn from_config(config: &NetworkConfig, statsd_host: &str) -> Vec<Network> {
         let mut networks = vec![];
 
         for id in &config.tendermint {
+            let metrics = crate::metrics::Metrics::new(statsd_host).unwrap_or_else(|err| {
+                status_err!("invalid statsd config {}", &err);
+                process::exit(1);
+            });
             networks.push(Network::Tendermint(Box::new(
-                self::tendermint::Network::new(*id),
+                self::tendermint::Network::new(*id, metrics),
             )))
         }
 

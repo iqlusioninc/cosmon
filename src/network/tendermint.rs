@@ -6,12 +6,10 @@ use crate::{
     monitor::{net_info::Peer, status::ChainStatus},
     prelude::*,
 };
+use relayer_modules::events::IBCEvent;
 use serde::Serialize;
 use std::collections::BTreeMap as Map;
-
-use relayer_modules::events::IBCEvent;
-
-/// Tendermint networks
+/// Tendermint network monitoring
 #[derive(Debug)]
 pub struct Network {
     /// Chain ID for this network
@@ -27,11 +25,13 @@ pub struct Network {
     validators: Option<tendermint::validator::Info>,
 
     events: Vec<IBCEvent>,
+
+    metrics: crate::metrics::Metrics,
 }
 
 impl Network {
     /// Create new Tendermint network state
-    pub fn new(id: tendermint::chain::Id) -> Self {
+    pub fn new(id: tendermint::chain::Id, metrics: crate::metrics::Metrics) -> Self {
         Self {
             id,
             nodes: Map::new(),
@@ -39,6 +39,7 @@ impl Network {
             chain: None,
             validators: None,
             events: vec![],
+            metrics,
         }
     }
 
@@ -65,8 +66,26 @@ impl Network {
                 Message::Peers(ref peer_info) => self.update_peer(peer_info),
                 Message::Chain(ref chain_info) => self.update_chain(chain_info),
                 Message::Validator(ref validator_info) => self.update_validator(validator_info),
-                Message::EventIBC(ref event) => self.events.push(event.clone()),
+                Message::EventIBC(ref event) => self.emit_event_metrics(event),
             }
+        }
+    }
+
+    fn emit_event_metrics(&mut self, event: &IBCEvent) {
+        match event {
+            IBCEvent::SendPacketChannel(event) => self
+                .metrics
+                .packet_send_event(self.id, event.clone())
+                .unwrap_or_else(|err| {
+                    trace!("Metrics error:{}", err);
+                }),
+            IBCEvent::RecievePacketChannel(event) => self
+                .metrics
+                .packet_recieve_event(self.id, event.clone())
+                .unwrap_or_else(|err| {
+                    trace!("Metrics error:{}", err);
+                }),
+            _ => trace!("No metrics defined for event"),
         }
     }
 
