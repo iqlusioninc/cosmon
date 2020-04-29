@@ -20,34 +20,30 @@ impl Runnable for StartCommand {
     /// Start the application.
     fn run(&self) {
         abscissa_tokio::run(&APPLICATION, async {
+            if let Some(listen_addr) = self.init_collector() {
+                let c_handle = tokio::spawn(async move {
+                    let collector = HttpServer::new(&listen_addr).unwrap_or_else(|e| {
+                        status_err!("couldn't initialize HTTP collector: {}", e);
+                        process::exit(1);
+                    });
 
-            if let Some(listen_addr) = self.init_collector(){
-                let c_handle =tokio::spawn(async move {
-                     let collector = HttpServer::new(&listen_addr).unwrap_or_else(|e| {
-                         status_err!("couldn't initialize HTTP collector: {}", e);
-                         process::exit(1);
-                     });
- 
-                     collector.run();
-                 });
-                 c_handle.await.unwrap();
+                    collector.run();
+                });
+                c_handle.await.unwrap();
             }
 
             if let Some((mut monitor, mut event_monitor, mut event_reporter)) =
                 self.init_monitor().await
             {
-                let m_handle = tokio::spawn(async move {
-                    monitor.run().await
-                });
+                let m_handle = tokio::spawn(async move { monitor.run().await });
 
-                let e_handle = tokio::spawn(async move {
-                    event_monitor.run().await
-                });
+                let e_handle = tokio::spawn(async move { event_monitor.run().await });
 
-                let r_handle = tokio::spawn(async move {
-                    event_reporter.run().await
-                });
-                futures::join!(m_handle, e_handle, r_handle)
+                let r_handle = tokio::spawn(async move { event_reporter.run().await });
+                let (r0, r1, r2) = futures::join!(m_handle, e_handle, r_handle);
+                r0.unwrap();
+                r1.unwrap();
+                r2.unwrap();
             }
         })
         .unwrap();
@@ -62,7 +58,7 @@ impl StartCommand {
         app.config()
             .collector
             .as_ref()
-            .map(|collector_config| { dbg!(collector_config); collector_config.listen_addr.clone()})
+            .map(|collector_config| collector_config.listen_addr.clone())
     }
 
     /// Initialize the monitor (if configured)

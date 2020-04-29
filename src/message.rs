@@ -2,7 +2,7 @@
 
 use crate::monitor::{net_info::Peer, status::ChainStatus};
 use abscissa_core::time::{DateTime, Utc};
-use relayer_modules::ics02_client::events::CreateClientEvent;
+use relayer_modules::events::IBCEvent;
 use serde::{Deserialize, Serialize};
 use tendermint::{chain, node};
 
@@ -25,8 +25,8 @@ pub enum Message {
     #[serde(rename = "peers")]
     Peers(Vec<Peer>),
     /// CreateClient IBC event
-    #[serde(rename = "event_ibc_create_client")]
-    EventIBCCreateClient(CreateClientEvent),
+    #[serde(rename = "event_ibc")]
+    EventIBC(IBCEvent),
 }
 
 impl From<ChainStatus> for Message {
@@ -53,9 +53,9 @@ impl From<Vec<Peer>> for Message {
     }
 }
 
-impl From<CreateClientEvent> for Message {
-    fn from(event: CreateClientEvent) -> Message {
-        Message::EventIBCCreateClient(event)
+impl From<IBCEvent> for Message {
+    fn from(event: IBCEvent) -> Message {
+        Message::EventIBC(event)
     }
 }
 

@@ -1,0 +1,6 @@
+# Example Sagan configuration file
+
+[agent]
+rpc = "tcp://127.0.0.1:26657"
+event_queries =["tm.event='NewBlock'"]
+collector = {http = {addr = "127.0.0.1:31023"}}

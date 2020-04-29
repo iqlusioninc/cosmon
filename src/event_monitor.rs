@@ -9,16 +9,14 @@ use tendermint::{chain, net, node, rpc::event_listener, Error as TMError};
 use abscissa_core::prelude::trace;
 use tokio::sync::mpsc::{Receiver, Sender};
 
-use std::convert::TryFrom;
-
-use relayer_modules::ics02_client::events::CreateClientEvent;
+use relayer_modules::events::IBCEvent;
 
 /// Connect to a tendermint node and recieve push events over a websocket and filter them for the collector.
 pub struct EventMonitor {
     /// Websocket to collect events from
     event_listener: event_listener::EventListener,
     /// Channel endpoint for the agent to push events to
-    event_out_queue: Sender<CreateClientEvent>,
+    event_out_queue: Sender<Vec<IBCEvent>>,
 
     // Node Address for reconnection
     node_addr: net::Address,
@@ -30,7 +28,7 @@ impl EventMonitor {
     /// Constructor for the event listener. Connect to node and subscribe to the queries.
     pub async fn new(
         agent_config: &AgentConfig,
-        event_out_queue: Sender<CreateClientEvent>,
+        event_out_queue: Sender<Vec<IBCEvent>>,
     ) -> Result<Self, Error> {
         match agent_config.load_tendermint_config()? {
             Some(node_config) => {
@@ -95,20 +93,15 @@ impl EventMonitor {
 
     /// get and type an event
     pub async fn collect_events(&mut self) -> Result<(), TMError> {
-        match CreateClientEvent::try_from(self.event_listener.get_event().await?) {
-            Ok(event) => self.event_out_queue.send(event).await.unwrap(),
-            // Log untyped events but do not send to the collector
-            Err(err) => {
-                trace!(err);
-            }
-        }
+        let events = IBCEvent::get_all_events(self.event_listener.get_event().await?);
+        self.event_out_queue.send(events).await?;
         Ok(())
     }
 }
 /// The Event Reporter runs concurrently with the Event Listener and takes pushed events sends to the collector
 pub struct EventReporter {
     ///Channel endpoint for the report to the collector
-    event_rx_queue: Receiver<CreateClientEvent>,
+    event_rx_queue: Receiver<Vec<IBCEvent>>,
 
     ///Address for collector
     collector_addr: CollectorAddr,
@@ -124,7 +117,7 @@ impl EventReporter {
     /// Constructor for the Event Reporter
     pub fn new(
         agent_config: &AgentConfig,
-        event_rx_queue: Receiver<CreateClientEvent>,
+        event_rx_queue: Receiver<Vec<IBCEvent>>,
         node: node::Id,
         chain: chain::Id,
     ) -> Self {
@@ -139,10 +132,13 @@ impl EventReporter {
     ///Reporter loop that runs concurrently with the listener loop
     pub async fn run(&mut self) {
         loop {
-            let event = self.event_rx_queue.recv().await.unwrap();
+            let events = self.event_rx_queue.recv().await.unwrap();
 
-            if let Some(env) = Envelope::new(self.chain, self.node, vec![Message::from(event)]) {
-                self.report(env).await.unwrap();
+            for event in events {
+                if let Some(env) = Envelope::new(self.chain, self.node, vec![Message::from(event)])
+                {
+                    self.report(env).await.unwrap();
+                }
             }
         }
     }
