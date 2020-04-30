@@ -6,6 +6,7 @@ use cadence::{BufferedUdpMetricSink, StatsdClient, DEFAULT_PORT};
 use relayer_modules::ics04_channel::events as ChannelEvents;
 use std::net::UdpSocket;
 use tendermint::chain;
+use std::time::SystemTime;
 /// Send Statd metrics over UDP
 #[derive(Debug)]
 pub struct Metrics {
@@ -20,7 +21,7 @@ impl Metrics {
         let host = (host, DEFAULT_PORT);
         let sink = BufferedUdpMetricSink::from(host, socket).unwrap();
         let client = StatsdClient::from_sink("sagan", sink);
-
+        client.time("sagan.collector.start",SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap().as_millis() as u64).unwrap();
         Ok(Self { client })
     }
     /// Send a metric for each packet send event
