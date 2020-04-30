@@ -93,7 +93,9 @@ impl EventMonitor {
 
     /// get and type an event
     pub async fn collect_events(&mut self) -> Result<(), TMError> {
-        let events = IBCEvent::get_all_events(self.event_listener.get_event().await?);
+        let raw_event =self.event_listener.get_event().await?;
+        dbg!(&raw_event);
+        let events = IBCEvent::get_all_events(raw_event);
         dbg!(&events);
         self.event_out_queue.send(events).await?;
         Ok(())
