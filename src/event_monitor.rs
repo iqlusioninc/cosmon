@@ -94,7 +94,10 @@ impl EventMonitor {
     /// get and type an event
     pub async fn collect_events(&mut self) -> Result<(), TMError> {
         let raw_event =self.event_listener.get_event().await?;
-        dbg!(&raw_event);
+        match raw_event.clone() {
+            event_listener::Event::JsonRPCTransctionResult{data}=>{dbg!(data);},
+            _=>{},
+        };
         let events = IBCEvent::get_all_events(raw_event);
         dbg!(&events);
         self.event_out_queue.send(events).await?;
