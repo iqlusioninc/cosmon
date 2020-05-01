@@ -69,6 +69,7 @@ impl Network {
                 Message::EventIBC(ref event) => self.emit_event_metrics(event),
             }
         }
+        self.metrics.heartbeat();
     }
 
     fn emit_event_metrics(&mut self, event: &IBCEvent) {

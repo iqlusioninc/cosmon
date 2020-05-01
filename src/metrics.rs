@@ -2,7 +2,7 @@
 
 use crate::error::Error;
 use cadence::prelude::*;
-use cadence::{BufferedUdpMetricSink, StatsdClient, DEFAULT_PORT};
+use cadence::{StatsdClient, UdpMetricSink, DEFAULT_PORT};
 use relayer_modules::ics04_channel::events as ChannelEvents;
 use std::net::UdpSocket;
 use tendermint::chain;
@@ -18,11 +18,16 @@ impl Metrics {
         let socket = UdpSocket::bind("0.0.0.0:0")?;
         socket.set_nonblocking(true)?;
         let host = (host, DEFAULT_PORT);
-        let sink = BufferedUdpMetricSink::from(host, socket).unwrap();
+        let sink = UdpMetricSink::from(host, socket).unwrap();
         let client = StatsdClient::from_sink("sagan", sink);
-        client.count("sagan.collector.start",1).unwrap();
+        client.count("sagan.collector.start", 1).unwrap();
         Ok(Self { client })
     }
+    ///heartbeat metric
+    pub fn heartbeat(&mut self) {
+        self.client.count("sagan.collector.heartbeat", 1).unwrap();
+    }
+
     /// Send a metric for each packet send event
     pub fn packet_send_event(
         &mut self,
