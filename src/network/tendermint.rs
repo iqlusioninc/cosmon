@@ -72,6 +72,10 @@ impl Network {
     }
 
     fn emit_event_metrics(&mut self, event: &IBCEvent) {
+        info!(
+            "got IBC Event update from: {} (event: {:?})",
+            self.id, event,
+        );
         match event {
             IBCEvent::SendPacketChannel(event) => self
                 .metrics

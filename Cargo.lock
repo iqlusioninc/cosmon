@@ -1532,7 +1532,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 [[package]]
 name = "relayer-modules"
 version = "0.1.0"
-source = "git+https://github.com/iqlusioninc/ibc-rs.git?branch=poldsam-zaki-ibc-events#6b831bae9d2119ecea5007ca3352b5f19e53425a"
+source = "git+https://github.com/iqlusioninc/ibc-rs.git?branch=poldsam-zaki-ibc-events#484a66a13e6e59f582e381de29b3a4c430802c3c"
 dependencies = [
  "anomaly 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde 1.0.106 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -1968,7 +1968,7 @@ dependencies = [
 [[package]]
 name = "tendermint"
 version = "0.13.0"
-source = "git+https://github.com/iqlusioninc/tendermint-rs.git?branch=zaki-event-subscribe#766a86dce12fe13ea39be893f8ffeafecd5a3d91"
+source = "git+https://github.com/iqlusioninc/tendermint-rs.git?branch=zaki-event-subscribe#97f5c9bc9b8a62f10f801f9b0db7d4eb99278bfa"
 dependencies = [
  "anomaly 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "async-trait 0.1.30 (registry+https://github.com/rust-lang/crates.io-index)",
