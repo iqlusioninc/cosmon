@@ -284,6 +284,48 @@ impl Metrics {
         Ok(())
     }
 
+    ///Send a metric for client misbehaviour event
+    pub fn client_misbehaviour_event(
+        &mut self,
+        chain: chain::Id,
+        event: ClientEvents::ClientMisbehavior,
+    ) -> Result<(), Error> {
+        let missing_client_id = "client_id_missing".to_owned();
+        let client_id = event
+            .data
+            .get("client_id")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_client_id))
+            .unwrap();
+
+        let missing_sender = "sender_missing".to_owned();
+        let message_sender = event
+            .data
+            .get("sender")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_sender))
+            .unwrap();
+
+        let client_id = match self.get_team_by_client_id(client_id) {
+            Some(team) => team,
+            None => client_id,
+        };
+
+        let message_sender = match self.get_team_by_address(message_sender) {
+            Some(team) => team,
+            None => message_sender,
+        };
+
+        self.client.incr(
+            format!(
+                "{}.client_misbehaviour_event.{}.{}.{}",
+                self.prefix, chain, message_sender, client_id
+            )
+            .as_ref(),
+        )?;
+        Ok(())
+    }
+
     fn get_team_by_channel(&self, channel_id: &str) -> Option<&String> {
         if let Some(ref channels_to_team) = self.channels_to_team {
             return channels_to_team.get(channel_id);
