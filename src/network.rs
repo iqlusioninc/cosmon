@@ -49,8 +49,9 @@ impl Network {
         config: &NetworkConfig,
         statsd_host: &str,
         prefix: String,
-        teamchannels: Option<HashMap<String, String>>,
-        teamaddresses: Option<HashMap<String, String>>,
+        channels_to_teams: Option<HashMap<String, String>>,
+        address_to_teams: Option<HashMap<String, String>>,
+        client_id_to_teams: Option<HashMap<String, String>>,
     ) -> Vec<Network> {
         let mut networks = vec![];
 
@@ -58,8 +59,9 @@ impl Network {
             let metrics = crate::metrics::Metrics::new(
                 statsd_host,
                 prefix.clone(),
-                teamchannels.clone(),
-                teamaddresses.clone(),
+                channels_to_teams.clone(),
+                address_to_teams.clone(),
+                client_id_to_teams.clone(),
             )
             .unwrap_or_else(|err| {
                 status_err!("invalid statsd config {}", &err);

@@ -19,18 +19,22 @@ pub struct Metrics {
     pub prefix: String,
 
     /// Map from Channel ID to team
-    pub teamchannels: Option<HashMap<String, String>>,
+    pub channels_to_team: Option<HashMap<String, String>>,
 
     /// Map from Address to team
-    pub teamaddresses: Option<HashMap<String, String>>,
+    pub address_to_team: Option<HashMap<String, String>>,
+
+    /// Map from Addre
+    pub client_id_to_team: Option<HashMap<String, String>>,
 }
 impl Metrics {
     /// Create a new metrics client
     pub fn new(
         host: &str,
         prefix: String,
-        teamchannels: Option<HashMap<String, String>>,
-        teamaddresses: Option<HashMap<String, String>>,
+        channels_to_team: Option<HashMap<String, String>>,
+        address_to_team: Option<HashMap<String, String>>,
+        client_id_to_team: Option<HashMap<String, String>>,
     ) -> Result<Metrics, Error> {
         let socket = UdpSocket::bind("0.0.0.0:0")?;
         socket.set_nonblocking(true)?;
@@ -49,8 +53,9 @@ impl Metrics {
         Ok(Self {
             prefix,
             client,
-            teamchannels,
-            teamaddresses,
+            channels_to_team,
+            address_to_team,
+            client_id_to_team,
         })
     }
     ///heartbeat metric
@@ -102,6 +107,21 @@ impl Metrics {
             .map(|data| data.get(0))
             .unwrap_or(Some(&missing_sender))
             .unwrap();
+
+        let src_channel = match self.get_team_by_channel(src_channel) {
+            Some(team) => team,
+            None => src_channel,
+        };
+
+        let dst_channel = match self.get_team_by_channel(dst_channel) {
+            Some(team) => team,
+            None => dst_channel,
+        };
+
+        let message_sender = match self.get_team_by_address(message_sender) {
+            Some(team) => team,
+            None => message_sender,
+        };
 
         self.client.incr(
             format!(
@@ -155,6 +175,21 @@ impl Metrics {
             .unwrap_or(Some(&missing_sender))
             .unwrap();
 
+        let src_channel = match self.get_team_by_channel(src_channel) {
+            Some(team) => team,
+            None => src_channel,
+        };
+
+        let dst_channel = match self.get_team_by_channel(dst_channel) {
+            Some(team) => team,
+            None => dst_channel,
+        };
+
+        let message_sender = match self.get_team_by_address(message_sender) {
+            Some(team) => team,
+            None => message_sender,
+        };
+
         self.client.incr(
             format!(
                 "{}.packet_recieve.{}.{}.{}.{}.{}.{}",
@@ -186,6 +221,16 @@ impl Metrics {
             .unwrap_or(Some(&missing_sender))
             .unwrap();
 
+        let client_id = match self.get_team_by_client_id(client_id) {
+            Some(team) => team,
+            None => client_id,
+        };
+
+        let message_sender = match self.get_team_by_address(message_sender) {
+            Some(team) => team,
+            None => message_sender,
+        };
+
         self.client.incr(
             format!(
                 "{}.packet_recieve.{}.{}.{}",
@@ -194,5 +239,26 @@ impl Metrics {
             .as_ref(),
         )?;
         Ok(())
+    }
+
+    fn get_team_by_channel(&self, channel_id: &str) -> Option<&String> {
+        if let Some(ref channels_to_team) = self.channels_to_team {
+            return channels_to_team.get(channel_id);
+        }
+        None
+    }
+
+    fn get_team_by_address(&self, channel_id: &str) -> Option<&String> {
+        if let Some(ref channels_to_team) = self.address_to_team {
+            return channels_to_team.get(channel_id);
+        }
+        None
+    }
+
+    fn get_team_by_client_id(&self, channel_id: &str) -> Option<&String> {
+        if let Some(ref channels_to_team) = self.address_to_team {
+            return channels_to_team.get(channel_id);
+        }
+        None
     }
 }
