@@ -199,6 +199,49 @@ impl Metrics {
         )?;
         Ok(())
     }
+
+    ///Send a metric for create client event
+    pub fn create_client_event(
+        &mut self,
+        chain: chain::Id,
+        event: ClientEvents::CreateClient,
+    ) -> Result<(), Error> {
+        let missing_client_id = "client_id_missing".to_owned();
+        let client_id = event
+            .data
+            .get("client_id")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_client_id))
+            .unwrap();
+
+        let missing_sender = "sender_missing".to_owned();
+        let message_sender = event
+            .data
+            .get("sender")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_sender))
+            .unwrap();
+
+        let client_id = match self.get_team_by_client_id(client_id) {
+            Some(team) => team,
+            None => client_id,
+        };
+
+        let message_sender = match self.get_team_by_address(message_sender) {
+            Some(team) => team,
+            None => message_sender,
+        };
+
+        self.client.incr(
+            format!(
+                "{}.create_client_event.{}.{}.{}",
+                self.prefix, chain, message_sender, client_id
+            )
+            .as_ref(),
+        )?;
+        Ok(())
+    }
+
     ///Send a metric for update client event
     pub fn update_client_event(
         &mut self,
