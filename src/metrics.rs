@@ -233,7 +233,7 @@ impl Metrics {
 
         self.client.incr(
             format!(
-                "{}.packet_recieve.{}.{}.{}",
+                "{}.client_update.{}.{}.{}",
                 self.prefix, chain, message_sender, client_id
             )
             .as_ref(),
