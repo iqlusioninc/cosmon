@@ -114,9 +114,9 @@ impl SaganApplication {
                     &collector_config.networks,
                     &collector_config.statsd,
                     collector_config.metrics_prefix.clone(),
-                    Some(channel_id_to_team.clone()),
-                    Some(address_to_team.clone()),
-                    Some(client_id_to_team.clone()),
+                    Some(channel_id_to_team),
+                    Some(address_to_team),
+                    Some(client_id_to_team),
                 ) {
                     let network_id = network.id();
                     if self.networks.insert(network_id.clone(), network).is_some() {
