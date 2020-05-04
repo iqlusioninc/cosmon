@@ -106,7 +106,13 @@ impl Application for SaganApplication {
 impl SaganApplication {
     /// Initialize collector state
     fn init_collector(&mut self, collector_config: &CollectorConfig) {
-        for network in Network::from_config(&collector_config.networks, &collector_config.statsd) {
+        for network in Network::from_config(
+            &collector_config.networks,
+            &collector_config.statsd,
+            collector_config.prefix.clone(),
+            collector_config.teamchannels.clone(),
+            collector_config.teamaddresses.clone(),
+        ) {
             let network_id = network.id();
             if self.networks.insert(network_id.clone(), network).is_some() {
                 status_err!("duplicate networks in config: {}", &network_id);

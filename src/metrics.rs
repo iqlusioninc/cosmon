@@ -3,29 +3,61 @@
 use crate::error::Error;
 use cadence::prelude::*;
 use cadence::{StatsdClient, UdpMetricSink, DEFAULT_PORT};
+use relayer_modules::ics02_client::events as ClientEvents;
 use relayer_modules::ics04_channel::events as ChannelEvents;
+use std::collections::HashMap;
 use std::net::UdpSocket;
+use std::time::SystemTime;
 use tendermint::chain;
+
 /// Send Statd metrics over UDP
 #[derive(Debug)]
 pub struct Metrics {
     client: StatsdClient,
-}
 
+    /// Metric Prefix
+    pub prefix: String,
+
+    /// Map from Channel ID to team
+    pub teamchannels: Option<HashMap<String, String>>,
+
+    /// Map from Address to team
+    pub teamaddresses: Option<HashMap<String, String>>,
+}
 impl Metrics {
     /// Create a new metrics client
-    pub fn new(host: &str) -> Result<Metrics, Error> {
+    pub fn new(
+        host: &str,
+        prefix: String,
+        teamchannels: Option<HashMap<String, String>>,
+        teamaddresses: Option<HashMap<String, String>>,
+    ) -> Result<Metrics, Error> {
         let socket = UdpSocket::bind("0.0.0.0:0")?;
         socket.set_nonblocking(true)?;
         let host = (host, DEFAULT_PORT);
         let sink = UdpMetricSink::from(host, socket).unwrap();
         let client = StatsdClient::from_sink("sagan", sink);
-        client.count("sagan.collector.start", 1).unwrap();
-        Ok(Self { client })
+        client
+            .time(
+                &format!("{}.collector.start", &prefix),
+                SystemTime::now()
+                    .duration_since(SystemTime::UNIX_EPOCH)
+                    .unwrap()
+                    .as_millis() as u64,
+            )
+            .unwrap();
+        Ok(Self {
+            prefix,
+            client,
+            teamchannels,
+            teamaddresses,
+        })
     }
     ///heartbeat metric
     pub fn heartbeat(&mut self) {
-        self.client.count("sagan.collector.heartbeat", 1).unwrap();
+        self.client
+            .incr(&format!("{}.heartbeat", self.prefix))
+            .unwrap();
     }
 
     /// Send a metric for each packet send event
@@ -63,10 +95,18 @@ impl Metrics {
             .unwrap_or(Some(&missing_dst_port))
             .unwrap();
 
+        let missing_sender = "sender_missing".to_owned();
+        let message_sender = event
+            .data
+            .get("sender")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_sender))
+            .unwrap();
+
         self.client.incr(
             format!(
-                "packer_send.{}.{}.{}.{}.{}",
-                chain, src_channel, src_port, dst_channel, dst_port
+                "{}.packer_send.{}.{}.{}.{}.{}.{}",
+                self.prefix, message_sender, chain, src_channel, src_port, dst_channel, dst_port
             )
             .as_ref(),
         )?;
@@ -107,10 +147,49 @@ impl Metrics {
             .map(|data| data.get(0))
             .unwrap_or(Some(&missing_dst_port))
             .unwrap();
+        let missing_sender = "sender_missing".to_owned();
+        let message_sender = event
+            .data
+            .get("sender")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_sender))
+            .unwrap();
+
         self.client.incr(
             format!(
-                "packet_recieve.{}.{}.{}.{}.{}",
-                chain, src_channel, src_port, dst_channel, dst_port
+                "{}.packet_recieve.{}.{}.{}.{}.{}.{}",
+                self.prefix, chain, message_sender, src_channel, src_port, dst_channel, dst_port
+            )
+            .as_ref(),
+        )?;
+        Ok(())
+    }
+    ///Send a metric for update client event
+    pub fn update_client_event(
+        &mut self,
+        chain: chain::Id,
+        event: ClientEvents::UpdateClient,
+    ) -> Result<(), Error> {
+        let missing_client_id = "client_id_missing".to_owned();
+        let client_id = event
+            .data
+            .get("client_id")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_client_id))
+            .unwrap();
+
+        let missing_sender = "sender_missing".to_owned();
+        let message_sender = event
+            .data
+            .get("sender")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_sender))
+            .unwrap();
+
+        self.client.incr(
+            format!(
+                "{}.packet_recieve.{}.{}.{}",
+                self.prefix, chain, message_sender, client_id
             )
             .as_ref(),
         )?;

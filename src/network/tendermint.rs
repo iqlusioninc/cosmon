@@ -90,6 +90,12 @@ impl Network {
                 .unwrap_or_else(|err| {
                     trace!("Metrics error:{}", err);
                 }),
+            IBCEvent::UpdateClient(event) => self
+                .metrics
+                .update_client_event(self.id, event.clone())
+                .unwrap_or_else(|err| {
+                    trace!("Metrics error:{}", err);
+                }),
             _ => trace!("No metrics defined for event"),
         }
     }

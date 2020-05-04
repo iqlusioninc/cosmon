@@ -3,6 +3,7 @@
 [collector]
 listen_addr = "127.0.0.1:31023"
 statsd ="127.0.0.1"
+prefix ="sagan_testing"
 
 [collector.networks]
 tendermint = ["ibc0"]

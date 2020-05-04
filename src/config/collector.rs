@@ -1,6 +1,7 @@
 //! `sagan.toml` Collector configuration settings
 
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 use tendermint::net;
 
 /// Collector config settings from `sagan.toml`
@@ -15,6 +16,15 @@ pub struct CollectorConfig {
 
     /// Host ip for the StatsD Deserver
     pub statsd: String,
+
+    /// Map from Channel ID to team
+    pub teamchannels: Option<HashMap<String, String>>,
+
+    /// Map from Address to team
+    pub teamaddresses: Option<HashMap<String, String>>,
+
+    ///Prefix for metrics
+    pub prefix: String,
 }
 
 /// Types of networks this collector is collecting information about
