@@ -4,6 +4,7 @@ use crate::error::Error;
 use cadence::prelude::*;
 use cadence::{StatsdClient, UdpMetricSink, DEFAULT_PORT};
 use relayer_modules::ics02_client::events as ClientEvents;
+use relayer_modules::ics03_connection::events as ConnectionEvents;
 use relayer_modules::ics04_channel::events as ChannelEvents;
 use std::collections::HashMap;
 use std::net::UdpSocket;
@@ -320,6 +321,278 @@ impl Metrics {
             format!(
                 "{}.client_misbehaviour_event.{}.{}.{}",
                 self.prefix, chain, message_sender, client_id
+            )
+            .as_ref(),
+        )?;
+        Ok(())
+    }
+
+    ///Send a metric for openinit event
+    pub fn handle_openinit_event(
+        &mut self,
+        chain: chain::Id,
+        event: ConnectionEvents::OpenInit,
+    ) -> Result<(), Error> {
+        let missing_connection_id = "connection_id_missing".to_owned();
+        let connection_id = event
+            .data
+            .get("connection_id")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_connection_id))
+            .unwrap();
+
+        let missing_client_id = "client_id_missing".to_owned();
+        let client_id = event
+            .data
+            .get("client_id")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_client_id))
+            .unwrap();
+
+        let missing_counterparty_client_id = "counterparty_client_id_missing".to_owned();
+        let counterparty_client_id = event
+            .data
+            .get("counterparty_client_id")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_counterparty_client_id))
+            .unwrap();
+
+        let missing_sender = "sender_missing".to_owned();
+        let message_sender = event
+            .data
+            .get("sender")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_sender))
+            .unwrap();
+
+        let client_id = match self.get_team_by_client_id(client_id) {
+            Some(team) => team,
+            None => client_id,
+        };
+
+        let counterparty_client_id = match self.get_team_by_client_id(counterparty_client_id) {
+            Some(team) => team,
+            None => counterparty_client_id,
+        };
+
+        let message_sender = match self.get_team_by_address(message_sender) {
+            Some(team) => team,
+            None => message_sender,
+        };
+
+        self.client.incr(
+            format!(
+                "{}.handle_openinit_event.{}.{}.{}.{}.{}",
+                self.prefix,
+                chain,
+                message_sender,
+                connection_id,
+                client_id,
+                counterparty_client_id
+            )
+            .as_ref(),
+        )?;
+        Ok(())
+    }
+
+    ///Send a metric for opentry event
+    pub fn handle_opentry_event(
+        &mut self,
+        chain: chain::Id,
+        event: ConnectionEvents::OpenTry,
+    ) -> Result<(), Error> {
+        let missing_connection_id = "connection_id_missing".to_owned();
+        let connection_id = event
+            .data
+            .get("connection_id")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_connection_id))
+            .unwrap();
+
+        let missing_client_id = "client_id_missing".to_owned();
+        let client_id = event
+            .data
+            .get("client_id")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_client_id))
+            .unwrap();
+
+        let missing_counterparty_client_id = "counterparty_client_id_missing".to_owned();
+        let counterparty_client_id = event
+            .data
+            .get("counterparty_client_id")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_counterparty_client_id))
+            .unwrap();
+
+        let missing_sender = "sender_missing".to_owned();
+        let message_sender = event
+            .data
+            .get("sender")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_sender))
+            .unwrap();
+
+        let client_id = match self.get_team_by_client_id(client_id) {
+            Some(team) => team,
+            None => client_id,
+        };
+
+        let counterparty_client_id = match self.get_team_by_client_id(counterparty_client_id) {
+            Some(team) => team,
+            None => counterparty_client_id,
+        };
+
+        let message_sender = match self.get_team_by_address(message_sender) {
+            Some(team) => team,
+            None => message_sender,
+        };
+
+        self.client.incr(
+            format!(
+                "{}.handle_opentry_event.{}.{}.{}.{}.{}",
+                self.prefix,
+                chain,
+                message_sender,
+                connection_id,
+                client_id,
+                counterparty_client_id
+            )
+            .as_ref(),
+        )?;
+        Ok(())
+    }
+
+    ///Send a metric for openack event
+    pub fn handle_openack_event(
+        &mut self,
+        chain: chain::Id,
+        event: ConnectionEvents::OpenAck,
+    ) -> Result<(), Error> {
+        let missing_connection_id = "connection_id_missing".to_owned();
+        let connection_id = event
+            .data
+            .get("connection_id")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_connection_id))
+            .unwrap();
+
+        let missing_client_id = "client_id_missing".to_owned();
+        let client_id = event
+            .data
+            .get("client_id")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_client_id))
+            .unwrap();
+
+        let missing_counterparty_client_id = "counterparty_client_id_missing".to_owned();
+        let counterparty_client_id = event
+            .data
+            .get("counterparty_client_id")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_counterparty_client_id))
+            .unwrap();
+
+        let missing_sender = "sender_missing".to_owned();
+        let message_sender = event
+            .data
+            .get("sender")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_sender))
+            .unwrap();
+
+        let client_id = match self.get_team_by_client_id(client_id) {
+            Some(team) => team,
+            None => client_id,
+        };
+
+        let counterparty_client_id = match self.get_team_by_client_id(counterparty_client_id) {
+            Some(team) => team,
+            None => counterparty_client_id,
+        };
+
+        let message_sender = match self.get_team_by_address(message_sender) {
+            Some(team) => team,
+            None => message_sender,
+        };
+
+        self.client.incr(
+            format!(
+                "{}.handle_openack_event.{}.{}.{}.{}.{}",
+                self.prefix,
+                chain,
+                message_sender,
+                connection_id,
+                client_id,
+                counterparty_client_id
+            )
+            .as_ref(),
+        )?;
+        Ok(())
+    }
+
+    ///Send a metric for openack event
+    pub fn handle_openconfirm_event(
+        &mut self,
+        chain: chain::Id,
+        event: ConnectionEvents::OpenConfirm,
+    ) -> Result<(), Error> {
+        let missing_connection_id = "connection_id_missing".to_owned();
+        let connection_id = event
+            .data
+            .get("connection_id")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_connection_id))
+            .unwrap();
+
+        let missing_client_id = "client_id_missing".to_owned();
+        let client_id = event
+            .data
+            .get("client_id")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_client_id))
+            .unwrap();
+
+        let missing_counterparty_client_id = "counterparty_client_id_missing".to_owned();
+        let counterparty_client_id = event
+            .data
+            .get("counterparty_client_id")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_counterparty_client_id))
+            .unwrap();
+
+        let missing_sender = "sender_missing".to_owned();
+        let message_sender = event
+            .data
+            .get("sender")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_sender))
+            .unwrap();
+
+        let client_id = match self.get_team_by_client_id(client_id) {
+            Some(team) => team,
+            None => client_id,
+        };
+
+        let counterparty_client_id = match self.get_team_by_client_id(counterparty_client_id) {
+            Some(team) => team,
+            None => counterparty_client_id,
+        };
+
+        let message_sender = match self.get_team_by_address(message_sender) {
+            Some(team) => team,
+            None => message_sender,
+        };
+
+        self.client.incr(
+            format!(
+                "{}.handle_openconfirm_event.{}.{}.{}.{}.{}",
+                self.prefix,
+                chain,
+                message_sender,
+                connection_id,
+                client_id,
+                counterparty_client_id
             )
             .as_ref(),
         )?;
