@@ -109,22 +109,22 @@ impl SaganApplication {
         if let Some((address_to_team, channel_id_to_team, client_id_to_team)) =
             collector_config.build_hashmaps()
         {
-            {
-                for network in Network::from_config(
-                    &collector_config.networks,
-                    &collector_config.statsd,
-                    collector_config.metrics_prefix.clone(),
-                    Some(channel_id_to_team),
-                    Some(address_to_team),
-                    Some(client_id_to_team),
-                ) {
-                    let network_id = network.id();
-                    if self.networks.insert(network_id.clone(), network).is_some() {
-                        status_err!("duplicate networks in config: {}", &network_id);
-                        process::exit(1);
-                    }
+            for network in Network::from_config(
+                &collector_config.networks,
+                &collector_config.statsd,
+                collector_config.metrics_prefix.clone(),
+                Some(channel_id_to_team),
+                Some(address_to_team),
+                Some(client_id_to_team),
+            ) {
+                let network_id = network.id();
+                info!("Registering network {}", network_id);
+                if self.networks.insert(network_id.clone(), network).is_some() {
+                    status_err!("duplicate networks in config: {}", &network_id);
+                    process::exit(1);
                 }
             }
+        } else {
             for network in Network::from_config(
                 &collector_config.networks,
                 &collector_config.statsd,
