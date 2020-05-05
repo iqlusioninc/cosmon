@@ -26,12 +26,7 @@ pub struct CollectorConfig {
 
 impl CollectorConfig {
     ///Build look up indexes from the teams
-    pub fn build_hashmaps(
-        &self,
-    ) -> Option<(
-        HashMap<String, String>,
-        HashMap<String, String>,
-    )> {
+    pub fn build_hashmaps(&self) -> Option<(HashMap<String, String>, HashMap<String, String>)> {
         if let Some(ref teams) = self.teams {
             let mut address_to_team = HashMap::new();
             let mut channel_id_to_team = HashMap::new();

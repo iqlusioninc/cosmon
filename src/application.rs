@@ -106,9 +106,7 @@ impl Application for SaganApplication {
 impl SaganApplication {
     /// Initialize collector state
     fn init_collector(&mut self, collector_config: &CollectorConfig) {
-        if let Some((address_to_team, channel_id_to_team)) =
-            collector_config.build_hashmaps()
-        {
+        if let Some((address_to_team, channel_id_to_team)) = collector_config.build_hashmaps() {
             for network in Network::from_config(
                 &collector_config.networks,
                 &collector_config.statsd,

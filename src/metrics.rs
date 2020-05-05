@@ -25,7 +25,6 @@ pub struct Metrics {
 
     /// Map from Address to team
     pub address_to_team: Option<HashMap<String, String>>,
-
 }
 impl Metrics {
     /// Create a new metrics client
@@ -102,14 +101,15 @@ impl Metrics {
         let message_sender = event
             .data
             .get("message.sender")
-            .map(|data| data.iter().map(|address|{
-                match self.get_team_by_address(address) {
-                    Some(team) => team.clone(),
-                    None => address.clone(),
-                }
+            .map(|data| {
+                data.iter()
+                    .map(|address| match self.get_team_by_address(address) {
+                        Some(team) => team.clone(),
+                        None => address.clone(),
+                    })
+                    .collect::<Vec<String>>()
+                    .join(".")
             })
-            .collect::<Vec<String>>()
-            .join("."))
             .unwrap_or(missing_sender);
 
         let src_channel = match self.get_team_by_channel(src_channel) {
@@ -122,13 +122,16 @@ impl Metrics {
             None => dst_channel,
         };
 
-        self.client.incr(
-            format!(
-                "{}.packer_send.{}.{}.{}.{}.{}.{}",
-                self.prefix, message_sender, chain, src_channel, src_port, dst_channel, dst_port
-            )
-            .as_ref(),
-        )?;
+        self.client
+            .incr_with_tags(format!("{}.packet_send", self.prefix,).as_ref())
+            .with_tag("chain", &chain.to_string())
+            .with_tag("sender", &message_sender)
+            .with_tag("src_channel", src_channel)
+            .with_tag("src_port", src_port)
+            .with_tag("dst_channel", dst_channel)
+            .with_tag("dst_port", dst_port)
+            .send();
+
         Ok(())
     }
 
@@ -170,16 +173,16 @@ impl Metrics {
         let message_sender = event
             .data
             .get("message.sender")
-            .map(|data| data.iter().map(|address|{
-                match self.get_team_by_address(address) {
-                    Some(team) => team.clone(),
-                    None => address.clone(),
-                }
+            .map(|data| {
+                data.iter()
+                    .map(|address| match self.get_team_by_address(address) {
+                        Some(team) => team.clone(),
+                        None => address.clone(),
+                    })
+                    .collect::<Vec<String>>()
+                    .join(".")
             })
-            .collect::<Vec<String>>()
-            .join("."))
             .unwrap_or(missing_sender);
-
 
         let src_channel = match self.get_team_by_channel(src_channel) {
             Some(team) => team,
@@ -191,20 +194,25 @@ impl Metrics {
             None => dst_channel,
         };
 
+        self.client
+            .incr_with_tags(format!("{}.packet_recieve", self.prefix,).as_ref())
+            .with_tag("chain", &chain.to_string())
+            .with_tag("sender", &message_sender)
+            .with_tag("src_channel", src_channel)
+            .with_tag("src_port", src_port)
+            .with_tag("dst_channel", dst_channel)
+            .with_tag("dst_port", dst_port)
+            .send();
 
-
-        self.client.incr(
-            format!(
-                "{}.packet_recieve.{}.{}.{}.{}.{}.{}",
-                self.prefix, chain, message_sender, src_channel, src_port, dst_channel, dst_port
-            )
-            .as_ref(),
-        )?;
         Ok(())
     }
 
     /// Event for recieving opaque_packet
-    pub fn opaque_packet(&mut self, chain:chain::Id, event:ChannelEvents::OpaquePacket) -> Result<(), Error>{
+    pub fn opaque_packet(
+        &mut self,
+        chain: chain::Id,
+        event: ChannelEvents::OpaquePacket,
+    ) -> Result<(), Error> {
         let missing_src_channel = "packet_src_channel_missing".to_owned();
         let src_channel: &String = event
             .data
@@ -237,16 +245,16 @@ impl Metrics {
         let message_sender = event
             .data
             .get("message.sender")
-            .map(|data| data.iter().map(|address|{
-                match self.get_team_by_address(address) {
-                    Some(team) => team.clone(),
-                    None => address.clone(),
-                }
+            .map(|data| {
+                data.iter()
+                    .map(|address| match self.get_team_by_address(address) {
+                        Some(team) => team.clone(),
+                        None => address.clone(),
+                    })
+                    .collect::<Vec<String>>()
+                    .join(".")
             })
-            .collect::<Vec<String>>()
-            .join("."))
             .unwrap_or(missing_sender);
-
 
         let src_channel = match self.get_team_by_channel(src_channel) {
             Some(team) => team,
@@ -258,20 +266,25 @@ impl Metrics {
             None => dst_channel,
         };
 
+        self.client
+            .incr_with_tags(format!("{}.packet_recv_opaque", self.prefix,).as_ref())
+            .with_tag("chain", &chain.to_string())
+            .with_tag("sender", &message_sender)
+            .with_tag("src_channel", src_channel)
+            .with_tag("src_port", src_port)
+            .with_tag("dst_channel", dst_channel)
+            .with_tag("dst_port", dst_port)
+            .send();
 
-
-        self.client.incr(
-            format!(
-                "{}.packet_recv_opaque.{}.{}.{}.{}.{}.{}",
-                self.prefix, chain, message_sender, src_channel, src_port, dst_channel, dst_port
-            )
-            .as_ref(),
-        )?;
-        Ok(())     
+        Ok(())
     }
 
     /// Transfer events
-    pub fn transfer_event(&mut self,chain:chain::Id, event: TransferEvents::Packet)->Result<(), Error>{
+    pub fn transfer_event(
+        &mut self,
+        chain: chain::Id,
+        event: TransferEvents::Packet,
+    ) -> Result<(), Error> {
         let missing_src_channel = "packet_src_channel_missing".to_owned();
         let src_channel: &String = event
             .data
@@ -305,14 +318,15 @@ impl Metrics {
         let message_sender = event
             .data
             .get("message.sender")
-            .map(|data| data.iter().map(|address|{
-                match self.get_team_by_address(address) {
-                    Some(team) => team.clone(),
-                    None => address.clone(),
-                }
+            .map(|data| {
+                data.iter()
+                    .map(|address| match self.get_team_by_address(address) {
+                        Some(team) => team.clone(),
+                        None => address.clone(),
+                    })
+                    .collect::<Vec<String>>()
+                    .join(".")
             })
-            .collect::<Vec<String>>()
-            .join("."))
             .unwrap_or(missing_sender);
 
         let src_channel = match self.get_team_by_channel(src_channel) {
@@ -325,19 +339,17 @@ impl Metrics {
             None => dst_channel,
         };
 
-
-        self.client.incr(
-            format!(
-                "{}.ics20_transfer.{}.{}.{}.{}.{}.{}",
-                self.prefix, message_sender, chain, src_channel, src_port, dst_channel, dst_port
-            )
-            .as_ref(),
-        )?;
+        self.client
+            .incr_with_tags(format!("{}.ics20_transfer", self.prefix,).as_ref())
+            .with_tag("chain", &chain.to_string())
+            .with_tag("sender", &message_sender)
+            .with_tag("src_channel", src_channel)
+            .with_tag("src_port", src_port)
+            .with_tag("dst_channel", dst_channel)
+            .with_tag("dst_port", dst_port)
+            .send();
         Ok(())
-        
     }
-
-
 
     ///Send a metric for create client event
     pub fn create_client_event(
@@ -345,21 +357,20 @@ impl Metrics {
         chain: chain::Id,
         event: ClientEvents::CreateClient,
     ) -> Result<(), Error> {
-
         let missing_sender = "sender_missing".to_owned();
         let message_sender = event
             .data
             .get("message.sender")
-            .map(|data| data.iter().map(|address|{
-                match self.get_team_by_address(address) {
-                    Some(team) => team.clone(),
-                    None => address.clone(),
-                }
+            .map(|data| {
+                data.iter()
+                    .map(|address| match self.get_team_by_address(address) {
+                        Some(team) => team.clone(),
+                        None => address.clone(),
+                    })
+                    .collect::<Vec<String>>()
+                    .join(".")
             })
-            .collect::<Vec<String>>()
-            .join("."))
             .unwrap_or(missing_sender);
-
 
         self.client.incr(
             format!(
@@ -389,16 +400,16 @@ impl Metrics {
         let message_sender = event
             .data
             .get("message.sender")
-            .map(|data| data.iter().map(|address|{
-                match self.get_team_by_address(address) {
-                    Some(team) => team.clone(),
-                    None => address.clone(),
-                }
+            .map(|data| {
+                data.iter()
+                    .map(|address| match self.get_team_by_address(address) {
+                        Some(team) => team.clone(),
+                        None => address.clone(),
+                    })
+                    .collect::<Vec<String>>()
+                    .join(".")
             })
-            .collect::<Vec<String>>()
-            .join("."))
             .unwrap_or(missing_sender);
-
 
         self.client.incr(
             format!(
@@ -420,16 +431,16 @@ impl Metrics {
         let message_sender = event
             .data
             .get("message.sender")
-            .map(|data| data.iter().map(|address|{
-                match self.get_team_by_address(address) {
-                    Some(team) => team.clone(),
-                    None => address.clone(),
-                }
+            .map(|data| {
+                data.iter()
+                    .map(|address| match self.get_team_by_address(address) {
+                        Some(team) => team.clone(),
+                        None => address.clone(),
+                    })
+                    .collect::<Vec<String>>()
+                    .join(".")
             })
-            .collect::<Vec<String>>()
-            .join("."))
             .unwrap_or(missing_sender);
-
 
         self.client.incr(
             format!(
@@ -447,58 +458,26 @@ impl Metrics {
         chain: chain::Id,
         event: ConnectionEvents::OpenInit,
     ) -> Result<(), Error> {
-        let missing_connection_id = "connection_id_missing".to_owned();
-        let connection_id = event
+        let missing_sender = "sender_missing".to_owned();
+        let message_sender = event
             .data
-            .get("connection_open_init.connection_id")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_connection_id))
-            .unwrap();
-
-        let missing_client_id = "client_id_missing".to_owned();
-        let client_id = event
-            .data
-            .get("connection_open_init.client_id")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_client_id))
-            .unwrap();
-
-        let missing_counterparty_client_id = "counterparty_client_id_missing".to_owned();
-        let counterparty_client_id = event
-            .data
-            .get("connection_open_init.counterparty_client_id")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_counterparty_client_id))
-            .unwrap();
-
-            let missing_sender = "sender_missing".to_owned();
-            let message_sender = event
-                .data
-                .get("message.sender")
-                .map(|data| data.iter().map(|address|{
-                    match self.get_team_by_address(address) {
+            .get("message.sender")
+            .map(|data| {
+                data.iter()
+                    .map(|address| match self.get_team_by_address(address) {
                         Some(team) => team.clone(),
                         None => address.clone(),
-                    }
-                })
-                .collect::<Vec<String>>()
-                .join("."))
-                .unwrap_or(missing_sender);
-    
+                    })
+                    .collect::<Vec<String>>()
+                    .join(".")
+            })
+            .unwrap_or(missing_sender);
 
-
-        self.client.incr(
-            format!(
-                "{}.openinit_event.{}.{}.{}.{}.{}",
-                self.prefix,
-                chain,
-                message_sender,
-                connection_id,
-                client_id,
-                counterparty_client_id
-            )
-            .as_ref(),
-        )?;
+        self.client
+            .incr_with_tags(format!("{}.openinit_event", self.prefix,).as_ref())
+            .with_tag("chain", &chain.to_string())
+            .with_tag("sender", &message_sender)
+            .send();
         Ok(())
     }
 
@@ -508,40 +487,27 @@ impl Metrics {
         chain: chain::Id,
         event: ConnectionEvents::OpenTry,
     ) -> Result<(), Error> {
-        let missing_connection_id = "connection_id_missing".to_owned();
-        let connection_id = event
-            .data
-            .get("connection_open_try.connection_id")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_connection_id))
-            .unwrap();
-
-
-
         let missing_sender = "sender_missing".to_owned();
         let message_sender = event
             .data
             .get("message.sender")
-            .map(|data| data.iter().map(|address|{
-                match self.get_team_by_address(address) {
-                    Some(team) => team.clone(),
-                    None => address.clone(),
-                }
+            .map(|data| {
+                data.iter()
+                    .map(|address| match self.get_team_by_address(address) {
+                        Some(team) => team.clone(),
+                        None => address.clone(),
+                    })
+                    .collect::<Vec<String>>()
+                    .join(".")
             })
-            .collect::<Vec<String>>()
-            .join("."))
             .unwrap_or(missing_sender);
 
-        self.client.incr(
-            format!(
-                "{}.opentry_event.{}.{}.{}",
-                self.prefix,
-                chain,
-                message_sender,
-                connection_id,
-            )
-            .as_ref(),
-        )?;
+        self.client
+            .incr_with_tags(format!("{}.opentry_event", self.prefix,).as_ref())
+            .with_tag("chain", &chain.to_string())
+            .with_tag("sender", &message_sender)
+            .send();
+
         Ok(())
     }
 
@@ -551,39 +517,26 @@ impl Metrics {
         chain: chain::Id,
         event: ConnectionEvents::OpenAck,
     ) -> Result<(), Error> {
-        let missing_connection_id = "connection_id_missing".to_owned();
-        let connection_id = event
+        let missing_sender = "sender_missing".to_owned();
+        let message_sender = event
             .data
-            .get("connection_open_ack.connection_id")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_connection_id))
-            .unwrap();
-
-            let missing_sender = "sender_missing".to_owned();
-            let message_sender = event
-                .data
-                .get("message.sender")
-                .map(|data| data.iter().map(|address|{
-                    match self.get_team_by_address(address) {
+            .get("message.sender")
+            .map(|data| {
+                data.iter()
+                    .map(|address| match self.get_team_by_address(address) {
                         Some(team) => team.clone(),
                         None => address.clone(),
-                    }
-                })
-                .collect::<Vec<String>>()
-                .join("."))
-                .unwrap_or(missing_sender);
-    
-        self.client.incr(
-            format!(
-                "{}.openack_event.{}.{}.{}",
-                self.prefix,
-                chain,
-                message_sender,
-                connection_id,
+                    })
+                    .collect::<Vec<String>>()
+                    .join(".")
+            })
+            .unwrap_or(missing_sender);
 
-            )
-            .as_ref(),
-        )?;
+        self.client
+            .incr_with_tags(format!("{}.openack_event", self.prefix,).as_ref())
+            .with_tag("chain", &chain.to_string())
+            .with_tag("sender", &message_sender)
+            .send();
         Ok(())
     }
 
@@ -593,39 +546,26 @@ impl Metrics {
         chain: chain::Id,
         event: ConnectionEvents::OpenConfirm,
     ) -> Result<(), Error> {
-        let missing_connection_id = "connection_id_missing".to_owned();
-        let connection_id = event
+        let missing_sender = "sender_missing".to_owned();
+        let message_sender = event
             .data
-            .get("connection_id")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_connection_id))
-            .unwrap();
-
-            let missing_sender = "sender_missing".to_owned();
-            let message_sender = event
-                .data
-                .get("message.sender")
-                .map(|data| data.iter().map(|address|{
-                    match self.get_team_by_address(address) {
+            .get("message.sender")
+            .map(|data| {
+                data.iter()
+                    .map(|address| match self.get_team_by_address(address) {
                         Some(team) => team.clone(),
                         None => address.clone(),
-                    }
-                })
-                .collect::<Vec<String>>()
-                .join("."))
-                .unwrap_or(missing_sender);
-    
+                    })
+                    .collect::<Vec<String>>()
+                    .join(".")
+            })
+            .unwrap_or(missing_sender);
 
-        self.client.incr(
-            format!(
-                "{}.openconfirm_event.{}.{}.{}",
-                self.prefix,
-                chain,
-                message_sender,
-                connection_id,
-            )
-            .as_ref(),
-        )?;
+        self.client
+            .incr_with_tags(format!("{}.openconfirm_event", self.prefix,).as_ref())
+            .with_tag("chain", &chain.to_string())
+            .with_tag("sender", &message_sender)
+            .send();
         Ok(())
     }
 

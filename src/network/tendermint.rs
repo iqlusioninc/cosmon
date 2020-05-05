@@ -109,30 +109,30 @@ impl Network {
                     trace!("Metrics error:{}", err);
                 }),
             IBCEvent::OpenInitConnection(event) => self
-            .metrics
-            .openinit_event(self.id, event.clone())
-            .unwrap_or_else(|err| {
-                trace!("Metrics error:{}", err);
-            }),
+                .metrics
+                .openinit_event(self.id, event.clone())
+                .unwrap_or_else(|err| {
+                    trace!("Metrics error:{}", err);
+                }),
             IBCEvent::OpenTryConnection(event) => self
-            .metrics
-            .opentry_event(self.id, event.clone())
-            .unwrap_or_else(|err| {
-                trace!("Metrics error:{}", err);
-            }),
+                .metrics
+                .opentry_event(self.id, event.clone())
+                .unwrap_or_else(|err| {
+                    trace!("Metrics error:{}", err);
+                }),
             IBCEvent::OpenAckConnection(event) => self
-            .metrics
-            .openack_event(self.id, event.clone())
-            .unwrap_or_else(|err| {
-                trace!("Metrics error:{}", err);
-            }),
+                .metrics
+                .openack_event(self.id, event.clone())
+                .unwrap_or_else(|err| {
+                    trace!("Metrics error:{}", err);
+                }),
             IBCEvent::OpenConfirmConnection(event) => self
-            .metrics
-            .openconfirm_event(self.id, event.clone())
-            .unwrap_or_else(|err| {
-                trace!("Metrics error:{}", err);
-            }),
-            _ => info!("No metrics defined for event {:?}",event),
+                .metrics
+                .openconfirm_event(self.id, event.clone())
+                .unwrap_or_else(|err| {
+                    trace!("Metrics error:{}", err);
+                }),
+            _ => info!("No metrics defined for event {:?}", event),
         }
     }
 
