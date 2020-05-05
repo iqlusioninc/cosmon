@@ -74,28 +74,28 @@ impl Metrics {
         let missing_src_channel = "packet_src_channel_missing".to_owned();
         let src_channel: &String = event
             .data
-            .get("packet_src_channel")
+            .get("send_packet.packet_src_channel")
             .map(|data| data.get(0))
             .unwrap_or(Some(&missing_src_channel))
             .unwrap();
         let missing_src_port = "packet_src_port_missing".to_owned();
         let src_port: &String = event
             .data
-            .get("packet_src_port")
+            .get("send_packet.packet_src_port")
             .map(|data| data.get(0))
             .unwrap_or(Some(&missing_src_port))
             .unwrap();
         let missing_dst_channel = "packet_dst_channel_missing".to_owned();
         let dst_channel: &String = event
             .data
-            .get("packet_dst_channel")
+            .get("send_packet.packet_dst_channel")
             .map(|data| data.get(0))
             .unwrap_or(Some(&missing_dst_channel))
             .unwrap();
         let missing_dst_port = "packet_dst_port_missing".to_owned();
         let dst_port: &String = event
             .data
-            .get("packet_dst_port")
+            .get("send_packet.packet_dst_port")
             .map(|data| data.get(0))
             .unwrap_or(Some(&missing_dst_port))
             .unwrap();
@@ -103,10 +103,16 @@ impl Metrics {
         let missing_sender = "sender_missing".to_owned();
         let message_sender = event
             .data
-            .get("sender")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_sender))
-            .unwrap();
+            .get("message.sender")
+            .map(|data| data.iter().map(|address|{
+                match self.get_team_by_address(address) {
+                    Some(team) => team.clone(),
+                    None => address.clone(),
+                }
+            })
+            .collect::<Vec<String>>()
+            .join("-"))
+            .unwrap_or(missing_sender);
 
         let src_channel = match self.get_team_by_channel(src_channel) {
             Some(team) => team,
@@ -116,11 +122,6 @@ impl Metrics {
         let dst_channel = match self.get_team_by_channel(dst_channel) {
             Some(team) => team,
             None => dst_channel,
-        };
-
-        let message_sender = match self.get_team_by_address(message_sender) {
-            Some(team) => team,
-            None => message_sender,
         };
 
         self.client.incr(
@@ -170,10 +171,17 @@ impl Metrics {
         let missing_sender = "sender_missing".to_owned();
         let message_sender = event
             .data
-            .get("sender")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_sender))
-            .unwrap();
+            .get("message.sender")
+            .map(|data| data.iter().map(|address|{
+                match self.get_team_by_address(address) {
+                    Some(team) => team.clone(),
+                    None => address.clone(),
+                }
+            })
+            .collect::<Vec<String>>()
+            .join("-"))
+            .unwrap_or(missing_sender);
+
 
         let src_channel = match self.get_team_by_channel(src_channel) {
             Some(team) => team,
@@ -185,10 +193,7 @@ impl Metrics {
             None => dst_channel,
         };
 
-        let message_sender = match self.get_team_by_address(message_sender) {
-            Some(team) => team,
-            None => message_sender,
-        };
+
 
         self.client.incr(
             format!(
@@ -216,20 +221,24 @@ impl Metrics {
         let missing_sender = "sender_missing".to_owned();
         let message_sender = event
             .data
-            .get("sender")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_sender))
-            .unwrap();
+            .get("message.sender")
+            .map(|data| data.iter().map(|address|{
+                match self.get_team_by_address(address) {
+                    Some(team) => team.clone(),
+                    None => address.clone(),
+                }
+            })
+            .collect::<Vec<String>>()
+            .join("-"))
+            .unwrap_or(missing_sender);
+
 
         let client_id = match self.get_team_by_client_id(client_id) {
             Some(team) => team,
             None => client_id,
         };
 
-        let message_sender = match self.get_team_by_address(message_sender) {
-            Some(team) => team,
-            None => message_sender,
-        };
+
 
         self.client.incr(
             format!(

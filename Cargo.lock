@@ -1532,7 +1532,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 [[package]]
 name = "relayer-modules"
 version = "0.1.0"
-source = "git+https://github.com/iqlusioninc/ibc-rs.git?branch=poldsam-zaki-ibc-events#484a66a13e6e59f582e381de29b3a4c430802c3c"
+source = "git+https://github.com/iqlusioninc/ibc-rs.git?branch=poldsam-zaki-ibc-events#9fb438ea0c53148e2b4ba3b7a6244d54c18711a5"
 dependencies = [
  "anomaly 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde 1.0.106 (registry+https://github.com/rust-lang/crates.io-index)",
