@@ -53,7 +53,7 @@ impl Runnable for HttpServer {
         // POST /collector
         let collector = warp::post2()
             .and(path("collector"))
-            .and(warp::body::content_length_limit(1024 * 64))
+            .and(warp::body::content_length_limit(1024 * 128))
             .and(warp::body::json())
             .map(|envelope: message::Envelope| {
                 let mut app = app_writer();
