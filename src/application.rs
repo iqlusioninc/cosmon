@@ -134,6 +134,7 @@ impl SaganApplication {
                 None,
             ) {
                 let network_id = network.id();
+                info!("Registering network {}", network_id);
                 if self.networks.insert(network_id.clone(), network).is_some() {
                     status_err!("duplicate networks in config: {}", &network_id);
                     process::exit(1);
