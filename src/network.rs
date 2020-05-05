@@ -51,7 +51,6 @@ impl Network {
         prefix: String,
         channels_to_teams: Option<HashMap<String, String>>,
         address_to_teams: Option<HashMap<String, String>>,
-        client_id_to_teams: Option<HashMap<String, String>>,
     ) -> Vec<Network> {
         let mut networks = vec![];
 
@@ -61,7 +60,6 @@ impl Network {
                 prefix.clone(),
                 channels_to_teams.clone(),
                 address_to_teams.clone(),
-                client_id_to_teams.clone(),
             )
             .unwrap_or_else(|err| {
                 status_err!("invalid statsd config {}", &err);

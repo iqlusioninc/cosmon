@@ -24,8 +24,6 @@ pub struct Metrics {
     /// Map from Address to team
     pub address_to_team: Option<HashMap<String, String>>,
 
-    /// Map from Addre
-    pub client_id_to_team: Option<HashMap<String, String>>,
 }
 impl Metrics {
     /// Create a new metrics client
@@ -34,7 +32,6 @@ impl Metrics {
         prefix: String,
         channels_to_team: Option<HashMap<String, String>>,
         address_to_team: Option<HashMap<String, String>>,
-        client_id_to_team: Option<HashMap<String, String>>,
     ) -> Result<Metrics, Error> {
         let socket = UdpSocket::bind("0.0.0.0:0")?;
         socket.set_nonblocking(true)?;
@@ -55,7 +52,6 @@ impl Metrics {
             client,
             channels_to_team,
             address_to_team,
-            client_id_to_team,
         })
     }
     ///heartbeat metric
@@ -233,13 +229,6 @@ impl Metrics {
             .unwrap_or(missing_sender);
 
 
-        let client_id = match self.get_team_by_client_id(client_id) {
-            Some(team) => team,
-            None => client_id,
-        };
-
-
-
         self.client.incr(
             format!(
                 "{}.client_update.{}.{}.{}",
@@ -258,15 +247,8 @@ impl Metrics {
     }
 
     fn get_team_by_address(&self, channel_id: &str) -> Option<&String> {
-        if let Some(ref channels_to_team) = self.address_to_team {
-            return channels_to_team.get(channel_id);
-        }
-        None
-    }
-
-    fn get_team_by_client_id(&self, channel_id: &str) -> Option<&String> {
-        if let Some(ref channels_to_team) = self.address_to_team {
-            return channels_to_team.get(channel_id);
+        if let Some(ref address_to_team) = self.address_to_team {
+            return address_to_team.get(channel_id);
         }
         None
     }

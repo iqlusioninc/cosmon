@@ -2,8 +2,19 @@
 
 [collector]
 listen_addr = "127.0.0.1:31023"
-statsd ="127.0.0.1"
-prefix ="sagan_testing"
+statsd = "127.0.0.1"
+metrics_prefix ="sagan_testing"
 
 [collector.networks]
 tendermint = ["ibc0"]
+
+[[teams]]
+name = "hello_world"
+address = "cosmic17mxjzvrr0a39sl0z9ywfh5e7t5shdeg3hrwte7"
+channel_id ="ulkbxmmphjss"
+
+
+[[teams]]
+name = "hello_world2"
+address = "cosmic17mxjzvrr0a39sl0z9ywfh5e7t5shdeg3hrwte7"
+channel_id ="ulkbxmmphjss"

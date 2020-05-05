@@ -1968,7 +1968,7 @@ dependencies = [
 [[package]]
 name = "tendermint"
 version = "0.13.0"
-source = "git+https://github.com/iqlusioninc/tendermint-rs.git?branch=zaki-event-subscribe#644bbd1c53fdc36312e1a1926393bea2ed05a2d4"
+source = "git+https://github.com/iqlusioninc/tendermint-rs.git?branch=zaki-event-subscribe#81e2bc5d89e7a09bd54523367b40cafb500bdacd"
 dependencies = [
  "anomaly 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "async-trait 0.1.30 (registry+https://github.com/rust-lang/crates.io-index)",

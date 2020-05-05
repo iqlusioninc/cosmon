@@ -106,7 +106,7 @@ impl Application for SaganApplication {
 impl SaganApplication {
     /// Initialize collector state
     fn init_collector(&mut self, collector_config: &CollectorConfig) {
-        if let Some((address_to_team, channel_id_to_team, client_id_to_team)) =
+        if let Some((address_to_team, channel_id_to_team)) =
             collector_config.build_hashmaps()
         {
             for network in Network::from_config(
@@ -115,7 +115,6 @@ impl SaganApplication {
                 collector_config.metrics_prefix.clone(),
                 Some(channel_id_to_team),
                 Some(address_to_team),
-                Some(client_id_to_team),
             ) {
                 let network_id = network.id();
                 info!("Registering network {}", network_id);
@@ -129,7 +128,6 @@ impl SaganApplication {
                 &collector_config.networks,
                 &collector_config.statsd,
                 collector_config.metrics_prefix.clone(),
-                None,
                 None,
                 None,
             ) {
