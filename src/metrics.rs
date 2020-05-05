@@ -6,6 +6,7 @@ use cadence::{StatsdClient, UdpMetricSink, DEFAULT_PORT};
 use relayer_modules::ics02_client::events as ClientEvents;
 use relayer_modules::ics03_connection::events as ConnectionEvents;
 use relayer_modules::ics04_channel::events as ChannelEvents;
+use relayer_modules::ics20_fungible_token_transfer::events as TransferEvents;
 use std::collections::HashMap;
 use std::net::UdpSocket;
 use std::time::SystemTime;
@@ -108,7 +109,7 @@ impl Metrics {
                 }
             })
             .collect::<Vec<String>>()
-            .join("-"))
+            .join("."))
             .unwrap_or(missing_sender);
 
         let src_channel = match self.get_team_by_channel(src_channel) {
@@ -140,28 +141,28 @@ impl Metrics {
         let missing_src_channel = "packet_src_channel_missing".to_owned();
         let src_channel: &String = event
             .data
-            .get("packet_src_channel")
+            .get("recv_packet.packet_src_channel")
             .map(|data| data.get(0))
             .unwrap_or(Some(&missing_src_channel))
             .unwrap();
         let missing_src_port = "packet_src_port_missing".to_owned();
         let src_port: &String = event
             .data
-            .get("packet_src_port")
+            .get("recv_packet.packet_src_port")
             .map(|data| data.get(0))
             .unwrap_or(Some(&missing_src_port))
             .unwrap();
         let missing_dst_channel = "packet_dst_channel_missing".to_owned();
         let dst_channel: &String = event
             .data
-            .get("packet_dst_channel")
+            .get("recv_packet.packet_dst_channel")
             .map(|data| data.get(0))
             .unwrap_or(Some(&missing_dst_channel))
             .unwrap();
         let missing_dst_port = "packet_dst_port_missing".to_owned();
         let dst_port: &String = event
             .data
-            .get("packet_dst_port")
+            .get("recv_packet.packet_dst_port")
             .map(|data| data.get(0))
             .unwrap_or(Some(&missing_dst_port))
             .unwrap();
@@ -176,7 +177,7 @@ impl Metrics {
                 }
             })
             .collect::<Vec<String>>()
-            .join("-"))
+            .join("."))
             .unwrap_or(missing_sender);
 
 
@@ -202,42 +203,168 @@ impl Metrics {
         Ok(())
     }
 
+    /// Event for recieving opaque_packet
+    pub fn opaque_packet(&mut self, chain:chain::Id, event:ChannelEvents::OpaquePacket) -> Result<(), Error>{
+        let missing_src_channel = "packet_src_channel_missing".to_owned();
+        let src_channel: &String = event
+            .data
+            .get("recv_packet.packet_src_channel")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_src_channel))
+            .unwrap();
+        let missing_src_port = "packet_src_port_missing".to_owned();
+        let src_port: &String = event
+            .data
+            .get("recv_packet.packet_src_port")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_src_port))
+            .unwrap();
+        let missing_dst_channel = "packet_dst_channel_missing".to_owned();
+        let dst_channel: &String = event
+            .data
+            .get("recv_packet.packet_dst_channel")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_dst_channel))
+            .unwrap();
+        let missing_dst_port = "packet_dst_port_missing".to_owned();
+        let dst_port: &String = event
+            .data
+            .get("recv_packet.packet_dst_port")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_dst_port))
+            .unwrap();
+        let missing_sender = "sender_missing".to_owned();
+        let message_sender = event
+            .data
+            .get("message.sender")
+            .map(|data| data.iter().map(|address|{
+                match self.get_team_by_address(address) {
+                    Some(team) => team.clone(),
+                    None => address.clone(),
+                }
+            })
+            .collect::<Vec<String>>()
+            .join("."))
+            .unwrap_or(missing_sender);
+
+
+        let src_channel = match self.get_team_by_channel(src_channel) {
+            Some(team) => team,
+            None => src_channel,
+        };
+
+        let dst_channel = match self.get_team_by_channel(dst_channel) {
+            Some(team) => team,
+            None => dst_channel,
+        };
+
+
+
+        self.client.incr(
+            format!(
+                "{}.packet_recv_opaque.{}.{}.{}.{}.{}.{}",
+                self.prefix, chain, message_sender, src_channel, src_port, dst_channel, dst_port
+            )
+            .as_ref(),
+        )?;
+        Ok(())     
+    }
+
+    /// Transfer events
+    pub fn transfer_event(&mut self,chain:chain::Id, event: TransferEvents::Packet)->Result<(), Error>{
+        let missing_src_channel = "packet_src_channel_missing".to_owned();
+        let src_channel: &String = event
+            .data
+            .get("send_packet.packet_src_channel")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_src_channel))
+            .unwrap();
+        let missing_src_port = "packet_src_port_missing".to_owned();
+        let src_port: &String = event
+            .data
+            .get("send_packet.packet_src_port")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_src_port))
+            .unwrap();
+        let missing_dst_channel = "packet_dst_channel_missing".to_owned();
+        let dst_channel: &String = event
+            .data
+            .get("send_packet.packet_dst_channel")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_dst_channel))
+            .unwrap();
+        let missing_dst_port = "packet_dst_port_missing".to_owned();
+        let dst_port: &String = event
+            .data
+            .get("send_packet.packet_dst_port")
+            .map(|data| data.get(0))
+            .unwrap_or(Some(&missing_dst_port))
+            .unwrap();
+
+        let missing_sender = "sender_missing".to_owned();
+        let message_sender = event
+            .data
+            .get("message.sender")
+            .map(|data| data.iter().map(|address|{
+                match self.get_team_by_address(address) {
+                    Some(team) => team.clone(),
+                    None => address.clone(),
+                }
+            })
+            .collect::<Vec<String>>()
+            .join("."))
+            .unwrap_or(missing_sender);
+
+        let src_channel = match self.get_team_by_channel(src_channel) {
+            Some(team) => team,
+            None => src_channel,
+        };
+
+        let dst_channel = match self.get_team_by_channel(dst_channel) {
+            Some(team) => team,
+            None => dst_channel,
+        };
+
+
+        self.client.incr(
+            format!(
+                "{}.ics20_transfer.{}.{}.{}.{}.{}.{}",
+                self.prefix, message_sender, chain, src_channel, src_port, dst_channel, dst_port
+            )
+            .as_ref(),
+        )?;
+        Ok(())
+        
+    }
+
+
+
     ///Send a metric for create client event
     pub fn create_client_event(
         &mut self,
         chain: chain::Id,
         event: ClientEvents::CreateClient,
     ) -> Result<(), Error> {
-        let missing_client_id = "client_id_missing".to_owned();
-        let client_id = event
-            .data
-            .get("client_id")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_client_id))
-            .unwrap();
 
         let missing_sender = "sender_missing".to_owned();
         let message_sender = event
             .data
-            .get("sender")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_sender))
-            .unwrap();
+            .get("message.sender")
+            .map(|data| data.iter().map(|address|{
+                match self.get_team_by_address(address) {
+                    Some(team) => team.clone(),
+                    None => address.clone(),
+                }
+            })
+            .collect::<Vec<String>>()
+            .join("."))
+            .unwrap_or(missing_sender);
 
-        let client_id = match self.get_team_by_client_id(client_id) {
-            Some(team) => team,
-            None => client_id,
-        };
-
-        let message_sender = match self.get_team_by_address(message_sender) {
-            Some(team) => team,
-            None => message_sender,
-        };
 
         self.client.incr(
             format!(
-                "{}.create_client_event.{}.{}.{}",
-                self.prefix, chain, message_sender, client_id
+                "{}.create_client_event.{}.{}",
+                self.prefix, chain, message_sender
             )
             .as_ref(),
         )?;
@@ -269,7 +396,7 @@ impl Metrics {
                 }
             })
             .collect::<Vec<String>>()
-            .join("-"))
+            .join("."))
             .unwrap_or(missing_sender);
 
 
@@ -289,36 +416,25 @@ impl Metrics {
         chain: chain::Id,
         event: ClientEvents::ClientMisbehavior,
     ) -> Result<(), Error> {
-        let missing_client_id = "client_id_missing".to_owned();
-        let client_id = event
-            .data
-            .get("client_id")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_client_id))
-            .unwrap();
-
         let missing_sender = "sender_missing".to_owned();
         let message_sender = event
             .data
-            .get("sender")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_sender))
-            .unwrap();
+            .get("message.sender")
+            .map(|data| data.iter().map(|address|{
+                match self.get_team_by_address(address) {
+                    Some(team) => team.clone(),
+                    None => address.clone(),
+                }
+            })
+            .collect::<Vec<String>>()
+            .join("."))
+            .unwrap_or(missing_sender);
 
-        let client_id = match self.get_team_by_client_id(client_id) {
-            Some(team) => team,
-            None => client_id,
-        };
-
-        let message_sender = match self.get_team_by_address(message_sender) {
-            Some(team) => team,
-            None => message_sender,
-        };
 
         self.client.incr(
             format!(
-                "{}.client_misbehaviour_event.{}.{}.{}",
-                self.prefix, chain, message_sender, client_id
+                "{}.client_misbehaviour_event.{}.{}",
+                self.prefix, chain, message_sender
             )
             .as_ref(),
         )?;
@@ -326,7 +442,7 @@ impl Metrics {
     }
 
     ///Send a metric for openinit event
-    pub fn handle_openinit_event(
+    pub fn openinit_event(
         &mut self,
         chain: chain::Id,
         event: ConnectionEvents::OpenInit,
@@ -334,7 +450,7 @@ impl Metrics {
         let missing_connection_id = "connection_id_missing".to_owned();
         let connection_id = event
             .data
-            .get("connection_id")
+            .get("connection_open_init.connection_id")
             .map(|data| data.get(0))
             .unwrap_or(Some(&missing_connection_id))
             .unwrap();
@@ -342,7 +458,7 @@ impl Metrics {
         let missing_client_id = "client_id_missing".to_owned();
         let client_id = event
             .data
-            .get("client_id")
+            .get("connection_open_init.client_id")
             .map(|data| data.get(0))
             .unwrap_or(Some(&missing_client_id))
             .unwrap();
@@ -350,37 +466,30 @@ impl Metrics {
         let missing_counterparty_client_id = "counterparty_client_id_missing".to_owned();
         let counterparty_client_id = event
             .data
-            .get("counterparty_client_id")
+            .get("connection_open_init.counterparty_client_id")
             .map(|data| data.get(0))
             .unwrap_or(Some(&missing_counterparty_client_id))
             .unwrap();
 
-        let missing_sender = "sender_missing".to_owned();
-        let message_sender = event
-            .data
-            .get("sender")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_sender))
-            .unwrap();
+            let missing_sender = "sender_missing".to_owned();
+            let message_sender = event
+                .data
+                .get("message.sender")
+                .map(|data| data.iter().map(|address|{
+                    match self.get_team_by_address(address) {
+                        Some(team) => team.clone(),
+                        None => address.clone(),
+                    }
+                })
+                .collect::<Vec<String>>()
+                .join("."))
+                .unwrap_or(missing_sender);
+    
 
-        let client_id = match self.get_team_by_client_id(client_id) {
-            Some(team) => team,
-            None => client_id,
-        };
-
-        let counterparty_client_id = match self.get_team_by_client_id(counterparty_client_id) {
-            Some(team) => team,
-            None => counterparty_client_id,
-        };
-
-        let message_sender = match self.get_team_by_address(message_sender) {
-            Some(team) => team,
-            None => message_sender,
-        };
 
         self.client.incr(
             format!(
-                "{}.handle_openinit_event.{}.{}.{}.{}.{}",
+                "{}.openinit_event.{}.{}.{}.{}.{}",
                 self.prefix,
                 chain,
                 message_sender,
@@ -394,7 +503,7 @@ impl Metrics {
     }
 
     ///Send a metric for opentry event
-    pub fn handle_opentry_event(
+    pub fn opentry_event(
         &mut self,
         chain: chain::Id,
         event: ConnectionEvents::OpenTry,
@@ -402,59 +511,34 @@ impl Metrics {
         let missing_connection_id = "connection_id_missing".to_owned();
         let connection_id = event
             .data
-            .get("connection_id")
+            .get("connection_open_try.connection_id")
             .map(|data| data.get(0))
             .unwrap_or(Some(&missing_connection_id))
             .unwrap();
 
-        let missing_client_id = "client_id_missing".to_owned();
-        let client_id = event
-            .data
-            .get("client_id")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_client_id))
-            .unwrap();
 
-        let missing_counterparty_client_id = "counterparty_client_id_missing".to_owned();
-        let counterparty_client_id = event
-            .data
-            .get("counterparty_client_id")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_counterparty_client_id))
-            .unwrap();
 
         let missing_sender = "sender_missing".to_owned();
         let message_sender = event
             .data
-            .get("sender")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_sender))
-            .unwrap();
-
-        let client_id = match self.get_team_by_client_id(client_id) {
-            Some(team) => team,
-            None => client_id,
-        };
-
-        let counterparty_client_id = match self.get_team_by_client_id(counterparty_client_id) {
-            Some(team) => team,
-            None => counterparty_client_id,
-        };
-
-        let message_sender = match self.get_team_by_address(message_sender) {
-            Some(team) => team,
-            None => message_sender,
-        };
+            .get("message.sender")
+            .map(|data| data.iter().map(|address|{
+                match self.get_team_by_address(address) {
+                    Some(team) => team.clone(),
+                    None => address.clone(),
+                }
+            })
+            .collect::<Vec<String>>()
+            .join("."))
+            .unwrap_or(missing_sender);
 
         self.client.incr(
             format!(
-                "{}.handle_opentry_event.{}.{}.{}.{}.{}",
+                "{}.opentry_event.{}.{}.{}",
                 self.prefix,
                 chain,
                 message_sender,
                 connection_id,
-                client_id,
-                counterparty_client_id
             )
             .as_ref(),
         )?;
@@ -462,7 +546,7 @@ impl Metrics {
     }
 
     ///Send a metric for openack event
-    pub fn handle_openack_event(
+    pub fn openack_event(
         &mut self,
         chain: chain::Id,
         event: ConnectionEvents::OpenAck,
@@ -470,59 +554,33 @@ impl Metrics {
         let missing_connection_id = "connection_id_missing".to_owned();
         let connection_id = event
             .data
-            .get("connection_id")
+            .get("connection_open_ack.connection_id")
             .map(|data| data.get(0))
             .unwrap_or(Some(&missing_connection_id))
             .unwrap();
 
-        let missing_client_id = "client_id_missing".to_owned();
-        let client_id = event
-            .data
-            .get("client_id")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_client_id))
-            .unwrap();
-
-        let missing_counterparty_client_id = "counterparty_client_id_missing".to_owned();
-        let counterparty_client_id = event
-            .data
-            .get("counterparty_client_id")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_counterparty_client_id))
-            .unwrap();
-
-        let missing_sender = "sender_missing".to_owned();
-        let message_sender = event
-            .data
-            .get("sender")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_sender))
-            .unwrap();
-
-        let client_id = match self.get_team_by_client_id(client_id) {
-            Some(team) => team,
-            None => client_id,
-        };
-
-        let counterparty_client_id = match self.get_team_by_client_id(counterparty_client_id) {
-            Some(team) => team,
-            None => counterparty_client_id,
-        };
-
-        let message_sender = match self.get_team_by_address(message_sender) {
-            Some(team) => team,
-            None => message_sender,
-        };
-
+            let missing_sender = "sender_missing".to_owned();
+            let message_sender = event
+                .data
+                .get("message.sender")
+                .map(|data| data.iter().map(|address|{
+                    match self.get_team_by_address(address) {
+                        Some(team) => team.clone(),
+                        None => address.clone(),
+                    }
+                })
+                .collect::<Vec<String>>()
+                .join("."))
+                .unwrap_or(missing_sender);
+    
         self.client.incr(
             format!(
-                "{}.handle_openack_event.{}.{}.{}.{}.{}",
+                "{}.openack_event.{}.{}.{}",
                 self.prefix,
                 chain,
                 message_sender,
                 connection_id,
-                client_id,
-                counterparty_client_id
+
             )
             .as_ref(),
         )?;
@@ -530,7 +588,7 @@ impl Metrics {
     }
 
     ///Send a metric for openack event
-    pub fn handle_openconfirm_event(
+    pub fn openconfirm_event(
         &mut self,
         chain: chain::Id,
         event: ConnectionEvents::OpenConfirm,
@@ -543,54 +601,28 @@ impl Metrics {
             .unwrap_or(Some(&missing_connection_id))
             .unwrap();
 
-        let missing_client_id = "client_id_missing".to_owned();
-        let client_id = event
-            .data
-            .get("client_id")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_client_id))
-            .unwrap();
-
-        let missing_counterparty_client_id = "counterparty_client_id_missing".to_owned();
-        let counterparty_client_id = event
-            .data
-            .get("counterparty_client_id")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_counterparty_client_id))
-            .unwrap();
-
-        let missing_sender = "sender_missing".to_owned();
-        let message_sender = event
-            .data
-            .get("sender")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_sender))
-            .unwrap();
-
-        let client_id = match self.get_team_by_client_id(client_id) {
-            Some(team) => team,
-            None => client_id,
-        };
-
-        let counterparty_client_id = match self.get_team_by_client_id(counterparty_client_id) {
-            Some(team) => team,
-            None => counterparty_client_id,
-        };
-
-        let message_sender = match self.get_team_by_address(message_sender) {
-            Some(team) => team,
-            None => message_sender,
-        };
+            let missing_sender = "sender_missing".to_owned();
+            let message_sender = event
+                .data
+                .get("message.sender")
+                .map(|data| data.iter().map(|address|{
+                    match self.get_team_by_address(address) {
+                        Some(team) => team.clone(),
+                        None => address.clone(),
+                    }
+                })
+                .collect::<Vec<String>>()
+                .join("."))
+                .unwrap_or(missing_sender);
+    
 
         self.client.incr(
             format!(
-                "{}.handle_openconfirm_event.{}.{}.{}.{}.{}",
+                "{}.openconfirm_event.{}.{}.{}",
                 self.prefix,
                 chain,
                 message_sender,
                 connection_id,
-                client_id,
-                counterparty_client_id
             )
             .as_ref(),
         )?;
