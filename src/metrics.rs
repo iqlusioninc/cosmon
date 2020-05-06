@@ -387,13 +387,11 @@ impl Metrics {
             })
             .unwrap_or(&missing_sender);
 
-
         self.client
             .incr_with_tags(format!("{}.create_client", self.prefix,).as_ref())
             .with_tag("chain", &chain.to_string())
             .with_tag("sender", &message_sender)
             .send();
-
 
         Ok(())
     }
@@ -404,14 +402,6 @@ impl Metrics {
         chain: chain::Id,
         event: ClientEvents::UpdateClient,
     ) -> Result<(), Error> {
-        let missing_client_id = "client_id_missing".to_owned();
-        let client_id = event
-            .data
-            .get("client_id")
-            .map(|data| data.get(0))
-            .unwrap_or(Some(&missing_client_id))
-            .unwrap();
-
         let missing_sender = "sender_missing".to_owned();
         let message_sender = event
             .data
@@ -431,12 +421,10 @@ impl Metrics {
             .unwrap_or(&missing_sender);
 
         self.client
-        .incr_with_tags(format!("{}.client_update", self.prefix,).as_ref())
-        .with_tag("chain", &chain.to_string())
-        .with_tag("sender", &message_sender)
-        .send();
-
-
+            .incr_with_tags(format!("{}.client_update", self.prefix,).as_ref())
+            .with_tag("chain", &chain.to_string())
+            .with_tag("sender", &message_sender)
+            .send();
 
         Ok(())
     }
@@ -466,11 +454,10 @@ impl Metrics {
             .unwrap_or(&missing_sender);
 
         self.client
-        .incr_with_tags(format!("{}.client_misbehaviour", self.prefix,).as_ref())
-        .with_tag("chain", &chain.to_string())
-        .with_tag("sender", &message_sender)
-        .send();
-
+            .incr_with_tags(format!("{}.client_misbehaviour", self.prefix,).as_ref())
+            .with_tag("chain", &chain.to_string())
+            .with_tag("sender", &message_sender)
+            .send();
 
         Ok(())
     }
