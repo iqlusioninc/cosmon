@@ -8,235 +8,296 @@ metrics_prefix = "sagan.testing"
 [collector.networks]
 tendermint = ["gameofzoneshub-1a"]
 
+
 [[collector.teams]]
 name = "ArmyIDs"
 address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
+channel_id ="qlftrgqziw"
 
 [[collector.teams]]
 name = "Muzamint"
 address = "cosmos1runeqr6aagcgv9ysw420mvw0sfymsz58szxew9"
-channel_id ="aivvsnimtc"
+channel_id ="ameofzoneshubxferx"
 
 [[collector.teams]]
 name = "pupu"
 address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
-channel_id ="aivvsnimtc"
+channel_id ="nsqbtsdzqz"
 
 [[collector.teams]]
 name = "Everstake"
 address = "cosmos1zt902wvvf2340qpq3uxtmst8a5cpgww95s6rv9"
-channel_id ="aivvsnimtc"
+channel_id ="jkebkagnyy"
 
 [[collector.teams]]
 name = "Atomic Bombers"
 address = "cosmos1kmrn6a4wf2sqw6fxemhee9tr6qz46wvl0hdzya"
-channel_id ="aivvsnimtc"
+channel_id ="atomicszones"
 
 [[collector.teams]]
 name = "Atomic Bombers"
 address = "cosmos1kmrn6a4wf2sqw6fxemhee9tr6qz46wvl0hdzya"
-channel_id ="aivvsnimtc"
+channel_id ="atomiczones"
 
 [[collector.teams]]
 name = "Chainapsis"
 address = "cosmos1l28a844m6p0csr6ypcpnygl4hrg9vr4mqty83j"
-channel_id ="aivvsnimtc"
+channel_id ="txbsnrydys"
 
 [[collector.teams]]
 name = "Simply Staking"
 address = "cosmos1sreeksgvr62zgamuewp0znkta8gdkj7agxdl56"
-channel_id ="aivvsnimtc"
+channel_id ="lljbwqnbml"
 
 [[collector.teams]]
 name = "ArmyIDs"
 address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
+channel_id ="mhyfzsculx"
 
 [[collector.teams]]
 name = "Staked"
 address = "cosmos1w8ueuqk007aqy33tgfx5yveatlfamapwty47p0"
-channel_id ="aivvsnimtc"
+channel_id ="swudqopscv"
 
 [[collector.teams]]
 name = "ArmyIDs"
 address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
+channel_id ="liyqvphukq"
 
 [[collector.teams]]
 name = "ArmyIDs"
 address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
+channel_id ="qaggvwdapg"
 
 [[collector.teams]]
 name = "ArmyIDs"
 address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
+channel_id ="cracxafxus"
 
 [[collector.teams]]
 name = "ArmyIDs"
 address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
+channel_id ="ngwpntcbgh"
 
 [[collector.teams]]
 name = "astronomia"
 address = "cosmos1hwux8hlz2xrwggdcltg7net4v7sfjnn76w5ec3"
-channel_id ="aivvsnimtc"
+channel_id ="ekfptnsvgyau"
 
 [[collector.teams]]
 name = "All in Bits Inc"
 address = "cosmos1xnc4hwja48e77nms0a49eqkdw36d7dqzrj006n"
-channel_id ="aivvsnimtc"
+channel_id ="sfmsihqcoe"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+channel_id ="ngkqvdbixy"
 
 [[collector.teams]]
 name = "Protofire"
 address = "cosmos1y8ejrm82rzaqf5n4n5nx338m6x3u9x082qfqe8"
-channel_id ="aivvsnimtc"
+channel_id ="wkarztxzdo"
 
 [[collector.teams]]
 name = "nibiru"
 address = "cosmos15fz7asxctg528lwgde3x633vru9rgz64qkvrq7"
-channel_id ="aivvsnimtc"
+channel_id ="xnfsypcabh"
+
+[[collector.teams]]
+name = "nibiru"
+address = "cosmos15fz7asxctg528lwgde3x633vru9rgz64qkvrq7"
+channel_id ="gvkicflhns"
 
 [[collector.teams]]
 name = "ArmyIDs"
 address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "BigBeautifulSilverPlate"
-address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "BigBeautifulSilverPlate"
-address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "BigBeautifulSilverPlate"
-address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "BigBeautifulSilverPlate"
-address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "BigBeautifulSilverPlate"
-address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Certus One"
-address = "cosmos1t73d3c57mu7w4gncf50yuupfutkqthjw7d6f66"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Certus One"
-address = "cosmos1t73d3c57mu7w4gncf50yuupfutkqthjw7d6f66"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Certus One"
-address = "cosmos1t73d3c57mu7w4gncf50yuupfutkqthjw7d6f66"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Staking Fund"
-address = "cosmos1a533d3t2k5pynxh3hn3mzjhwe9jmeskqxh3cz9"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "BigBeautifulSilverPlate"
-address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ArmyIDs"
-address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Dawns.World"
-address = "cosmos1v5fhgkkkvcd9sqpd5arzce0h36jqezcwmf2w3z"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ArmyIDs"
-address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ArmyIDs"
-address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Datachain"
-address = "cosmos1hezg9c7etk6qvs5p6j22jgxuqdc82fy9tnynmr"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Mr.K"
-address = "cosmos1kgrhmxu6khuzcamwgwrent45ufhpdqlmm0473u"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Mr.K"
-address = "cosmos1kgrhmxu6khuzcamwgwrent45ufhpdqlmm0473u"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Mr.K"
-address = "cosmos1kgrhmxu6khuzcamwgwrent45ufhpdqlmm0473u"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Mr.K"
-address = "cosmos1kgrhmxu6khuzcamwgwrent45ufhpdqlmm0473u"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Mr.K"
-address = "cosmos1kgrhmxu6khuzcamwgwrent45ufhpdqlmm0473u"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "huglester"
-address = "cosmos14r2l50t22kk63st9e0zeg3m6hjel6gnzpnmr2j"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Desmos"
-address = "cosmos1engcn8p4vj8fsta62l3n3c5menm6sc9djvrzee"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Bitple"
-address = "cosmos1vndhkx9sdheewhdg58ug7fy388l8wm689gn7jg"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Bitple"
-address = "cosmos1vndhkx9sdheewhdg58ug7fy388l8wm689gn7jg"
-channel_id ="aivvsnimtc"
+channel_id ="fslqgdyvsp"
 
 [[collector.teams]]
 name = "stakefish"
 address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
-channel_id ="aivvsnimtc"
+channel_id ="chgozfastalice"
+
+[[collector.teams]]
+name = "stakefish"
+address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
+channel_id ="chgozslowalice"
+
+[[collector.teams]]
+name = "stakefish"
+address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
+channel_id ="chgozslowbob"
+
+[[collector.teams]]
+name = "stakefish"
+address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
+channel_id ="chgozslowcarol"
+
+[[collector.teams]]
+name = "stakefish"
+address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
+channel_id ="chgozslowdan"
+
+[[collector.teams]]
+name = "stakefish"
+address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
+channel_id ="chgozsloweve"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+channel_id ="chhubcdgygvt"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+channel_id ="chhubcdgyhop"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+channel_id ="chhubcdgyirb"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+channel_id ="chhubcdgyjxa"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+channel_id ="chhubcdgykma"
+
+[[collector.teams]]
+name = "ozone"
+address = "cosmos19ytadpwm7687ywft6sdksz2j5sgxh4ywl5ev44"
+channel_id ="channelgozhub"
+
+[[collector.teams]]
+name = "Certus One"
+address = "cosmos1t73d3c57mu7w4gncf50yuupfutkqthjw7d6f66"
+channel_id ="channsdfkekw"
+
+[[collector.teams]]
+name = "Certus One"
+address = "cosmos1t73d3c57mu7w4gncf50yuupfutkqthjw7d6f66"
+channel_id ="chsefaxcefwsa"
+
+[[collector.teams]]
+name = "Certus One"
+address = "cosmos1t73d3c57mu7w4gncf50yuupfutkqthjw7d6f66"
+channel_id ="chasdfslaec"
+
+[[collector.teams]]
+name = "Staking Fund"
+address = "cosmos1a533d3t2k5pynxh3hn3mzjhwe9jmeskqxh3cz9"
+channel_id ="ipqwabsvjz"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+channel_id ="ctpnovrovt"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+channel_id ="tnndsjlfzy"
+
+[[collector.teams]]
+name = "Dawns.World"
+address = "cosmos1v5fhgkkkvcd9sqpd5arzce0h36jqezcwmf2w3z"
+channel_id ="usjfsrweua"
+
+[[collector.teams]]
+name = "All in Bits Inc"
+address = "cosmos1xnc4hwja48e77nms0a49eqkdw36d7dqzrj006n"
+channel_id ="mngqveayvk"
+
+[[collector.teams]]
+name = "Sentinel"
+address = "cosmos1mcm426eejm5y7dsjvppxfg2dd2uel0gyt8cxxj"
+channel_id ="bwpmapphiq"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+channel_id ="rivpemreua"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+channel_id ="yngqaxsovx"
+
+[[collector.teams]]
+name = "Datachain"
+address = "cosmos1hezg9c7etk6qvs5p6j22jgxuqdc82fy9tnynmr"
+channel_id ="wqjngougqy"
+
+[[collector.teams]]
+name = "Mr.K"
+address = "cosmos1kgrhmxu6khuzcamwgwrent45ufhpdqlmm0473u"
+channel_id ="dstchannelidgoz"
+
+[[collector.teams]]
+name = "Mr.K"
+address = "cosmos1kgrhmxu6khuzcamwgwrent45ufhpdqlmm0473u"
+channel_id ="dstchannelidgozu"
+
+[[collector.teams]]
+name = "Mr.K"
+address = "cosmos1kgrhmxu6khuzcamwgwrent45ufhpdqlmm0473u"
+channel_id ="dstchannelidgozx"
+
+[[collector.teams]]
+name = "Mr.K"
+address = "cosmos1kgrhmxu6khuzcamwgwrent45ufhpdqlmm0473u"
+channel_id ="dstchannelidgozy"
+
+[[collector.teams]]
+name = "Mr.K"
+address = "cosmos1kgrhmxu6khuzcamwgwrent45ufhpdqlmm0473u"
+channel_id ="dstchannelidgozz"
+
+[[collector.teams]]
+name = "huglester"
+address = "cosmos14r2l50t22kk63st9e0zeg3m6hjel6gnzpnmr2j"
+channel_id ="fquizcbahf"
+
+[[collector.teams]]
+name = "Persistence"
+address = "cosmos1tznxzdk4t9vr9nstrvjwmnztq4k6wjj55cgeqq"
+channel_id ="dmbnyadmgg"
+
+[[collector.teams]]
+name = "Desmos"
+address = "cosmos1engcn8p4vj8fsta62l3n3c5menm6sc9djvrzee"
+channel_id ="ypelpyoxuh"
+
+[[collector.teams]]
+name = "Bitple"
+address = "cosmos1vndhkx9sdheewhdg58ug7fy388l8wm689gn7jg"
+channel_id ="wpapskkxgdab"
+
+[[collector.teams]]
+name = "Bitple"
+address = "cosmos1vndhkx9sdheewhdg58ug7fy388l8wm689gn7jg"
+channel_id ="wpapskkxgdabq"
+
+[[collector.teams]]
+name = "stakefish"
+address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
+channel_id ="iltzfmomwk"
 
 [[collector.teams]]
 name = "cyber~Congress"
 address = "cosmos13fmcdmkurnaz6sklf0tyynln4k48xjj0dwuvpu"
-channel_id ="aivvsnimtc"
+channel_id ="xvqztphwyw"
 
 [[collector.teams]]
 name = "pupu"
 address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
-channel_id ="aivvsnimtc"
+channel_id ="hreassdqlo"
 
 [[collector.teams]]
 name = "Mia // Lableet"
@@ -246,1014 +307,1154 @@ channel_id ="aivvsnimtc"
 [[collector.teams]]
 name = "ArmyIDs"
 address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
+channel_id ="bfodsukgzz"
 
 [[collector.teams]]
 name = "Compass"
 address = "cosmos1u0fdsfw0wflm2n9x2ggv09u89ed2nhmfgq88zr"
-channel_id ="aivvsnimtc"
+channel_id ="yckueewusy"
 
 [[collector.teams]]
 name = "JokerTheBond"
 address = "cosmos1v6p6p0dr4ll0p53q8zn78fdf5dd5ldmnecp0wl"
-channel_id ="aivvsnimtc"
+channel_id ="eitbzbupep"
 
 [[collector.teams]]
 name = "retz80"
 address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
-channel_id ="aivvsnimtc"
+channel_id ="yicmtnsiwf"
 
 [[collector.teams]]
 name = "mintonium"
 address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Everstake"
-address = "cosmos1zt902wvvf2340qpq3uxtmst8a5cpgww95s6rv9"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ChainLayer"
-address = "cosmos1j4tmary50sq3cfn6n9vk3k7addplljjmfs5fjd"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ChainLayer"
-address = "cosmos1j4tmary50sq3cfn6n9vk3k7addplljjmfs5fjd"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ChainLayer"
-address = "cosmos1j4tmary50sq3cfn6n9vk3k7addplljjmfs5fjd"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ChainLayer"
-address = "cosmos1j4tmary50sq3cfn6n9vk3k7addplljjmfs5fjd"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ChainLayer"
-address = "cosmos1j4tmary50sq3cfn6n9vk3k7addplljjmfs5fjd"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ChainLayer"
-address = "cosmos1j4tmary50sq3cfn6n9vk3k7addplljjmfs5fjd"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ChainLayer"
-address = "cosmos1j4tmary50sq3cfn6n9vk3k7addplljjmfs5fjd"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ChainLayer"
-address = "cosmos1j4tmary50sq3cfn6n9vk3k7addplljjmfs5fjd"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ozone"
-address = "cosmos19ytadpwm7687ywft6sdksz2j5sgxh4ywl5ev44"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ArmyIDs"
-address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Protofire"
-address = "cosmos14el02ask2rr9uez9gc5uqr98cskdt4ydz9nw2x"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Defending.Network"
-address = "cosmos1hcapezvn75r8p7c4xglsq82kzrvffudmyp50td"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Defending.Network"
-address = "cosmos1hcapezvn75r8p7c4xglsq82kzrvffudmyp50td"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Defending.Network"
-address = "cosmos1hcapezvn75r8p7c4xglsq82kzrvffudmyp50td"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Defending.Network"
-address = "cosmos1hcapezvn75r8p7c4xglsq82kzrvffudmyp50td"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Defending.Network"
-address = "cosmos1hcapezvn75r8p7c4xglsq82kzrvffudmyp50td"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Defending.Network"
-address = "cosmos1hcapezvn75r8p7c4xglsq82kzrvffudmyp50td"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Defending.Network"
-address = "cosmos1hcapezvn75r8p7c4xglsq82kzrvffudmyp50td"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Ape Smash"
-address = "cosmos1jljl9ks0093mewjjmdkdujp6cs3du8pzgh99e4"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "B-Harvest"
-address = "cosmos1f9z2gazg52a8n6c06xf2234c9y0tzsgtqv4j8q"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "B-Harvest"
-address = "cosmos1f9z2gazg52a8n6c06xf2234c9y0tzsgtqv4j8q"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Muzamint"
-address = "cosmos1runeqr6aagcgv9ysw420mvw0sfymsz58szxew9"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Datachain"
-address = "cosmos1hezg9c7etk6qvs5p6j22jgxuqdc82fy9tnynmr"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "B-Harvest"
-address = "cosmos1f9z2gazg52a8n6c06xf2234c9y0tzsgtqv4j8q"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "B-Harvest"
-address = "cosmos1f9z2gazg52a8n6c06xf2234c9y0tzsgtqv4j8q"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "B-Harvest"
-address = "cosmos1f9z2gazg52a8n6c06xf2234c9y0tzsgtqv4j8q"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "B-Harvest"
-address = "cosmos1f9z2gazg52a8n6c06xf2234c9y0tzsgtqv4j8q"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "B-Harvest"
-address = "cosmos1f9z2gazg52a8n6c06xf2234c9y0tzsgtqv4j8q"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "cyber~Congress"
-address = "cosmos13fmcdmkurnaz6sklf0tyynln4k48xjj0dwuvpu"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "BurekSteak"
-address = "cosmos12gec735tjutvyjwc0lnlqllgdufnctg62uek7r"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Node A-Team"
-address = "cosmos1s0fymxncdm2tga7swzucywggcunxvq89d3pcyn"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Node A-Team"
-address = "cosmos1s0fymxncdm2tga7swzucywggcunxvq89d3pcyn"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Node A-Team"
-address = "cosmos1s0fymxncdm2tga7swzucywggcunxvq89d3pcyn"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "staked.sh"
-address = "cosmos1z0gsnxexgc5jxgcl3uz55kqy29y8ck7ayk5ejz"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "staked.sh"
-address = "cosmos1z0gsnxexgc5jxgcl3uz55kqy29y8ck7ayk5ejz"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "staked.sh"
-address = "cosmos1z0gsnxexgc5jxgcl3uz55kqy29y8ck7ayk5ejz"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Alpha Virtual"
-address = "cosmos1x2f3vpdww36px4r6m40mzjnndn8aghfq8yeda7"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Alpha Virtual"
-address = "cosmos1x2f3vpdww36px4r6m40mzjnndn8aghfq8yeda7"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Alpha Virtual"
-address = "cosmos1x2f3vpdww36px4r6m40mzjnndn8aghfq8yeda7"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Alpha Virtual"
-address = "cosmos1x2f3vpdww36px4r6m40mzjnndn8aghfq8yeda7"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Alpha Virtual"
-address = "cosmos1x2f3vpdww36px4r6m40mzjnndn8aghfq8yeda7"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Alpha Virtual"
-address = "cosmos1x2f3vpdww36px4r6m40mzjnndn8aghfq8yeda7"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Staking Fund"
-address = "cosmos1a533d3t2k5pynxh3hn3mzjhwe9jmeskqxh3cz9"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "hashquark"
-address = "cosmos1a76ndykhlcgm7u7rexn99vmj2uptm2633ypw6f"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Cosmic Compass (CoCo)"
-address = "cosmos17hm0z0gme9nd8th32yz4lde5k48t3nykuu90yq"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Cosmic Compass (CoCo)"
-address = "cosmos17hm0z0gme9nd8th32yz4lde5k48t3nykuu90yq"
-channel_id ="amazingarmyzones"
-
-[[collector.teams]]
-name = "Cosmic Compass (CoCo)"
-address = "cosmos17hm0z0gme9nd8th32yz4lde5k48t3nykuu90yq"
-channel_id ="ameofzoneshubxferx"
-
-[[collector.teams]]
-name = "Aneka"
-address = "cosmos14ahfuwynumydy2kz2gq6qe2l4w4n7pr8ycka55"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "mintonium"
-address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "WeStaking"
-address = "cosmos16qp669v7k2wcsml6zv945nmnsknhckp39w0a0k"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "pupu"
-address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Cypher Core"
-address = "cosmos1ww8zfd4ts6fac55wt8z5lnm5wdfqy67ldanua8"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Commonwealth Labs Inc."
-address = "cosmos1k8zxp6yxqqpgafe0m3ujs2gccs9f5zkvy9anv8"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Capybara"
-address = "cosmos1y4gs9xtwk0335zf3kej8el5kzkpalq3dtmxljr"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "COSMOON"
-address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Validatorich"
-address = "cosmos1mvu547ythhm8c7ew2xnh6d8njhvdljgen3dr65"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "cyber~Congress"
-address = "cosmos13fmcdmkurnaz6sklf0tyynln4k48xjj0dwuvpu"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Cosmic Compass (CoCo)"
-address = "cosmos17hm0z0gme9nd8th32yz4lde5k48t3nykuu90yq"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "mintonium"
-address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "retz80"
-address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ozone"
-address = "cosmos19ytadpwm7687ywft6sdksz2j5sgxh4ywl5ev44"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ozone"
-address = "cosmos19ytadpwm7687ywft6sdksz2j5sgxh4ywl5ev44"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Interstation"
-address = "cosmos108rpmv2kr798p7nalkdgdexkmem70shkecqvhh"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "stakefish"
-address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "P2P.ORG - P2P Validator"
-address = "cosmos1vf93vh2rsn4yf3rgu5sy8n39q52cna0rewmrn4"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Everstake"
-address = "cosmos1zt902wvvf2340qpq3uxtmst8a5cpgww95s6rv9"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ArmyIDs"
-address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Bit Cat"
-address = "cosmos12knqu4ecmg0982plzs9m9f5jareh0cvedv6yz0"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Bit Cat"
-address = "cosmos12knqu4ecmg0982plzs9m9f5jareh0cvedv6yz0"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Bit Cat"
-address = "cosmos12knqu4ecmg0982plzs9m9f5jareh0cvedv6yz0"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "COSMOON"
-address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "retz80"
-address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Bitple"
-address = "cosmos1vndhkx9sdheewhdg58ug7fy388l8wm689gn7jg"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "pupu"
-address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "WeStaking"
-address = "cosmos16qp669v7k2wcsml6zv945nmnsknhckp39w0a0k"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Protofire"
-address = "cosmos1y8ejrm82rzaqf5n4n5nx338m6x3u9x082qfqe8"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Nodeasy.com"
-address = "cosmos152zx830nl6gy97m6qms7chyktzk729cyveqv9n"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Nodeasy.com"
-address = "cosmos152zx830nl6gy97m6qms7chyktzk729cyveqv9n"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "retz80"
-address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "SNZPool"
-address = "cosmos1tstp7pl0fd6zk2v3tzmpq86x8pv29jevyrgswk"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Newroad Network"
-address = "cosmos1l0qgnjr4uw3jv7r735kfgu3n6awpnqea229m4c"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ArmyIDs"
-address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "mintonium"
-address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "okchain/OKex"
-address = "cosmos1rdrtfn7rgzula94vv9cz4tah75uh2zr930ftes"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "gunray"
-address = "cosmos1wu8mv84pwsmcryq98w8nzwskusmqyv24qpy9pv"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Muzamint"
-address = "cosmos1runeqr6aagcgv9ysw420mvw0sfymsz58szxew9"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "mintonium"
-address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ArmyIDs"
-address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Staking Fund"
-address = "cosmos1a533d3t2k5pynxh3hn3mzjhwe9jmeskqxh3cz9"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "retz80"
-address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Protofire"
-address = "cosmos1y8ejrm82rzaqf5n4n5nx338m6x3u9x082qfqe8"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Everstake"
-address = "cosmos1zt902wvvf2340qpq3uxtmst8a5cpgww95s6rv9"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "VGNG"
-address = "cosmos1vgng37d8ksml9yxaryzect6pdvlpzx64yzfzff"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "COSMOON"
-address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ArmyIDs"
-address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ArmyIDs"
-address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "SNZPool"
-address = "cosmos1tstp7pl0fd6zk2v3tzmpq86x8pv29jevyrgswk"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "COSMOON"
-address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ArmyIDs"
-address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "StakesStone"
-address = "cosmos1dx2jqcrjfd3y9mvdd56t54j7pa2wgx2qqk0tx2"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "StakesStone"
-address = "cosmos1dx2jqcrjfd3y9mvdd56t54j7pa2wgx2qqk0tx2"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "melea"
-address = "cosmos1exwcn4rmcyuf4xfjs722amqrfheng7z8cjfzgn"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ArmyIDs"
-address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "stakefish"
-address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "retz80"
-address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Desmos"
-address = "cosmos1engcn8p4vj8fsta62l3n3c5menm6sc9djvrzee"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "IRISnet"
-address = "cosmos10uvrya46d400ymgp7ygdp6auasfvfx9lxpdtja"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Everstake"
-address = "cosmos1zt902wvvf2340qpq3uxtmst8a5cpgww95s6rv9"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Cosmic Compass (CoCo)"
-address = "cosmos17hm0z0gme9nd8th32yz4lde5k48t3nykuu90yq"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Compass"
-address = "cosmos1u0fdsfw0wflm2n9x2ggv09u89ed2nhmfgq88zr"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Drops Power"
-address = "cosmos1jr2kxdw3je9kr7rhxw8y6t40qrms53z5ksc3w2"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "stakefish"
-address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ArmyIDs"
-address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "stakefish"
-address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Yura Forgive Us"
-address = "cosmos18g6s0cdlm593ej66rr6hrxc55362dkjattvc7h"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "B-Harvest"
-address = "cosmos1f9z2gazg52a8n6c06xf2234c9y0tzsgtqv4j8q"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Dawns.World"
-address = "cosmos1v5fhgkkkvcd9sqpd5arzce0h36jqezcwmf2w3z"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Compass"
-address = "cosmos1u0fdsfw0wflm2n9x2ggv09u89ed2nhmfgq88zr"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "mintonium"
-address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "retz80"
-address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "B-Harvest"
-address = "cosmos1f9z2gazg52a8n6c06xf2234c9y0tzsgtqv4j8q"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "B-Harvest"
-address = "cosmos1f9z2gazg52a8n6c06xf2234c9y0tzsgtqv4j8q"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "B-Harvest"
-address = "cosmos1f9z2gazg52a8n6c06xf2234c9y0tzsgtqv4j8q"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "FreeFlix Media"
-address = "cosmos1ljd64u6uf5x23c85e6t0v7rquss3weqff6x3mj"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "FreeFlix Media"
-address = "cosmos1ljd64u6uf5x23c85e6t0v7rquss3weqff6x3mj"
-channel_id ="amazingarmyzones"
-
-[[collector.teams]]
-name = "FreeFlix Media"
-address = "cosmos1ljd64u6uf5x23c85e6t0v7rquss3weqff6x3mj"
-channel_id ="ameofzoneshubxferx"
-
-[[collector.teams]]
-name = "astronomia"
-address = "cosmos1hwux8hlz2xrwggdcltg7net4v7sfjnn76w5ec3"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ArmyIDs"
-address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Everstake"
-address = "cosmos1zt902wvvf2340qpq3uxtmst8a5cpgww95s6rv9"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Source"
-address = "cosmos1qz2s5unwu3l4hn2jw09cnsd3muvrcerezm9c52"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Validatorich"
-address = "cosmos1mvu547ythhm8c7ew2xnh6d8njhvdljgen3dr65"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Validatorich"
-address = "cosmos1mvu547ythhm8c7ew2xnh6d8njhvdljgen3dr65"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Validatorich"
-address = "cosmos1mvu547ythhm8c7ew2xnh6d8njhvdljgen3dr65"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "stakefish"
-address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "retz80"
-address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Desmos"
-address = "cosmos1engcn8p4vj8fsta62l3n3c5menm6sc9djvrzee"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Chainapsis"
-address = "cosmos1l28a844m6p0csr6ypcpnygl4hrg9vr4mqty83j"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "astronomia"
-address = "cosmos1hwux8hlz2xrwggdcltg7net4v7sfjnn76w5ec3"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Muzamint"
-address = "cosmos1runeqr6aagcgv9ysw420mvw0sfymsz58szxew9"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Source"
-address = "cosmos1qz2s5unwu3l4hn2jw09cnsd3muvrcerezm9c52"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "mintonium"
-address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ArmyIDs"
-address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ResponsibleChain"
-address = "cosmos1dtx6e6we59j03grm55zpc3pymz52msx0hsq8ce"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ResponsibleChain"
-address = "cosmos1dtx6e6we59j03grm55zpc3pymz52msx0hsq8ce"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "okchain/OKex"
-address = "cosmos1rdrtfn7rgzula94vv9cz4tah75uh2zr930ftes"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "mintonium"
-address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ArmyIDs"
-address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Staked"
-address = "cosmos1w8ueuqk007aqy33tgfx5yveatlfamapwty47p0"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "blockscape"
-address = "cosmos16tdeldrswlksrejchqtzndrkal9cxawtnh8mvd"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "blockscape"
-address = "cosmos16tdeldrswlksrejchqtzndrkal9cxawtnh8mvd"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Protofire"
-address = "cosmos1y8ejrm82rzaqf5n4n5nx338m6x3u9x082qfqe8"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Dawns.World"
-address = "cosmos1v5fhgkkkvcd9sqpd5arzce0h36jqezcwmf2w3z"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "mintonium"
-address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "cdos"
-address = "cosmos1xl0pc9phu3meevzfy4v8f35c2vy2as3trzwt9w"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "cdos"
-address = "cosmos1xl0pc9phu3meevzfy4v8f35c2vy2as3trzwt9w"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "cyber~Congress"
-address = "cosmos13fmcdmkurnaz6sklf0tyynln4k48xjj0dwuvpu"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Taidi"
-address = "cosmos1xgcjknmn6y2cjapje5aw6fq93a5r7hejcu6y6j"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Staking Fund"
-address = "cosmos1a533d3t2k5pynxh3hn3mzjhwe9jmeskqxh3cz9"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "SNZPool"
-address = "cosmos1tstp7pl0fd6zk2v3tzmpq86x8pv29jevyrgswk"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Drops Power"
-address = "cosmos1jr2kxdw3je9kr7rhxw8y6t40qrms53z5ksc3w2"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "BlockNgine"
-address = "cosmos1qmd7y0mw63qcuts0z53sptne6vypen5q00xmww"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Datachain"
-address = "cosmos1hezg9c7etk6qvs5p6j22jgxuqdc82fy9tnynmr"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "StarCluster"
-address = "cosmos16gp9q9euupf2m96cvv7kta7q09h8ce0cl6wky9"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "astronomia"
-address = "cosmos1hwux8hlz2xrwggdcltg7net4v7sfjnn76w5ec3"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Stakebird"
-address = "cosmos1ar20w6rf4ulfljld7xaj4qjklyulr5myw0xqt6"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "stakefish"
-address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "stakefish"
-address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ozone"
-address = "cosmos19ytadpwm7687ywft6sdksz2j5sgxh4ywl5ev44"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Wetez"
-address = "cosmos1gnpwvxwkj6a855z2708hnfy3h30muewcfmckw2"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Capybara"
-address = "cosmos1y4gs9xtwk0335zf3kej8el5kzkpalq3dtmxljr"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "mintonium"
-address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ArmyIDs"
-address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Certus One"
-address = "cosmos1t73d3c57mu7w4gncf50yuupfutkqthjw7d6f66"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "mintonium"
-address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "stakefish"
-address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Cypher Core"
-address = "cosmos1ww8zfd4ts6fac55wt8z5lnm5wdfqy67ldanua8"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Everstake"
-address = "cosmos1zt902wvvf2340qpq3uxtmst8a5cpgww95s6rv9"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Staking Fund"
-address = "cosmos1a533d3t2k5pynxh3hn3mzjhwe9jmeskqxh3cz9"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Stake Capital"
-address = "cosmos1c6vyd9sqmxslqkrqtn84det6ukefrxrnwru66p"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Defending.Network"
-address = "cosmos1hcapezvn75r8p7c4xglsq82kzrvffudmyp50td"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Desmos"
-address = "cosmos1engcn8p4vj8fsta62l3n3c5menm6sc9djvrzee"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Dawns.World"
-address = "cosmos1v5fhgkkkvcd9sqpd5arzce0h36jqezcwmf2w3z"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "RVC Group"
-address = "cosmos1qyfu9s408exw2yae0d86m5tupr8q9h8qt4tnge"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "mintonium"
-address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Aneka"
-address = "cosmos14ahfuwynumydy2kz2gq6qe2l4w4n7pr8ycka55"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Datachain"
-address = "cosmos1hezg9c7etk6qvs5p6j22jgxuqdc82fy9tnynmr"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "ArmyIDs"
-address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Cosmic Compass (CoCo)"
-address = "cosmos17hm0z0gme9nd8th32yz4lde5k48t3nykuu90yq"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Taidi"
-address = "cosmos1xgcjknmn6y2cjapje5aw6fq93a5r7hejcu6y6j"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Datachain"
-address = "cosmos1hezg9c7etk6qvs5p6j22jgxuqdc82fy9tnynmr"
-channel_id ="aivvsnimtc"
-
-[[collector.teams]]
-name = "Konstellation"
-address = "cosmos1mtv5e6zq8grgpnrsm7cr23h5k5q9qw4egz6678"
-channel_id ="aivvsnimtc"
+channel_id ="hvczlmtkvi"
 
 [[collector.teams]]
 name = "Anonstake"
 address = "cosmos10zehl3artk76qfmn4h09pxfvvq264ew2me8lap"
-channel_id ="aivvsnimtc"
+channel_id ="jucotloqjq"
+
+[[collector.teams]]
+name = "Everstake"
+address = "cosmos1zt902wvvf2340qpq3uxtmst8a5cpgww95s6rv9"
+channel_id ="hirrslykpm"
+
+[[collector.teams]]
+name = "ChainLayer"
+address = "cosmos1j4tmary50sq3cfn6n9vk3k7addplljjmfs5fjd"
+channel_id ="zqhkheusee"
+
+[[collector.teams]]
+name = "ChainLayer"
+address = "cosmos1j4tmary50sq3cfn6n9vk3k7addplljjmfs5fjd"
+channel_id ="zqhkheuseea"
+
+[[collector.teams]]
+name = "ChainLayer"
+address = "cosmos1j4tmary50sq3cfn6n9vk3k7addplljjmfs5fjd"
+channel_id ="zqhkheuseeb"
+
+[[collector.teams]]
+name = "ChainLayer"
+address = "cosmos1j4tmary50sq3cfn6n9vk3k7addplljjmfs5fjd"
+channel_id ="zqhkheuseec"
+
+[[collector.teams]]
+name = "ChainLayer"
+address = "cosmos1j4tmary50sq3cfn6n9vk3k7addplljjmfs5fjd"
+channel_id ="zqhkheuseed"
+
+[[collector.teams]]
+name = "ChainLayer"
+address = "cosmos1j4tmary50sq3cfn6n9vk3k7addplljjmfs5fjd"
+channel_id ="zqhkheuseee"
+
+[[collector.teams]]
+name = "ChainLayer"
+address = "cosmos1j4tmary50sq3cfn6n9vk3k7addplljjmfs5fjd"
+channel_id ="zqhkheuseeg"
+
+[[collector.teams]]
+name = "ChainLayer"
+address = "cosmos1j4tmary50sq3cfn6n9vk3k7addplljjmfs5fjd"
+channel_id ="zqhkheuseeh"
+
+[[collector.teams]]
+name = "ozone"
+address = "cosmos19ytadpwm7687ywft6sdksz2j5sgxh4ywl5ev44"
+channel_id ="qpntuijjyd"
 
 [[collector.teams]]
 name = "ArmyIDs"
 address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
+channel_id ="kvmzdzkkpf"
+
+[[collector.teams]]
+name = "vipnamai"
+address = "cosmos1trq740zypnm64g9deufsdkx0qcw8xd09vfxx06"
+channel_id ="cxzdleduzf"
+
+[[collector.teams]]
+name = "Protofire"
+address = "cosmos14el02ask2rr9uez9gc5uqr98cskdt4ydz9nw2x"
+channel_id ="jelsekehsx"
+
+[[collector.teams]]
+name = "Defending.Network"
+address = "cosmos1hcapezvn75r8p7c4xglsq82kzrvffudmyp50td"
+channel_id ="gameofgameofcc"
+
+[[collector.teams]]
+name = "Defending.Network"
+address = "cosmos1hcapezvn75r8p7c4xglsq82kzrvffudmyp50td"
+channel_id ="gameofofac"
+
+[[collector.teams]]
+name = "Defending.Network"
+address = "cosmos1hcapezvn75r8p7c4xglsq82kzrvffudmyp50td"
+channel_id ="gameofofaf"
+
+[[collector.teams]]
+name = "Defending.Network"
+address = "cosmos1hcapezvn75r8p7c4xglsq82kzrvffudmyp50td"
+channel_id ="gameofofaj"
+
+[[collector.teams]]
+name = "Defending.Network"
+address = "cosmos1hcapezvn75r8p7c4xglsq82kzrvffudmyp50td"
+channel_id ="gameofofam"
+
+[[collector.teams]]
+name = "Defending.Network"
+address = "cosmos1hcapezvn75r8p7c4xglsq82kzrvffudmyp50td"
+channel_id ="gameofofap"
+
+[[collector.teams]]
+name = "Defending.Network"
+address = "cosmos1hcapezvn75r8p7c4xglsq82kzrvffudmyp50td"
+channel_id ="gameofofas"
+
+[[collector.teams]]
+name = "Ape Smash"
+address = "cosmos1jljl9ks0093mewjjmdkdujp6cs3du8pzgh99e4"
+channel_id ="gameofzoneschannel"
+
+[[collector.teams]]
+name = "B-Harvest"
+address = "cosmos1f9z2gazg52a8n6c06xf2234c9y0tzsgtqv4j8q"
+channel_id ="gameofzoneshub"
+
+[[collector.teams]]
+name = "B-Harvest"
+address = "cosmos1f9z2gazg52a8n6c06xf2234c9y0tzsgtqv4j8q"
+channel_id ="gameofzoneshuba"
+
+[[collector.teams]]
+name = "Muzamint"
+address = "cosmos1runeqr6aagcgv9ysw420mvw0sfymsz58szxew9"
+channel_id ="gameofzoneshubxfer"
+
+[[collector.teams]]
+name = "Datachain"
+address = "cosmos1hezg9c7etk6qvs5p6j22jgxuqdc82fy9tnynmr"
+channel_id ="gameofzoneshubdczb"
+
+[[collector.teams]]
+name = "B-Harvest"
+address = "cosmos1f9z2gazg52a8n6c06xf2234c9y0tzsgtqv4j8q"
+channel_id ="gameofzoneshubq"
+
+[[collector.teams]]
+name = "B-Harvest"
+address = "cosmos1f9z2gazg52a8n6c06xf2234c9y0tzsgtqv4j8q"
+channel_id ="gameofzoneshubqq"
+
+[[collector.teams]]
+name = "B-Harvest"
+address = "cosmos1f9z2gazg52a8n6c06xf2234c9y0tzsgtqv4j8q"
+channel_id ="gameofzoneshubqqq"
+
+[[collector.teams]]
+name = "B-Harvest"
+address = "cosmos1f9z2gazg52a8n6c06xf2234c9y0tzsgtqv4j8q"
+channel_id ="gameofzoneshubqqqq"
+
+[[collector.teams]]
+name = "B-Harvest"
+address = "cosmos1f9z2gazg52a8n6c06xf2234c9y0tzsgtqv4j8q"
+channel_id ="gameofzoneshubqqqqq"
+
+[[collector.teams]]
+name = "cyber~Congress"
+address = "cosmos13fmcdmkurnaz6sklf0tyynln4k48xjj0dwuvpu"
+channel_id ="veuzbpovfc"
+
+[[collector.teams]]
+name = "BurekSteak"
+address = "cosmos12gec735tjutvyjwc0lnlqllgdufnctg62uek7r"
+channel_id ="zfgaddnzfs"
+
+[[collector.teams]]
+name = "Node A-Team"
+address = "cosmos1s0fymxncdm2tga7swzucywggcunxvq89d3pcyn"
+channel_id ="gozchannelid"
+
+[[collector.teams]]
+name = "Node A-Team"
+address = "cosmos1s0fymxncdm2tga7swzucywggcunxvq89d3pcyn"
+channel_id ="gozchannelidx"
+
+[[collector.teams]]
+name = "Node A-Team"
+address = "cosmos1s0fymxncdm2tga7swzucywggcunxvq89d3pcyn"
+channel_id ="gozchannelidz"
+
+[[collector.teams]]
+name = "staked.sh"
+address = "cosmos1z0gsnxexgc5jxgcl3uz55kqy29y8ck7ayk5ejz"
+channel_id ="gozhubchand"
+
+[[collector.teams]]
+name = "staked.sh"
+address = "cosmos1z0gsnxexgc5jxgcl3uz55kqy29y8ck7ayk5ejz"
+channel_id ="gozhubchane"
+
+[[collector.teams]]
+name = "staked.sh"
+address = "cosmos1z0gsnxexgc5jxgcl3uz55kqy29y8ck7ayk5ejz"
+channel_id ="gozhubchanf"
+
+[[collector.teams]]
+name = "Alpha Virtual"
+address = "cosmos1x2f3vpdww36px4r6m40mzjnndn8aghfq8yeda7"
+channel_id ="gozhubiochanf"
+
+[[collector.teams]]
+name = "Alpha Virtual"
+address = "cosmos1x2f3vpdww36px4r6m40mzjnndn8aghfq8yeda7"
+channel_id ="gozhubiochang"
+
+[[collector.teams]]
+name = "Alpha Virtual"
+address = "cosmos1x2f3vpdww36px4r6m40mzjnndn8aghfq8yeda7"
+channel_id ="gozhuboneaxfer"
+
+[[collector.teams]]
+name = "Alpha Virtual"
+address = "cosmos1x2f3vpdww36px4r6m40mzjnndn8aghfq8yeda7"
+channel_id ="gozhuboneaxferb"
+
+[[collector.teams]]
+name = "Alpha Virtual"
+address = "cosmos1x2f3vpdww36px4r6m40mzjnndn8aghfq8yeda7"
+channel_id ="gozhuboneaxferc"
+
+[[collector.teams]]
+name = "Alpha Virtual"
+address = "cosmos1x2f3vpdww36px4r6m40mzjnndn8aghfq8yeda7"
+channel_id ="gozhuboneaxferd"
+
+[[collector.teams]]
+name = "Staking Fund"
+address = "cosmos1a533d3t2k5pynxh3hn3mzjhwe9jmeskqxh3cz9"
+channel_id ="zvezvvhthy"
+
+[[collector.teams]]
+name = "hashquark"
+address = "cosmos1a76ndykhlcgm7u7rexn99vmj2uptm2633ypw6f"
+channel_id ="jbqpiwktrkab"
+
+[[collector.teams]]
+name = "Cosmic Compass (CoCo)"
+address = "cosmos17hm0z0gme9nd8th32yz4lde5k48t3nykuu90yq"
+channel_id ="ulkbxmmphj"
+
+[[collector.teams]]
+name = "Cosmic Compass (CoCo)"
+address = "cosmos17hm0z0gme9nd8th32yz4lde5k48t3nykuu90yq"
+channel_id ="ulkbxmmphjs"
+
+[[collector.teams]]
+name = "Cosmic Compass (CoCo)"
+address = "cosmos17hm0z0gme9nd8th32yz4lde5k48t3nykuu90yq"
+channel_id ="ulkbxmmphjss"
+
+[[collector.teams]]
+name = "Aneka"
+address = "cosmos14ahfuwynumydy2kz2gq6qe2l4w4n7pr8ycka55"
+channel_id ="vsvkopkfcw"
+
+[[collector.teams]]
+name = "mintonium"
+address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
+channel_id ="hfhgfbfbfb"
+
+[[collector.teams]]
+name = "WeStaking"
+address = "cosmos16qp669v7k2wcsml6zv945nmnsknhckp39w0a0k"
+channel_id ="qcdzdwtvmg"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+channel_id ="psyflglqbs"
+
+[[collector.teams]]
+name = "Cypher Core"
+address = "cosmos1ww8zfd4ts6fac55wt8z5lnm5wdfqy67ldanua8"
+channel_id ="rwsjhjqtgn"
+
+[[collector.teams]]
+name = "Commonwealth Labs Inc."
+address = "cosmos1k8zxp6yxqqpgafe0m3ujs2gccs9f5zkvy9anv8"
+channel_id ="ouvfkeyckl"
+
+[[collector.teams]]
+name = "Capybara"
+address = "cosmos1y4gs9xtwk0335zf3kej8el5kzkpalq3dtmxljr"
+channel_id ="mzvrbajanw"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+channel_id ="wneczbqdhk"
+
+[[collector.teams]]
+name = "Datachain"
+address = "cosmos1hezg9c7etk6qvs5p6j22jgxuqdc82fy9tnynmr"
+channel_id ="vfebaqemfw"
+
+[[collector.teams]]
+name = "Validatorich"
+address = "cosmos1mvu547ythhm8c7ew2xnh6d8njhvdljgen3dr65"
+channel_id ="pysiogxmgt"
 
 [[collector.teams]]
 name = "ArmyIDs"
 address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
-channel_id ="aivvsnimtc"
+channel_id ="lhzjjnycem"
 
 [[collector.teams]]
-name = "Strong"
-address = "cosmos1wrdpscszcevkeplqykedphclquh3ha6mr0709c"
-channel_id ="aivvsnimtc"
+name = "cyber~Congress"
+address = "cosmos13fmcdmkurnaz6sklf0tyynln4k48xjj0dwuvpu"
+channel_id ="rihkpmhurf"
+
+[[collector.teams]]
+name = "Cosmic Compass (CoCo)"
+address = "cosmos17hm0z0gme9nd8th32yz4lde5k48t3nykuu90yq"
+channel_id ="wvrriiletk"
+
+[[collector.teams]]
+name = "mintonium"
+address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
+channel_id ="gxuyjkuoxt"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+channel_id ="ohgslrecup"
+
+[[collector.teams]]
+name = "ozone"
+address = "cosmos19ytadpwm7687ywft6sdksz2j5sgxh4ywl5ev44"
+channel_id ="hcesgpxdfapj"
+
+[[collector.teams]]
+name = "ozone"
+address = "cosmos19ytadpwm7687ywft6sdksz2j5sgxh4ywl5ev44"
+channel_id ="rkzfaktvaw"
+
+[[collector.teams]]
+name = "Interstation"
+address = "cosmos108rpmv2kr798p7nalkdgdexkmem70shkecqvhh"
+channel_id ="wrsxbfzxlw"
+
+[[collector.teams]]
+name = "stakefish"
+address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
+channel_id ="jeympfjavw"
+
+[[collector.teams]]
+name = "P2P.ORG - P2P Validator"
+address = "cosmos1vf93vh2rsn4yf3rgu5sy8n39q52cna0rewmrn4"
+channel_id ="hcdduizfhpqa"
+
+[[collector.teams]]
+name = "Everstake"
+address = "cosmos1zt902wvvf2340qpq3uxtmst8a5cpgww95s6rv9"
+channel_id ="wfvkyfspfs"
+
+[[collector.teams]]
+name = "teddyrabbit"
+address = "cosmos1fnp2kdujj2vrlfj5y4nly2wpy9unjthx8ngfx8"
+channel_id ="qumshqzvdg"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+channel_id ="kwsoxstltp"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+channel_id ="xhtfvsewmf"
+
+[[collector.teams]]
+name = "Bit Cat"
+address = "cosmos12knqu4ecmg0982plzs9m9f5jareh0cvedv6yz0"
+channel_id ="banzuvqadya"
+
+[[collector.teams]]
+name = "Bit Cat"
+address = "cosmos12knqu4ecmg0982plzs9m9f5jareh0cvedv6yz0"
+channel_id ="pfjuhdrvvo"
+
+[[collector.teams]]
+name = "Bit Cat"
+address = "cosmos12knqu4ecmg0982plzs9m9f5jareh0cvedv6yz0"
+channel_id ="hraeglykbra"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+channel_id ="xtyfemnlfe"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+channel_id ="cubyxcbjbk"
+
+[[collector.teams]]
+name = "Bitple"
+address = "cosmos1vndhkx9sdheewhdg58ug7fy388l8wm689gn7jg"
+channel_id ="mpapskkxgd"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+channel_id ="gibkfrkrtb"
+
+[[collector.teams]]
+name = "WeStaking"
+address = "cosmos16qp669v7k2wcsml6zv945nmnsknhckp39w0a0k"
+channel_id ="aofavrtruo"
+
+[[collector.teams]]
+name = "Protofire"
+address = "cosmos1y8ejrm82rzaqf5n4n5nx338m6x3u9x082qfqe8"
+channel_id ="bgpdaoekye"
+
+[[collector.teams]]
+name = "Nodeasy.com"
+address = "cosmos152zx830nl6gy97m6qms7chyktzk729cyveqv9n"
+channel_id ="krwvxhhjmz"
+
+[[collector.teams]]
+name = "Nodeasy.com"
+address = "cosmos152zx830nl6gy97m6qms7chyktzk729cyveqv9n"
+channel_id ="kwuupmphldpoe"
+
+[[collector.teams]]
+name = "Nodeasy.com"
+address = "cosmos152zx830nl6gy97m6qms7chyktzk729cyveqv9n"
+channel_id ="kwuupmphlgdpoet"
+
+[[collector.teams]]
+name = "Nodeasy.com"
+address = "cosmos152zx830nl6gy97m6qms7chyktzk729cyveqv9n"
+channel_id ="kwuupmphlgdpoedt"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+channel_id ="zvcznfkrfp"
+
+[[collector.teams]]
+name = "SNZPool"
+address = "cosmos1tstp7pl0fd6zk2v3tzmpq86x8pv29jevyrgswk"
+channel_id ="fustdujfdz"
+
+[[collector.teams]]
+name = "Newroad Network"
+address = "cosmos1l0qgnjr4uw3jv7r735kfgu3n6awpnqea229m4c"
+channel_id ="qsrggnbhgp"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+channel_id ="lvksjssaqq"
+
+[[collector.teams]]
+name = "mintonium"
+address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
+channel_id ="zkymkxxftt"
+
+[[collector.teams]]
+name = "okchain/OKex"
+address = "cosmos1rdrtfn7rgzula94vv9cz4tah75uh2zr930ftes"
+channel_id ="nxisthwxdt"
+
+[[collector.teams]]
+name = "gunray"
+address = "cosmos1wu8mv84pwsmcryq98w8nzwskusmqyv24qpy9pv"
+channel_id ="pekuamhwqt"
+
+[[collector.teams]]
+name = "Muzamint"
+address = "cosmos1runeqr6aagcgv9ysw420mvw0sfymsz58szxew9"
+channel_id ="meofzoneshubxferx"
+
+[[collector.teams]]
+name = "mintonium"
+address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
+channel_id ="rxrrixxhiq"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+channel_id ="khhmmgaoot"
+
+[[collector.teams]]
+name = "Staking Fund"
+address = "cosmos1a533d3t2k5pynxh3hn3mzjhwe9jmeskqxh3cz9"
+channel_id ="vjgiqitnzs"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+channel_id ="ejwknvekxt"
+
+[[collector.teams]]
+name = "Anonstake"
+address = "cosmos10zehl3artk76qfmn4h09pxfvvq264ew2me8lap"
+channel_id ="choxnmston"
+
+[[collector.teams]]
+name = "Protofire"
+address = "cosmos1y8ejrm82rzaqf5n4n5nx338m6x3u9x082qfqe8"
+channel_id ="kzgpwygbfv"
+
+[[collector.teams]]
+name = "Everstake"
+address = "cosmos1zt902wvvf2340qpq3uxtmst8a5cpgww95s6rv9"
+channel_id ="lpgwvnfkxh"
+
+[[collector.teams]]
+name = "VGNG"
+address = "cosmos1vgng37d8ksml9yxaryzect6pdvlpzx64yzfzff"
+channel_id ="efldjtluec"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+channel_id ="zcbxyllhxx"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+channel_id ="kzzzvrhqzf"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+channel_id ="fugizqfykm"
+
+[[collector.teams]]
+name = "SNZPool"
+address = "cosmos1tstp7pl0fd6zk2v3tzmpq86x8pv29jevyrgswk"
+channel_id ="flgrfjnmjk"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+channel_id ="dgmovzhyhy"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+channel_id ="qpikrlrlaz"
+
+[[collector.teams]]
+name = "Chorus One"
+address = "cosmos1a66jar5lh0mgzexgqfl7rkcuy6gt5rj06l9v2e"
+channel_id ="ciclgnczoy"
+
+[[collector.teams]]
+name = "StakesStone"
+address = "cosmos1dx2jqcrjfd3y9mvdd56t54j7pa2wgx2qqk0tx2"
+channel_id ="ihygbmjfex"
+
+[[collector.teams]]
+name = "StakesStone"
+address = "cosmos1dx2jqcrjfd3y9mvdd56t54j7pa2wgx2qqk0tx2"
+channel_id ="otfzxvsqvq"
+
+[[collector.teams]]
+name = "melea"
+address = "cosmos1exwcn4rmcyuf4xfjs722amqrfheng7z8cjfzgn"
+channel_id ="qzeyjgxjjr"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+channel_id ="ziwogdixsz"
+
+[[collector.teams]]
+name = "stakefish"
+address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
+channel_id ="qwkgkyphsu"
+
+[[collector.teams]]
+name = "Gruberx_crew"
+address = "cosmos1ygz4u35t0yyt7vm6fxtl0x6t8nyuw0dly05asn"
+channel_id ="jafmilmrtg"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+channel_id ="naasyakjpv"
 
 [[collector.teams]]
 name = "Desmos"
 address = "cosmos1engcn8p4vj8fsta62l3n3c5menm6sc9djvrzee"
-channel_id ="aivvsnimtc"
+channel_id ="czadqxsylu"
+
+[[collector.teams]]
+name = "IRISnet"
+address = "cosmos10uvrya46d400ymgp7ygdp6auasfvfx9lxpdtja"
+channel_id ="hyajdopppw"
+
+[[collector.teams]]
+name = "Everstake"
+address = "cosmos1zt902wvvf2340qpq3uxtmst8a5cpgww95s6rv9"
+channel_id ="epjpzgkzqm"
+
+[[collector.teams]]
+name = "isillien"
+address = "cosmos1c4e4pd8p39tr4tvtgdt8zapu4pmmxg7693235m"
+channel_id ="olzvxojkko"
+
+[[collector.teams]]
+name = "Cosmic Compass (CoCo)"
+address = "cosmos17hm0z0gme9nd8th32yz4lde5k48t3nykuu90yq"
+channel_id ="rvejasoiof"
+
+[[collector.teams]]
+name = "Compass"
+address = "cosmos1u0fdsfw0wflm2n9x2ggv09u89ed2nhmfgq88zr"
+channel_id ="xzqudgfbku"
+
+[[collector.teams]]
+name = "Drops Power"
+address = "cosmos1jr2kxdw3je9kr7rhxw8y6t40qrms53z5ksc3w2"
+channel_id ="lqvmovjrjw"
+
+[[collector.teams]]
+name = "stakefish"
+address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
+channel_id ="bvtvylptuw"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+channel_id ="czbxuwncjs"
+
+[[collector.teams]]
+name = "stakefish"
+address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
+channel_id ="wdfaqezgfb"
+
+[[collector.teams]]
+name = "Yura Forgive Us"
+address = "cosmos18g6s0cdlm593ej66rr6hrxc55362dkjattvc7h"
+channel_id ="xnygzshpef"
+
+[[collector.teams]]
+name = "B-Harvest"
+address = "cosmos1f9z2gazg52a8n6c06xf2234c9y0tzsgtqv4j8q"
+channel_id ="jtputtthbfq"
+
+[[collector.teams]]
+name = "Dawns.World"
+address = "cosmos1v5fhgkkkvcd9sqpd5arzce0h36jqezcwmf2w3z"
+channel_id ="xosedotohh"
+
+[[collector.teams]]
+name = "Compass"
+address = "cosmos1u0fdsfw0wflm2n9x2ggv09u89ed2nhmfgq88zr"
+channel_id ="cwsboioejo"
+
+[[collector.teams]]
+name = "mintonium"
+address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
+channel_id ="pfrzzsqwed"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+channel_id ="hugiwntfnn"
+
+[[collector.teams]]
+name = "Regen"
+address = "cosmos1fnlw6290j037gyff6zdy8rzlv88wr9qn3v4l3h"
+channel_id ="uqofuihasj"
+
+[[collector.teams]]
+name = "B-Harvest"
+address = "cosmos1f9z2gazg52a8n6c06xf2234c9y0tzsgtqv4j8q"
+channel_id ="qjtputtthbfq"
+
+[[collector.teams]]
+name = "B-Harvest"
+address = "cosmos1f9z2gazg52a8n6c06xf2234c9y0tzsgtqv4j8q"
+channel_id ="qjtputtthbfqqqq"
+
+[[collector.teams]]
+name = "B-Harvest"
+address = "cosmos1f9z2gazg52a8n6c06xf2234c9y0tzsgtqv4j8q"
+channel_id ="qjtputtthbfqqqqq"
+
+[[collector.teams]]
+name = "Audit.One"
+address = "cosmos1nknhkw97mj8aelekg7v73am6zlrdc3fd3n2lyc"
+channel_id ="inebhwifgr"
+
+[[collector.teams]]
+name = "FreeFlix Media"
+address = "cosmos1ljd64u6uf5x23c85e6t0v7rquss3weqff6x3mj"
+channel_id ="nbmsjklwcz"
+
+[[collector.teams]]
+name = "FreeFlix Media"
+address = "cosmos1ljd64u6uf5x23c85e6t0v7rquss3weqff6x3mj"
+channel_id ="nbmsjklwczs"
+
+[[collector.teams]]
+name = "FreeFlix Media"
+address = "cosmos1ljd64u6uf5x23c85e6t0v7rquss3weqff6x3mj"
+channel_id ="nbmsjklwczss"
+
+[[collector.teams]]
+name = "astronomia"
+address = "cosmos1hwux8hlz2xrwggdcltg7net4v7sfjnn76w5ec3"
+channel_id ="jnupcoklex"
+
+[[collector.teams]]
+name = "BurekSteak"
+address = "cosmos12gec735tjutvyjwc0lnlqllgdufnctg62uek7r"
+channel_id ="ejqaiecqfu"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+channel_id ="izbwcsqevp"
+
+[[collector.teams]]
+name = "Everstake"
+address = "cosmos1zt902wvvf2340qpq3uxtmst8a5cpgww95s6rv9"
+channel_id ="wnsgpxjxlc"
+
+[[collector.teams]]
+name = "Source"
+address = "cosmos1qz2s5unwu3l4hn2jw09cnsd3muvrcerezm9c52"
+channel_id ="vehcklfooc"
+
+[[collector.teams]]
+name = "Validatorich"
+address = "cosmos1mvu547ythhm8c7ew2xnh6d8njhvdljgen3dr65"
+channel_id ="sshifquefo"
+
+[[collector.teams]]
+name = "Validatorich"
+address = "cosmos1mvu547ythhm8c7ew2xnh6d8njhvdljgen3dr65"
+channel_id ="zpyiarrvhe"
+
+[[collector.teams]]
+name = "Validatorich"
+address = "cosmos1mvu547ythhm8c7ew2xnh6d8njhvdljgen3dr65"
+channel_id ="qbiqdgrkma"
+
+[[collector.teams]]
+name = "stakefish"
+address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
+channel_id ="iudazorwjy"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+channel_id ="jmkndgmlzv"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+channel_id ="mhmjlscakk"
+
+[[collector.teams]]
+name = "Desmos"
+address = "cosmos1engcn8p4vj8fsta62l3n3c5menm6sc9djvrzee"
+channel_id ="nvimdacnhv"
+
+[[collector.teams]]
+name = "RVC Group"
+address = "cosmos1qyfu9s408exw2yae0d86m5tupr8q9h8qt4tnge"
+channel_id ="rvcgozhuba"
+
+[[collector.teams]]
+name = "staking-defense"
+address = "cosmos1c00l9xvwmh4f77pwnnnh5x0fww0x245sdlzlxg"
+channel_id ="zpmileavne"
+
+[[collector.teams]]
+name = "Chainapsis"
+address = "cosmos1l28a844m6p0csr6ypcpnygl4hrg9vr4mqty83j"
+channel_id ="gpzbppaynp"
+
+[[collector.teams]]
+name = "astronomia"
+address = "cosmos1hwux8hlz2xrwggdcltg7net4v7sfjnn76w5ec3"
+channel_id ="mcnjssvcrf"
+
+[[collector.teams]]
+name = "ozone"
+address = "cosmos19ytadpwm7687ywft6sdksz2j5sgxh4ywl5ev44"
+channel_id ="wodnbcpsgl"
+
+[[collector.teams]]
+name = "Muzamint"
+address = "cosmos1runeqr6aagcgv9ysw420mvw0sfymsz58szxew9"
+channel_id ="erctelrujf"
+
+[[collector.teams]]
+name = "Source"
+address = "cosmos1qz2s5unwu3l4hn2jw09cnsd3muvrcerezm9c52"
+channel_id ="srcxgozonexfer"
+
+[[collector.teams]]
+name = "mintonium"
+address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
+channel_id ="eclszqvjhv"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+channel_id ="yzllupyfoa"
+
+[[collector.teams]]
+name = "ResponsibleChain"
+address = "cosmos1dtx6e6we59j03grm55zpc3pymz52msx0hsq8ce"
+channel_id ="wcabfakksa"
+
+[[collector.teams]]
+name = "ResponsibleChain"
+address = "cosmos1dtx6e6we59j03grm55zpc3pymz52msx0hsq8ce"
+channel_id ="wcabfakksasasa"
+
+[[collector.teams]]
+name = "okchain/OKex"
+address = "cosmos1rdrtfn7rgzula94vv9cz4tah75uh2zr930ftes"
+channel_id ="fwohldwqoh"
+
+[[collector.teams]]
+name = "mintonium"
+address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
+channel_id ="roszkomabh"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+channel_id ="zlixkovbtx"
+
+[[collector.teams]]
+name = "Staked"
+address = "cosmos1w8ueuqk007aqy33tgfx5yveatlfamapwty47p0"
+channel_id ="pixuqguuxu"
+
+[[collector.teams]]
+name = "blockscape"
+address = "cosmos16tdeldrswlksrejchqtzndrkal9cxawtnh8mvd"
+channel_id ="tolfoyckdb"
+
+[[collector.teams]]
+name = "blockscape"
+address = "cosmos16tdeldrswlksrejchqtzndrkal9cxawtnh8mvd"
+channel_id ="tolfoyckdz"
+
+[[collector.teams]]
+name = "Protofire"
+address = "cosmos1y8ejrm82rzaqf5n4n5nx338m6x3u9x082qfqe8"
+channel_id ="zsbdiirauz"
+
+[[collector.teams]]
+name = "Dawns.World"
+address = "cosmos1v5fhgkkkvcd9sqpd5arzce0h36jqezcwmf2w3z"
+channel_id ="xaplixzfbu"
+
+[[collector.teams]]
+name = "mintonium"
+address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
+channel_id ="dcwnmlozdp"
+
+[[collector.teams]]
+name = "cdos"
+address = "cosmos1xl0pc9phu3meevzfy4v8f35c2vy2as3trzwt9w"
+channel_id ="tricbdufgi"
+
+[[collector.teams]]
+name = "cdos"
+address = "cosmos1xl0pc9phu3meevzfy4v8f35c2vy2as3trzwt9w"
+channel_id ="tricbigfud"
+
+[[collector.teams]]
+name = "cyber~Congress"
+address = "cosmos13fmcdmkurnaz6sklf0tyynln4k48xjj0dwuvpu"
+channel_id ="xpsotbcjpt"
+
+[[collector.teams]]
+name = "Taidi"
+address = "cosmos1xgcjknmn6y2cjapje5aw6fq93a5r7hejcu6y6j"
+channel_id ="mruwghgmxx"
+
+[[collector.teams]]
+name = "Staking Fund"
+address = "cosmos1a533d3t2k5pynxh3hn3mzjhwe9jmeskqxh3cz9"
+channel_id ="igvpkahfwz"
+
+[[collector.teams]]
+name = "SNZPool"
+address = "cosmos1tstp7pl0fd6zk2v3tzmpq86x8pv29jevyrgswk"
+channel_id ="vyzimywjfr"
+
+[[collector.teams]]
+name = "Anonstake"
+address = "cosmos10zehl3artk76qfmn4h09pxfvvq264ew2me8lap"
+channel_id ="xriovnccww"
+
+[[collector.teams]]
+name = "Drops Power"
+address = "cosmos1jr2kxdw3je9kr7rhxw8y6t40qrms53z5ksc3w2"
+channel_id ="pnmstxgwzr"
+
+[[collector.teams]]
+name = "BlockNgine"
+address = "cosmos1qmd7y0mw63qcuts0z53sptne6vypen5q00xmww"
+channel_id ="piinacostu"
+
+[[collector.teams]]
+name = "Datachain"
+address = "cosmos1hezg9c7etk6qvs5p6j22jgxuqdc82fy9tnynmr"
+channel_id ="vfzhwgxjld"
+
+[[collector.teams]]
+name = "StarCluster"
+address = "cosmos16gp9q9euupf2m96cvv7kta7q09h8ce0cl6wky9"
+channel_id ="vxcdzgopbl"
+
+[[collector.teams]]
+name = "StarCluster"
+address = "cosmos16gp9q9euupf2m96cvv7kta7q09h8ce0cl6wky9"
+channel_id ="vxcdzgopel"
+
+[[collector.teams]]
+name = "astronomia"
+address = "cosmos1hwux8hlz2xrwggdcltg7net4v7sfjnn76w5ec3"
+channel_id ="ksiabqcebi"
+
+[[collector.teams]]
+name = "Stakebird"
+address = "cosmos1ar20w6rf4ulfljld7xaj4qjklyulr5myw0xqt6"
+channel_id ="mvyvijmeck"
+
+[[collector.teams]]
+name = "stakefish"
+address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
+channel_id ="sskferwmgz"
+
+[[collector.teams]]
+name = "stakefish"
+address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
+channel_id ="znscrsraki"
+
+[[collector.teams]]
+name = "Regen"
+address = "cosmos1fnlw6290j037gyff6zdy8rzlv88wr9qn3v4l3h"
+channel_id ="pzrzdtuyop"
+
+[[collector.teams]]
+name = "ozone"
+address = "cosmos19ytadpwm7687ywft6sdksz2j5sgxh4ywl5ev44"
+channel_id ="uhvgbuinrv"
+
+[[collector.teams]]
+name = "Wetez"
+address = "cosmos1gnpwvxwkj6a855z2708hnfy3h30muewcfmckw2"
+channel_id ="nsaysmqiax"
+
+[[collector.teams]]
+name = "Capybara"
+address = "cosmos1y4gs9xtwk0335zf3kej8el5kzkpalq3dtmxljr"
+channel_id ="jeconsothx"
+
+[[collector.teams]]
+name = "mintonium"
+address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
+channel_id ="oaxsxwgjjp"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+channel_id ="gemtxxwear"
+
+[[collector.teams]]
+name = "Certus One"
+address = "cosmos1t73d3c57mu7w4gncf50yuupfutkqthjw7d6f66"
+channel_id ="ootnlxnjwd"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+channel_id ="tsiuwmtkvi"
+
+[[collector.teams]]
+name = "mintonium"
+address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
+channel_id ="mhnnwfasvh"
+
+[[collector.teams]]
+name = "stakefish"
+address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
+channel_id ="cbpsucydba"
+
+[[collector.teams]]
+name = "Anonstake"
+address = "cosmos10zehl3artk76qfmn4h09pxfvvq264ew2me8lap"
+channel_id ="bodroninux"
+
+[[collector.teams]]
+name = "Cypher Core"
+address = "cosmos1ww8zfd4ts6fac55wt8z5lnm5wdfqy67ldanua8"
+channel_id ="rmlufcsrxe"
+
+[[collector.teams]]
+name = "Everstake"
+address = "cosmos1zt902wvvf2340qpq3uxtmst8a5cpgww95s6rv9"
+channel_id ="lqugdmprad"
+
+[[collector.teams]]
+name = "Staking Fund"
+address = "cosmos1a533d3t2k5pynxh3hn3mzjhwe9jmeskqxh3cz9"
+channel_id ="evqeceqmny"
+
+[[collector.teams]]
+name = "Genesis Lab"
+address = "cosmos1pah42z0avajjcpdf5u83p9vjp9vpkkc4p82sx3"
+channel_id ="pmbyyanenq"
+
+[[collector.teams]]
+name = "Stake Capital"
+address = "cosmos1c6vyd9sqmxslqkrqtn84det6ukefrxrnwru66p"
+channel_id ="yepcfpaams"
+
+[[collector.teams]]
+name = "Defending.Network"
+address = "cosmos1hcapezvn75r8p7c4xglsq82kzrvffudmyp50td"
+channel_id ="mfwwvkqrqf"
+
+[[collector.teams]]
+name = "Desmos"
+address = "cosmos1engcn8p4vj8fsta62l3n3c5menm6sc9djvrzee"
+channel_id ="dptsvylcxc"
+
+[[collector.teams]]
+name = "Dawns.World"
+address = "cosmos1v5fhgkkkvcd9sqpd5arzce0h36jqezcwmf2w3z"
+channel_id ="ixjtpsnicw"
+
+[[collector.teams]]
+name = "RVC Group"
+address = "cosmos1qyfu9s408exw2yae0d86m5tupr8q9h8qt4tnge"
+channel_id ="hoiglhilpb"
+
+[[collector.teams]]
+name = "stakematic"
+address = "cosmos1pzgw03td8l5hsa3e6jert6gpjfratxxsm32adg"
+channel_id ="pepnficamw"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+channel_id ="ynbsgwjezc"
+
+[[collector.teams]]
+name = "mintonium"
+address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
+channel_id ="ycyowzjrba"
+
+[[collector.teams]]
+name = "Aneka"
+address = "cosmos14ahfuwynumydy2kz2gq6qe2l4w4n7pr8ycka55"
+channel_id ="gexeatuadf"
+
+[[collector.teams]]
+name = "Datachain"
+address = "cosmos1hezg9c7etk6qvs5p6j22jgxuqdc82fy9tnynmr"
+channel_id ="eotltjbcle"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+channel_id ="qneooxkaiw"
+
+[[collector.teams]]
+name = "Cosmic Compass (CoCo)"
+address = "cosmos17hm0z0gme9nd8th32yz4lde5k48t3nykuu90yq"
+channel_id ="ynaeqidbmj"
+
+[[collector.teams]]
+name = "Taidi"
+address = "cosmos1xgcjknmn6y2cjapje5aw6fq93a5r7hejcu6y6j"
+channel_id ="ijylpaaonc"
+
+[[collector.teams]]
+name = "stakefish"
+address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
+channel_id ="zfxmbtkvvj"
+
+[[collector.teams]]
+name = "Datachain"
+address = "cosmos1hezg9c7etk6qvs5p6j22jgxuqdc82fy9tnynmr"
+channel_id ="sduphsruzs"
+
+[[collector.teams]]
+name = "Konstellation"
+address = "cosmos1mtv5e6zq8grgpnrsm7cr23h5k5q9qw4egz6678"
+channel_id ="pvgmuhppug"
+
+[[collector.teams]]
+name = "Anonstake"
+address = "cosmos10zehl3artk76qfmn4h09pxfvvq264ew2me8lap"
+channel_id ="eqetwaoivy"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+channel_id ="zyhtrhfsno"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+channel_id ="zqidtwmnmh"
+
+[[collector.teams]]
+name = "Strong"
+address = "cosmos1wrdpscszcevkeplqykedphclquh3ha6mr0709c"
+channel_id ="yqbaimhbeed"
+
+[[collector.teams]]
+name = "Desmos"
+address = "cosmos1engcn8p4vj8fsta62l3n3c5menm6sc9djvrzee"
+channel_id ="jjqukucruz"
 
 [[collector.teams]]
 name = "Aynelis"
 address = "cosmos1afed0xhvc2hzkn38fpqcfl9m9wjycqw7mtvkag"
-channel_id ="aivvsnimtc"
+channel_id ="ipodeoyfen"
