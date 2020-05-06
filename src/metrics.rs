@@ -387,13 +387,14 @@ impl Metrics {
             })
             .unwrap_or(&missing_sender);
 
-        self.client.incr(
-            format!(
-                "{}.create_client_event.{}.{}",
-                self.prefix, chain, message_sender
-            )
-            .as_ref(),
-        )?;
+
+        self.client
+            .incr_with_tags(format!("{}.create_client", self.prefix,).as_ref())
+            .with_tag("chain", &chain.to_string())
+            .with_tag("sender", &message_sender)
+            .send();
+
+
         Ok(())
     }
 
@@ -436,6 +437,15 @@ impl Metrics {
             )
             .as_ref(),
         )?;
+
+        self.client
+        .incr_with_tags(format!("{}.client_update", self.prefix,).as_ref())
+        .with_tag("chain", &chain.to_string())
+        .with_tag("sender", &message_sender)
+        .send();
+
+
+
         Ok(())
     }
 
@@ -463,13 +473,13 @@ impl Metrics {
             })
             .unwrap_or(&missing_sender);
 
-        self.client.incr(
-            format!(
-                "{}.client_misbehaviour_event.{}.{}",
-                self.prefix, chain, message_sender
-            )
-            .as_ref(),
-        )?;
+        self.client
+        .incr_with_tags(format!("{}.client_misbehaviour", self.prefix,).as_ref())
+        .with_tag("chain", &chain.to_string())
+        .with_tag("sender", &message_sender)
+        .send();
+
+
         Ok(())
     }
 
@@ -498,7 +508,7 @@ impl Metrics {
             .unwrap_or(&missing_sender);
 
         self.client
-            .incr_with_tags(format!("{}.openinit_event", self.prefix,).as_ref())
+            .incr_with_tags(format!("{}.openinit", self.prefix,).as_ref())
             .with_tag("chain", &chain.to_string())
             .with_tag("sender", &message_sender)
             .send();
@@ -530,7 +540,7 @@ impl Metrics {
             .unwrap_or(&missing_sender);
 
         self.client
-            .incr_with_tags(format!("{}.opentry_event", self.prefix,).as_ref())
+            .incr_with_tags(format!("{}.opentry", self.prefix,).as_ref())
             .with_tag("chain", &chain.to_string())
             .with_tag("sender", &message_sender)
             .send();
@@ -595,7 +605,7 @@ impl Metrics {
             .unwrap_or(&missing_sender);
 
         self.client
-            .incr_with_tags(format!("{}.openconfirm_event", self.prefix,).as_ref())
+            .incr_with_tags(format!("{}.openconfirm", self.prefix,).as_ref())
             .with_tag("chain", &chain.to_string())
             .with_tag("sender", &message_sender)
             .send();
