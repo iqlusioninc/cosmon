@@ -430,14 +430,6 @@ impl Metrics {
             })
             .unwrap_or(&missing_sender);
 
-        self.client.incr(
-            format!(
-                "{}.client_update.{}.{}.{}",
-                self.prefix, chain, message_sender, client_id
-            )
-            .as_ref(),
-        )?;
-
         self.client
         .incr_with_tags(format!("{}.client_update", self.prefix,).as_ref())
         .with_tag("chain", &chain.to_string())
