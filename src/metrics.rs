@@ -102,15 +102,18 @@ impl Metrics {
             .data
             .get("message.sender")
             .map(|data| {
-                data.iter()
-                    .map(|address| match self.get_team_by_address(address) {
-                        Some(team) => team.clone(),
-                        None => address.clone(),
-                    })
-                    .collect::<Vec<String>>()
-                    .join(".")
+                for addr in data {
+                    if let Some(team_name) = self.get_team_by_address(addr) {
+                        return team_name;
+                    }
+                }
+                if let Some(addr) = data.get(0) {
+                    return addr;
+                } else {
+                    return &missing_sender;
+                }
             })
-            .unwrap_or(missing_sender);
+            .unwrap_or(&missing_sender);
 
         let src_channel = match self.get_team_by_channel(src_channel) {
             Some(team) => team,
@@ -174,15 +177,18 @@ impl Metrics {
             .data
             .get("message.sender")
             .map(|data| {
-                data.iter()
-                    .map(|address| match self.get_team_by_address(address) {
-                        Some(team) => team.clone(),
-                        None => address.clone(),
-                    })
-                    .collect::<Vec<String>>()
-                    .join(".")
+                for addr in data {
+                    if let Some(team_name) = self.get_team_by_address(addr) {
+                        return team_name;
+                    }
+                }
+                if let Some(addr) = data.get(0) {
+                    return addr;
+                } else {
+                    return &missing_sender;
+                }
             })
-            .unwrap_or(missing_sender);
+            .unwrap_or(&missing_sender);
 
         let src_channel = match self.get_team_by_channel(src_channel) {
             Some(team) => team,
@@ -246,15 +252,18 @@ impl Metrics {
             .data
             .get("message.sender")
             .map(|data| {
-                data.iter()
-                    .map(|address| match self.get_team_by_address(address) {
-                        Some(team) => team.clone(),
-                        None => address.clone(),
-                    })
-                    .collect::<Vec<String>>()
-                    .join(".")
+                for addr in data {
+                    if let Some(team_name) = self.get_team_by_address(addr) {
+                        return team_name;
+                    }
+                }
+                if let Some(addr) = data.get(0) {
+                    return addr;
+                } else {
+                    return &missing_sender;
+                }
             })
-            .unwrap_or(missing_sender);
+            .unwrap_or(&missing_sender);
 
         let src_channel = match self.get_team_by_channel(src_channel) {
             Some(team) => team,
@@ -319,15 +328,18 @@ impl Metrics {
             .data
             .get("message.sender")
             .map(|data| {
-                data.iter()
-                    .map(|address| match self.get_team_by_address(address) {
-                        Some(team) => team.clone(),
-                        None => address.clone(),
-                    })
-                    .collect::<Vec<String>>()
-                    .join(".")
+                for addr in data {
+                    if let Some(team_name) = self.get_team_by_address(addr) {
+                        return team_name;
+                    }
+                }
+                if let Some(addr) = data.get(0) {
+                    return addr;
+                } else {
+                    return &missing_sender;
+                }
             })
-            .unwrap_or(missing_sender);
+            .unwrap_or(&missing_sender);
 
         let src_channel = match self.get_team_by_channel(src_channel) {
             Some(team) => team,
@@ -362,15 +374,18 @@ impl Metrics {
             .data
             .get("message.sender")
             .map(|data| {
-                data.iter()
-                    .map(|address| match self.get_team_by_address(address) {
-                        Some(team) => team.clone(),
-                        None => address.clone(),
-                    })
-                    .collect::<Vec<String>>()
-                    .join(".")
+                for addr in data {
+                    if let Some(team_name) = self.get_team_by_address(addr) {
+                        return team_name;
+                    }
+                }
+                if let Some(addr) = data.get(0) {
+                    return addr;
+                } else {
+                    return &missing_sender;
+                }
             })
-            .unwrap_or(missing_sender);
+            .unwrap_or(&missing_sender);
 
         self.client.incr(
             format!(
@@ -401,15 +416,18 @@ impl Metrics {
             .data
             .get("message.sender")
             .map(|data| {
-                data.iter()
-                    .map(|address| match self.get_team_by_address(address) {
-                        Some(team) => team.clone(),
-                        None => address.clone(),
-                    })
-                    .collect::<Vec<String>>()
-                    .join(".")
+                for addr in data {
+                    if let Some(team_name) = self.get_team_by_address(addr) {
+                        return team_name;
+                    }
+                }
+                if let Some(addr) = data.get(0) {
+                    return addr;
+                } else {
+                    return &missing_sender;
+                }
             })
-            .unwrap_or(missing_sender);
+            .unwrap_or(&missing_sender);
 
         self.client.incr(
             format!(
@@ -432,15 +450,18 @@ impl Metrics {
             .data
             .get("message.sender")
             .map(|data| {
-                data.iter()
-                    .map(|address| match self.get_team_by_address(address) {
-                        Some(team) => team.clone(),
-                        None => address.clone(),
-                    })
-                    .collect::<Vec<String>>()
-                    .join(".")
+                for addr in data {
+                    if let Some(team_name) = self.get_team_by_address(addr) {
+                        return team_name;
+                    }
+                }
+                if let Some(addr) = data.get(0) {
+                    return addr;
+                } else {
+                    return &missing_sender;
+                }
             })
-            .unwrap_or(missing_sender);
+            .unwrap_or(&missing_sender);
 
         self.client.incr(
             format!(
@@ -463,15 +484,18 @@ impl Metrics {
             .data
             .get("message.sender")
             .map(|data| {
-                data.iter()
-                    .map(|address| match self.get_team_by_address(address) {
-                        Some(team) => team.clone(),
-                        None => address.clone(),
-                    })
-                    .collect::<Vec<String>>()
-                    .join(".")
+                for addr in data {
+                    if let Some(team_name) = self.get_team_by_address(addr) {
+                        return team_name;
+                    }
+                }
+                if let Some(addr) = data.get(0) {
+                    return addr;
+                } else {
+                    return &missing_sender;
+                }
             })
-            .unwrap_or(missing_sender);
+            .unwrap_or(&missing_sender);
 
         self.client
             .incr_with_tags(format!("{}.openinit_event", self.prefix,).as_ref())
@@ -492,15 +516,18 @@ impl Metrics {
             .data
             .get("message.sender")
             .map(|data| {
-                data.iter()
-                    .map(|address| match self.get_team_by_address(address) {
-                        Some(team) => team.clone(),
-                        None => address.clone(),
-                    })
-                    .collect::<Vec<String>>()
-                    .join(".")
+                for addr in data {
+                    if let Some(team_name) = self.get_team_by_address(addr) {
+                        return team_name;
+                    }
+                }
+                if let Some(addr) = data.get(0) {
+                    return addr;
+                } else {
+                    return &missing_sender;
+                }
             })
-            .unwrap_or(missing_sender);
+            .unwrap_or(&missing_sender);
 
         self.client
             .incr_with_tags(format!("{}.opentry_event", self.prefix,).as_ref())
@@ -522,15 +549,18 @@ impl Metrics {
             .data
             .get("message.sender")
             .map(|data| {
-                data.iter()
-                    .map(|address| match self.get_team_by_address(address) {
-                        Some(team) => team.clone(),
-                        None => address.clone(),
-                    })
-                    .collect::<Vec<String>>()
-                    .join(".")
+                for addr in data {
+                    if let Some(team_name) = self.get_team_by_address(addr) {
+                        return team_name;
+                    }
+                }
+                if let Some(addr) = data.get(0) {
+                    return addr;
+                } else {
+                    return &missing_sender;
+                }
             })
-            .unwrap_or(missing_sender);
+            .unwrap_or(&missing_sender);
 
         self.client
             .incr_with_tags(format!("{}.openack_event", self.prefix,).as_ref())
@@ -551,15 +581,18 @@ impl Metrics {
             .data
             .get("message.sender")
             .map(|data| {
-                data.iter()
-                    .map(|address| match self.get_team_by_address(address) {
-                        Some(team) => team.clone(),
-                        None => address.clone(),
-                    })
-                    .collect::<Vec<String>>()
-                    .join(".")
+                for addr in data {
+                    if let Some(team_name) = self.get_team_by_address(addr) {
+                        return team_name;
+                    }
+                }
+                if let Some(addr) = data.get(0) {
+                    return addr;
+                } else {
+                    return &missing_sender;
+                }
             })
-            .unwrap_or(missing_sender);
+            .unwrap_or(&missing_sender);
 
         self.client
             .incr_with_tags(format!("{}.openconfirm_event", self.prefix,).as_ref())
