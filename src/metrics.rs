@@ -108,9 +108,9 @@ impl Metrics {
                     }
                 }
                 if let Some(addr) = data.get(0) {
-                    return addr;
+                    addr
                 } else {
-                    return &missing_sender;
+                    &missing_sender
                 }
             })
             .unwrap_or(&missing_sender);
@@ -183,9 +183,9 @@ impl Metrics {
                     }
                 }
                 if let Some(addr) = data.get(0) {
-                    return addr;
+                    addr
                 } else {
-                    return &missing_sender;
+                    &missing_sender
                 }
             })
             .unwrap_or(&missing_sender);
@@ -258,9 +258,9 @@ impl Metrics {
                     }
                 }
                 if let Some(addr) = data.get(0) {
-                    return addr;
+                    addr
                 } else {
-                    return &missing_sender;
+                    &missing_sender
                 }
             })
             .unwrap_or(&missing_sender);
@@ -334,9 +334,9 @@ impl Metrics {
                     }
                 }
                 if let Some(addr) = data.get(0) {
-                    return addr;
+                    addr
                 } else {
-                    return &missing_sender;
+                    &missing_sender
                 }
             })
             .unwrap_or(&missing_sender);
@@ -380,9 +380,9 @@ impl Metrics {
                     }
                 }
                 if let Some(addr) = data.get(0) {
-                    return addr;
+                    addr
                 } else {
-                    return &missing_sender;
+                    &missing_sender
                 }
             })
             .unwrap_or(&missing_sender);
@@ -422,9 +422,9 @@ impl Metrics {
                     }
                 }
                 if let Some(addr) = data.get(0) {
-                    return addr;
+                    addr
                 } else {
-                    return &missing_sender;
+                    &missing_sender
                 }
             })
             .unwrap_or(&missing_sender);
@@ -456,9 +456,9 @@ impl Metrics {
                     }
                 }
                 if let Some(addr) = data.get(0) {
-                    return addr;
+                    addr
                 } else {
-                    return &missing_sender;
+                    &missing_sender
                 }
             })
             .unwrap_or(&missing_sender);
@@ -490,9 +490,9 @@ impl Metrics {
                     }
                 }
                 if let Some(addr) = data.get(0) {
-                    return addr;
+                    addr
                 } else {
-                    return &missing_sender;
+                    &missing_sender
                 }
             })
             .unwrap_or(&missing_sender);
@@ -522,9 +522,9 @@ impl Metrics {
                     }
                 }
                 if let Some(addr) = data.get(0) {
-                    return addr;
+                    addr
                 } else {
-                    return &missing_sender;
+                    &missing_sender
                 }
             })
             .unwrap_or(&missing_sender);
@@ -555,9 +555,9 @@ impl Metrics {
                     }
                 }
                 if let Some(addr) = data.get(0) {
-                    return addr;
+                    addr
                 } else {
-                    return &missing_sender;
+                    &missing_sender
                 }
             })
             .unwrap_or(&missing_sender);
@@ -587,9 +587,9 @@ impl Metrics {
                     }
                 }
                 if let Some(addr) = data.get(0) {
-                    return addr;
+                    addr
                 } else {
-                    return &missing_sender;
+                    &missing_sender
                 }
             })
             .unwrap_or(&missing_sender);
