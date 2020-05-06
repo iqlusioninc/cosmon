@@ -598,9 +598,9 @@ impl Metrics {
         None
     }
 
-    fn get_team_by_address(&self, channel_id: &str) -> Option<&String> {
+    fn get_team_by_address(&self, address: &str) -> Option<&String> {
         if let Some(ref address_to_team) = self.address_to_team {
-            return address_to_team.get(channel_id);
+            return address_to_team.get(address);
         }
         None
     }

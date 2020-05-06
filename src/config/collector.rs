@@ -32,8 +32,14 @@ impl CollectorConfig {
             let mut channel_id_to_team = HashMap::new();
 
             for team in teams {
-                address_to_team.insert(team.address.clone(), team.name.clone());
-                channel_id_to_team.insert(team.channel_id.clone(), team.name.clone());
+                address_to_team.insert(
+                    team.address.to_lowercase().replace(" ", "_").clone(),
+                    team.name.clone(),
+                );
+                channel_id_to_team.insert(
+                    team.channel_id.clone().to_lowercase().replace(" ", "_"),
+                    team.name.clone(),
+                );
             }
 
             return Some((address_to_team, channel_id_to_team));
