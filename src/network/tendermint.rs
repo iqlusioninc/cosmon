@@ -96,6 +96,12 @@ impl Network {
                 .unwrap_or_else(|err| {
                     trace!("Metrics error:{}", err);
                 }),
+            IBCEvent::CreateClient(event) => self
+                .metrics
+                .create_client_event(self.id, event.clone())
+                .unwrap_or_else(|err| {
+                    trace!("Metrics error:{}", err);
+                }),
             IBCEvent::OpaquePacket(event) => self
                 .metrics
                 .opaque_packet(self.id, event.clone())
