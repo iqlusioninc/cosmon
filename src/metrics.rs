@@ -12,6 +12,8 @@ use std::net::UdpSocket;
 use std::time::SystemTime;
 use tendermint::chain;
 
+use subtle_encoding::bech32::{decode, encode};
+
 /// Send Statd metrics over UDP
 #[derive(Debug)]
 pub struct Metrics {
@@ -600,7 +602,14 @@ impl Metrics {
 
     fn get_team_by_address(&self, address: &str) -> Option<&String> {
         if let Some(ref address_to_team) = self.address_to_team {
-            return address_to_team.get(address);
+            if address.contains("cosmos1") {
+                return address_to_team.get(address);
+            } else {
+                match decode(address) {
+                    Ok((_, data)) => return address_to_team.get(&encode("cosmos", data)),
+                    Err(_) => return None,
+                }
+            }
         }
         None
     }
