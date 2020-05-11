@@ -11,6 +11,10 @@ use tokio::sync::mpsc::{Receiver, Sender};
 
 use relayer_modules::events::IBCEvent;
 
+use tokio::time::delay_for;
+
+use std::time::Duration;
+
 /// Connect to a tendermint node and recieve push events over a websocket and filter them for the collector.
 pub struct EventMonitor {
     /// Websocket to collect events from
@@ -76,14 +80,13 @@ impl EventMonitor {
                                     Ok(..) => continue,
                                     Err(err) => {
                                         trace!("Error on recreating subscribptions {}", err);
-                                        panic!("Abort during recconnection");
+                                        delay_for(Duration::from_millis(500)).await
                                     }
                                 };
                             }
                         }
                         Err(err) => {
                             trace!("Error on recconnection from{}", err);
-                            panic!("Abort on failed reconnection")
                         }
                     }
                 }
@@ -138,7 +141,13 @@ impl EventReporter {
             for event in events {
                 if let Some(env) = Envelope::new(self.chain, self.node, vec![Message::from(event)])
                 {
-                    self.report(env).await.unwrap();
+                    match self.report(env).await {
+                        Ok(_) => {}
+                        Err(err) => {
+                            status_err!("error reporting events node: {}", err);
+                            delay_for(Duration::from_millis(500)).await
+                        }
+                    }
                 }
             }
         }

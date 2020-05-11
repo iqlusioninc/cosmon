@@ -118,7 +118,6 @@ impl Monitor {
                 }
                 Err(e) => {
                     status_err!("error polling node: {}", e);
-                    break;
                 }
             }
 
