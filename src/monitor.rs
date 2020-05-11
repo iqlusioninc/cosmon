@@ -113,7 +113,10 @@ impl Monitor {
                     if let Some(env) =
                         message::Envelope::new(self.status.node.network, self.status.node.id, msg)
                     {
-                        self.report(env).await.unwrap();
+                        match self.report(env).await {
+                            Ok(_) => {}
+                            Err(e) => status_err!("error polling node: {}", e),
+                        }
                     }
                 }
                 Err(e) => {
