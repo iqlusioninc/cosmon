@@ -1,6 +1,7 @@
 //!Module to process data into metrics for statsd. Mostly for pipeing to datadog.
 
 use crate::error::Error;
+use crate::monitor::net_info::Peer;
 use cadence::prelude::*;
 use cadence::{StatsdClient, UdpMetricSink, DEFAULT_PORT};
 use relayer_modules::ics02_client::events as ClientEvents;
@@ -10,7 +11,7 @@ use relayer_modules::ics20_fungible_token_transfer::events as TransferEvents;
 use std::collections::HashMap;
 use std::net::UdpSocket;
 use std::time::SystemTime;
-use tendermint::chain;
+use tendermint::{chain, node};
 
 use subtle_encoding::bech32::{decode, encode};
 
@@ -62,6 +63,24 @@ impl Metrics {
         self.client
             .incr(&format!("{}.heartbeat", self.prefix))
             .unwrap();
+    }
+
+    ///Send a metric for a number of peers
+    pub fn number_of_peers_event(
+        &mut self,
+        peers: &Vec<Peer>,
+        node: node::Id,
+    ) -> Result<(), Error> {
+        let number_of_peers = peers.len();
+        self.client
+            .gauge_with_tags(
+                &format!("{}.number_of_peers", self.prefix),
+                number_of_peers as u64,
+            )
+            .with_tag("node", &node.to_string())
+            .send();
+
+        Ok(())
     }
 
     /// Send a metric for each packet send event
