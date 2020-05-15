@@ -65,12 +65,8 @@ impl Metrics {
             .unwrap();
     }
 
-    ///Send a metric for a number of peers
-    pub fn number_of_peers_event(
-        &mut self,
-        peers: &Vec<Peer>,
-        node: node::Id,
-    ) -> Result<(), Error> {
+    ///Send a metric for number of peers event
+    pub fn number_of_peers_event(&mut self, peers: &[Peer], node: node::Id) -> Result<(), Error> {
         let number_of_peers = peers.len();
         self.client
             .gauge_with_tags(

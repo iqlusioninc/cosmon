@@ -9,9 +9,9 @@ use crate::{
 use relayer_modules::events::IBCEvent;
 use serde::Serialize;
 use std::collections::BTreeMap as Map;
-use std::fs::{OpenOptions, File};
+use std::fs::{File, OpenOptions};
 use std::io::prelude::*;
-
+use tendermint::node;
 
 /// Tendermint network monitoring
 #[derive(Debug)]
@@ -32,14 +32,17 @@ pub struct Network {
 
     metrics: crate::metrics::Metrics,
 
-    event_log:File,
+    event_log: File,
 }
-
 
 impl Network {
     /// Create new Tendermint network state
     pub fn new(id: tendermint::chain::Id, metrics: crate::metrics::Metrics) -> Self {
-        let event_log = OpenOptions::new().append(true).create(true).open("events.log").unwrap();
+        let event_log = OpenOptions::new()
+            .append(true)
+            .create(true)
+            .open("events.log")
+            .unwrap();
 
         Self {
             id,
@@ -51,7 +54,6 @@ impl Network {
             metrics,
             event_log,
         }
-
     }
 
     /// Get this network's ID
@@ -74,12 +76,15 @@ impl Network {
         for msg in &envelope.msg {
             match msg {
                 Message::Node(ref node_info) => self.update_node(node_info),
-                Message::Peers(ref peer_info) => self.update_peer(peer_info),
+                Message::Peers(ref peer_info) => self.update_peer(peer_info, envelope.node),
                 Message::Chain(ref chain_info) => self.update_chain(chain_info),
                 Message::Validator(ref validator_info) => self.update_validator(validator_info),
                 Message::EventIBC(ref event) => {
-                    self.event_log.write_all(&envelope.to_json().as_bytes()).unwrap_or(status_err!("Writing log file failed"));
-                    self.emit_event_metrics(event)},
+                    self.event_log
+                        .write_all(&envelope.to_json().as_bytes())
+                        .unwrap_or(status_err!("Writing log file failed"));
+                    self.emit_event_metrics(event)
+                }
             }
         }
         self.metrics.heartbeat();
@@ -171,9 +176,10 @@ impl Network {
     }
 
     /// Update information about peers
-    fn update_peer(&mut self, peer_info: &[Peer]) {
+    fn update_peer(&mut self, peer_info: &[Peer], node: node::Id) {
         info!("peers update: {:?} ", peer_info);
 
+        self.metrics.number_of_peers_event(peer_info, node).unwrap();
         self.peers = peer_info.to_vec();
     }
 
