@@ -41,34 +41,32 @@ impl HttpServer {
 impl Runnable for HttpServer {
     /// Run the HTTP collector
     fn run(&self) {
-        abscissa_tokio::run(&APPLICATION, async{
+        abscissa_tokio::run(&APPLICATION, async {
+            // GET /net/:network_id
+            let network = warp::get().and(path!("net" / String).map(|network_id| {
+                let app = app_reader();
+                let result = app
+                    .network(network_id)
+                    .map(|network| network.state())
+                    .ok_or_else(|| response::Error {});
+                warp::reply::json(&response::Wrapper::from_result(result))
+            }));
 
+            // POST /collector
+            let collector = warp::post()
+                .and(path("collector"))
+                .and(warp::body::content_length_limit(1024 * 128))
+                .and(warp::body::json())
+                .map(|envelope: message::Envelope| {
+                    let mut app = app_writer();
+                    app.handle_message(envelope);
+                    warp::reply()
+                });
 
-        // GET /net/:network_id
-        let network = warp::get().and(path!("net" / String).map(|network_id| {
-            let app = app_reader();
-            let result = app
-                .network(network_id)
-                .map(|network| network.state())
-                .ok_or_else(|| response::Error {});
-            warp::reply::json(&response::Wrapper::from_result(result))
-        }));
+            let routes = network.or(collector);
 
-        // POST /collector
-        let collector = warp::post()
-            .and(path("collector"))
-            .and(warp::body::content_length_limit(1024 * 128))
-            .and(warp::body::json())
-            .map(|envelope: message::Envelope| {
-                let mut app = app_writer();
-                app.handle_message(envelope);
-                warp::reply()
-            });
-
-        let routes = network.or(collector);
-
-        warp::serve(routes).run((self.addr, self.port)).await;
-        }
-        ).unwrap();
+            warp::serve(routes).run((self.addr, self.port)).await;
+        })
+        .unwrap();
     }
 }

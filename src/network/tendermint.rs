@@ -9,9 +9,8 @@ use crate::{
 use relayer_modules::events::IBCEvent;
 use serde::Serialize;
 use std::collections::BTreeMap as Map;
-use std::fs::{OpenOptions, File};
+use std::fs::{File, OpenOptions};
 use std::io::prelude::*;
-
 
 /// Tendermint network monitoring
 #[derive(Debug)]
@@ -32,14 +31,17 @@ pub struct Network {
 
     metrics: crate::metrics::Metrics,
 
-    event_log:File,
+    event_log: File,
 }
-
 
 impl Network {
     /// Create new Tendermint network state
     pub fn new(id: tendermint::chain::Id, metrics: crate::metrics::Metrics) -> Self {
-        let event_log = OpenOptions::new().append(true).create(true).open("events.log").unwrap();
+        let event_log = OpenOptions::new()
+            .append(true)
+            .create(true)
+            .open("events.log")
+            .unwrap();
 
         Self {
             id,
@@ -51,7 +53,6 @@ impl Network {
             metrics,
             event_log,
         }
-
     }
 
     /// Get this network's ID
@@ -78,8 +79,11 @@ impl Network {
                 Message::Chain(ref chain_info) => self.update_chain(chain_info),
                 Message::Validator(ref validator_info) => self.update_validator(validator_info),
                 Message::EventIBC(ref event) => {
-                    self.event_log.write_all(&envelope.to_json().as_bytes()).unwrap_or(status_err!("Writing log file failed"));
-                    self.emit_event_metrics(event)},
+                    self.event_log
+                        .write_all(&envelope.to_json().as_bytes())
+                        .unwrap_or(status_err!("Writing log file failed"));
+                    self.emit_event_metrics(event)
+                }
             }
         }
         self.metrics.heartbeat();
