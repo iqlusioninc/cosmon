@@ -1,6 +1,7 @@
 //! HTTP collector
 
 use crate::{
+    application::APPLICATION,
     error::{Error, ErrorKind},
     message,
     prelude::*,
@@ -40,8 +41,11 @@ impl HttpServer {
 impl Runnable for HttpServer {
     /// Run the HTTP collector
     fn run(&self) {
+        abscissa_tokio::run(&APPLICATION, async{
+
+
         // GET /net/:network_id
-        let network = warp::get2().and(path!("net" / String).map(|network_id| {
+        let network = warp::get().and(path!("net" / String).map(|network_id| {
             let app = app_reader();
             let result = app
                 .network(network_id)
@@ -51,7 +55,7 @@ impl Runnable for HttpServer {
         }));
 
         // POST /collector
-        let collector = warp::post2()
+        let collector = warp::post()
             .and(path("collector"))
             .and(warp::body::content_length_limit(1024 * 128))
             .and(warp::body::json())
@@ -63,6 +67,8 @@ impl Runnable for HttpServer {
 
         let routes = network.or(collector);
 
-        warp::serve(routes).run((self.addr, self.port));
+        warp::serve(routes).run((self.addr, self.port)).await;
+        }
+        ).unwrap();
     }
 }

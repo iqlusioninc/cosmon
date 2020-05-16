@@ -22,8 +22,8 @@ reqwest = "0.10"
 thiserror = "1"
 toml = "0.5"
 tokio = "0.2"
-warp = "0.1"
-futures = "0.3.4"
+warp = "0.2"
+futures = "0.3"
 cadence = "0.20"
 subtle-encoding = {version = "0.5.1", features=["bech32-preview"]}
 
