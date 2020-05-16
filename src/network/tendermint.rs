@@ -81,7 +81,7 @@ impl Network {
                 Message::EventIBC(ref event) => {
                     self.event_log
                         .write_all(&envelope.to_json().as_bytes())
-                        .unwrap_or(status_err!("Writing log file failed"));
+                        .unwrap_or_else(|_| status_err!("Writing log file failed"));
                     self.emit_event_metrics(event)
                 }
             }

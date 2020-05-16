@@ -27,7 +27,7 @@ impl Runnable for StartCommand {
                         process::exit(1);
                     });
 
-                    collector.run();
+                    collector.run().await;
                 });
                 c_handle.await.unwrap();
             }
