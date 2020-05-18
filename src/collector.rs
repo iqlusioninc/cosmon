@@ -5,6 +5,7 @@ use crate::{
     message,
     prelude::*,
     response,
+    application::SaganApplication,
 };
 use std::{net::IpAddr, str::FromStr};
 use tendermint::net;
@@ -47,19 +48,33 @@ impl HttpServer {
             warp::reply::json(&response::Wrapper::from_result(result))
         }));
 
+        let app = app_writer();
+        let lock = std::sync::Arc::new(tokio::sync::RwLock::new(&*app));
+
+        let with_lock = warp::any().map( move || lock.clone());
+
+
+
         // POST /collector
         let collector = warp::post()
             .and(path("collector"))
             .and(warp::body::content_length_limit(1024 * 128))
             .and(warp::body::json())
-            .map(|envelope: message::Envelope| {
-                let mut app = app_writer();
-                app.handle_message(envelope);
-                warp::reply()
-            });
+            .and(with_lock.clone())
+            .and_then(handler);
 
         let routes = network.or(collector);
 
         warp::serve(routes).run((self.addr, self.port)).await;
     }
+}
+
+async fn handler(envelope: message::Envelope, lock: std::sync::Arc<tokio::sync::RwLock<&SaganApplication>>)->Result<impl warp::Reply, warp::Rejection> {
+    let mut app = lock.write().await;
+    app.handle_message(envelope).await;
+    Ok(warp::reply::with_status(
+        "Handled envelope".to_string(),
+        warp::http::StatusCode::OK,
+    ))
+
 }

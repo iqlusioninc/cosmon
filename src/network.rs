@@ -81,9 +81,9 @@ impl Network {
     }
 
     /// Handle an incoming status message from a monitor
-    pub fn handle_message(&mut self, envelope: message::Envelope) {
+    pub async fn handle_message(&mut self, envelope: message::Envelope) {
         match self {
-            Network::Tendermint(tm) => tm.handle_message(envelope),
+            Network::Tendermint(tm) => tm.handle_message(envelope).await,
         }
     }
 

@@ -66,7 +66,7 @@ impl Network {
     }
 
     /// Update internal state from incoming messages
-    pub fn handle_message(&mut self, envelope: Envelope) {
+    pub async fn handle_message(&mut self, envelope: Envelope) {
         if envelope.network != self.id {
             return;
         }

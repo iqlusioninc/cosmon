@@ -145,9 +145,9 @@ impl SaganApplication {
     }
 
     /// Handle an incoming status message from a monitor
-    pub fn handle_message(&mut self, message: message::Envelope) {
+    pub async fn handle_message(&mut self, message: message::Envelope) {
         if let Some(network) = self.networks.get_mut(&message.network.into()) {
-            network.handle_message(message);
+            network.handle_message(message).await;
         } else {
             warn!("got message for unregistered network: {}", &message.network);
         }
