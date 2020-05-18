@@ -90,4 +90,11 @@ impl From<SyncInfo> for ChainStatus {
     fn from(sync_info: SyncInfo) -> ChainStatus {
         ChainStatus(sync_info)
     }
+
 }
+
+impl From<ChainStatus> for SyncInfo {
+    fn from (chain_status: ChainStatus) -> SyncInfo {
+        chain_status.0
+    }
+} 

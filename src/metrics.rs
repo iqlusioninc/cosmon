@@ -11,7 +11,7 @@ use relayer_modules::ics20_fungible_token_transfer::events as TransferEvents;
 use std::collections::HashMap;
 use std::net::UdpSocket;
 use std::time::SystemTime;
-use tendermint::{chain, node, validator::Info};
+use tendermint::{chain, node, validator::Info, rpc::endpoint::status::SyncInfo};
 
 
 use subtle_encoding::bech32::{decode, encode};
@@ -97,6 +97,19 @@ impl Metrics {
             Ok(())
     }
 
+    ///Send a metric for node block height event
+    pub fn block_height_event(&mut self, sync_info: &SyncInfo, node: node::Id) -> Result<(), Error> {
+        let latest_block_height = sync_info.latest_block_height;
+        self.client
+            .gauge_with_tags(
+                &format!("{}.latest_block_height", self.prefix),
+                u64::from(latest_block_height),
+            )
+            .with_tag("node", &node.to_string())
+            .send();
+
+            Ok(())
+    }
 
     /// Send a metric for each packet send event
     pub fn packet_send_event(

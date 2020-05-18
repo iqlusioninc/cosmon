@@ -12,6 +12,7 @@ use std::collections::BTreeMap as Map;
 use std::fs::{File, OpenOptions};
 use std::io::prelude::*;
 use tendermint::node;
+use tendermint::rpc::endpoint::status::SyncInfo;
 
 /// Tendermint network monitoring
 #[derive(Debug)]
@@ -77,7 +78,7 @@ impl Network {
             match msg {
                 Message::Node(ref node_info) => self.update_node(node_info),
                 Message::Peers(ref peer_info) => self.update_peer(peer_info, envelope.node),
-                Message::Chain(ref chain_info) => self.update_chain(chain_info),
+                Message::Chain(ref chain_info) => self.update_chain(chain_info, envelope.node),
                 Message::Validator(ref validator_info) => self.update_validator(validator_info, envelope.node),
                 Message::EventIBC(ref event) => {
                     self.event_log
@@ -184,9 +185,10 @@ impl Network {
     }
 
     /// Update information about chain status
-    fn update_chain(&mut self, chain_info: &ChainStatus) {
+    fn update_chain(&mut self, chain_info: &ChainStatus, node: node::Id) {
         info!("chain status update: {:?}", chain_info);
 
+        self.metrics.block_height_event(&SyncInfo::from(chain_info.clone()), node).unwrap();
         self.chain = Some(chain_info.clone());
     }
 
