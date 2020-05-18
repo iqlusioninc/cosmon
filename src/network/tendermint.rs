@@ -78,7 +78,7 @@ impl Network {
                 Message::Node(ref node_info) => self.update_node(node_info),
                 Message::Peers(ref peer_info) => self.update_peer(peer_info, envelope.node),
                 Message::Chain(ref chain_info) => self.update_chain(chain_info),
-                Message::Validator(ref validator_info) => self.update_validator(validator_info),
+                Message::Validator(ref validator_info) => self.update_validator(validator_info, envelope.node),
                 Message::EventIBC(ref event) => {
                     self.event_log
                         .write_all(&envelope.to_json().as_bytes())
@@ -191,9 +191,10 @@ impl Network {
     }
 
     /// Update information about validators
-    fn update_validator(&mut self, validator_info: &tendermint::validator::Info) {
+    fn update_validator(&mut self, validator_info: &tendermint::validator::Info, node: node::Id) {
         info!("validator update: {:?}", validator_info);
-
+        
+        self.metrics.voting_power_event(validator_info, node).unwrap();
         self.validators = Some(*validator_info);
     }
 }

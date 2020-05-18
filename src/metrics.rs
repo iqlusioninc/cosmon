@@ -11,7 +11,8 @@ use relayer_modules::ics20_fungible_token_transfer::events as TransferEvents;
 use std::collections::HashMap;
 use std::net::UdpSocket;
 use std::time::SystemTime;
-use tendermint::{chain, node};
+use tendermint::{chain, node, validator::Info};
+
 
 use subtle_encoding::bech32::{decode, encode};
 
@@ -78,6 +79,24 @@ impl Metrics {
 
         Ok(())
     }
+
+
+    ///Send a metric for validator voting power event
+    pub fn voting_power_event(&mut self, validator_info:&Info, node: node::Id) -> Result<(), Error> {
+        let address = validator_info.address;
+        let voting_power =  validator_info.voting_power;
+        self.client
+            .gauge_with_tags(
+                &format!("{}.voting_power", self.prefix),
+                u64::from(voting_power),
+            )
+            .with_tag("address", &address.to_string())
+            .with_tag("node", &node.to_string())
+            .send();
+
+            Ok(())
+    }
+
 
     /// Send a metric for each packet send event
     pub fn packet_send_event(
