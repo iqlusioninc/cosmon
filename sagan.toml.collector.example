@@ -1,0 +1,2695 @@
+# Example Sagan configuration file
+
+[collector]
+listen_addr = "0.0.0.0:31023"
+statsd ="127.0.0.1"
+metrics_prefix = "sagan.testing"
+
+[collector.networks]
+tendermint = ["gameofzoneshub-1a"]
+
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="abmrmrdpor"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="adnftlxezn"
+
+[[collector.teams]]
+name = "kokuwa"
+address = "cosmos1xl67sr4mdv2ejc4whgpkz66llm2v8g24dmxcn7"
+client_id ="aecqcobkzg"
+
+[[collector.teams]]
+name = "staked.sh"
+address = "cosmos1z0gsnxexgc5jxgcl3uz55kqy29y8ck7ayk5ejz"
+client_id ="aenuirgeaa"
+
+[[collector.teams]]
+name = "staked.sh"
+address = "cosmos1z0gsnxexgc5jxgcl3uz55kqy29y8ck7ayk5ejz"
+client_id ="aenuirgeax"
+
+[[collector.teams]]
+name = "Fetch.AI"
+address = "cosmos16sctx4fhuczxxy6sfj2e5s4v72sqdspx6eectt"
+client_id ="aeopeyxstg"
+
+[[collector.teams]]
+name = "Staking Fund"
+address = "cosmos1a533d3t2k5pynxh3hn3mzjhwe9jmeskqxh3cz9"
+client_id ="agokkwlxqq"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="ahaxyurptp"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="amvhksxzfp"
+
+[[collector.teams]]
+name = "astronomia"
+address = "cosmos1hwux8hlz2xrwggdcltg7net4v7sfjnn76w5ec3"
+client_id ="anitlftywslm"
+
+[[collector.teams]]
+name = "Aneka"
+address = "cosmos14ahfuwynumydy2kz2gq6qe2l4w4n7pr8ycka55"
+client_id ="ankgozcli"
+
+[[collector.teams]]
+name = "Muzamint"
+address = "cosmos1runeqr6aagcgv9ysw420mvw0sfymsz58szxew9"
+client_id ="aouqeewzyk"
+
+[[collector.teams]]
+name = "teddyrabbit"
+address = "cosmos1fnp2kdujj2vrlfj5y4nly2wpy9unjthx8ngfx8"
+client_id ="astfhjiaro"
+
+[[collector.teams]]
+name = "BurekSteak"
+address = "cosmos12gec735tjutvyjwc0lnlqllgdufnctg62uek7r"
+client_id ="atmxqlhsws"
+
+[[collector.teams]]
+name = "Anonstake"
+address = "cosmos10zehl3artk76qfmn4h09pxfvvq264ew2me8lap"
+client_id ="auaevmjyfy"
+
+[[collector.teams]]
+name = "Audit.One"
+address = "cosmos1nknhkw97mj8aelekg7v73am6zlrdc3fd3n2lyc"
+client_id ="awbsefuovm"
+
+[[collector.teams]]
+name = "Cosmic Compass (CoCo)"
+address = "cosmos17hm0z0gme9nd8th32yz4lde5k48t3nykuu90yq"
+client_id ="axegzwjyef"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="bathjdnhky"
+
+[[collector.teams]]
+name = "JokerTheBond"
+address = "cosmos1v6p6p0dr4ll0p53q8zn78fdf5dd5ldmnecp0wl"
+client_id ="bbiejjrmva"
+
+[[collector.teams]]
+name = "Cypher Core"
+address = "cosmos1ww8zfd4ts6fac55wt8z5lnm5wdfqy67ldanua8"
+client_id ="bdvqgklhmx"
+
+[[collector.teams]]
+name = "kokuwa"
+address = "cosmos1xl67sr4mdv2ejc4whgpkz66llm2v8g24dmxcn7"
+client_id ="becqcobkzg"
+
+[[collector.teams]]
+name = "Muzamint"
+address = "cosmos1runeqr6aagcgv9ysw420mvw0sfymsz58szxew9"
+client_id ="bhsjtabhwn"
+
+[[collector.teams]]
+name = "vipnamai"
+address = "cosmos1trq740zypnm64g9deufsdkx0qcw8xd09vfxx06"
+client_id ="biqnceplvv"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+client_id ="blcdjljtw"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+client_id ="blcdjnumk"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+client_id ="blcdjobmx"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+client_id ="blcdjsxxk"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+client_id ="blcdjtiyg"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+client_id ="blcdjtyzj"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+client_id ="blcdjuzhw"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+client_id ="blcdjvvxd"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+client_id ="blcdjwigf"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+client_id ="blcdjxfqq"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+client_id ="blcdjxrij"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+client_id ="blcdjxsgi"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+client_id ="blcdjyfpm"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+client_id ="blcdjyqlb"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+client_id ="blcdjywhq"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+client_id ="blcdjyzge"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+client_id ="blcdjzdam"
+
+[[collector.teams]]
+name = "BlockNgine"
+address = "cosmos1qmd7y0mw63qcuts0z53sptne6vypen5q00xmww"
+client_id ="blockngine"
+
+[[collector.teams]]
+name = "BigBeautifulSilverPlate"
+address = "cosmos1fj9lg5n4demt42t6ey6wfzx4ut9pz6yyltzxyx"
+client_id ="blogblogb"
+
+[[collector.teams]]
+name = "Atomic Bombers"
+address = "cosmos1kmrn6a4wf2sqw6fxemhee9tr6qz46wvl0hdzya"
+client_id ="bomberzones"
+
+[[collector.teams]]
+name = "Atomic Bombers"
+address = "cosmos1kmrn6a4wf2sqw6fxemhee9tr6qz46wvl0hdzya"
+client_id ="bomberzonesx"
+
+[[collector.teams]]
+name = "Muzamint"
+address = "cosmos1runeqr6aagcgv9ysw420mvw0sfymsz58szxew9"
+client_id ="bqvnoztret"
+
+[[collector.teams]]
+name = "Cypher Core"
+address = "cosmos1ww8zfd4ts6fac55wt8z5lnm5wdfqy67ldanua8"
+client_id ="bsijsfaldr"
+
+[[collector.teams]]
+name = "Datachain"
+address = "cosmos1hezg9c7etk6qvs5p6j22jgxuqdc82fy9tnynmr"
+client_id ="btspgfljlv"
+
+[[collector.teams]]
+name = "Fanprime"
+address = "cosmos1780eywt4gghkhzu62fkr2exqkkya06ydj68ckh"
+client_id ="btvdvnjrlf"
+
+[[collector.teams]]
+name = "gunray"
+address = "cosmos1wu8mv84pwsmcryq98w8nzwskusmqyv24qpy9pv"
+client_id ="bwbtoiqeuk"
+
+[[collector.teams]]
+name = "ozone"
+address = "cosmos19ytadpwm7687ywft6sdksz2j5sgxh4ywl5ev44"
+client_id ="bykbnwvksj"
+
+[[collector.teams]]
+name = "Mr.K"
+address = "cosmos1kgrhmxu6khuzcamwgwrent45ufhpdqlmm0473u"
+client_id ="bzvuaimdeaa"
+
+[[collector.teams]]
+name = "Mr.K"
+address = "cosmos1kgrhmxu6khuzcamwgwrent45ufhpdqlmm0473u"
+client_id ="bzvuaimdeab"
+
+[[collector.teams]]
+name = "Mr.K"
+address = "cosmos1kgrhmxu6khuzcamwgwrent45ufhpdqlmm0473u"
+client_id ="bzvuaimdeac"
+
+[[collector.teams]]
+name = "Mr.K"
+address = "cosmos1kgrhmxu6khuzcamwgwrent45ufhpdqlmm0473u"
+client_id ="bzvuaimdead"
+
+[[collector.teams]]
+name = "Mr.K"
+address = "cosmos1kgrhmxu6khuzcamwgwrent45ufhpdqlmm0473u"
+client_id ="bzvuaimdeade"
+
+[[collector.teams]]
+name = "P2P.ORG - P2P Validator"
+address = "cosmos1vf93vh2rsn4yf3rgu5sy8n39q52cna0rewmrn4"
+client_id ="capitaablazesquawk"
+
+[[collector.teams]]
+name = "Fetch.AI"
+address = "cosmos16sctx4fhuczxxy6sfj2e5s4v72sqdspx6eectt"
+client_id ="ccopltvyav"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="ccsgernvdr"
+
+[[collector.teams]]
+name = "Persistence"
+address = "cosmos1tznxzdk4t9vr9nstrvjwmnztq4k6wjj55cgeqq"
+client_id ="cfxrjkcvmu"
+
+[[collector.teams]]
+name = "Aneka"
+address = "cosmos14ahfuwynumydy2kz2gq6qe2l4w4n7pr8ycka55"
+client_id ="chingozcli"
+
+[[collector.teams]]
+name = "Persistence"
+address = "cosmos1tznxzdk4t9vr9nstrvjwmnztq4k6wjj55cgeqq"
+client_id ="cismlnznse"
+
+[[collector.teams]]
+name = "Chainapsis"
+address = "cosmos1l28a844m6p0csr6ypcpnygl4hrg9vr4mqty83j"
+client_id ="cjupdehexa"
+
+[[collector.teams]]
+name = "Chainapsis"
+address = "cosmos1l28a844m6p0csr6ypcpnygl4hrg9vr4mqty83j"
+client_id ="cjupdehexb"
+
+[[collector.teams]]
+name = "Chainapsis"
+address = "cosmos1l28a844m6p0csr6ypcpnygl4hrg9vr4mqty83j"
+client_id ="cjupdehexs"
+
+[[collector.teams]]
+name = "stakefish"
+address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
+client_id ="clgoztwoalice"
+
+[[collector.teams]]
+name = "stakefish"
+address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
+client_id ="clgoztwoaliceb"
+
+[[collector.teams]]
+name = "stakefish"
+address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
+client_id ="clgoztwoalicec"
+
+[[collector.teams]]
+name = "stakefish"
+address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
+client_id ="clgoztwobob"
+
+[[collector.teams]]
+name = "stakefish"
+address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
+client_id ="clgoztwocarol"
+
+[[collector.teams]]
+name = "stakefish"
+address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
+client_id ="clgoztwodan"
+
+[[collector.teams]]
+name = "stakefish"
+address = "cosmos1vskhrny09fjjmrsf90nqccaxcp40eyc2gvkgp4"
+client_id ="clgoztwoeve"
+
+[[collector.teams]]
+name = "Supernova"
+address = "cosmos15wa9rkp28zsw8ymuj7dpvpyuqd5ncywnggsqeu"
+client_id ="clkgzwcgfe"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="csyvjfyyui"
+
+[[collector.teams]]
+name = "Fetch.AI"
+address = "cosmos16sctx4fhuczxxy6sfj2e5s4v72sqdspx6eectt"
+client_id ="cubcqjoiol"
+
+[[collector.teams]]
+name = "Anonstake"
+address = "cosmos10zehl3artk76qfmn4h09pxfvvq264ew2me8lap"
+client_id ="cvxtrmnxjh"
+
+[[collector.teams]]
+name = "Cypher Core"
+address = "cosmos1ww8zfd4ts6fac55wt8z5lnm5wdfqy67ldanua8"
+client_id ="cxhmqonqjy"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="cyomrtbfoe"
+
+[[collector.teams]]
+name = "Fanprime"
+address = "cosmos1780eywt4gghkhzu62fkr2exqkkya06ydj68ckh"
+client_id ="czgywijrku"
+
+[[collector.teams]]
+name = "Regen"
+address = "cosmos1fnlw6290j037gyff6zdy8rzlv88wr9qn3v4l3h"
+client_id ="daupduzjct"
+
+[[collector.teams]]
+name = "Dawns.World"
+address = "cosmos1v5fhgkkkvcd9sqpd5arzce0h36jqezcwmf2w3z"
+client_id ="dcpapdjflo"
+
+[[collector.teams]]
+name = "staking-defense"
+address = "cosmos1c00l9xvwmh4f77pwnnnh5x0fww0x245sdlzlxg"
+client_id ="defstaking"
+
+[[collector.teams]]
+name = "Team Stoner"
+address = "cosmos15dgc2xv3l28vqy9n6r8q7aya5s37zdu2phjxm8"
+client_id ="dgavyugzwd"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="dhjokpustk"
+
+[[collector.teams]]
+name = "okchain/OKex"
+address = "cosmos1rdrtfn7rgzula94vv9cz4tah75uh2zr930ftes"
+client_id ="dmwiscwtdi"
+
+[[collector.teams]]
+name = "Node123"
+address = "cosmos15h39aypryvsd87p2tsxxv0aedrlqu93neenjys"
+client_id ="dqlpfszlnl"
+
+[[collector.teams]]
+name = "Cypher Core"
+address = "cosmos1ww8zfd4ts6fac55wt8z5lnm5wdfqy67ldanua8"
+client_id ="dqmfyzpgwq"
+
+[[collector.teams]]
+name = "Audit.One"
+address = "cosmos1nknhkw97mj8aelekg7v73am6zlrdc3fd3n2lyc"
+client_id ="drwjawvgeq"
+
+[[collector.teams]]
+name = "Wetez"
+address = "cosmos1gnpwvxwkj6a855z2708hnfy3h30muewcfmckw2"
+client_id ="dsnaxmyhxm"
+
+[[collector.teams]]
+name = "FreeFlix Media"
+address = "cosmos1ljd64u6uf5x23c85e6t0v7rquss3weqff6x3mj"
+client_id ="dsyxbyoukl"
+
+[[collector.teams]]
+name = "Drops Power"
+address = "cosmos1jr2kxdw3je9kr7rhxw8y6t40qrms53z5ksc3w2"
+client_id ="durrrrfywk"
+
+[[collector.teams]]
+name = "Atomic Bombers"
+address = "cosmos1kmrn6a4wf2sqw6fxemhee9tr6qz46wvl0hdzya"
+client_id ="dvgndnpsci"
+
+[[collector.teams]]
+name = "Drops Power"
+address = "cosmos1jr2kxdw3je9kr7rhxw8y6t40qrms53z5ksc3w2"
+client_id ="dwddhmmaum"
+
+[[collector.teams]]
+name = "Wetez"
+address = "cosmos1gnpwvxwkj6a855z2708hnfy3h30muewcfmckw2"
+client_id ="dwkfbdgcrk"
+
+[[collector.teams]]
+name = "joonZone"
+address = "cosmos17dp0722pxv3fycv2g3gvr00reug9cgq56mhpmm"
+client_id ="dwyqyxopfa"
+
+[[collector.teams]]
+name = "WeStaking"
+address = "cosmos16qp669v7k2wcsml6zv945nmnsknhckp39w0a0k"
+client_id ="dxedaaqaqh"
+
+[[collector.teams]]
+name = "Defending.Network"
+address = "cosmos1hcapezvn75r8p7c4xglsq82kzrvffudmyp50td"
+client_id ="dxovsmkppk"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="dzgilelxua"
+
+[[collector.teams]]
+name = "Protofire"
+address = "cosmos14el02ask2rr9uez9gc5uqr98cskdt4ydz9nw2x"
+client_id ="ecamcpeiok"
+
+[[collector.teams]]
+name = "Stratus"
+address = "cosmos1gx77frp5shnhnf2ffupt6mp97nalxsyav7mphq"
+client_id ="eeeevalidators"
+
+[[collector.teams]]
+name = "TheTechTrap"
+address = "cosmos12c3wmcqqhy3xvkac5zc5rvgxf2hunm6qydm7az"
+client_id ="eikcwteyvj"
+
+[[collector.teams]]
+name = "Persistence"
+address = "cosmos1tznxzdk4t9vr9nstrvjwmnztq4k6wjj55cgeqq"
+client_id ="eiqjthghtc"
+
+[[collector.teams]]
+name = "Drops Power"
+address = "cosmos1jr2kxdw3je9kr7rhxw8y6t40qrms53z5ksc3w2"
+client_id ="ejdsybzasg"
+
+[[collector.teams]]
+name = "astronomia"
+address = "cosmos1hwux8hlz2xrwggdcltg7net4v7sfjnn76w5ec3"
+client_id ="ejeqledjes"
+
+[[collector.teams]]
+name = "Source"
+address = "cosmos1qz2s5unwu3l4hn2jw09cnsd3muvrcerezm9c52"
+client_id ="ejgumjutwr"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="eklpgyffsi"
+
+[[collector.teams]]
+name = "Capybara"
+address = "cosmos1y4gs9xtwk0335zf3kej8el5kzkpalq3dtmxljr"
+client_id ="ekrxjkbudm"
+
+[[collector.teams]]
+name = "Desmos"
+address = "cosmos1engcn8p4vj8fsta62l3n3c5menm6sc9djvrzee"
+client_id ="etczrngbjr"
+
+[[collector.teams]]
+name = "Staking Fund"
+address = "cosmos1a533d3t2k5pynxh3hn3mzjhwe9jmeskqxh3cz9"
+client_id ="evmlrcsttq"
+
+[[collector.teams]]
+name = "joonZone"
+address = "cosmos17dp0722pxv3fycv2g3gvr00reug9cgq56mhpmm"
+client_id ="exwwquiszy"
+
+[[collector.teams]]
+name = "huglester"
+address = "cosmos14r2l50t22kk63st9e0zeg3m6hjel6gnzpnmr2j"
+client_id ="eyukwaxxjk"
+
+[[collector.teams]]
+name = "Bitple"
+address = "cosmos1vndhkx9sdheewhdg58ug7fy388l8wm689gn7jg"
+client_id ="fajrcymgcz"
+
+[[collector.teams]]
+name = "Fanprime"
+address = "cosmos1780eywt4gghkhzu62fkr2exqkkya06ydj68ckh"
+client_id ="fakqfdhnja"
+
+[[collector.teams]]
+name = "Atomic Bombers"
+address = "cosmos1kmrn6a4wf2sqw6fxemhee9tr6qz46wvl0hdzya"
+client_id ="febggrjcdh"
+
+[[collector.teams]]
+name = "Chorus One"
+address = "cosmos1a66jar5lh0mgzexgqfl7rkcuy6gt5rj06l9v2e"
+client_id ="fedzonegoz"
+
+[[collector.teams]]
+name = "Chorus One"
+address = "cosmos1a66jar5lh0mgzexgqfl7rkcuy6gt5rj06l9v2e"
+client_id ="fedzonegoza"
+
+[[collector.teams]]
+name = "Chorus One"
+address = "cosmos1a66jar5lh0mgzexgqfl7rkcuy6gt5rj06l9v2e"
+client_id ="fedzonegozb"
+
+[[collector.teams]]
+name = "Chorus One"
+address = "cosmos1a66jar5lh0mgzexgqfl7rkcuy6gt5rj06l9v2e"
+client_id ="fedzonegozc"
+
+[[collector.teams]]
+name = "Chorus One"
+address = "cosmos1a66jar5lh0mgzexgqfl7rkcuy6gt5rj06l9v2e"
+client_id ="fedzonegozd"
+
+[[collector.teams]]
+name = "Chorus One"
+address = "cosmos1a66jar5lh0mgzexgqfl7rkcuy6gt5rj06l9v2e"
+client_id ="fedzonegoze"
+
+[[collector.teams]]
+name = "Chorus One"
+address = "cosmos1a66jar5lh0mgzexgqfl7rkcuy6gt5rj06l9v2e"
+client_id ="fedzonegozf"
+
+[[collector.teams]]
+name = "DUNHILL"
+address = "cosmos154gkwufztxevns3adkmk3q8uhp8mlqwd03r2zy"
+client_id ="fgcjabklwb"
+
+[[collector.teams]]
+name = "Aynelis"
+address = "cosmos1afed0xhvc2hzkn38fpqcfl9m9wjycqw7mtvkag"
+client_id ="fkaynnkdin"
+
+[[collector.teams]]
+name = "Protofire"
+address = "cosmos1y8ejrm82rzaqf5n4n5nx338m6x3u9x082qfqe8"
+client_id ="fkfjutwpiz"
+
+[[collector.teams]]
+name = "Fetch.AI"
+address = "cosmos16sctx4fhuczxxy6sfj2e5s4v72sqdspx6eectt"
+client_id ="fkumqwfbcv"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="flcvywfaae"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="flpzwsynpa"
+
+[[collector.teams]]
+name = "StakesStone"
+address = "cosmos1dx2jqcrjfd3y9mvdd56t54j7pa2wgx2qqk0tx2"
+client_id ="flrewsctisssaa"
+
+[[collector.teams]]
+name = "TheTechTrap"
+address = "cosmos12c3wmcqqhy3xvkac5zc5rvgxf2hunm6qydm7az"
+client_id ="fmmjuusegd"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="fpxpystnym"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="ftcrsjnjwa"
+
+[[collector.teams]]
+name = "huglester"
+address = "cosmos14r2l50t22kk63st9e0zeg3m6hjel6gnzpnmr2j"
+client_id ="ftwvfsehot"
+
+[[collector.teams]]
+name = "astronomia"
+address = "cosmos1hwux8hlz2xrwggdcltg7net4v7sfjnn76w5ec3"
+client_id ="fwjlixrlfs"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="fxfvczpiaw"
+
+[[collector.teams]]
+name = "Source"
+address = "cosmos1qz2s5unwu3l4hn2jw09cnsd3muvrcerezm9c52"
+client_id ="fyfbmlvtbe"
+
+[[collector.teams]]
+name = "Ape Smash"
+address = "cosmos1jljl9ks0093mewjjmdkdujp6cs3du8pzgh99e4"
+client_id ="gameofzonesclient"
+
+[[collector.teams]]
+name = "Umbrella"
+address = "cosmos10ekrjlmat8sgr6c40fg8j348gv9tearfkmx883"
+client_id ="gameofzoneshub"
+
+[[collector.teams]]
+name = "joonZone"
+address = "cosmos17dp0722pxv3fycv2g3gvr00reug9cgq56mhpmm"
+client_id ="gasqndeaws"
+
+[[collector.teams]]
+name = "FreeFlix Media"
+address = "cosmos1ljd64u6uf5x23c85e6t0v7rquss3weqff6x3mj"
+client_id ="gbkppghlnw"
+
+[[collector.teams]]
+name = "JokerTheBond"
+address = "cosmos1v6p6p0dr4ll0p53q8zn78fdf5dd5ldmnecp0wl"
+client_id ="ggitjxzxgi"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="ggniabobdw"
+
+[[collector.teams]]
+name = "Genesis Lab"
+address = "cosmos1pah42z0avajjcpdf5u83p9vjp9vpkkc4p82sx3"
+client_id ="ghglmrxiey"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="ghoaiebdyp"
+
+[[collector.teams]]
+name = "Mia // Lableet"
+address = "cosmos1g0n9dhy4d3vyvaesgtw0sdruehugyyk3mv3hge"
+client_id ="giiaxtzjanc"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="gjfdiqyxef"
+
+[[collector.teams]]
+name = "stakezone"
+address = "cosmos1ufa0sa4hjwj389t2f0r028mspr4nr5eu0vg4d6"
+client_id ="gjgbhiitou"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="gkafoftizv"
+
+[[collector.teams]]
+name = "Nodeasy.com"
+address = "cosmos152zx830nl6gy97m6qms7chyktzk729cyveqv9n"
+client_id ="gklsiecdddfg"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="glqlmzljdn"
+
+[[collector.teams]]
+name = "Gruberx_crew"
+address = "cosmos1ygz4u35t0yyt7vm6fxtl0x6t8nyuw0dly05asn"
+client_id ="gnquahcexx"
+
+[[collector.teams]]
+name = "Muzamint"
+address = "cosmos1runeqr6aagcgv9ysw420mvw0sfymsz58szxew9"
+client_id ="gozclient"
+
+[[collector.teams]]
+name = "Nodeasy.com"
+address = "cosmos152zx830nl6gy97m6qms7chyktzk729cyveqv9n"
+client_id ="goznodeasyclia"
+
+[[collector.teams]]
+name = "Nodeasy.com"
+address = "cosmos152zx830nl6gy97m6qms7chyktzk729cyveqv9n"
+client_id ="goznodeasyclib"
+
+[[collector.teams]]
+name = "Nodeasy.com"
+address = "cosmos152zx830nl6gy97m6qms7chyktzk729cyveqv9n"
+client_id ="goznodeasyclic"
+
+[[collector.teams]]
+name = "Nodeasy.com"
+address = "cosmos152zx830nl6gy97m6qms7chyktzk729cyveqv9n"
+client_id ="goznodeasyclid"
+
+[[collector.teams]]
+name = "ozone"
+address = "cosmos19ytadpwm7687ywft6sdksz2j5sgxh4ywl5ev44"
+client_id ="grgimatprw"
+
+[[collector.teams]]
+name = "FreeFlix Media"
+address = "cosmos1ljd64u6uf5x23c85e6t0v7rquss3weqff6x3mj"
+client_id ="grvzpoitlb"
+
+[[collector.teams]]
+name = "BlockNgine"
+address = "cosmos1qmd7y0mw63qcuts0z53sptne6vypen5q00xmww"
+client_id ="gukppczrup"
+
+[[collector.teams]]
+name = "TheTechTrap"
+address = "cosmos12c3wmcqqhy3xvkac5zc5rvgxf2hunm6qydm7az"
+client_id ="gwvcentkzl"
+
+[[collector.teams]]
+name = "Kysen Outpost"
+address = "cosmos1mpqvdhh7cq47j6qjxgtwarsxsgxdzjw9cd66ul"
+client_id ="gycfvyvopw"
+
+[[collector.teams]]
+name = "BitSong"
+address = "cosmos12m0en3wm0f50w25nzqfxvxu3je0vk3qvwqqxxt"
+client_id ="gzlcctlmpb"
+
+[[collector.teams]]
+name = "isillien"
+address = "cosmos1c4e4pd8p39tr4tvtgdt8zapu4pmmxg7693235m"
+client_id ="haxntbkyde"
+
+[[collector.teams]]
+name = "Staking Fund"
+address = "cosmos1a533d3t2k5pynxh3hn3mzjhwe9jmeskqxh3cz9"
+client_id ="hbnyxccspi"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="hcxlnuxhto"
+
+[[collector.teams]]
+name = "ResponsibleChain"
+address = "cosmos1dtx6e6we59j03grm55zpc3pymz52msx0hsq8ce"
+client_id ="helicalsuggestbucko"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="hfouhjlgzp"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="hfwcmmkrse"
+
+[[collector.teams]]
+name = "Protofire"
+address = "cosmos1y8ejrm82rzaqf5n4n5nx338m6x3u9x082qfqe8"
+client_id ="hgcjtqqjhi"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="hgpqqcvsdf"
+
+[[collector.teams]]
+name = "Cypher Core"
+address = "cosmos1ww8zfd4ts6fac55wt8z5lnm5wdfqy67ldanua8"
+client_id ="hhiiuqyaue"
+
+[[collector.teams]]
+name = "Fanprime"
+address = "cosmos1780eywt4gghkhzu62fkr2exqkkya06ydj68ckh"
+client_id ="hlrkaswoqo"
+
+[[collector.teams]]
+name = "Atomic Bombers"
+address = "cosmos1kmrn6a4wf2sqw6fxemhee9tr6qz46wvl0hdzya"
+client_id ="hlsdujovbk"
+
+[[collector.teams]]
+name = "Taidi"
+address = "cosmos1xgcjknmn6y2cjapje5aw6fq93a5r7hejcu6y6j"
+client_id ="hmvrkclvky"
+
+[[collector.teams]]
+name = "Atomic Bombers"
+address = "cosmos1kmrn6a4wf2sqw6fxemhee9tr6qz46wvl0hdzya"
+client_id ="hslsdujovbk"
+
+[[collector.teams]]
+name = "Stakin"
+address = "cosmos1atkhc2che0en0yzy5prh00wqwn5nhclvlgymrm"
+client_id ="htnpaagnqa"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="hvbmcmdlfe"
+
+[[collector.teams]]
+name = "mintonium"
+address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
+client_id ="hwmpghbfwm"
+
+[[collector.teams]]
+name = "Yura Forgive Us"
+address = "cosmos18g6s0cdlm593ej66rr6hrxc55362dkjattvc7h"
+client_id ="hywyrhhvcr"
+
+[[collector.teams]]
+name = "Muzamint"
+address = "cosmos1runeqr6aagcgv9ysw420mvw0sfymsz58szxew9"
+client_id ="idkyebklau"
+
+[[collector.teams]]
+name = "Everstake"
+address = "cosmos1zt902wvvf2340qpq3uxtmst8a5cpgww95s6rv9"
+client_id ="idvosjgplj"
+
+[[collector.teams]]
+name = "BitSong"
+address = "cosmos12m0en3wm0f50w25nzqfxvxu3je0vk3qvwqqxxt"
+client_id ="iftqnoywlb"
+
+[[collector.teams]]
+name = "Capybara"
+address = "cosmos1y4gs9xtwk0335zf3kej8el5kzkpalq3dtmxljr"
+client_id ="igpjteurap"
+
+[[collector.teams]]
+name = "ozone"
+address = "cosmos19ytadpwm7687ywft6sdksz2j5sgxh4ywl5ev44"
+client_id ="ihnlphzrbj"
+
+[[collector.teams]]
+name = "Fanprime"
+address = "cosmos1780eywt4gghkhzu62fkr2exqkkya06ydj68ckh"
+client_id ="iilsnfhsxb"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="ilisnstvhk"
+
+[[collector.teams]]
+name = "Audit.One"
+address = "cosmos1nknhkw97mj8aelekg7v73am6zlrdc3fd3n2lyc"
+client_id ="ilxdqxcyiv"
+
+[[collector.teams]]
+name = "Cosmic Compass (CoCo)"
+address = "cosmos17hm0z0gme9nd8th32yz4lde5k48t3nykuu90yq"
+client_id ="imwdxonhnd"
+
+[[collector.teams]]
+name = "Fanprime"
+address = "cosmos1780eywt4gghkhzu62fkr2exqkkya06ydj68ckh"
+client_id ="imxabupnls"
+
+[[collector.teams]]
+name = "Atomic Bombers"
+address = "cosmos1kmrn6a4wf2sqw6fxemhee9tr6qz46wvl0hdzya"
+client_id ="ipjqsqaipc"
+
+[[collector.teams]]
+name = "Desmos"
+address = "cosmos1engcn8p4vj8fsta62l3n3c5menm6sc9djvrzee"
+client_id ="iqvyyxguju"
+
+[[collector.teams]]
+name = "Datachain"
+address = "cosmos1hezg9c7etk6qvs5p6j22jgxuqdc82fy9tnynmr"
+client_id ="irkuskrnfu"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="iscgtgrjzc"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="isetfdbxyw"
+
+[[collector.teams]]
+name = "nibiru"
+address = "cosmos15fz7asxctg528lwgde3x633vru9rgz64qkvrq7"
+client_id ="isqgxpuyuc"
+
+[[collector.teams]]
+name = "nibiru"
+address = "cosmos15fz7asxctg528lwgde3x633vru9rgz64qkvrq7"
+client_id ="isqgxpuyux"
+
+[[collector.teams]]
+name = "Aynelis"
+address = "cosmos1afed0xhvc2hzkn38fpqcfl9m9wjycqw7mtvkag"
+client_id ="isroespfka"
+
+[[collector.teams]]
+name = "Alpha Virtual"
+address = "cosmos1x2f3vpdww36px4r6m40mzjnndn8aghfq8yeda7"
+client_id ="iucrvgzfiv"
+
+[[collector.teams]]
+name = "Kysen Outpost"
+address = "cosmos1mpqvdhh7cq47j6qjxgtwarsxsgxdzjw9cd66ul"
+client_id ="iuctwofasa"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="iwdgsytcit"
+
+[[collector.teams]]
+name = "Defending.Network"
+address = "cosmos1hcapezvn75r8p7c4xglsq82kzrvffudmyp50td"
+client_id ="iwfhsahlav"
+
+[[collector.teams]]
+name = "Supernova"
+address = "cosmos15wa9rkp28zsw8ymuj7dpvpyuqd5ncywnggsqeu"
+client_id ="iwwlqzrfcl"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="ixczdlhhdv"
+
+[[collector.teams]]
+name = "Interstation"
+address = "cosmos108rpmv2kr798p7nalkdgdexkmem70shkecqvhh"
+client_id ="jacljmvdoa"
+
+[[collector.teams]]
+name = "stakezone"
+address = "cosmos1ufa0sa4hjwj389t2f0r028mspr4nr5eu0vg4d6"
+client_id ="jasrqevhoy"
+
+[[collector.teams]]
+name = "Stakin"
+address = "cosmos1atkhc2che0en0yzy5prh00wqwn5nhclvlgymrm"
+client_id ="jbzrepzhew"
+
+[[collector.teams]]
+name = "FreeFlix Media"
+address = "cosmos1ljd64u6uf5x23c85e6t0v7rquss3weqff6x3mj"
+client_id ="jedegdegld"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="jjbuccggah"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="jjxdyzfnti"
+
+[[collector.teams]]
+name = "Everstake"
+address = "cosmos1zt902wvvf2340qpq3uxtmst8a5cpgww95s6rv9"
+client_id ="jkhhzmjjlh"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="jmnjudjcsw"
+
+[[collector.teams]]
+name = "huglester"
+address = "cosmos14r2l50t22kk63st9e0zeg3m6hjel6gnzpnmr2j"
+client_id ="jnvqhjdewg"
+
+[[collector.teams]]
+name = "Atomic Bombers"
+address = "cosmos1kmrn6a4wf2sqw6fxemhee9tr6qz46wvl0hdzya"
+client_id ="jscalntulz"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="jtofsdhryn"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="jydeyjnbrp"
+
+[[collector.teams]]
+name = "Atomic Bombers"
+address = "cosmos1kmrn6a4wf2sqw6fxemhee9tr6qz46wvl0hdzya"
+client_id ="jyqayjhfak"
+
+[[collector.teams]]
+name = "Dawns.World"
+address = "cosmos1v5fhgkkkvcd9sqpd5arzce0h36jqezcwmf2w3z"
+client_id ="jzkxbtszht"
+
+[[collector.teams]]
+name = "Source"
+address = "cosmos1qz2s5unwu3l4hn2jw09cnsd3muvrcerezm9c52"
+client_id ="kekersbzri"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="kjczyugbsz"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="kjpbxxkvui"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="kkdfdyvyuo"
+
+[[collector.teams]]
+name = "Node123"
+address = "cosmos15h39aypryvsd87p2tsxxv0aedrlqu93neenjys"
+client_id ="kkdohsorku"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="klcllqguia"
+
+[[collector.teams]]
+name = "Fetch.AI"
+address = "cosmos16sctx4fhuczxxy6sfj2e5s4v72sqdspx6eectt"
+client_id ="kldxoshvht"
+
+[[collector.teams]]
+name = "JokerTheBond"
+address = "cosmos1v6p6p0dr4ll0p53q8zn78fdf5dd5ldmnecp0wl"
+client_id ="kqfryyhqka"
+
+[[collector.teams]]
+name = "Fetch.AI"
+address = "cosmos16sctx4fhuczxxy6sfj2e5s4v72sqdspx6eectt"
+client_id ="krpwfkzajf"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="kuxisarirz"
+
+[[collector.teams]]
+name = "Kysen Outpost"
+address = "cosmos1mpqvdhh7cq47j6qjxgtwarsxsgxdzjw9cd66ul"
+client_id ="kvnbaxpbea"
+
+[[collector.teams]]
+name = "Meeseeks"
+address = "cosmos1mhdnss2nd7mx29qnc9gqp4lpxjqdp3j6drhe0v"
+client_id ="kwjowlxppz"
+
+[[collector.teams]]
+name = "SNZPool"
+address = "cosmos1tstp7pl0fd6zk2v3tzmpq86x8pv29jevyrgswk"
+client_id ="kwqbdqhmcv"
+
+[[collector.teams]]
+name = "Atomic Bombers"
+address = "cosmos1kmrn6a4wf2sqw6fxemhee9tr6qz46wvl0hdzya"
+client_id ="kwtabihxws"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="kxkwqoozmu"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="laoegixlip"
+
+[[collector.teams]]
+name = "Stakebird"
+address = "cosmos1ar20w6rf4ulfljld7xaj4qjklyulr5myw0xqt6"
+client_id ="lasmbeybiz"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="legezpbpch"
+
+[[collector.teams]]
+name = "Kysen Outpost"
+address = "cosmos1mpqvdhh7cq47j6qjxgtwarsxsgxdzjw9cd66ul"
+client_id ="lennfxplgq"
+
+[[collector.teams]]
+name = "Cosmic Compass (CoCo)"
+address = "cosmos17hm0z0gme9nd8th32yz4lde5k48t3nykuu90yq"
+client_id ="lerrdipvrh"
+
+[[collector.teams]]
+name = "RVC Group"
+address = "cosmos1qyfu9s408exw2yae0d86m5tupr8q9h8qt4tnge"
+client_id ="lgfxdytsyc"
+
+[[collector.teams]]
+name = "BurekSteak"
+address = "cosmos12gec735tjutvyjwc0lnlqllgdufnctg62uek7r"
+client_id ="liidemevyh"
+
+[[collector.teams]]
+name = "Staked"
+address = "cosmos1w8ueuqk007aqy33tgfx5yveatlfamapwty47p0"
+client_id ="lkwaqykvco"
+
+[[collector.teams]]
+name = "Cosmic Compass (CoCo)"
+address = "cosmos17hm0z0gme9nd8th32yz4lde5k48t3nykuu90yq"
+client_id ="lmqoajmfwr"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="lnizozsfto"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="lohqrpjjdj"
+
+[[collector.teams]]
+name = "StakesStone"
+address = "cosmos1dx2jqcrjfd3y9mvdd56t54j7pa2wgx2qqk0tx2"
+client_id ="lrewsctdasaa"
+
+[[collector.teams]]
+name = "StakesStone"
+address = "cosmos1dx2jqcrjfd3y9mvdd56t54j7pa2wgx2qqk0tx2"
+client_id ="lrewsctisacsaa"
+
+[[collector.teams]]
+name = "StakesStone"
+address = "cosmos1dx2jqcrjfd3y9mvdd56t54j7pa2wgx2qqk0tx2"
+client_id ="lrewsctisq"
+
+[[collector.teams]]
+name = "StakesStone"
+address = "cosmos1dx2jqcrjfd3y9mvdd56t54j7pa2wgx2qqk0tx2"
+client_id ="lrewsctisqds"
+
+[[collector.teams]]
+name = "StakesStone"
+address = "cosmos1dx2jqcrjfd3y9mvdd56t54j7pa2wgx2qqk0tx2"
+client_id ="lrewsctisqdsaa"
+
+[[collector.teams]]
+name = "StakesStone"
+address = "cosmos1dx2jqcrjfd3y9mvdd56t54j7pa2wgx2qqk0tx2"
+client_id ="lrewsctisssaa"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="lrgbfvwghw"
+
+[[collector.teams]]
+name = "Bitple"
+address = "cosmos1vndhkx9sdheewhdg58ug7fy388l8wm689gn7jg"
+client_id ="ltvmcoyyhd"
+
+[[collector.teams]]
+name = "Fanprime"
+address = "cosmos1780eywt4gghkhzu62fkr2exqkkya06ydj68ckh"
+client_id ="ltwpyokmnh"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="ludqihmbow"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="luvfuowscw"
+
+[[collector.teams]]
+name = "Cypher Core"
+address = "cosmos1ww8zfd4ts6fac55wt8z5lnm5wdfqy67ldanua8"
+client_id ="lweyhqodvz"
+
+[[collector.teams]]
+name = "Stakin"
+address = "cosmos1atkhc2che0en0yzy5prh00wqwn5nhclvlgymrm"
+client_id ="lxufczatvv"
+
+[[collector.teams]]
+name = "BitSong"
+address = "cosmos12m0en3wm0f50w25nzqfxvxu3je0vk3qvwqqxxt"
+client_id ="maewcdcnya"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="mbbpvrebac"
+
+[[collector.teams]]
+name = "Capybara"
+address = "cosmos1y4gs9xtwk0335zf3kej8el5kzkpalq3dtmxljr"
+client_id ="mbweylmizu"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="mbyoozajum"
+
+[[collector.teams]]
+name = "Fanprime"
+address = "cosmos1780eywt4gghkhzu62fkr2exqkkya06ydj68ckh"
+client_id ="mdebvbxohl"
+
+[[collector.teams]]
+name = "Stakin"
+address = "cosmos1atkhc2che0en0yzy5prh00wqwn5nhclvlgymrm"
+client_id ="medmtqymip"
+
+[[collector.teams]]
+name = "melea"
+address = "cosmos1exwcn4rmcyuf4xfjs722amqrfheng7z8cjfzgn"
+client_id ="melealacream"
+
+[[collector.teams]]
+name = "melea"
+address = "cosmos1exwcn4rmcyuf4xfjs722amqrfheng7z8cjfzgn"
+client_id ="meleaonetwo"
+
+[[collector.teams]]
+name = "melea"
+address = "cosmos1exwcn4rmcyuf4xfjs722amqrfheng7z8cjfzgn"
+client_id ="meleasmelea"
+
+[[collector.teams]]
+name = "mintonium"
+address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
+client_id ="mintoniumb"
+
+[[collector.teams]]
+name = "mintonium"
+address = "cosmos1sjj6v2v2hzl9mrup5gnnta66pd76krz3qw3hhw"
+client_id ="mintoniumbx"
+
+[[collector.teams]]
+name = "vipnamai"
+address = "cosmos1trq740zypnm64g9deufsdkx0qcw8xd09vfxx06"
+client_id ="mitqovtyip"
+
+[[collector.teams]]
+name = "joonZone"
+address = "cosmos17dp0722pxv3fycv2g3gvr00reug9cgq56mhpmm"
+client_id ="mknlurqltw"
+
+[[collector.teams]]
+name = "Fanprime"
+address = "cosmos1780eywt4gghkhzu62fkr2exqkkya06ydj68ckh"
+client_id ="mkyjatunpt"
+
+[[collector.teams]]
+name = "Aneka"
+address = "cosmos14ahfuwynumydy2kz2gq6qe2l4w4n7pr8ycka55"
+client_id ="mmagozcli"
+
+[[collector.teams]]
+name = "Aneka"
+address = "cosmos14ahfuwynumydy2kz2gq6qe2l4w4n7pr8ycka55"
+client_id ="mmangozcli"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="mnisqpqsmp"
+
+[[collector.teams]]
+name = "Aneka"
+address = "cosmos14ahfuwynumydy2kz2gq6qe2l4w4n7pr8ycka55"
+client_id ="mongozcli"
+
+[[collector.teams]]
+name = "P2P.ORG - P2P Validator"
+address = "cosmos1vf93vh2rsn4yf3rgu5sy8n39q52cna0rewmrn4"
+client_id ="morceauyentared"
+
+[[collector.teams]]
+name = "P2P.ORG - P2P Validator"
+address = "cosmos1vf93vh2rsn4yf3rgu5sy8n39q52cna0rewmrn4"
+client_id ="morceauyentareda"
+
+[[collector.teams]]
+name = "P2P.ORG - P2P Validator"
+address = "cosmos1vf93vh2rsn4yf3rgu5sy8n39q52cna0rewmrn4"
+client_id ="morceauyentaredas"
+
+[[collector.teams]]
+name = "P2P.ORG - P2P Validator"
+address = "cosmos1vf93vh2rsn4yf3rgu5sy8n39q52cna0rewmrn4"
+client_id ="morceauyentaredo"
+
+[[collector.teams]]
+name = "TheTechTrap"
+address = "cosmos12c3wmcqqhy3xvkac5zc5rvgxf2hunm6qydm7az"
+client_id ="mqbtplhawg"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="mqvazwtwrq"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="mrgdptnvvm"
+
+[[collector.teams]]
+name = "Desmos"
+address = "cosmos1engcn8p4vj8fsta62l3n3c5menm6sc9djvrzee"
+client_id ="msjmotsfwb"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="msjsawjgmz"
+
+[[collector.teams]]
+name = "Persistence"
+address = "cosmos1tznxzdk4t9vr9nstrvjwmnztq4k6wjj55cgeqq"
+client_id ="mtbktabglx"
+
+[[collector.teams]]
+name = "Everstake"
+address = "cosmos1zt902wvvf2340qpq3uxtmst8a5cpgww95s6rv9"
+client_id ="mtcjyfzfqb"
+
+[[collector.teams]]
+name = "Strong"
+address = "cosmos1wrdpscszcevkeplqykedphclquh3ha6mr0709c"
+client_id ="mtkycatdlf"
+
+[[collector.teams]]
+name = "Node123"
+address = "cosmos15h39aypryvsd87p2tsxxv0aedrlqu93neenjys"
+client_id ="mvteodkswp"
+
+[[collector.teams]]
+name = "Defending.Network"
+address = "cosmos1hcapezvn75r8p7c4xglsq82kzrvffudmyp50td"
+client_id ="mxgvyqivts"
+
+[[collector.teams]]
+name = "Atomic Bombers"
+address = "cosmos1kmrn6a4wf2sqw6fxemhee9tr6qz46wvl0hdzya"
+client_id ="mzgaxrwqzg"
+
+[[collector.teams]]
+name = "WeStaking"
+address = "cosmos16qp669v7k2wcsml6zv945nmnsknhckp39w0a0k"
+client_id ="ndwbkvwqmh"
+
+[[collector.teams]]
+name = "hashquark"
+address = "cosmos1a76ndykhlcgm7u7rexn99vmj2uptm2633ypw6f"
+client_id ="nfhnmjpztw"
+
+[[collector.teams]]
+name = "BlockNgine"
+address = "cosmos1qmd7y0mw63qcuts0z53sptne6vypen5q00xmww"
+client_id ="nhdaeaeukk"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="nhtchvxoba"
+
+[[collector.teams]]
+name = "Wetez"
+address = "cosmos1gnpwvxwkj6a855z2708hnfy3h30muewcfmckw2"
+client_id ="nigdksqhmz"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="njsacojfdm"
+
+[[collector.teams]]
+name = "Genesis Lab"
+address = "cosmos1pah42z0avajjcpdf5u83p9vjp9vpkkc4p82sx3"
+client_id ="nkozwbzlxm"
+
+[[collector.teams]]
+name = "staking-defense"
+address = "cosmos1c00l9xvwmh4f77pwnnnh5x0fww0x245sdlzlxg"
+client_id ="nkzpedhywi"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="nlqditbkii"
+
+[[collector.teams]]
+name = "chainflow"
+address = "cosmos1c5udlt5f3m3fj3p2eufw3k9407df8zkhrjlg33"
+client_id ="nootntpdgs"
+
+[[collector.teams]]
+name = "Source"
+address = "cosmos1qz2s5unwu3l4hn2jw09cnsd3muvrcerezm9c52"
+client_id ="nrfrohutft"
+
+[[collector.teams]]
+name = "BitSong"
+address = "cosmos12m0en3wm0f50w25nzqfxvxu3je0vk3qvwqqxxt"
+client_id ="nrueetvpuj"
+
+[[collector.teams]]
+name = "RVC Group"
+address = "cosmos1qyfu9s408exw2yae0d86m5tupr8q9h8qt4tnge"
+client_id ="nrvshaadjx"
+
+[[collector.teams]]
+name = "Umbrella"
+address = "cosmos10ekrjlmat8sgr6c40fg8j348gv9tearfkmx883"
+client_id ="nuecukmylf"
+
+[[collector.teams]]
+name = "staked.sh"
+address = "cosmos1z0gsnxexgc5jxgcl3uz55kqy29y8ck7ayk5ejz"
+client_id ="nuueseodvc"
+
+[[collector.teams]]
+name = "ozone"
+address = "cosmos19ytadpwm7687ywft6sdksz2j5sgxh4ywl5ev44"
+client_id ="nvepnzckoy"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="nvzlghpgdp"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="nwacxupecf"
+
+[[collector.teams]]
+name = "Taidi"
+address = "cosmos1xgcjknmn6y2cjapje5aw6fq93a5r7hejcu6y6j"
+client_id ="nwaxjmsvaa"
+
+[[collector.teams]]
+name = "Stake Capital"
+address = "cosmos1c6vyd9sqmxslqkrqtn84det6ukefrxrnwru66p"
+client_id ="nyyefsxsbe"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="nzabmzncrf"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="nzlgqxegmb"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="nzorlqmkaf"
+
+[[collector.teams]]
+name = "Capybara"
+address = "cosmos1y4gs9xtwk0335zf3kej8el5kzkpalq3dtmxljr"
+client_id ="odmnhvkgnd"
+
+[[collector.teams]]
+name = "Wetez"
+address = "cosmos1gnpwvxwkj6a855z2708hnfy3h30muewcfmckw2"
+client_id ="oekmpgfzjp"
+
+[[collector.teams]]
+name = "Fanprime"
+address = "cosmos1780eywt4gghkhzu62fkr2exqkkya06ydj68ckh"
+client_id ="oeqyawvphl"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="ogaxdjhtet"
+
+[[collector.teams]]
+name = "melea"
+address = "cosmos1exwcn4rmcyuf4xfjs722amqrfheng7z8cjfzgn"
+client_id ="ogmeleagoz"
+
+[[collector.teams]]
+name = "melea"
+address = "cosmos1exwcn4rmcyuf4xfjs722amqrfheng7z8cjfzgn"
+client_id ="ogmeletrust"
+
+[[collector.teams]]
+name = "Source"
+address = "cosmos1qz2s5unwu3l4hn2jw09cnsd3muvrcerezm9c52"
+client_id ="ogogpalwak"
+
+[[collector.teams]]
+name = "melea"
+address = "cosmos1exwcn4rmcyuf4xfjs722amqrfheng7z8cjfzgn"
+client_id ="ogtrustmele"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="ojdkrqllep"
+
+[[collector.teams]]
+name = "astronomia"
+address = "cosmos1hwux8hlz2xrwggdcltg7net4v7sfjnn76w5ec3"
+client_id ="okmvtkdqfnpt"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="omxwbekqbz"
+
+[[collector.teams]]
+name = "Stratus"
+address = "cosmos1gx77frp5shnhnf2ffupt6mp97nalxsyav7mphq"
+client_id ="onestardust"
+
+[[collector.teams]]
+name = "Atomic Bombers"
+address = "cosmos1kmrn6a4wf2sqw6fxemhee9tr6qz46wvl0hdzya"
+client_id ="oqcwnjhtlp"
+
+[[collector.teams]]
+name = "Atomic Bombers"
+address = "cosmos1kmrn6a4wf2sqw6fxemhee9tr6qz46wvl0hdzya"
+client_id ="osxqpuoosc"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="ownwrawfnq"
+
+[[collector.teams]]
+name = "Sentinel"
+address = "cosmos1mcm426eejm5y7dsjvppxfg2dd2uel0gyt8cxxj"
+client_id ="oxemgztoiw"
+
+[[collector.teams]]
+name = "Sentinel"
+address = "cosmos1mcm426eejm5y7dsjvppxfg2dd2uel0gyt8cxxj"
+client_id ="oxemgztoiwa"
+
+[[collector.teams]]
+name = "Sentinel"
+address = "cosmos1mcm426eejm5y7dsjvppxfg2dd2uel0gyt8cxxj"
+client_id ="oxemgztoiwb"
+
+[[collector.teams]]
+name = "Sentinel"
+address = "cosmos1mcm426eejm5y7dsjvppxfg2dd2uel0gyt8cxxj"
+client_id ="oxemgztoiwc"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="oxovudbzrp"
+
+[[collector.teams]]
+name = "Dawns.World"
+address = "cosmos1v5fhgkkkvcd9sqpd5arzce0h36jqezcwmf2w3z"
+client_id ="oziibvphlw"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="pddzfhanmx"
+
+[[collector.teams]]
+name = "Cosmic Compass (CoCo)"
+address = "cosmos17hm0z0gme9nd8th32yz4lde5k48t3nykuu90yq"
+client_id ="pglwaizdhr"
+
+[[collector.teams]]
+name = "stakezone"
+address = "cosmos1ufa0sa4hjwj389t2f0r028mspr4nr5eu0vg4d6"
+client_id ="pinrvhehfh"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="plarwicvbf"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="pljymmsmtk"
+
+[[collector.teams]]
+name = "stakematic"
+address = "cosmos1pzgw03td8l5hsa3e6jert6gpjfratxxsm32adg"
+client_id ="pnqelqsepn"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="poeczziipy"
+
+[[collector.teams]]
+name = "Fetch.AI"
+address = "cosmos16sctx4fhuczxxy6sfj2e5s4v72sqdspx6eectt"
+client_id ="ppawxukrpk"
+
+[[collector.teams]]
+name = "Muzamint"
+address = "cosmos1runeqr6aagcgv9ysw420mvw0sfymsz58szxew9"
+client_id ="pqqhgzvdrw"
+
+[[collector.teams]]
+name = "Muzamint"
+address = "cosmos1runeqr6aagcgv9ysw420mvw0sfymsz58szxew9"
+client_id ="prayhyybtb"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="putxqfjosh"
+
+[[collector.teams]]
+name = "Defending.Network"
+address = "cosmos1hcapezvn75r8p7c4xglsq82kzrvffudmyp50td"
+client_id ="pwwezbqavv"
+
+[[collector.teams]]
+name = "stakezone"
+address = "cosmos1ufa0sa4hjwj389t2f0r028mspr4nr5eu0vg4d6"
+client_id ="pylgehvfnr"
+
+[[collector.teams]]
+name = "Drops Power"
+address = "cosmos1jr2kxdw3je9kr7rhxw8y6t40qrms53z5ksc3w2"
+client_id ="qdozoxcvfg"
+
+[[collector.teams]]
+name = "Bitple"
+address = "cosmos1vndhkx9sdheewhdg58ug7fy388l8wm689gn7jg"
+client_id ="qfsslwtvcb"
+
+[[collector.teams]]
+name = "huglester"
+address = "cosmos14r2l50t22kk63st9e0zeg3m6hjel6gnzpnmr2j"
+client_id ="qhtrtpwilm"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="qibkpkbxbn"
+
+[[collector.teams]]
+name = "Muzamint"
+address = "cosmos1runeqr6aagcgv9ysw420mvw0sfymsz58szxew9"
+client_id ="qnjnktdoyd"
+
+[[collector.teams]]
+name = "Validatorich"
+address = "cosmos1mvu547ythhm8c7ew2xnh6d8njhvdljgen3dr65"
+client_id ="qpndeinahkbb"
+
+[[collector.teams]]
+name = "Validatorich"
+address = "cosmos1mvu547ythhm8c7ew2xnh6d8njhvdljgen3dr65"
+client_id ="qpndeinahkcc"
+
+[[collector.teams]]
+name = "Validatorich"
+address = "cosmos1mvu547ythhm8c7ew2xnh6d8njhvdljgen3dr65"
+client_id ="qpndeinahkyh"
+
+[[collector.teams]]
+name = "Validatorich"
+address = "cosmos1mvu547ythhm8c7ew2xnh6d8njhvdljgen3dr65"
+client_id ="qpndeinahkyy"
+
+[[collector.teams]]
+name = "Validatorich"
+address = "cosmos1mvu547ythhm8c7ew2xnh6d8njhvdljgen3dr65"
+client_id ="qpndeinahkzz"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="qqrksaergx"
+
+[[collector.teams]]
+name = "Cosmic Compass (CoCo)"
+address = "cosmos17hm0z0gme9nd8th32yz4lde5k48t3nykuu90yq"
+client_id ="qryotbhnip"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="quzsyayccs"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="qwrbpqivpi"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="qwsgmjbocn"
+
+[[collector.teams]]
+name = "Muzamint"
+address = "cosmos1runeqr6aagcgv9ysw420mvw0sfymsz58szxew9"
+client_id ="ravvyuffjp"
+
+[[collector.teams]]
+name = "joonZone"
+address = "cosmos17dp0722pxv3fycv2g3gvr00reug9cgq56mhpmm"
+client_id ="rbzvgmvvmg"
+
+[[collector.teams]]
+name = "Muzamint"
+address = "cosmos1runeqr6aagcgv9ysw420mvw0sfymsz58szxew9"
+client_id ="rcxetdvmxk"
+
+[[collector.teams]]
+name = "TheTechTrap"
+address = "cosmos12c3wmcqqhy3xvkac5zc5rvgxf2hunm6qydm7az"
+client_id ="reecbnhgdc"
+
+[[collector.teams]]
+name = "Source"
+address = "cosmos1qz2s5unwu3l4hn2jw09cnsd3muvrcerezm9c52"
+client_id ="reymfkletr"
+
+[[collector.teams]]
+name = "Everstake"
+address = "cosmos1zt902wvvf2340qpq3uxtmst8a5cpgww95s6rv9"
+client_id ="rikngdtini"
+
+[[collector.teams]]
+name = "Protofire"
+address = "cosmos1y8ejrm82rzaqf5n4n5nx338m6x3u9x082qfqe8"
+client_id ="rioljoecfn"
+
+[[collector.teams]]
+name = "Team Stoner"
+address = "cosmos15dgc2xv3l28vqy9n6r8q7aya5s37zdu2phjxm8"
+client_id ="rnidbfsxwk"
+
+[[collector.teams]]
+name = "Desmos"
+address = "cosmos1engcn8p4vj8fsta62l3n3c5menm6sc9djvrzee"
+client_id ="rnpsfvsjis"
+
+[[collector.teams]]
+name = "Wetez"
+address = "cosmos1gnpwvxwkj6a855z2708hnfy3h30muewcfmckw2"
+client_id ="roofblzspe"
+
+[[collector.teams]]
+name = "Fetch.AI"
+address = "cosmos16sctx4fhuczxxy6sfj2e5s4v72sqdspx6eectt"
+client_id ="roquvynvjt"
+
+[[collector.teams]]
+name = "Muzamint"
+address = "cosmos1runeqr6aagcgv9ysw420mvw0sfymsz58szxew9"
+client_id ="rpahsipgci"
+
+[[collector.teams]]
+name = "Atomic Bombers"
+address = "cosmos1kmrn6a4wf2sqw6fxemhee9tr6qz46wvl0hdzya"
+client_id ="rpsdqmrbek"
+
+[[collector.teams]]
+name = "Persistence"
+address = "cosmos1tznxzdk4t9vr9nstrvjwmnztq4k6wjj55cgeqq"
+client_id ="rrnpavbwpt"
+
+[[collector.teams]]
+name = "ResponsibleChain"
+address = "cosmos1dtx6e6we59j03grm55zpc3pymz52msx0hsq8ce"
+client_id ="rundleselfhay"
+
+[[collector.teams]]
+name = "ResponsibleChain"
+address = "cosmos1dtx6e6we59j03grm55zpc3pymz52msx0hsq8ce"
+client_id ="rundleselfhays"
+
+[[collector.teams]]
+name = "ResponsibleChain"
+address = "cosmos1dtx6e6we59j03grm55zpc3pymz52msx0hsq8ce"
+client_id ="rundleselfhaysa"
+
+[[collector.teams]]
+name = "huglester"
+address = "cosmos14r2l50t22kk63st9e0zeg3m6hjel6gnzpnmr2j"
+client_id ="ruxydwxqlf"
+
+[[collector.teams]]
+name = "Cypher Core"
+address = "cosmos1ww8zfd4ts6fac55wt8z5lnm5wdfqy67ldanua8"
+client_id ="rvgcwygdbg"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="rwdaonxmpl"
+
+[[collector.teams]]
+name = "BitSong"
+address = "cosmos12m0en3wm0f50w25nzqfxvxu3je0vk3qvwqqxxt"
+client_id ="saescdcnya"
+
+[[collector.teams]]
+name = "Fanprime"
+address = "cosmos1780eywt4gghkhzu62fkr2exqkkya06ydj68ckh"
+client_id ="samoemcvee"
+
+[[collector.teams]]
+name = "Nodeasy.com"
+address = "cosmos152zx830nl6gy97m6qms7chyktzk729cyveqv9n"
+client_id ="sbgozsbgoz"
+
+[[collector.teams]]
+name = "Nodeasy.com"
+address = "cosmos152zx830nl6gy97m6qms7chyktzk729cyveqv9n"
+client_id ="sbgozsbgozsbgoz"
+
+[[collector.teams]]
+name = "Genesis Lab"
+address = "cosmos1pah42z0avajjcpdf5u83p9vjp9vpkkc4p82sx3"
+client_id ="sbvzkpjldw"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="sclegyqqtj"
+
+[[collector.teams]]
+name = "Stakin"
+address = "cosmos1atkhc2che0en0yzy5prh00wqwn5nhclvlgymrm"
+client_id ="scukrcuosc"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="sfafbzftcw"
+
+[[collector.teams]]
+name = "Fetch.AI"
+address = "cosmos16sctx4fhuczxxy6sfj2e5s4v72sqdspx6eectt"
+client_id ="sgzkpinkri"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="shrwkduavm"
+
+[[collector.teams]]
+name = "FreeFlix Media"
+address = "cosmos1ljd64u6uf5x23c85e6t0v7rquss3weqff6x3mj"
+client_id ="siwakeeckp"
+
+[[collector.teams]]
+name = "WeStaking"
+address = "cosmos16qp669v7k2wcsml6zv945nmnsknhckp39w0a0k"
+client_id ="sljokofvyl"
+
+[[collector.teams]]
+name = "Compass"
+address = "cosmos1u0fdsfw0wflm2n9x2ggv09u89ed2nhmfgq88zr"
+client_id ="snkxcvarit"
+
+[[collector.teams]]
+name = "Node A-Team"
+address = "cosmos1s0fymxncdm2tga7swzucywggcunxvq89d3pcyn"
+client_id ="srchclientaa"
+
+[[collector.teams]]
+name = "Node A-Team"
+address = "cosmos1s0fymxncdm2tga7swzucywggcunxvq89d3pcyn"
+client_id ="srchclientab"
+
+[[collector.teams]]
+name = "Node A-Team"
+address = "cosmos1s0fymxncdm2tga7swzucywggcunxvq89d3pcyn"
+client_id ="srchclientad"
+
+[[collector.teams]]
+name = "Node A-Team"
+address = "cosmos1s0fymxncdm2tga7swzucywggcunxvq89d3pcyn"
+client_id ="srchclientae"
+
+[[collector.teams]]
+name = "Node A-Team"
+address = "cosmos1s0fymxncdm2tga7swzucywggcunxvq89d3pcyn"
+client_id ="srchclientaf"
+
+[[collector.teams]]
+name = "Node A-Team"
+address = "cosmos1s0fymxncdm2tga7swzucywggcunxvq89d3pcyn"
+client_id ="srchclientag"
+
+[[collector.teams]]
+name = "Bit Cat"
+address = "cosmos12knqu4ecmg0982plzs9m9f5jareh0cvedv6yz0"
+client_id ="srtkkawifsaf"
+
+[[collector.teams]]
+name = "Bit Cat"
+address = "cosmos12knqu4ecmg0982plzs9m9f5jareh0cvedv6yz0"
+client_id ="srtkkawifsag"
+
+[[collector.teams]]
+name = "Bit Cat"
+address = "cosmos12knqu4ecmg0982plzs9m9f5jareh0cvedv6yz0"
+client_id ="srtkkawifsah"
+
+[[collector.teams]]
+name = "Stakebird"
+address = "cosmos1ar20w6rf4ulfljld7xaj4qjklyulr5myw0xqt6"
+client_id ="stakebirdontdie"
+
+[[collector.teams]]
+name = "Stakebird"
+address = "cosmos1ar20w6rf4ulfljld7xaj4qjklyulr5myw0xqt6"
+client_id ="stakebirdstrikesback"
+
+[[collector.teams]]
+name = "Stakebird"
+address = "cosmos1ar20w6rf4ulfljld7xaj4qjklyulr5myw0xqt6"
+client_id ="stakebirdyolo"
+
+[[collector.teams]]
+name = "Stakebird"
+address = "cosmos1ar20w6rf4ulfljld7xaj4qjklyulr5myw0xqt6"
+client_id ="stakebirdyolotwo"
+
+[[collector.teams]]
+name = "stakewolf"
+address = "cosmos1auhk88eyt7y4paywhtv3ykqfzfkmtjzk57aynt"
+client_id ="stakewolfy"
+
+[[collector.teams]]
+name = "stakewolf"
+address = "cosmos1auhk88eyt7y4paywhtv3ykqfzfkmtjzk57aynt"
+client_id ="stakingwolfy"
+
+[[collector.teams]]
+name = "Cypher Core"
+address = "cosmos1ww8zfd4ts6fac55wt8z5lnm5wdfqy67ldanua8"
+client_id ="stbdypjsaf"
+
+[[collector.teams]]
+name = "Genesis Lab"
+address = "cosmos1pah42z0avajjcpdf5u83p9vjp9vpkkc4p82sx3"
+client_id ="subnnpfqnz"
+
+[[collector.teams]]
+name = "stakematic"
+address = "cosmos1pzgw03td8l5hsa3e6jert6gpjfratxxsm32adg"
+client_id ="suhmpdcgzu"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="svbcmictxd"
+
+[[collector.teams]]
+name = "Kysen Outpost"
+address = "cosmos1mpqvdhh7cq47j6qjxgtwarsxsgxdzjw9cd66ul"
+client_id ="svrewqsqsm"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="swdofsvwhp"
+
+[[collector.teams]]
+name = "blockscape"
+address = "cosmos16tdeldrswlksrejchqtzndrkal9cxawtnh8mvd"
+client_id ="sxknejoxaa"
+
+[[collector.teams]]
+name = "blockscape"
+address = "cosmos16tdeldrswlksrejchqtzndrkal9cxawtnh8mvd"
+client_id ="sxknejoxab"
+
+[[collector.teams]]
+name = "blockscape"
+address = "cosmos16tdeldrswlksrejchqtzndrkal9cxawtnh8mvd"
+client_id ="sxknejoxac"
+
+[[collector.teams]]
+name = "blockscape"
+address = "cosmos16tdeldrswlksrejchqtzndrkal9cxawtnh8mvd"
+client_id ="sxknejoxad"
+
+[[collector.teams]]
+name = "blockscape"
+address = "cosmos16tdeldrswlksrejchqtzndrkal9cxawtnh8mvd"
+client_id ="sxknejoxsa"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="synjtntgdn"
+
+[[collector.teams]]
+name = "Stratus"
+address = "cosmos1gx77frp5shnhnf2ffupt6mp97nalxsyav7mphq"
+client_id ="tardusstratus"
+
+[[collector.teams]]
+name = "TheTechTrap"
+address = "cosmos12c3wmcqqhy3xvkac5zc5rvgxf2hunm6qydm7az"
+client_id ="tarnnavxqg"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="tbpfgenbyp"
+
+[[collector.teams]]
+name = "Stratus"
+address = "cosmos1gx77frp5shnhnf2ffupt6mp97nalxsyav7mphq"
+client_id ="teamstratus"
+
+[[collector.teams]]
+name = "Stratus"
+address = "cosmos1gx77frp5shnhnf2ffupt6mp97nalxsyav7mphq"
+client_id ="teamvalidators"
+
+[[collector.teams]]
+name = "Stratus"
+address = "cosmos1gx77frp5shnhnf2ffupt6mp97nalxsyav7mphq"
+client_id ="teeevalidators"
+
+[[collector.teams]]
+name = "Staking Fund"
+address = "cosmos1a533d3t2k5pynxh3hn3mzjhwe9jmeskqxh3cz9"
+client_id ="teheswlnhl"
+
+[[collector.teams]]
+name = "BitSong"
+address = "cosmos12m0en3wm0f50w25nzqfxvxu3je0vk3qvwqqxxt"
+client_id ="thcpehnect"
+
+[[collector.teams]]
+name = "Fanprime"
+address = "cosmos1780eywt4gghkhzu62fkr2exqkkya06ydj68ckh"
+client_id ="tiejqrjlbj"
+
+[[collector.teams]]
+name = "Defending.Network"
+address = "cosmos1hcapezvn75r8p7c4xglsq82kzrvffudmyp50td"
+client_id ="tighjjuqet"
+
+[[collector.teams]]
+name = "Alpha Virtual"
+address = "cosmos1x2f3vpdww36px4r6m40mzjnndn8aghfq8yeda7"
+client_id ="tljzfyhmmm"
+
+[[collector.teams]]
+name = "StakesStone"
+address = "cosmos1dx2jqcrjfd3y9mvdd56t54j7pa2wgx2qqk0tx2"
+client_id ="tlrewsctisssaa"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="tqdqdhgvkw"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="trtlpilylk"
+
+[[collector.teams]]
+name = "melea"
+address = "cosmos1exwcn4rmcyuf4xfjs722amqrfheng7z8cjfzgn"
+client_id ="trustmelea"
+
+[[collector.teams]]
+name = "Audit.One"
+address = "cosmos1nknhkw97mj8aelekg7v73am6zlrdc3fd3n2lyc"
+client_id ="tvqjwpxycr"
+
+[[collector.teams]]
+name = "Atomic Bombers"
+address = "cosmos1kmrn6a4wf2sqw6fxemhee9tr6qz46wvl0hdzya"
+client_id ="twmhovalza"
+
+[[collector.teams]]
+name = "Bitple"
+address = "cosmos1vndhkx9sdheewhdg58ug7fy388l8wm689gn7jg"
+client_id ="txpzksmerg"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="txrsbkweje"
+
+[[collector.teams]]
+name = "cyber~Congress"
+address = "cosmos13fmcdmkurnaz6sklf0tyynln4k48xjj0dwuvpu"
+client_id ="ubfbiokttk"
+
+[[collector.teams]]
+name = "Defending.Network"
+address = "cosmos1hcapezvn75r8p7c4xglsq82kzrvffudmyp50td"
+client_id ="ubmkqyvjef"
+
+[[collector.teams]]
+name = "Cypher Core"
+address = "cosmos1ww8zfd4ts6fac55wt8z5lnm5wdfqy67ldanua8"
+client_id ="uctnvlngtg"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="uenftdfzdf"
+
+[[collector.teams]]
+name = "Team Stoner"
+address = "cosmos15dgc2xv3l28vqy9n6r8q7aya5s37zdu2phjxm8"
+client_id ="ugxhcygffu"
+
+[[collector.teams]]
+name = "WeStaking"
+address = "cosmos16qp669v7k2wcsml6zv945nmnsknhckp39w0a0k"
+client_id ="uiayhqbgbp"
+
+[[collector.teams]]
+name = "Fanprime"
+address = "cosmos1780eywt4gghkhzu62fkr2exqkkya06ydj68ckh"
+client_id ="uileshxfwu"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="ujuketvyfh"
+
+[[collector.teams]]
+name = "Audit.One"
+address = "cosmos1nknhkw97mj8aelekg7v73am6zlrdc3fd3n2lyc"
+client_id ="uloqhvmhjn"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="unmyvlxvzx"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="unwrwpdojr"
+
+[[collector.teams]]
+name = "Persistence"
+address = "cosmos1tznxzdk4t9vr9nstrvjwmnztq4k6wjj55cgeqq"
+client_id ="uobbdgrwkh"
+
+[[collector.teams]]
+name = "IRISnet"
+address = "cosmos10uvrya46d400ymgp7ygdp6auasfvfx9lxpdtja"
+client_id ="urdfdwumlnaa"
+
+[[collector.teams]]
+name = "IRISnet"
+address = "cosmos10uvrya46d400ymgp7ygdp6auasfvfx9lxpdtja"
+client_id ="urdfdwumlnab"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="usirqzpzlj"
+
+[[collector.teams]]
+name = "joonZone"
+address = "cosmos17dp0722pxv3fycv2g3gvr00reug9cgq56mhpmm"
+client_id ="uufoplgyht"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="uusqjmlkdu"
+
+[[collector.teams]]
+name = "Source"
+address = "cosmos1qz2s5unwu3l4hn2jw09cnsd3muvrcerezm9c52"
+client_id ="uuzhlzohem"
+
+[[collector.teams]]
+name = "Capybara"
+address = "cosmos1y4gs9xtwk0335zf3kej8el5kzkpalq3dtmxljr"
+client_id ="uvniuqqthg"
+
+[[collector.teams]]
+name = "StarCluster"
+address = "cosmos16gp9q9euupf2m96cvv7kta7q09h8ce0cl6wky9"
+client_id ="uvzwirnwgo"
+
+[[collector.teams]]
+name = "Protofire"
+address = "cosmos1y8ejrm82rzaqf5n4n5nx338m6x3u9x082qfqe8"
+client_id ="uwmygmgabl"
+
+[[collector.teams]]
+name = "Stratus"
+address = "cosmos1gx77frp5shnhnf2ffupt6mp97nalxsyav7mphq"
+client_id ="valistratus"
+
+[[collector.teams]]
+name = "hashquark"
+address = "cosmos1a76ndykhlcgm7u7rexn99vmj2uptm2633ypw6f"
+client_id ="vaqmfhndrf"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="vcavpzvpcq"
+
+[[collector.teams]]
+name = "SNZPool"
+address = "cosmos1tstp7pl0fd6zk2v3tzmpq86x8pv29jevyrgswk"
+client_id ="vfjaxkrqzu"
+
+[[collector.teams]]
+name = "BurekSteak"
+address = "cosmos12gec735tjutvyjwc0lnlqllgdufnctg62uek7r"
+client_id ="vixvxuwqfo"
+
+[[collector.teams]]
+name = "Persistence"
+address = "cosmos1tznxzdk4t9vr9nstrvjwmnztq4k6wjj55cgeqq"
+client_id ="vkrizkspxn"
+
+[[collector.teams]]
+name = "Fanprime"
+address = "cosmos1780eywt4gghkhzu62fkr2exqkkya06ydj68ckh"
+client_id ="vkryndfgss"
+
+[[collector.teams]]
+name = "Source"
+address = "cosmos1qz2s5unwu3l4hn2jw09cnsd3muvrcerezm9c52"
+client_id ="vlsukyfziy"
+
+[[collector.teams]]
+name = "Taidi"
+address = "cosmos1xgcjknmn6y2cjapje5aw6fq93a5r7hejcu6y6j"
+client_id ="vncldcklkb"
+
+[[collector.teams]]
+name = "BitSong"
+address = "cosmos12m0en3wm0f50w25nzqfxvxu3je0vk3qvwqqxxt"
+client_id ="vnuskdanck"
+
+[[collector.teams]]
+name = "vipnamai"
+address = "cosmos1trq740zypnm64g9deufsdkx0qcw8xd09vfxx06"
+client_id ="vqmhzhlgpt"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="vwwyfqcxhy"
+
+[[collector.teams]]
+name = "BitSong"
+address = "cosmos12m0en3wm0f50w25nzqfxvxu3je0vk3qvwqqxxt"
+client_id ="vyjugrticz"
+
+[[collector.teams]]
+name = "Source"
+address = "cosmos1qz2s5unwu3l4hn2jw09cnsd3muvrcerezm9c52"
+client_id ="waophertbr"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="waukrisxxh"
+
+[[collector.teams]]
+name = "SNZPool"
+address = "cosmos1tstp7pl0fd6zk2v3tzmpq86x8pv29jevyrgswk"
+client_id ="wavkaiekti"
+
+[[collector.teams]]
+name = "Stratus"
+address = "cosmos1gx77frp5shnhnf2ffupt6mp97nalxsyav7mphq"
+client_id ="wetrustcode"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="wewxqfhhdf"
+
+[[collector.teams]]
+name = "ozone"
+address = "cosmos19ytadpwm7687ywft6sdksz2j5sgxh4ywl5ev44"
+client_id ="whqldcovef"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="whtxanapgz"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="wjgvglynqe"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="wkmwhaizze"
+
+[[collector.teams]]
+name = "Protofire"
+address = "cosmos1y8ejrm82rzaqf5n4n5nx338m6x3u9x082qfqe8"
+client_id ="wnkefzmmrg"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="wofeyrjqxs"
+
+[[collector.teams]]
+name = "stakewolf"
+address = "cosmos1auhk88eyt7y4paywhtv3ykqfzfkmtjzk57aynt"
+client_id ="wolfiwolfo"
+
+[[collector.teams]]
+name = "stakewolf"
+address = "cosmos1auhk88eyt7y4paywhtv3ykqfzfkmtjzk57aynt"
+client_id ="wolfowolfo"
+
+[[collector.teams]]
+name = "stakewolf"
+address = "cosmos1auhk88eyt7y4paywhtv3ykqfzfkmtjzk57aynt"
+client_id ="wolfowolfy"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="wppcqgygpf"
+
+[[collector.teams]]
+name = "Drops Power"
+address = "cosmos1jr2kxdw3je9kr7rhxw8y6t40qrms53z5ksc3w2"
+client_id ="wtjeyhglle"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="wvbxpkqhag"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="wxrttjyfzx"
+
+[[collector.teams]]
+name = "Mia // Lableet"
+address = "cosmos1g0n9dhy4d3vyvaesgtw0sdruehugyyk3mv3hge"
+client_id ="xbqxjatnnbq"
+
+[[collector.teams]]
+name = "Genesis Lab"
+address = "cosmos1pah42z0avajjcpdf5u83p9vjp9vpkkc4p82sx3"
+client_id ="xclvlvlepj"
+
+[[collector.teams]]
+name = "kokuwa"
+address = "cosmos1xl67sr4mdv2ejc4whgpkz66llm2v8g24dmxcn7"
+client_id ="xecqcobkzg"
+
+[[collector.teams]]
+name = "Capybara"
+address = "cosmos1y4gs9xtwk0335zf3kej8el5kzkpalq3dtmxljr"
+client_id ="xgwkwzneuj"
+
+[[collector.teams]]
+name = "Audit.One"
+address = "cosmos1nknhkw97mj8aelekg7v73am6zlrdc3fd3n2lyc"
+client_id ="xigheakowk"
+
+[[collector.teams]]
+name = "Protofire"
+address = "cosmos14el02ask2rr9uez9gc5uqr98cskdt4ydz9nw2x"
+client_id ="xnminxvgwt"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="xoqgjebhss"
+
+[[collector.teams]]
+name = "Atomic Bombers"
+address = "cosmos1kmrn6a4wf2sqw6fxemhee9tr6qz46wvl0hdzya"
+client_id ="xqpoamzvff"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="xshquyfjqd"
+
+[[collector.teams]]
+name = "Desmos"
+address = "cosmos1engcn8p4vj8fsta62l3n3c5menm6sc9djvrzee"
+client_id ="xskguxslix"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="xsokqshsue"
+
+[[collector.teams]]
+name = "Staked"
+address = "cosmos1w8ueuqk007aqy33tgfx5yveatlfamapwty47p0"
+client_id ="xtqwzqefla"
+
+[[collector.teams]]
+name = "Staked"
+address = "cosmos1w8ueuqk007aqy33tgfx5yveatlfamapwty47p0"
+client_id ="xtqwzqeflaaa"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="xwhmyqwrcr"
+
+[[collector.teams]]
+name = "Bitple"
+address = "cosmos1vndhkx9sdheewhdg58ug7fy388l8wm689gn7jg"
+client_id ="xypdggzvlb"
+
+[[collector.teams]]
+name = "Stakin"
+address = "cosmos1atkhc2che0en0yzy5prh00wqwn5nhclvlgymrm"
+client_id ="xyrehpnmay"
+
+[[collector.teams]]
+name = "FreeFlix Media"
+address = "cosmos1ljd64u6uf5x23c85e6t0v7rquss3weqff6x3mj"
+client_id ="xziyeowsff"
+
+[[collector.teams]]
+name = "isillien"
+address = "cosmos1c4e4pd8p39tr4tvtgdt8zapu4pmmxg7693235m"
+client_id ="ycdolnspop"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="ydoduezvhq"
+
+[[collector.teams]]
+name = "Cypher Core"
+address = "cosmos1ww8zfd4ts6fac55wt8z5lnm5wdfqy67ldanua8"
+client_id ="ygmwbscxfh"
+
+[[collector.teams]]
+name = "astronomia"
+address = "cosmos1hwux8hlz2xrwggdcltg7net4v7sfjnn76w5ec3"
+client_id ="yhhjcfrtxn"
+
+[[collector.teams]]
+name = "Source"
+address = "cosmos1qz2s5unwu3l4hn2jw09cnsd3muvrcerezm9c52"
+client_id ="yhztzlgjvq"
+
+[[collector.teams]]
+name = "Defending.Network"
+address = "cosmos1hcapezvn75r8p7c4xglsq82kzrvffudmyp50td"
+client_id ="ylsvbjiyfv"
+
+[[collector.teams]]
+name = "Drops Power"
+address = "cosmos1jr2kxdw3je9kr7rhxw8y6t40qrms53z5ksc3w2"
+client_id ="ymeyhyhcbe"
+
+[[collector.teams]]
+name = "All in Bits Inc"
+address = "cosmos1xnc4hwja48e77nms0a49eqkdw36d7dqzrj006n"
+client_id ="ypmwscduyh"
+
+[[collector.teams]]
+name = "ozone"
+address = "cosmos19ytadpwm7687ywft6sdksz2j5sgxh4ywl5ev44"
+client_id ="ypwgpxktat"
+
+[[collector.teams]]
+name = "Yura Forgive Us"
+address = "cosmos18g6s0cdlm593ej66rr6hrxc55362dkjattvc7h"
+client_id ="yujyeopyum"
+
+[[collector.teams]]
+name = "Protofire"
+address = "cosmos14el02ask2rr9uez9gc5uqr98cskdt4ydz9nw2x"
+client_id ="ywjnvexgmx"
+
+[[collector.teams]]
+name = "ozone"
+address = "cosmos19ytadpwm7687ywft6sdksz2j5sgxh4ywl5ev44"
+client_id ="ywueevbgcd"
+
+[[collector.teams]]
+name = "Muzamint"
+address = "cosmos1runeqr6aagcgv9ysw420mvw0sfymsz58szxew9"
+client_id ="yyraxmniig"
+
+[[collector.teams]]
+name = "Desmos"
+address = "cosmos1engcn8p4vj8fsta62l3n3c5menm6sc9djvrzee"
+client_id ="zdduwudgqd"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="zdebhjcmyg"
+
+[[collector.teams]]
+name = "retz80"
+address = "cosmos1ud9yn60f9eppkgc7hy6tt8ye9kaga8mtd4e6ep"
+client_id ="zecmxpqymk"
+
+[[collector.teams]]
+name = "COSMOON"
+address = "cosmos1402ggxz5u6vm29sqztwqq8vxs3ke6dmw67kpp9"
+client_id ="zescroptli"
+
+[[collector.teams]]
+name = "Datachain"
+address = "cosmos1hezg9c7etk6qvs5p6j22jgxuqdc82fy9tnynmr"
+client_id ="zhdsczvbqv"
+
+[[collector.teams]]
+name = "BlockNgine"
+address = "cosmos1qmd7y0mw63qcuts0z53sptne6vypen5q00xmww"
+client_id ="zjafsprubj"
+
+[[collector.teams]]
+name = "isillien"
+address = "cosmos1c4e4pd8p39tr4tvtgdt8zapu4pmmxg7693235m"
+client_id ="zkypxlxxwe"
+
+[[collector.teams]]
+name = "hashquark"
+address = "cosmos1a76ndykhlcgm7u7rexn99vmj2uptm2633ypw6f"
+client_id ="zmxivaikkh"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="zpxsivkkgp"
+
+[[collector.teams]]
+name = "Desmos"
+address = "cosmos1engcn8p4vj8fsta62l3n3c5menm6sc9djvrzee"
+client_id ="zqzmhczhmu"
+
+[[collector.teams]]
+name = "Drops Power"
+address = "cosmos1jr2kxdw3je9kr7rhxw8y6t40qrms53z5ksc3w2"
+client_id ="zrtzwowbhg"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="zteupxaziv"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="zuokamwmhl"
+
+[[collector.teams]]
+name = "pupu"
+address = "cosmos10xq9nh42m7wd79mel9uhae4xqk7yk7yurs5q2v"
+client_id ="zwxjqgsgqq"
+
+[[collector.teams]]
+name = "cdos"
+address = "cosmos1xl0pc9phu3meevzfy4v8f35c2vy2as3trzwt9w"
+client_id ="zxihpmutac"
+
+[[collector.teams]]
+name = "BlockNgine"
+address = "cosmos1qmd7y0mw63qcuts0z53sptne6vypen5q00xmww"
+client_id ="zytbomohnm"
+
+[[collector.teams]]
+name = "ArmyIDs"
+address = "cosmos13u9vzlmxpk44uzmzvhgctkw0cpht42cgwjw54c"
+client_id ="zyxftshspy"
