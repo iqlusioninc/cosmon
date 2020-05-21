@@ -29,20 +29,20 @@ impl CollectorConfig {
     pub fn build_hashmaps(&self) -> Option<(HashMap<String, String>, HashMap<String, String>)> {
         if let Some(ref teams) = self.teams {
             let mut address_to_team = HashMap::new();
-            let mut channel_id_to_team = HashMap::new();
+            let mut client_id_to_team = HashMap::new();
 
             for team in teams {
                 address_to_team.insert(
                     team.address.to_lowercase().replace(" ", "_").clone(),
                     team.name.clone(),
                 );
-                channel_id_to_team.insert(
-                    team.channel_id.clone().to_lowercase().replace(" ", "_"),
+                client_id_to_team.insert(
+                    team.client_id.to_lowercase().replace(" ", "_").clone().to_lowercase().replace(" ", "_"),
                     team.name.clone(),
                 );
             }
 
-            return Some((address_to_team, channel_id_to_team));
+            return Some((address_to_team, client_id_to_team));
         }
         None
     }
@@ -65,5 +65,5 @@ pub struct Team {
     /// Team Cosmos Address
     pub address: String,
     /// Team Channel Id
-    pub channel_id: String,
+    pub client_id: String,
 }

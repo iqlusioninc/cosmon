@@ -64,6 +64,7 @@ impl Metrics {
             .unwrap();
     }
 
+
     /// Send a metric for each packet send event
     pub fn packet_send_event(
         &mut self,
@@ -117,15 +118,6 @@ impl Metrics {
             })
             .unwrap_or(&missing_sender);
 
-        let src_channel = match self.get_team_by_channel(src_channel) {
-            Some(team) => team,
-            None => src_channel,
-        };
-
-        let dst_channel = match self.get_team_by_channel(dst_channel) {
-            Some(team) => team,
-            None => dst_channel,
-        };
 
         self.client
             .incr_with_tags(format!("{}.packet_send", self.prefix,).as_ref())
@@ -192,16 +184,6 @@ impl Metrics {
             })
             .unwrap_or(&missing_sender);
 
-        let src_channel = match self.get_team_by_channel(src_channel) {
-            Some(team) => team,
-            None => src_channel,
-        };
-
-        let dst_channel = match self.get_team_by_channel(dst_channel) {
-            Some(team) => team,
-            None => dst_channel,
-        };
-
         self.client
             .incr_with_tags(format!("{}.packet_recieve", self.prefix,).as_ref())
             .with_tag("chain", &chain.to_string())
@@ -267,15 +249,6 @@ impl Metrics {
             })
             .unwrap_or(&missing_sender);
 
-        let src_channel = match self.get_team_by_channel(src_channel) {
-            Some(team) => team,
-            None => src_channel,
-        };
-
-        let dst_channel = match self.get_team_by_channel(dst_channel) {
-            Some(team) => team,
-            None => dst_channel,
-        };
 
         self.client
             .incr_with_tags(format!("{}.packet_recv_opaque", self.prefix,).as_ref())
@@ -343,15 +316,6 @@ impl Metrics {
             })
             .unwrap_or(&missing_sender);
 
-        let src_channel = match self.get_team_by_channel(src_channel) {
-            Some(team) => team,
-            None => src_channel,
-        };
-
-        let dst_channel = match self.get_team_by_channel(dst_channel) {
-            Some(team) => team,
-            None => dst_channel,
-        };
 
         self.client
             .incr_with_tags(format!("{}.ics20_transfer", self.prefix,).as_ref())
@@ -389,10 +353,34 @@ impl Metrics {
             })
             .unwrap_or(&missing_sender);
 
+
+    let missing_client_id = "client_id_missing".to_owned();
+    let client_id = event
+        .data
+        .get("create_client.client_id")
+        .map(|data| {
+            for addr in data {
+                if let Some(team_name) = self.get_team_by_client_id(addr) {
+                    return team_name;
+                }
+            }
+            if let Some(addr) = data.get(0) {
+                addr
+            } else {
+                &missing_sender
+            }
+        })
+        .unwrap_or(&missing_client_id);
+
+
+
+
+
         self.client
             .incr_with_tags(format!("{}.create_client", self.prefix,).as_ref())
             .with_tag("chain", &chain.to_string())
             .with_tag("sender", &message_sender)
+            .with_tag("client_id",&client_id)
             .send();
 
         Ok(())
@@ -422,10 +410,31 @@ impl Metrics {
             })
             .unwrap_or(&missing_sender);
 
+    let missing_client_id = "client_id_missing".to_owned();
+    let client_id = event
+        .data
+        .get("update_client.client_id")
+        .map(|data| {
+            for addr in data {
+                if let Some(team_name) = self.get_team_by_client_id(addr) {
+                    return team_name;
+                }
+            }
+            if let Some(addr) = data.get(0) {
+                addr
+            } else {
+                &missing_sender
+            }
+        })
+        .unwrap_or(&missing_client_id);
+
+
+
         self.client
             .incr_with_tags(format!("{}.client_update", self.prefix,).as_ref())
             .with_tag("chain", &chain.to_string())
             .with_tag("sender", &message_sender)
+            .with_tag("client_id",&client_id)
             .send();
 
         Ok(())
@@ -455,10 +464,31 @@ impl Metrics {
             })
             .unwrap_or(&missing_sender);
 
+            let missing_client_id = "client_id_missing".to_owned();
+            let client_id = event
+                .data
+                .get("client_misbehaviour.client_id")
+                .map(|data| {
+                    for addr in data {
+                        if let Some(team_name) = self.get_team_by_client_id(addr) {
+                            return team_name;
+                        }
+                    }
+                    if let Some(addr) = data.get(0) {
+                        addr
+                    } else {
+                        &missing_sender
+                    }
+                })
+                .unwrap_or(&missing_client_id);
+        
+        
+
         self.client
             .incr_with_tags(format!("{}.client_misbehaviour", self.prefix,).as_ref())
             .with_tag("chain", &chain.to_string())
             .with_tag("sender", &message_sender)
+            .with_tag("client_id",&client_id)
             .send();
 
         Ok(())
@@ -593,9 +623,9 @@ impl Metrics {
         Ok(())
     }
 
-    fn get_team_by_channel(&self, channel_id: &str) -> Option<&String> {
+    fn get_team_by_client_id(&self, client_id: &str) -> Option<&String> {
         if let Some(ref channels_to_team) = self.channels_to_team {
-            return channels_to_team.get(channel_id);
+            return channels_to_team.get(client_id);
         }
         None
     }
