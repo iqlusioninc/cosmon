@@ -147,7 +147,7 @@ impl SaganApplication {
 
     /// Handle an incoming status message from a monitor
     pub fn handle_message(&mut self, mut message: message::Envelope) {
-        message.network = chain::Id::from(message.network.to_string().replace(".", "*").as_ref());
+        message.network = chain::Id::from(message.network.to_string().replace(".", "_").as_ref());
         if let Some(network) = self.networks.get_mut(&message.network.into()) {
             network.handle_message(message);
         } else {
