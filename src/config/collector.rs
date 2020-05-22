@@ -37,7 +37,12 @@ impl CollectorConfig {
                     team.name.clone(),
                 );
                 client_id_to_team.insert(
-                    team.client_id.to_lowercase().replace(" ", "_").clone().to_lowercase().replace(" ", "_"),
+                    team.client_id
+                        .to_lowercase()
+                        .replace(" ", "_")
+                        .clone()
+                        .to_lowercase()
+                        .replace(" ", "_"),
                     team.name.clone(),
                 );
             }

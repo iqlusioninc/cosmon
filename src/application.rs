@@ -13,7 +13,6 @@ use abscissa_core::{
 };
 use abscissa_tokio::TokioComponent;
 use std::{collections::BTreeMap as Map, process};
-use tendermint::chain;
 
 /// Application state
 pub static APPLICATION: AppCell<SaganApplication> = AppCell::new();
@@ -146,8 +145,7 @@ impl SaganApplication {
     }
 
     /// Handle an incoming status message from a monitor
-    pub fn handle_message(&mut self, mut message: message::Envelope) {
-        message.network = chain::Id::from(message.network.to_string().replace(".", "_").as_ref());
+    pub fn handle_message(&mut self, message: message::Envelope) {
         if let Some(network) = self.networks.get_mut(&message.network.into()) {
             network.handle_message(message);
         } else {
