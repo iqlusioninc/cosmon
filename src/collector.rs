@@ -50,7 +50,7 @@ impl HttpServer {
         // POST /collector
         let collector = warp::post()
             .and(path("collector"))
-            .and(warp::body::content_length_limit(1024 * 128))
+            .and(warp::body::content_length_limit(4096 * 128))
             .and(warp::body::json())
             .map(|envelope: message::Envelope| {
                 let mut app = app_writer();
