@@ -86,7 +86,7 @@ impl Network {
                 }
             }
         }
-        self.metrics.heartbeat();
+        self.metrics.heartbeat(envelope.network);
     }
 
     fn emit_event_metrics(&mut self, event: &IBCEvent) {

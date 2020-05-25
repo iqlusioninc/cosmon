@@ -58,11 +58,11 @@ impl Metrics {
         })
     }
     ///heartbeat metric
-    pub fn heartbeat(&mut self) {
+    pub fn heartbeat(&mut self, network: tendermint::chain::Id) {
         self.client
-            .incr(&format!("{}.heartbeat", self.prefix))
-            .unwrap();
-    }
+            .incr_with_tags(&format!("{}.heartbeat", self.prefix))
+            .with_tag("network", &network.to_string())
+            .send();    }
 
     /// Send a metric for each packet send event
     pub fn packet_send_event(
