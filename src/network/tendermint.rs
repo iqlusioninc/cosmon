@@ -82,6 +82,9 @@ impl Network {
                     self.event_log
                         .write_all(&envelope.to_json().as_bytes())
                         .unwrap_or_else(|_| status_err!("Writing log file failed"));
+                    self.event_log
+                    .write_all(b"\n")
+                    .unwrap_or_else(|_| status_err!("Writing log file failed"));
                     self.emit_event_metrics(event)
                 }
             }
