@@ -65,6 +65,7 @@ impl EventMonitor {
     }
     /// Listener loop for push events and handle a recconection attempt on error
     pub async fn run(&mut self) {
+        status_ok!("Event Listener Connected", format!("{:?}", self.node_addr));
         loop {
             match self.collect_events().await {
                 Ok(..) => continue,

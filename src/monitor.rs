@@ -107,6 +107,7 @@ impl Monitor {
 
     /// Run the monitor
     pub async fn run(&mut self) {
+        status_ok!("Node Monitor Connected", format!("{:?}", self.status));
         loop {
             match self.poll().await {
                 Ok(msg) => {
