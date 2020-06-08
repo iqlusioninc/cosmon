@@ -24,8 +24,6 @@ pub struct EventMonitor {
 
     // Node Address for reconnection
     node_addr: net::Address,
-    // Queries for recconnection
-    event_queries: Vec<String>,
 }
 
 impl EventMonitor {
@@ -38,27 +36,23 @@ impl EventMonitor {
             Some(node_config) => {
                 let mut event_listener =
                     event_listener::EventListener::connect(node_config.rpc.laddr.clone()).await?;
-                for query in &agent_config.event_queries {
-                    event_listener.subscribe(query).await?;
-                }
+                    event_listener.subscribe(event_listener::EventSubscription::TransactionSubscription).await?;
+                
                 Ok(EventMonitor {
                     event_listener,
                     event_out_queue,
                     node_addr: node_config.rpc.laddr.clone(),
-                    event_queries: agent_config.event_queries.clone(),
                 })
             }
             None => {
                 let mut event_listener =
                     event_listener::EventListener::connect(agent_config.rpc.clone()).await?;
-                for query in &agent_config.event_queries {
-                    event_listener.subscribe(query).await?;
-                }
+                    event_listener.subscribe(event_listener::EventSubscription::TransactionSubscription).await?;
+                
                 Ok(EventMonitor {
                     event_listener,
                     event_out_queue,
                     node_addr: agent_config.rpc.clone(),
-                    event_queries: agent_config.event_queries.clone(),
                 })
             }
         }
@@ -76,15 +70,14 @@ impl EventMonitor {
                         Ok(event_listener) => {
                             trace!("Reconnected");
                             self.event_listener = event_listener;
-                            for query in &self.event_queries {
-                                match self.event_listener.subscribe(query).await {
+                                match self.event_listener.subscribe(event_listener::EventSubscription::TransactionSubscription).await {
                                     Ok(..) => continue,
                                     Err(err) => {
                                         trace!("Error on recreating subscribptions {}", err);
                                         delay_for(Duration::from_millis(500)).await
                                     }
                                 };
-                            }
+                            
                         }
                         Err(err) => {
                             trace!("Error on recconnection from{}", err);
