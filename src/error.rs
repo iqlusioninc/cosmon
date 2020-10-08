@@ -75,8 +75,8 @@ impl From<tendermint::Error> for Error {
     }
 }
 
-impl From<tendermint::rpc::Error> for Error {
-    fn from(other: tendermint::rpc::Error) -> Error {
+impl From<tendermint_rpc::Error> for Error {
+    fn from(other: tendermint_rpc::Error) -> Error {
         // TODO(tarcieri): better error conversions
         format_err!(ErrorKind::RpcError, "{}", other).into()
     }

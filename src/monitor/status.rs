@@ -3,7 +3,8 @@
 use super::message::Message;
 use crate::error::Error;
 use serde::{Deserialize, Serialize};
-pub use tendermint::rpc::{self, endpoint::status::SyncInfo};
+pub use tendermint_rpc::endpoint::status::SyncInfo;
+use tendermint_rpc::Client;
 
 /// Node status monitor: monitors the `/status` RPC endpoint.
 ///
@@ -22,14 +23,14 @@ pub struct Status {
 
 impl Status {
     /// Create a new `/status` endpoint monitor
-    pub async fn new(rpc_client: &rpc::Client) -> Result<Self, Error> {
+    pub async fn new(rpc_client: &Client) -> Result<Self, Error> {
         Ok(Self::from(rpc_client.status().await?))
     }
 
     /// Update internal state using the given RPC client, returning any changes
     pub async fn update(
         &mut self,
-        rpc_client: &rpc::Client,
+        rpc_client: &Client,
         force: bool,
     ) -> Result<Vec<Message>, Error> {
         let status = rpc_client.status().await?;
@@ -55,8 +56,8 @@ impl Status {
     }
 }
 
-impl From<rpc::endpoint::status::Response> for Status {
-    fn from(response: rpc::endpoint::status::Response) -> Self {
+impl From<tendermint_rpc::endpoint::status::Response> for Status {
+    fn from(response: tendermint_rpc::endpoint::status::Response) -> Self {
         Self {
             chain: response.sync_info.into(),
             node: response.node_info,

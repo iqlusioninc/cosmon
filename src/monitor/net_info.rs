@@ -4,7 +4,8 @@ use super::message::Message;
 use crate::error::{Error, ErrorKind};
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
-use tendermint::{net, node, rpc};
+use tendermint::{net, node};
+use tendermint_rpc::Client;
 
 /// Map of peer IDs to their peer information
 type PeerMap = BTreeMap<node::Id, Peer>;
@@ -36,7 +37,7 @@ impl NetInfo {
     // TODO(tarcieri): don't error out on attacker-controlled values; log instead
     pub async fn update(
         &mut self,
-        rpc_client: &rpc::Client,
+        rpc_client: &Client,
         force: bool,
     ) -> Result<Vec<Message>, Error> {
         let mut peer_map = self.peer_map()?;
