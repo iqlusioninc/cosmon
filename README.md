@@ -3,7 +3,7 @@
 Observability tool for [Cosmos] and other [Tendermint] applications.
 ## License
 
-Copyright © 2019 iqlusion
+Copyright © 2019-2021 iqlusion
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
