@@ -1893,7 +1893,7 @@ dependencies = [
  "tendermint",
  "tendermint-rpc",
  "thiserror",
- "tokio 0.2.25",
+ "tokio 1.5.0",
  "toml",
  "warp",
 ]
@@ -2353,6 +2353,16 @@ dependencies = [
  "pin-project-lite 0.1.12",
  "slab",
  "tokio-macros",
+]
+
+[[package]]
+name = "tokio"
+version = "1.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "83f0c8e7c0addab50b663055baf787d0af7f413a46e6e7fb9559a4e4db7137a5"
+dependencies = [
+ "autocfg 1.0.1",
+ "pin-project-lite 0.2.6",
 ]
 
 [[package]]

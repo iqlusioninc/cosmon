@@ -21,7 +21,7 @@ tendermint-rpc = { version = "0.16", features = ["client"] }
 reqwest = "0.10"
 thiserror = "1"
 toml = "0.5"
-tokio = "0.2"
+tokio = "1.5"
 warp = "0.1"
 
 [dev-dependencies]
