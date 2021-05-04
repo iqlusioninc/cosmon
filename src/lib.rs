@@ -1,6 +1,6 @@
 //! Sagan: observability tool for Cosmos and other Tendermint applications.
 
-#![deny(warnings, missing_docs, trivial_casts, unused_qualifications)]
+#![deny(missing_docs, trivial_casts, unused_qualifications, rust_2018_idioms)]
 #![forbid(unsafe_code)]
 
 #[macro_use]

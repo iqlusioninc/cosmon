@@ -3,9 +3,9 @@
 #![deny(warnings, missing_docs, trivial_casts, unused_qualifications)]
 #![forbid(unsafe_code)]
 
-use sagan::application::APPLICATION;
+use sagan::application::APP;
 
 /// Boot Sagan
 fn main() {
-    abscissa_core::boot(&APPLICATION);
+    abscissa_core::boot(&APP);
 }

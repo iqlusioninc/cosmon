@@ -1,9 +1,13 @@
+name: Rust
+
 on:
   push:
     branches: main
   pull_request: {}
 
-name: Rust
+env:
+  CARGO_INCREMENTAL: 0
+  RUSTFLAGS: "-Dwarnings"
 
 jobs:
   audit:

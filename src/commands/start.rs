@@ -1,9 +1,10 @@
 //! `start` subcommand
 
-use crate::{application::APPLICATION, collector::HttpServer, monitor::Monitor, prelude::*};
+use crate::{application::APP, collector, monitor::Monitor, prelude::*};
 use abscissa_core::{Command, Options, Runnable};
+use futures::future;
 use std::process;
-use tendermint::net;
+use tokio::task::JoinHandle;
 
 /// `start` subcommand
 #[derive(Command, Debug, Options)]
@@ -12,47 +13,50 @@ pub struct StartCommand {}
 impl Runnable for StartCommand {
     /// Start the application.
     fn run(&self) {
-        abscissa_tokio::run(&APPLICATION, async {
-            self.init_collector().map(|listen_addr| {
-                tokio::spawn(async move {
-                    let collector = HttpServer::new(&listen_addr).unwrap_or_else(|e| {
-                        status_err!("couldn't initialize HTTP collector: {}", e);
-                        process::exit(1);
-                    });
+        abscissa_tokio::run(&APP, async {
+            let mut tasks = vec![];
 
-                    collector.run();
-                })
-            });
+            if let Some(collector) = self.init_collector().await {
+                tasks.push(collector);
+            }
 
-            self.init_monitor().await.map(|mut monitor| {
-                tokio::spawn(async move {
-                    monitor.run().await;
-                })
-            });
+            if let Some(monitor) = self.init_monitor().await {
+                tasks.push(monitor);
+            }
+
+            future::join_all(tasks).await;
         })
-        .unwrap();
+        .expect("Tokio runtime crashed");
     }
 }
 
 impl StartCommand {
-    /// Initialize the collector (if configured)
-    fn init_collector(&self) -> Option<net::Address> {
-        let app = app_reader();
+    /// Initialize collector (if configured)
+    async fn init_collector(&self) -> Option<JoinHandle<()>> {
+        if let Some(config) = APP.config().collector.clone() {
+            Some(tokio::spawn(async move {
+                let collector = collector::Router::new(&config).unwrap_or_else(|e| {
+                    status_err!("couldn't initialize HTTP collector: {}", e);
+                    process::exit(1);
+                });
 
-        app.config()
-            .collector
-            .as_ref()
-            .map(|collector_config| collector_config.listen_addr.clone())
+                collector.run().await;
+            }))
+        } else {
+            None
+        }
     }
 
-    /// Initialize the monitor (if configured)
-    async fn init_monitor(&self) -> Option<Monitor> {
-        let app = app_reader();
-
-        if let Some(agent_config) = &app.config().agent {
-            Some(Monitor::new(agent_config).await.unwrap_or_else(|e| {
+    /// Initialize monitor (if configured)
+    async fn init_monitor(&self) -> Option<JoinHandle<()>> {
+        if let Some(config) = APP.config().agent.clone() {
+            let mut monitor = Monitor::new(&config).await.unwrap_or_else(|e| {
                 status_err!("couldn't initialize monitor: {}", e);
                 process::exit(1);
+            });
+
+            Some(tokio::spawn(async move {
+                monitor.run().await;
             }))
         } else {
             None

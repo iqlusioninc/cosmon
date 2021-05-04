@@ -26,7 +26,7 @@ pub const DEFAULT_FULL_REPORT_INTERVAL: Duration = Duration::from_secs(60);
 /// interface or other signal sources.
 pub struct Monitor {
     /// RPC client
-    rpc_client: tendermint_rpc::Client,
+    rpc_client: tendermint_rpc::HttpClient,
 
     /// Node status monitor
     status: Status,
@@ -55,7 +55,7 @@ impl Monitor {
     pub async fn new(agent_config: &AgentConfig) -> Result<Self, Error> {
         let home_dir = &agent_config.node_home;
         let node_config = agent_config.load_tendermint_config()?;
-        let rpc_client = tendermint_rpc::Client::new(node_config.rpc.laddr);
+        let rpc_client = tendermint_rpc::HttpClient::new(node_config.rpc.laddr)?;
         let status = Status::new(&rpc_client).await?;
         let data = Data::new(home_dir.join(&node_config.db_dir));
         let net_info = NetInfo::new(
@@ -80,9 +80,11 @@ impl Monitor {
         loop {
             match self.poll().await {
                 Ok(msg) => {
-                    if let Some(env) =
-                        message::Envelope::new(self.status.node.network, self.status.node.id, msg)
-                    {
+                    if let Some(env) = message::Envelope::new(
+                        self.status.node.network.clone(),
+                        self.status.node.id,
+                        msg,
+                    ) {
                         self.report(env).await.unwrap();
                     }
                 }
