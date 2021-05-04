@@ -1,12 +1,7 @@
 //! Collector HTTP request router
 
 use super::state::State;
-use crate::{
-    config::collector::{CollectorConfig, Protocol},
-    message,
-    prelude::*,
-    response,
-};
+use crate::{config, message, prelude::*, response};
 use std::{convert::Infallible, sync::Arc};
 use tokio::sync::Mutex;
 use warp::Filter;
@@ -21,7 +16,7 @@ pub struct Router {
     addr: ([u8; 4], u16),
 
     /// Protocol to listen on
-    protocol: Protocol,
+    protocol: config::collector::listen::Protocol,
 
     /// Collector state
     state: StateCell,
@@ -29,7 +24,7 @@ pub struct Router {
 
 impl Router {
     /// Initialize the router from the config
-    pub fn new(config: &CollectorConfig) -> Result<Router, Error> {
+    pub fn new(config: &config::collector::Config) -> Result<Router, Error> {
         let addr = (config.listen.addr.octets(), config.listen.port);
         let protocol = config.listen.protocol;
         let state = Arc::new(Mutex::new(State::new(&config)?));
@@ -64,7 +59,7 @@ impl Router {
         let routes = network.or(collector);
 
         match protocol {
-            Protocol::Http => warp::serve(routes).run(addr).await,
+            config::collector::listen::Protocol::Http => warp::serve(routes).run(addr).await,
         }
     }
 }

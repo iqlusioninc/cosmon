@@ -4,24 +4,24 @@ mod id;
 pub mod tendermint;
 
 pub use self::id::Id;
-use crate::{config::collector::NetworkConfig, message};
+use crate::{config, message};
 use serde::Serialize;
 
 /// Types of networks
 #[derive(Debug)]
 pub enum Network {
-    /// Tendermint networks
+    /// Tendermint network
     Tendermint(Box<self::tendermint::Network>),
 }
 
 impl Network {
-    /// Initialize networks from the given configuration
-    pub fn from_config(config: &NetworkConfig) -> Vec<Network> {
+    /// Initialize network from the given configuration
+    pub fn from_config(config: &config::network::Config) -> Vec<Network> {
         let mut networks = vec![];
 
-        for id in &config.tendermint {
+        for tm_config in &config.tendermint {
             networks.push(Network::Tendermint(Box::new(
-                self::tendermint::Network::new(id.clone()),
+                self::tendermint::Network::new(tm_config.chain_id.clone()),
             )))
         }
 

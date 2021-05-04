@@ -1,7 +1,7 @@
 //! Sagan: observability tool for Cosmos and other Tendermint applications.
 
-#![deny(missing_docs, trivial_casts, unused_qualifications, rust_2018_idioms)]
 #![forbid(unsafe_code)]
+#![warn(missing_docs, trivial_casts, unused_qualifications, rust_2018_idioms)]
 
 #[macro_use]
 extern crate abscissa_core;

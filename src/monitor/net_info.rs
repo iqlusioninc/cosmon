@@ -1,14 +1,13 @@
 //! Network information monitor
 
 use super::message::Message;
-use crate::error::{Error, ErrorKind};
+use crate::prelude::*;
 use serde::{Deserialize, Serialize};
-use std::collections::BTreeMap;
 use tendermint::{net, node};
 use tendermint_rpc::{Client, HttpClient};
 
 /// Map of peer IDs to their peer information
-type PeerMap = BTreeMap<node::Id, Peer>;
+type PeerMap = Map<node::Id, Peer>;
 
 /// Network information monitor: monitors the `/net_info` endpoint.
 #[derive(Clone, Debug)]

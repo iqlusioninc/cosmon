@@ -54,9 +54,8 @@ jobs:
         with:
           toolchain: stable
           override: true
-      - uses: actions-rs/cargo@v1
-        with:
-          command: test
+      - run: cargo test --release --no-default-features
+      - run: cargo test --release
 
   fmt:
     name: Rustfmt

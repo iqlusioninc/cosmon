@@ -7,9 +7,8 @@ use crate::{
     prelude::*,
 };
 use serde::Serialize;
-use std::collections::BTreeMap as Map;
 
-/// Tendermint networks
+/// Tendermint network
 #[derive(Debug)]
 pub struct Network {
     /// Chain ID for this network
@@ -104,7 +103,7 @@ impl Network {
     }
 }
 
-/// Nodes in Tendermint networks
+/// Nodes in Tendermint network
 #[derive(Clone, Debug, Serialize)]
 pub struct Node {
     /// Node ID
