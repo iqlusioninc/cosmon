@@ -1,52 +1,25 @@
 //! Sagan Abscissa Application
 
-use crate::{
-    commands::SaganCommand,
-    config::{collector::CollectorConfig, SaganConfig},
-    message,
-    network::{self, Network},
-    prelude::*,
-};
+use crate::{commands::SaganCommand, config::SaganConfig};
 use abscissa_core::{
-    application, application::AppCell, config, trace, Application, EntryPoint, FrameworkError,
-    StandardPaths,
+    application,
+    application::AppCell,
+    config::{self, CfgCell},
+    trace, Application, EntryPoint, FrameworkError, StandardPaths,
 };
 use abscissa_tokio::TokioComponent;
-use std::{collections::BTreeMap as Map, process};
 
 /// Application state
-pub static APPLICATION: AppCell<SaganApplication> = AppCell::new();
-
-/// Obtain a read-only (multi-reader) lock on the application state.
-///
-/// Panics if the application state has not been initialized.
-pub fn app_reader() -> application::lock::Reader<SaganApplication> {
-    APPLICATION.read()
-}
-
-/// Obtain an exclusive mutable lock on the application state.
-pub fn app_writer() -> application::lock::Writer<SaganApplication> {
-    APPLICATION.write()
-}
-
-/// Obtain a read-only (multi-reader) lock on the application configuration.
-///
-/// Panics if the application configuration has not been loaded.
-pub fn app_config() -> config::Reader<SaganApplication> {
-    config::Reader::new(&APPLICATION)
-}
+pub static APP: AppCell<SaganApplication> = AppCell::new();
 
 /// Abscissa `Application` type
 #[derive(Debug, Default)]
 pub struct SaganApplication {
     /// Application's `sagan.toml` config settings
-    config: Option<SaganConfig>,
+    config: CfgCell<SaganConfig>,
 
     /// Application state
     state: application::State<Self>,
-
-    /// Network state
-    networks: Map<network::Id, Network>,
 }
 
 impl Application for SaganApplication {
@@ -60,8 +33,8 @@ impl Application for SaganApplication {
     type Paths = StandardPaths;
 
     /// Accessor for application configuration.
-    fn config(&self) -> &SaganConfig {
-        self.config.as_ref().expect("`sagan.toml` not loaded")
+    fn config(&self) -> config::Reader<SaganConfig> {
+        self.config.read()
     }
 
     /// Borrow the application state immutably.
@@ -69,27 +42,20 @@ impl Application for SaganApplication {
         &self.state
     }
 
-    /// Borrow the application state mutably.
-    fn state_mut(&mut self) -> &mut application::State<Self> {
-        &mut self.state
-    }
-
     /// Register all components used by this application.
     fn register_components(&mut self, command: &Self::Cmd) -> Result<(), FrameworkError> {
         let mut components = self.framework_components(command)?;
         components.push(Box::new(TokioComponent::new()?));
-        self.state.components.register(components)
+
+        let mut component_registry = self.state.components_mut();
+        component_registry.register(components)
     }
 
     /// Post-configuration lifecycle callback.
     fn after_config(&mut self, config: SaganConfig) -> Result<(), FrameworkError> {
-        self.state.components.after_config(&config)?;
-
-        if let Some(collector_config) = &config.collector {
-            self.init_collector(collector_config);
-        }
-
-        self.config = Some(config);
+        let mut component_registry = self.state.components_mut();
+        component_registry.after_config(&config)?;
+        self.config.set_once(config);
         Ok(())
     }
 
@@ -99,33 +65,6 @@ impl Application for SaganApplication {
             trace::Config::verbose()
         } else {
             trace::Config::default()
-        }
-    }
-}
-
-impl SaganApplication {
-    /// Initialize collector state
-    fn init_collector(&mut self, collector_config: &CollectorConfig) {
-        for network in Network::from_config(&collector_config.networks) {
-            let network_id = network.id();
-            if self.networks.insert(network_id.clone(), network).is_some() {
-                status_err!("duplicate networks in config: {}", &network_id);
-                process::exit(1);
-            }
-        }
-    }
-
-    /// Borrow a network registered with this application
-    pub fn network(&self, network_id: impl Into<network::Id>) -> Option<&Network> {
-        self.networks.get(&network_id.into())
-    }
-
-    /// Handle an incoming status message from a monitor
-    pub fn handle_message(&mut self, message: message::Envelope) {
-        if let Some(network) = self.networks.get_mut(&message.network.into()) {
-            network.handle_message(message);
-        } else {
-            warn!("got message for unregistered network: {}", &message.network);
         }
     }
 }

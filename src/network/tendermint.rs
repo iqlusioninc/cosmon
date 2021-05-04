@@ -18,10 +18,13 @@ pub struct Network {
     /// Nodes in this network
     nodes: Map<tendermint::node::Id, Node>,
 
+    /// Network peers
     peers: Vec<Peer>,
 
+    /// Chain status (if known)
     chain: Option<ChainStatus>,
 
+    /// Validators
     validators: Option<tendermint::validator::Info>,
 }
 
@@ -39,7 +42,7 @@ impl Network {
 
     /// Get this network's ID
     pub fn id(&self) -> Id {
-        self.id.into()
+        self.id.clone().into()
     }
 
     /// Serialize information about this network as JSON

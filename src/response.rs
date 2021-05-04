@@ -3,6 +3,7 @@
 use serde::{Deserialize, Serialize};
 
 /// Response wrapper (i.e. message envelope)
+// TODO(tarcieri): use an enum?
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Wrapper<R> {
     /// Results of request (if successful)
@@ -32,5 +33,6 @@ where
 }
 
 /// Error type
+// TODO(tarcieri): provide more error information
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Error {}
