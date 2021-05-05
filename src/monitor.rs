@@ -6,7 +6,7 @@ pub mod status;
 
 use self::{data::Data, net_info::NetInfo, status::Status};
 use crate::{
-    config::agent::{AgentConfig, CollectorAddr, HttpConfig},
+    config,
     error::{Error, ErrorKind},
     message::{self, Message},
 };
@@ -14,7 +14,6 @@ use std::{
     thread,
     time::{Duration, Instant},
 };
-use tendermint::net;
 
 /// Default interval at which to poll a Tendermint node
 pub const DEFAULT_POLL_INTERVAL: Duration = Duration::from_millis(100);
@@ -47,12 +46,12 @@ pub struct Monitor {
     last_full_report: Instant,
 
     /// Collector address
-    collector_addr: CollectorAddr,
+    collector_addr: config::agent::CollectorAddr,
 }
 
 impl Monitor {
     /// Create a new `Monitor`
-    pub async fn new(agent_config: &AgentConfig) -> Result<Self, Error> {
+    pub async fn new(agent_config: &config::agent::Config) -> Result<Self, Error> {
         let home_dir = &agent_config.node_home;
         let node_config = agent_config.load_tendermint_config()?;
         let rpc_client = tendermint_rpc::HttpClient::new(node_config.rpc.laddr)?;
@@ -121,10 +120,9 @@ impl Monitor {
 
     async fn report(&self, msg: message::Envelope) -> Result<(), Error> {
         let url = match &self.collector_addr {
-            CollectorAddr::Http(HttpConfig {
-                addr: net::Address::Tcp { host, port, .. },
-            }) => format!("http://{}:{}/collector", host, port),
-            other => fail!(ErrorKind::ConfigError, "unsupported collector: {:?}", other),
+            config::agent::CollectorAddr::Http(config::agent::HttpConfig { uri }) => {
+                format!("{}/collector", uri)
+            }
         };
 
         let client = reqwest::Client::new();

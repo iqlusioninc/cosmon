@@ -8,5 +8,7 @@ addr = "127.0.0.1"
 port = 7322
 protocol = "http"
 
-[collector.networks]
-tendermint = ["cosmoshub-2"]
+[[collector.networks.tendermint]]
+chain_id = "cosmoshub-4"
+validator_addr = "cosmosvaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03xfytvz7"
+# mintscan = { host = "api.cosmostation.io" }

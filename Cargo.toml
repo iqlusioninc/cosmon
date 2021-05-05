@@ -1,14 +1,19 @@
 [package]
-name        = "sagan"
-version     = "0.0.0"
-description = "Observability tool for Cosmos and other Tendermint applications"
-authors     = ["Tony Arcieri <tony@iqlusion.io>", "Shella Stephens <shella@iqlusion.io>"]
-license     = "Apache-2.0"
-repository  = "https://github.com/iqlusioninc/sagan"
-readme      = "README.md"
-edition     = "2018"
-categories  = ["cryptography::cryptocurrencies"]
-keywords    = ["cosmos", "tendermint"]
+name = "sagan"
+version = "0.0.0"
+description = """
+Observability tool for Cosmos and other Tendermint applications
+"""
+authors = [
+    "Tony Arcieri <tony@iqlusion.io>",
+    "Shella Stephens <shella@iqlusion.io>"
+]
+license    = "Apache-2.0"
+repository = "https://github.com/iqlusioninc/sagan"
+readme     = "README.md"
+edition    = "2018"
+categories = ["cryptography::cryptocurrencies"]
+keywords   = ["cosmos", "tendermint"]
 
 [dependencies]
 abscissa_core = "0.6.0-pre.1"
@@ -16,6 +21,7 @@ abscissa_tokio = "0.6.0-pre.1"
 futures = "0.3"
 gumdrop = "0.7"
 home = "0.5"
+iqhttp = { version = "0.0.1", features = ["serde"] }
 serde = { version = "1", features = ["serde_derive"] }
 serde_json = { version = "1" }
 tendermint = "0.19"
@@ -26,9 +32,15 @@ toml = "0.5"
 tokio = "1"
 warp = "0.3"
 
+# optional dependencies
+mintscan = { version = "0.0.1", optional = true }
+
 [dev-dependencies]
 once_cell = "1"
 
 [dev-dependencies.abscissa_core]
 version = "0.6.0-pre.1"
 features = ["testing"]
+
+[features]
+default = ["mintscan"]

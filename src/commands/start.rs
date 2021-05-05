@@ -16,8 +16,12 @@ impl Runnable for StartCommand {
         abscissa_tokio::run(&APP, async {
             let mut tasks = vec![];
 
-            if let Some(collector) = self.init_collector().await {
-                tasks.push(collector);
+            if let Some(poller) = self.init_collector_poller().await {
+                tasks.push(poller);
+            }
+
+            if let Some(router) = self.init_collector_router().await {
+                tasks.push(router);
             }
 
             if let Some(monitor) = self.init_monitor().await {
@@ -31,16 +35,32 @@ impl Runnable for StartCommand {
 }
 
 impl StartCommand {
-    /// Initialize collector (if configured)
-    async fn init_collector(&self) -> Option<JoinHandle<()>> {
+    /// Initialize collector poller (if configured/needed)
+    async fn init_collector_poller(&self) -> Option<JoinHandle<()>> {
         if let Some(config) = APP.config().collector.clone() {
             Some(tokio::spawn(async move {
-                let collector = collector::Router::new(&config).unwrap_or_else(|e| {
+                let poller = collector::Poller::new(&config).unwrap_or_else(|e| {
+                    status_err!("couldn't initialize collector poller: {}", e);
+                    process::exit(1);
+                });
+
+                poller.run().await;
+            }))
+        } else {
+            None
+        }
+    }
+
+    /// Initialize collector (if configured)
+    async fn init_collector_router(&self) -> Option<JoinHandle<()>> {
+        if let Some(config) = APP.config().collector.clone() {
+            Some(tokio::spawn(async move {
+                let router = collector::Router::new(&config).unwrap_or_else(|e| {
                     status_err!("couldn't initialize HTTP collector: {}", e);
                     process::exit(1);
                 });
 
-                collector.run().await;
+                router.run().await;
             }))
         } else {
             None

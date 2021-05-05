@@ -1,14 +1,16 @@
 //! `sagan.toml` monitoring agent configuration settings
 
+pub use tendermint::config::TendermintConfig;
+
 use crate::error::{Error, ErrorKind};
+use iqhttp::Uri;
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
-use tendermint::{config::TendermintConfig, net};
 
 /// Tendermint node-related config settings from `sagan.toml`
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
-pub struct AgentConfig {
+pub struct Config {
     /// Location of monitored Tendermint node's `--home` directory
     pub node_home: PathBuf,
 
@@ -16,7 +18,7 @@ pub struct AgentConfig {
     pub collector: CollectorAddr,
 }
 
-impl AgentConfig {
+impl Config {
     /// Path to the node's configuration directory
     pub fn config_dir(&self) -> PathBuf {
         self.node_home.join("config")
@@ -47,6 +49,7 @@ pub enum CollectorAddr {
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct HttpConfig {
-    /// Address of collector http service
-    pub addr: net::Address,
+    /// Address of collector HTTP service
+    #[serde(with = "iqhttp::serializers::uri")]
+    pub uri: Uri,
 }

@@ -1,21 +1,20 @@
 //! `sagan.toml` configuration file
 
+use serde::{Deserialize, Serialize};
+
 pub mod agent;
 pub mod collector;
-
-use self::agent::AgentConfig;
-use self::collector::CollectorConfig;
-use serde::{Deserialize, Serialize};
+pub mod network;
 
 /// `sagan.toml` configuration settings
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct SaganConfig {
     /// Monitoring agent configuration
-    pub agent: Option<AgentConfig>,
+    pub agent: Option<agent::Config>,
 
     /// Collector configuration
-    pub collector: Option<CollectorConfig>,
+    pub collector: Option<collector::Config>,
 }
 
 impl SaganConfig {

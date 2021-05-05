@@ -1,12 +1,11 @@
 //! Collector state
 
 use crate::{
-    config::collector::CollectorConfig,
-    message,
+    config, message,
     network::{self, Network},
     prelude::*,
 };
-use std::{collections::BTreeMap as Map, process};
+use std::process;
 
 /// Collector state
 #[derive(Debug)]
@@ -17,7 +16,7 @@ pub struct State {
 
 impl State {
     /// Initialize collector state
-    pub fn new(config: &CollectorConfig) -> Result<Self, Error> {
+    pub fn new(config: &config::collector::Config) -> Result<Self, Error> {
         let mut networks = Map::default();
 
         for network in Network::from_config(&config.networks) {
@@ -25,7 +24,7 @@ impl State {
 
             if networks.insert(network_id.clone(), network).is_some() {
                 // TODO(tarcieri): bubble up this error
-                status_err!("duplicate networks in config: {}", &network_id);
+                status_err!("duplicate network in config: {}", &network_id);
                 process::exit(1);
             }
         }
