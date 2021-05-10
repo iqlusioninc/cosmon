@@ -1,10 +1,16 @@
 //! `start` subcommand
 
-use crate::{application::APP, collector, monitor::Monitor, prelude::*};
+use crate::{
+    application::APP,
+    collector::{self, Collector},
+    monitor::Monitor,
+    prelude::*,
+};
 use abscissa_core::{Command, Options, Runnable};
 use futures::future;
 use std::process;
 use tokio::task::JoinHandle;
+use tower::ServiceBuilder;
 
 /// `start` subcommand
 #[derive(Command, Debug, Options)]
@@ -34,6 +40,7 @@ impl Runnable for StartCommand {
     }
 }
 
+#[allow(clippy::manual_map)] // TODO(tarcieri): use async closures when stable
 impl StartCommand {
     /// Initialize collector poller (if configured/needed)
     async fn init_collector_poller(&self) -> Option<JoinHandle<()>> {
@@ -55,12 +62,15 @@ impl StartCommand {
     async fn init_collector_router(&self) -> Option<JoinHandle<()>> {
         if let Some(config) = APP.config().collector.clone() {
             Some(tokio::spawn(async move {
-                let router = collector::Router::new(&config).unwrap_or_else(|e| {
-                    status_err!("couldn't initialize HTTP collector: {}", e);
-                    process::exit(1);
-                });
+                let collector = ServiceBuilder::new().buffer(20).service(
+                    Collector::new(&config).unwrap_or_else(|e| {
+                        status_err!("couldn't initialize collector service: {}", e);
+                        process::exit(1);
+                    }),
+                );
 
-                router.run().await;
+                let router = collector::Router::new(&config);
+                router.run(collector).await;
             }))
         } else {
             None
