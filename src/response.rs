@@ -1,5 +1,6 @@
 //! Response types
 
+use crate::prelude::*;
 use serde::{Deserialize, Serialize};
 
 /// Response wrapper (i.e. message envelope)
@@ -10,7 +11,7 @@ pub struct Wrapper<R> {
     pub result: Option<R>,
 
     /// Error message if unsuccessful
-    pub error: Option<Error>,
+    pub error: Option<String>,
 }
 
 impl<R> Wrapper<R>
@@ -18,7 +19,7 @@ where
     R: Serialize,
 {
     /// Convert this wrapper into a result type
-    pub fn from_result(result: Result<R, Error>) -> Self {
+    pub fn from_result(result: Result<R, BoxError>) -> Self {
         match result {
             Ok(res) => Wrapper {
                 result: Some(res),
@@ -26,13 +27,8 @@ where
             },
             Err(err) => Wrapper {
                 result: None,
-                error: Some(err),
+                error: Some(err.to_string()),
             },
         }
     }
 }
-
-/// Error type
-// TODO(tarcieri): provide more error information
-#[derive(Debug, Deserialize, Serialize)]
-pub struct Error {}

@@ -4,6 +4,9 @@
 /// Abscissa core prelude.
 pub use abscissa_core::prelude::*;
 
+/// Other Abscissa imports.
+pub use abscissa_core::error::BoxError;
+
 /// Application-level types.
 pub use crate::{
     application::APP,

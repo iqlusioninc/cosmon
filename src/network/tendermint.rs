@@ -9,7 +9,7 @@ use crate::{
 use serde::Serialize;
 
 /// Tendermint network
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Network {
     /// Chain ID for this network
     id: tendermint::chain::Id,
@@ -84,21 +84,18 @@ impl Network {
     /// Update information about peers
     fn update_peer(&mut self, peer_info: &[Peer]) {
         info!("peers update: {:?} ", peer_info);
-
         self.peers = peer_info.to_vec();
     }
 
     /// Update information about chain status
     fn update_chain(&mut self, chain_info: &ChainStatus) {
         info!("chain status update: {:?}", chain_info);
-
         self.chain = Some(chain_info.clone());
     }
 
     /// Update information about validators
     fn update_validator(&mut self, validator_info: &tendermint::validator::Info) {
         info!("validator update: {:?}", validator_info);
-
         self.validators = Some(*validator_info);
     }
 }
@@ -122,7 +119,7 @@ impl<'a> From<&'a tendermint::node::Info> for Node {
     }
 }
 
-/// Snapshot of current network state
+/// Snapshot of current Tendermint network state
 #[derive(Debug, Serialize)]
 pub struct State {
     nodes: Vec<Node>,
@@ -134,7 +131,7 @@ pub struct State {
 impl State {
     fn new(network: &Network) -> Self {
         Self {
-            nodes: network.nodes.iter().map(|(_, node)| node.clone()).collect(),
+            nodes: network.nodes.values().cloned().collect(),
             peers: network.peers.clone(),
             chain: network.chain.clone(),
             validators: network.validators,

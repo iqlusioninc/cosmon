@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 use tendermint::{chain, node};
 
 /// Every event reported to the collector is a sequence of messages
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 pub enum Message {
     /// Chain synchronization status for a node
     #[serde(rename = "chain")]
@@ -51,9 +51,10 @@ impl From<Vec<Peer>> for Message {
 
 /// Message envelope - contains information about the node events are
 /// originating from.
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 pub struct Envelope {
     /// Chain ID reporting in
+    // TODO(tarcieri): change this to `network::Id`
     pub network: chain::Id,
 
     /// Node ID reporting in

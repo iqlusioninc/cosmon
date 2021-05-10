@@ -1,13 +1,10 @@
 //! Collector HTTP request router
 
-use super::state::State;
+use super::{Request, Response};
 use crate::{config, message, prelude::*, response};
-use std::{convert::Infallible, sync::Arc};
-use tokio::sync::Mutex;
+use std::convert::Infallible;
+use tower::{util::ServiceExt, Service};
 use warp::Filter;
-
-/// Storage cell for collector state
-type StateCell = Arc<Mutex<State>>;
 
 /// HTTP request router
 #[derive(Clone)]
@@ -17,35 +14,31 @@ pub struct Router {
 
     /// Protocol to listen on
     protocol: config::collector::listen::Protocol,
-
-    /// Collector state
-    state: StateCell,
 }
 
 impl Router {
     /// Initialize the router from the config
-    pub fn new(config: &config::collector::Config) -> Result<Router, Error> {
+    pub fn new(config: &config::collector::Config) -> Self {
         let addr = (config.listen.addr.octets(), config.listen.port);
         let protocol = config.listen.protocol;
-        let state = Arc::new(Mutex::new(State::new(&config)?));
 
-        Ok(Self {
-            addr,
-            protocol,
-            state,
-        })
+        Self { addr, protocol }
     }
 
     /// Route incoming requests
-    pub async fn run(self) {
+    pub async fn run<S>(self, collector: S)
+    where
+        S: Service<Request, Response = Response, Error = BoxError> + Send + Sync + Clone + 'static,
+        S::Future: Send,
+    {
         let addr = self.addr;
         let protocol = self.protocol;
-        let state = warp::any().map(move || self.state.clone());
+        let collector = warp::any().map(move || collector.clone());
 
         // GET /net/:network_id
         let network = warp::get()
             .and(warp::path!("net" / String))
-            .and(state.clone())
+            .and(collector.clone())
             .and_then(network_get);
 
         // POST /collector
@@ -53,7 +46,7 @@ impl Router {
             .and(warp::path("collector"))
             .and(warp::path::end())
             .and(warp::body::json())
-            .and(state.clone())
+            .and(collector.clone())
             .and_then(collector_post);
 
         let routes = network.or(collector);
@@ -65,15 +58,23 @@ impl Router {
 }
 
 /// `GET /net/:network_id`: handle incoming requests to get network state
-pub async fn network_get(
+pub async fn network_get<S>(
     network_id: String,
-    state_cell: StateCell,
-) -> Result<impl warp::Reply, Infallible> {
-    let state = state_cell.lock().await;
-    let result = state
-        .network(&network_id.into())
-        .map(|network| network.state())
-        .ok_or(response::Error {});
+    mut service: S,
+) -> Result<impl warp::Reply, Infallible>
+where
+    S: Service<Request, Response = Response, Error = BoxError> + Send + Clone + 'static,
+{
+    let result = service
+        .ready()
+        .await
+        .expect("service not ready")
+        .call(Request::NetworkState(network_id.into()))
+        .await
+        .map(|resp| match resp {
+            Response::NetworkState(state) => state,
+            other => panic!("unexpected response to request: {:?}", other),
+        });
 
     Ok(warp::reply::json(&response::Wrapper::from_result(result)))
 }
@@ -81,11 +82,25 @@ pub async fn network_get(
 /// `POST /collector`: handle incoming messages sent to the collector
 ///
 /// This endpoint is intended to be triggered by the sagan agent
-pub async fn collector_post(
+pub async fn collector_post<S>(
     msg: message::Envelope,
-    state_cell: StateCell,
-) -> Result<impl warp::Reply, Infallible> {
-    let mut state = state_cell.lock().await;
-    state.handle_message(msg);
+    mut service: S,
+) -> Result<impl warp::Reply, Infallible>
+where
+    S: Service<Request, Response = Response, Error = BoxError> + Send + Sync + Clone + 'static,
+    S::Future: Send,
+{
+    let result = service
+        .ready()
+        .await
+        .expect("service not ready")
+        .call(msg.into())
+        .await;
+
+    if let Err(err) = result {
+        // TODO(tarcieri): report errors back to the caller?
+        warn!("error handling agent message: {}", err);
+    }
+
     Ok(warp::reply())
 }
