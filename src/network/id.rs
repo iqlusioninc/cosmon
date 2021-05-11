@@ -20,6 +20,12 @@ impl Display for Id {
 
 impl From<tendermint::chain::Id> for Id {
     fn from(chain_id: tendermint::chain::Id) -> Id {
+        Id::from(&chain_id)
+    }
+}
+
+impl From<&tendermint::chain::Id> for Id {
+    fn from(chain_id: &tendermint::chain::Id) -> Id {
         Id(chain_id.as_str().to_owned())
     }
 }
