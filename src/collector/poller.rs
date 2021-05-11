@@ -3,10 +3,10 @@
 #[cfg(feature = "mintscan")]
 mod mintscan;
 
-use crate::config;
-use crate::prelude::*;
+use crate::{collector, config, prelude::*};
 use std::time::Duration;
 use tokio::time;
+use tower::Service;
 
 #[cfg(feature = "mintscan")]
 use futures::future;
@@ -46,7 +46,13 @@ impl Poller {
     }
 
     /// Route incoming requests.
-    pub async fn run(self) {
+    pub async fn run<S>(self, collector: S)
+    where
+        S: Service<collector::Request, Response = collector::Response, Error = BoxError>
+            + Send
+            + Clone
+            + 'static,
+    {
         if !self.has_sources() {
             info!("no sources to poll");
             return;
@@ -57,19 +63,26 @@ impl Poller {
 
         loop {
             interval.tick().await;
-            self.poll().await;
+            self.poll(&collector).await;
             info!("waiting for {:?}", self.poll_interval);
         }
     }
 
     /// Poll sources.
-    async fn poll(&self) {
+    #[cfg_attr(not(feature = "mintscan"), allow(unused_variables))]
+    async fn poll<S>(&self, collector: &S)
+    where
+        S: Service<collector::Request, Response = collector::Response, Error = BoxError>
+            + Send
+            + Clone
+            + 'static,
+    {
         #[cfg(feature = "mintscan")]
         let mut futures = vec![];
 
         #[cfg(feature = "mintscan")]
         for mintscan_poller in &self.mintscan {
-            futures.push(mintscan_poller.poll());
+            futures.push(mintscan_poller.poll(collector.clone()));
         }
 
         #[cfg(feature = "mintscan")]

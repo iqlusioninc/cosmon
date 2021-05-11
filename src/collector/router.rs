@@ -68,7 +68,7 @@ where
     let result = service
         .ready()
         .await
-        .expect("service not ready")
+        .expect("collector not ready") // TODO(tarcieri): better error handling
         .call(Request::NetworkState(network_id.into()))
         .await
         .map(|resp| match resp {
@@ -87,13 +87,12 @@ pub async fn collector_post<S>(
     mut service: S,
 ) -> Result<impl warp::Reply, Infallible>
 where
-    S: Service<Request, Response = Response, Error = BoxError> + Send + Sync + Clone + 'static,
-    S::Future: Send,
+    S: Service<Request, Response = Response, Error = BoxError> + Sync + Clone + 'static,
 {
     let result = service
         .ready()
         .await
-        .expect("service not ready")
+        .expect("collector not ready") // TODO(tarcieri): better error handling
         .call(msg.into())
         .await;
 

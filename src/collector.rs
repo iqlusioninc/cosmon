@@ -73,6 +73,14 @@ impl Collector {
             }
         }
     }
+
+    /// Handle incoming poller info
+    fn poller_info(&self, info: request::PollEvent) -> Result<Response, Error> {
+        info!("got {:?}", info);
+
+        // TODO(tarcieri): real response
+        Ok(Response::Message)
+    }
 }
 
 impl Service<Request> for Collector {
@@ -88,6 +96,7 @@ impl Service<Request> for Collector {
         let result = match req {
             Request::Message(msg) => self.handle_message(msg),
             Request::NetworkState(id) => self.network_state(&id),
+            Request::PollEvent(info) => self.poller_info(info),
         };
 
         Box::pin(async { result })
