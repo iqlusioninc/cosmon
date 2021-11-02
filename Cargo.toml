@@ -1,5 +1,5 @@
 [package]
-name = "sagan"
+name = "cosmon"
 version = "0.0.0"
 description = """
 Observability tool for Cosmos and other Tendermint applications
@@ -9,7 +9,7 @@ authors = [
     "Shella Stephens <shella@iqlusion.io>"
 ]
 license    = "Apache-2.0"
-repository = "https://github.com/iqlusioninc/sagan"
+repository = "https://github.com/iqlusioninc/cosmon"
 readme     = "README.md"
 edition    = "2018"
 categories = ["cryptography::cryptocurrencies"]

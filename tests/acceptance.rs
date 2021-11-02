@@ -1,11 +1,11 @@
-//! Sagan acceptance tests
+//! cosmon acceptance tests
 
 #![deny(warnings, missing_docs, trivial_casts, unused_qualifications)]
 #![forbid(unsafe_code)]
 
 use abscissa_core::testing::prelude::*;
 use once_cell::sync::Lazy;
-use sagan::config::SaganConfig;
+use cosmon::config::cosmonConfig;
 
 pub static RUNNER: Lazy<CmdRunner> = Lazy::new(CmdRunner::default);
 
@@ -13,7 +13,7 @@ pub static RUNNER: Lazy<CmdRunner> = Lazy::new(CmdRunner::default);
 fn start() {
     let mut runner = RUNNER.clone();
     let cmd = runner
-        .config(&SaganConfig::default())
+        .config(&cosmonConfig::default())
         .arg("start")
         .capture_stdout()
         .run();

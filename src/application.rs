@@ -1,6 +1,6 @@
-//! Sagan Abscissa Application
+//! cosmon Abscissa Application
 
-use crate::{commands::SaganCommand, config::SaganConfig};
+use crate::{commands::CosmonCommand, config::CosmonConfig};
 use abscissa_core::{
     application,
     application::AppCell,
@@ -10,30 +10,30 @@ use abscissa_core::{
 use abscissa_tokio::TokioComponent;
 
 /// Application state
-pub static APP: AppCell<SaganApplication> = AppCell::new();
+pub static APP: AppCell<CosmonApplication> = AppCell::new();
 
 /// Abscissa `Application` type
 #[derive(Debug, Default)]
-pub struct SaganApplication {
-    /// Application's `sagan.toml` config settings
-    config: CfgCell<SaganConfig>,
+pub struct CosmonApplication {
+    /// Application's `cosmon.toml` config settings
+    config: CfgCell<CosmonConfig>,
 
     /// Application state
     state: application::State<Self>,
 }
 
-impl Application for SaganApplication {
+impl Application for CosmonApplication {
     /// Entrypoint command for this application.
-    type Cmd = EntryPoint<SaganCommand>;
+    type Cmd = EntryPoint<CosmonCommand>;
 
     /// Application configuration.
-    type Cfg = SaganConfig;
+    type Cfg = CosmonConfig;
 
     /// Paths to resources within the application.
     type Paths = StandardPaths;
 
     /// Accessor for application configuration.
-    fn config(&self) -> config::Reader<SaganConfig> {
+    fn config(&self) -> config::Reader<CosmonConfig> {
         self.config.read()
     }
 
@@ -52,7 +52,7 @@ impl Application for SaganApplication {
     }
 
     /// Post-configuration lifecycle callback.
-    fn after_config(&mut self, config: SaganConfig) -> Result<(), FrameworkError> {
+    fn after_config(&mut self, config: CosmonConfig) -> Result<(), FrameworkError> {
         let mut component_registry = self.state.components_mut();
         component_registry.after_config(&config)?;
         self.config.set_once(config);
@@ -60,7 +60,7 @@ impl Application for SaganApplication {
     }
 
     /// Get logging configuration from command-line options.
-    fn tracing_config(&self, command: &EntryPoint<SaganCommand>) -> trace::Config {
+    fn tracing_config(&self, command: &EntryPoint<CosmonCommand>) -> trace::Config {
         if command.verbose {
             trace::Config::verbose()
         } else {

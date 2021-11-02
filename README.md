@@ -1,4 +1,4 @@
-# <img src="https://storage.googleapis.com/iqlusion-production-web/github/sagan/sagan-logo.svg" width="450px" alt="Sagan"> 
+# <img src="https://storage.googleapis.com/iqlusion-production-web/github/cosmon/cosmon-logo.svg" width="450px" alt="cosmon"> 
 
 Observability tool for [Cosmos] and other [Tendermint] applications.
 ## License

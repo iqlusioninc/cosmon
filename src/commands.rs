@@ -1,19 +1,19 @@
-//! Sagan subcommands
+//! cosmon subcommands
 
 mod start;
 mod version;
 
 use self::{start::StartCommand, version::VersionCommand};
-use crate::config::SaganConfig;
+use crate::config::CosmonConfig;
 use abscissa_core::{Command, Configurable, Help, Options, Runnable};
 use std::path::PathBuf;
 
 /// Configuration filename
-pub const CONFIG_FILE: &str = "sagan.toml";
+pub const CONFIG_FILE: &str = "cosmon.toml";
 
 /// Subcommands
 #[derive(Command, Debug, Options, Runnable)]
-pub enum SaganCommand {
+pub enum CosmonCommand {
     /// The `help` subcommand
     #[options(help = "get usage information")]
     Help(Help<Self>),
@@ -27,7 +27,7 @@ pub enum SaganCommand {
     Version(VersionCommand),
 }
 
-impl Configurable<SaganConfig> for SaganCommand {
+impl Configurable<CosmonConfig> for CosmonCommand {
     /// Location of the configuration file
     fn config_path(&self) -> Option<PathBuf> {
         Some(PathBuf::from(CONFIG_FILE))

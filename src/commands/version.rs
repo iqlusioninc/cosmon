@@ -2,7 +2,7 @@
 
 #![allow(clippy::never_loop)]
 
-use super::SaganCommand;
+use super::CosmonCommand;
 use abscissa_core::{Command, Options, Runnable};
 
 /// `version` subcommand
@@ -12,6 +12,6 @@ pub struct VersionCommand {}
 impl Runnable for VersionCommand {
     /// Print version message
     fn run(&self) {
-        println!("{} {}", SaganCommand::name(), SaganCommand::version());
+        println!("{} {}", CosmonCommand::name(), CosmonCommand::version());
     }
 }

@@ -10,7 +10,7 @@ pub use abscissa_core::error::BoxError;
 /// Application-level types.
 pub use crate::{
     application::APP,
-    config::SaganConfig,
+    config::CosmonConfig,
     error::{Error, ErrorKind},
 };
 

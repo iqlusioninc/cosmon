@@ -1,4 +1,4 @@
-//! `sagan.toml` monitoring agent configuration settings
+//! `cosmon.toml` monitoring agent configuration settings
 
 pub use tendermint::config::TendermintConfig;
 
@@ -7,7 +7,7 @@ use iqhttp::Uri;
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 
-/// Tendermint node-related config settings from `sagan.toml`
+/// Tendermint node-related config settings from `cosmon.toml`
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct Config {
