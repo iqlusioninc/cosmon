@@ -13,6 +13,7 @@ pub mod config;
 pub mod error;
 pub mod message;
 pub mod monitor;
+pub mod net;
 pub mod network;
 pub mod prelude;
 pub mod response;

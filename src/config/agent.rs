@@ -1,6 +1,6 @@
 //! `cosmon.toml` monitoring agent configuration settings
 
-pub use tendermint::config::TendermintConfig;
+pub use tendermint_config::TendermintConfig;
 
 use crate::error::{Error, ErrorKind};
 use iqhttp::Uri;

@@ -1,7 +1,7 @@
 //! Message types (sent to collector)
 
 use crate::monitor::{net_info::Peer, status::ChainStatus};
-use abscissa_core::time::{DateTime, Utc};
+use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use tendermint::{chain, node};
 

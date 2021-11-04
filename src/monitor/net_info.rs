@@ -3,7 +3,8 @@
 use super::message::Message;
 use crate::prelude::*;
 use serde::{Deserialize, Serialize};
-use tendermint::{net, node};
+use tendermint::node;
+use tendermint_config::net;
 use tendermint_rpc::{Client, HttpClient};
 
 /// Map of peer IDs to their peer information
@@ -46,12 +47,14 @@ impl NetInfo {
             let listen_addr = peer_info
                 .node_info
                 .listen_addr
-                .to_net_address()
-                .ok_or_else(|| {
+                .to_string()
+                .parse()
+                .map_err(|err| {
                     format_err!(
                         ErrorKind::ConfigError,
-                        "can't parse peer's listen address: {}",
-                        &peer_info.node_info.listen_addr
+                        "can't parse peer's listen address: {} ({})",
+                        &peer_info.node_info.listen_addr,
+                        err
                     )
                 })?;
 

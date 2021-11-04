@@ -1,11 +1,11 @@
 //! cosmon Abscissa Application
 
-use crate::{commands::CosmonCommand, config::CosmonConfig};
+use crate::{commands::EntryPoint, config::CosmonConfig};
 use abscissa_core::{
     application,
     application::AppCell,
     config::{self, CfgCell},
-    trace, Application, EntryPoint, FrameworkError, StandardPaths,
+    trace, Application, FrameworkError, StandardPaths,
 };
 use abscissa_tokio::TokioComponent;
 
@@ -24,7 +24,7 @@ pub struct CosmonApplication {
 
 impl Application for CosmonApplication {
     /// Entrypoint command for this application.
-    type Cmd = EntryPoint<CosmonCommand>;
+    type Cmd = EntryPoint;
 
     /// Application configuration.
     type Cfg = CosmonConfig;
@@ -60,7 +60,7 @@ impl Application for CosmonApplication {
     }
 
     /// Get logging configuration from command-line options.
-    fn tracing_config(&self, command: &EntryPoint<CosmonCommand>) -> trace::Config {
+    fn tracing_config(&self, command: &EntryPoint) -> trace::Config {
         if command.verbose {
             trace::Config::verbose()
         } else {

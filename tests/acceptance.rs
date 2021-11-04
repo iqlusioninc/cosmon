@@ -4,8 +4,8 @@
 #![forbid(unsafe_code)]
 
 use abscissa_core::testing::prelude::*;
+use cosmon::config::CosmonConfig;
 use once_cell::sync::Lazy;
-use cosmon::config::cosmonConfig;
 
 pub static RUNNER: Lazy<CmdRunner> = Lazy::new(CmdRunner::default);
 
@@ -13,8 +13,8 @@ pub static RUNNER: Lazy<CmdRunner> = Lazy::new(CmdRunner::default);
 fn start() {
     let mut runner = RUNNER.clone();
     let cmd = runner
-        .config(&cosmonConfig::default())
-        .arg("start")
+        .config(&CosmonConfig::default())
+        .arg("--start")
         .capture_stdout()
         .run();
 
