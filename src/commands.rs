@@ -4,14 +4,15 @@ mod start;
 
 use self::start::StartCommand;
 use crate::config::CosmonConfig;
-use abscissa_core::{Clap, Command, Configurable, Runnable};
+use abscissa_core::{Command, Configurable, Runnable};
+use clap::Parser;
 use std::path::PathBuf;
 
 /// Configuration filename
 pub const CONFIG_FILE: &str = "cosmon.toml";
 
 /// Subcommands
-#[derive(Command, Debug, Clap, Runnable)]
+#[derive(Command, Debug, Parser, Runnable)]
 pub enum CosmonCommand {
     /// The `start` subcommand
     #[clap()]
@@ -26,7 +27,7 @@ impl Configurable<CosmonConfig> for EntryPoint {
 }
 
 /// Entry point for the application.
-#[derive(Command, Debug, Clap)]
+#[derive(Command, Debug, Parser)]
 #[clap(author, about, version)]
 pub struct EntryPoint {
     #[clap(subcommand)]
