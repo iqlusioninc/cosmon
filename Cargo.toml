@@ -16,9 +16,9 @@ categories = ["cryptography::cryptocurrencies"]
 keywords   = ["cosmos", "tendermint"]
 
 [dependencies]
-abscissa_core = "=0.6.0-beta.1"
-abscissa_tokio = "=0.6.0-beta.1"
-clap = "=3.0.0-beta.5"
+abscissa_core = "=0.6.0-rc.0"
+abscissa_tokio = "=0.6.0-rc.0"
+clap = "3"
 chrono = "0.4"
 futures = "0.3"
 eyre = "0.6"
@@ -44,7 +44,7 @@ mintscan = { version = "0.3", optional = true }
 once_cell = "1"
 
 [dev-dependencies.abscissa_core]
-version = "=0.6.0-beta.1"
+version = "=0.6.0-rc.0"
 features = ["testing"]
 
 [features]
