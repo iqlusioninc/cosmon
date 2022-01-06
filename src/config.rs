@@ -7,7 +7,7 @@ pub mod collector;
 pub mod network;
 
 /// `cosmon.toml` configuration settings
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 pub struct CosmonConfig {
     /// Monitoring agent configuration
@@ -24,11 +24,11 @@ impl CosmonConfig {
     }
 }
 
-impl Default for CosmonConfig {
+/*impl Default for CosmonConfig {
     fn default() -> Self {
         Self {
             agent: None,
             collector: None,
         }
     }
-}
+}*/
