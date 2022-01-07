@@ -1,4 +1,4 @@
-//! `sagan.toml` configuration file
+//! `cosmon.toml` configuration file
 
 use serde::{Deserialize, Serialize};
 
@@ -6,10 +6,10 @@ pub mod agent;
 pub mod collector;
 pub mod network;
 
-/// `sagan.toml` configuration settings
-#[derive(Clone, Debug, Deserialize, Serialize)]
+/// `cosmon.toml` configuration settings
+#[derive(Clone, Debug, Default, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
-pub struct SaganConfig {
+pub struct CosmonConfig {
     /// Monitoring agent configuration
     pub agent: Option<agent::Config>,
 
@@ -17,18 +17,18 @@ pub struct SaganConfig {
     pub collector: Option<collector::Config>,
 }
 
-impl SaganConfig {
+impl CosmonConfig {
     /// Are we configured to be an agent?
     pub fn is_agent(&self) -> bool {
         self.agent.is_some()
     }
 }
 
-impl Default for SaganConfig {
+/*impl Default for CosmonConfig {
     fn default() -> Self {
         Self {
             agent: None,
             collector: None,
         }
     }
-}
+}*/

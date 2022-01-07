@@ -1,35 +1,50 @@
-//! Sagan subcommands
+//! cosmon subcommands
 
 mod start;
-mod version;
 
-use self::{start::StartCommand, version::VersionCommand};
-use crate::config::SaganConfig;
-use abscissa_core::{Command, Configurable, Help, Options, Runnable};
+use self::start::StartCommand;
+use crate::config::CosmonConfig;
+use abscissa_core::{Command, Configurable, Runnable};
+use clap::Parser;
 use std::path::PathBuf;
 
 /// Configuration filename
-pub const CONFIG_FILE: &str = "sagan.toml";
+pub const CONFIG_FILE: &str = "cosmon.toml";
 
 /// Subcommands
-#[derive(Command, Debug, Options, Runnable)]
-pub enum SaganCommand {
-    /// The `help` subcommand
-    #[options(help = "get usage information")]
-    Help(Help<Self>),
-
+#[derive(Command, Debug, Parser, Runnable)]
+pub enum CosmonCommand {
     /// The `start` subcommand
-    #[options(help = "start the application")]
+    #[clap()]
     Start(StartCommand),
-
-    /// The `version` subcommand
-    #[options(help = "display version information")]
-    Version(VersionCommand),
 }
 
-impl Configurable<SaganConfig> for SaganCommand {
+impl Configurable<CosmonConfig> for EntryPoint {
     /// Location of the configuration file
     fn config_path(&self) -> Option<PathBuf> {
         Some(PathBuf::from(CONFIG_FILE))
+    }
+}
+
+/// Entry point for the application.
+#[derive(Command, Debug, Parser)]
+#[clap(author, about, version)]
+pub struct EntryPoint {
+    #[clap(subcommand)]
+    /// CosmonCommand
+    cmd: CosmonCommand,
+
+    /// Enable verbose logging
+    #[clap(short, long)]
+    pub verbose: bool,
+
+    /// Use the specified config file
+    #[clap(short, long)]
+    pub config: Option<String>,
+}
+
+impl Runnable for EntryPoint {
+    fn run(&self) {
+        self.cmd.run()
     }
 }

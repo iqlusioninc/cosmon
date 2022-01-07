@@ -48,7 +48,7 @@ impl Status {
         }
 
         if !status.validator_info.eq(&self.validator) || force {
-            self.validator = status.validator_info;
+            self.validator = status.validator_info.clone();
             output.push(status.validator_info.into());
         }
 

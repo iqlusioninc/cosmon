@@ -3,7 +3,7 @@
 use serde::{Deserialize, Serialize};
 use std::net::Ipv4Addr;
 
-/// Default port number (Sagan's number: 7E22)
+/// Default port number (cosmon's number: 7E22)
 pub const DEFAULT_PORT: u16 = 7322;
 
 /// Listen config: controls where the collector listens for connections

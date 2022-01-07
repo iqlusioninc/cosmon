@@ -96,7 +96,7 @@ impl Network {
     /// Update information about validators
     fn update_validator(&mut self, validator_info: &tendermint::validator::Info) {
         info!("validator update: {:?}", validator_info);
-        self.validators = Some(*validator_info);
+        self.validators = Some(validator_info.clone());
     }
 }
 
@@ -134,7 +134,7 @@ impl State {
             nodes: network.nodes.values().cloned().collect(),
             peers: network.peers.clone(),
             chain: network.chain.clone(),
-            validators: network.validators,
+            validators: network.validators.clone(),
         }
     }
 }

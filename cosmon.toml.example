@@ -1,4 +1,4 @@
-# Example Sagan configuration file
+# Example cosmon configuration file
 
 [agent]
 node_home = "/{your-gaiad-home}/cosmoshub-2" # path to e.g. gaiad's --home

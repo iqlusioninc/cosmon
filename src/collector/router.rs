@@ -81,7 +81,7 @@ where
 
 /// `POST /collector`: handle incoming messages sent to the collector
 ///
-/// This endpoint is intended to be triggered by the sagan agent
+/// This endpoint is intended to be triggered by the cosmon agent
 pub async fn collector_post<S>(
     msg: message::Envelope,
     mut service: S,

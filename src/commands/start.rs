@@ -7,14 +7,15 @@ use crate::{
     monitor::Monitor,
     prelude::*,
 };
-use abscissa_core::{Command, Options, Runnable};
+use abscissa_core::{Command, Runnable};
+use clap::Parser;
 use futures::future;
 use std::process;
 use tokio::task::JoinHandle;
 use tower::{Service, ServiceBuilder};
 
 /// `start` subcommand
-#[derive(Command, Debug, Options)]
+#[derive(Command, Debug, Parser)]
 pub struct StartCommand {}
 
 impl Runnable for StartCommand {

@@ -1,11 +1,11 @@
-//! Main entry point for Sagan
+//! Main entry point for Cosmon
 
 #![deny(warnings, missing_docs, trivial_casts, unused_qualifications)]
 #![forbid(unsafe_code)]
 
-use sagan::application::APP;
+use cosmon::application::APP;
 
-/// Boot Sagan
+/// Boot Cosmon
 fn main() {
     abscissa_core::boot(&APP);
 }
