@@ -222,9 +222,9 @@ dependencies = [
 
 [[package]]
 name = "clap"
-version = "3.0.5"
+version = "3.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f6f34b09b9ee8c7c7b400fe2f8df39cafc9538b03d6ba7f4ae13e4cb90bfbb7d"
+checksum = "12e8611f9ae4e068fa3e56931fded356ff745e70987ff76924a6e0ab1c8ef2e3"
 dependencies = [
  "atty",
  "bitflags",
@@ -239,9 +239,9 @@ dependencies = [
 
 [[package]]
 name = "clap_derive"
-version = "3.0.5"
+version = "3.0.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "41a0645a430ec9136d2d701e54a95d557de12649a9dd7109ced3187e648ac824"
+checksum = "517358c28fcef6607bf6f76108e02afad7e82297d132a6b846dcc1fc3efcd153"
 dependencies = [
  "heck",
  "proc-macro-error",
@@ -391,6 +391,15 @@ checksum = "221239d1d5ea86bf5d6f91c9d6bc3646ffe471b08ff9b0f91c44f115ac969d2b"
 dependencies = [
  "indenter",
  "once_cell",
+]
+
+[[package]]
+name = "fastrand"
+version = "1.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "779d043b6a0b90cc4c0ed7ee380a6504394cee7efd7db050e3774eee387324b2"
+dependencies = [
+ "instant",
 ]
 
 [[package]]
@@ -560,9 +569,9 @@ checksum = "78cc372d058dcf6d5ecd98510e7fbc9e5aec4d21de70f65fea8fecebcd881bd4"
 
 [[package]]
 name = "h2"
-version = "0.3.9"
+version = "0.3.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8f072413d126e57991455e0a922b31e4c8ba7c2ffbebf6b78b4f8521397d65cd"
+checksum = "0c9de88456263e249e241fcd211d3954e2c9b0ef7ccfc235a444eb367cae3689"
 dependencies = [
  "bytes",
  "fnv",
@@ -701,11 +710,12 @@ dependencies = [
  "headers",
  "http",
  "hyper",
- "hyper-tls",
- "native-tls",
+ "hyper-rustls",
+ "rustls-native-certs",
  "tokio",
- "tokio-native-tls",
+ "tokio-rustls",
  "tower-service",
+ "webpki",
 ]
 
 [[package]]
@@ -764,12 +774,21 @@ checksum = "ce23b50ad8242c51a442f3ff322d56b02f08852c77e4c0b4d3fd684abc89c683"
 
 [[package]]
 name = "indexmap"
-version = "1.7.0"
+version = "1.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bc633605454125dec4b66843673f01c7df2b89479b32e0ed634e43a91cff62a5"
+checksum = "282a6247722caba404c065016bbfa522806e51714c34f5dfc3e4a3a46fcb4223"
 dependencies = [
  "autocfg",
  "hashbrown",
+]
+
+[[package]]
+name = "instant"
+version = "0.1.12"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7a5bbe824c507c5da5956355e86a746d82e0e1464f65d862cc5e71da70e94b2c"
+dependencies = [
+ "cfg-if",
 ]
 
 [[package]]
@@ -1043,9 +1062,9 @@ dependencies = [
 
 [[package]]
 name = "openssl-probe"
-version = "0.1.4"
+version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "28988d872ab76095a6e6ac88d99b54fd267702734fd7ffe610ca27f533ddb95a"
+checksum = "ff011a302c396a5197692431fc1948019154afc178baf7d8e37367442a4601cf"
 
 [[package]]
 name = "openssl-sys"
@@ -1331,15 +1350,16 @@ dependencies = [
 
 [[package]]
 name = "reqwest"
-version = "0.11.8"
+version = "0.11.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7c4e0a76dc12a116108933f6301b95e83634e0c47b0afbed6abbaa0601e99258"
+checksum = "87f242f1488a539a79bac6dbe7c8609ae43b7914b7736210f239a37cccb32525"
 dependencies = [
  "base64",
  "bytes",
  "encoding_rs",
  "futures-core",
  "futures-util",
+ "h2",
  "http",
  "http-body",
  "hyper",
@@ -1677,13 +1697,13 @@ dependencies = [
 
 [[package]]
 name = "tempfile"
-version = "3.2.0"
+version = "3.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dac1c663cfc93810f88aed9b8941d48cabf856a1b111c29a40439018d870eb22"
+checksum = "5cdb1ef4eaeeaddc8fbd371e5017057064af0911902ef36b39801f67cc6d79e4"
 dependencies = [
  "cfg-if",
+ "fastrand",
  "libc",
- "rand",
  "redox_syscall",
  "remove_dir_all",
  "winapi",
@@ -1691,9 +1711,9 @@ dependencies = [
 
 [[package]]
 name = "tendermint"
-version = "0.23.3"
+version = "0.23.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a9ef686b8ecd36550d0581f0989c9d8607090b23005df479d8e6ba348b5800b9"
+checksum = "9d2e82729447fba94ce0ff823fe4dba90ab7e7ada0a5dcb98b6e7d1f1d278cf3"
 dependencies = [
  "async-trait",
  "bytes",
@@ -1720,9 +1740,9 @@ dependencies = [
 
 [[package]]
 name = "tendermint-config"
-version = "0.23.3"
+version = "0.23.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ecc127f82e7a8c7337c1f293d65a821380d3407c4c44bc979ef4da0ebc3b31ed"
+checksum = "8bd6618c676a9eee8b5343be1503e7422921e399d995eabf3eeea81824ea82fb"
 dependencies = [
  "flex-error",
  "serde",
@@ -1734,9 +1754,9 @@ dependencies = [
 
 [[package]]
 name = "tendermint-proto"
-version = "0.23.3"
+version = "0.23.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a9e0a0251fd81bed7420bea0f4d91c2a58f6c9fa34d5b2f70bed0ba8890de5aa"
+checksum = "8b2643da389b6c69b160b9ae021678f119126f4c37cc12d0e81595d1df75a5d2"
 dependencies = [
  "bytes",
  "flex-error",
@@ -1752,9 +1772,9 @@ dependencies = [
 
 [[package]]
 name = "tendermint-rpc"
-version = "0.23.3"
+version = "0.23.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "626c493e9ced3a9de37583bbd929f4b6dbd49aa513ab9b4776aa44a9332ce9b5"
+checksum = "af16f4fee29dd0c9ea96a438e390fe99b64ff7a4bfec4321c49dbda38eb9f998"
 dependencies = [
  "async-trait",
  "bytes",
