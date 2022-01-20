@@ -1,9 +1,16 @@
 //! Mintscan poller
 
+use std::collections::BTreeMap;
 use crate::{collector, config, network, prelude::*};
+use datadog;
+use datadog::{send_stream_event, StreamEvent};
+use hostname;
 use mintscan::{Address, Mintscan};
+use std::env;
+use std::time::SystemTime;
 use tendermint::chain;
 use tower::{util::ServiceExt, Service};
+use warp::body::stream;
 
 /// Mintscan poller
 pub struct Poller {
@@ -60,9 +67,49 @@ impl Poller {
 
         if let Some(addr) = &self.validator_addr {
             match self.client.validator_uptime(addr).await {
-                // TODO(tarcieri): do something with `uptime.uptime` (i.e. missed blocks)?
                 Ok(uptime) => {
+                    dbg!(&uptime);
                     last_signed_height = Some(uptime.latest_height.into());
+                    dbg!(uptime.uptime.len());
+                    if uptime.uptime.len() >= 2 {
+
+                        fn block_on<F: std::future::Future>(f: F) -> F::Output {
+                            tokio::runtime::Builder::new_current_thread()
+                                .enable_all()
+                                .build()
+                                .unwrap()
+                                .block_on(f)
+                        }
+
+                        let dd_api_key = env::var("DD_API_KEY").unwrap();
+                        let hostname = hostname::get().unwrap();
+                        let mut ddtags = BTreeMap::new();
+                        ddtags.insert("env".to_owned(), "staging".to_owned());
+                        let stream_event = StreamEvent {
+                            aggregation_key: None,
+                            alert_type: Some(datadog::AlertType::Error),
+                            date_happened: Some(SystemTime::now()),
+                            device_name: None,
+                            hostname: Some(hostname.to_string_lossy().to_string()),
+                            priority: Some(datadog::Priority::Normal),
+                            related_event_id: None,
+                            tags: Some(ddtags),
+                            // Text field must contain @pagerduty to trigger alert
+                            text: format!("@pagerduty missed blocks alert: {:?}", &uptime),
+                            title: "missed blocks alert test".to_owned(),
+                        };
+
+                        // send stream event to datadog which forwards to pagerduty
+                        let stream_event = block_on(send_stream_event(&stream_event, dd_api_key));
+                        match stream_event {
+                            Ok(()) => {
+                                dbg!("event sent to datadog");
+                            }
+                            Err(err) => {
+                                warn!("unable to sent event to datadog");
+                            }
+                        }
+                    }
                 }
                 Err(err) => {
                     warn!(

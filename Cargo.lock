@@ -291,6 +291,7 @@ dependencies = [
  "eyre",
  "futures",
  "home",
+ "hostname",
  "iqhttp",
  "mintscan",
  "once_cell",
