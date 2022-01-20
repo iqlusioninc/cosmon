@@ -1,16 +1,15 @@
 //! Mintscan poller
 
-use std::collections::BTreeMap;
 use crate::{collector, config, network, prelude::*};
 use datadog;
 use datadog::{send_stream_event, StreamEvent};
 use hostname;
 use mintscan::{Address, Mintscan};
+use std::collections::BTreeMap;
 use std::env;
 use std::time::SystemTime;
 use tendermint::chain;
 use tower::{util::ServiceExt, Service};
-use warp::body::stream;
 
 /// Mintscan poller
 pub struct Poller {
@@ -72,15 +71,6 @@ impl Poller {
                     last_signed_height = Some(uptime.latest_height.into());
                     dbg!(uptime.uptime.len());
                     if uptime.uptime.len() >= 2 {
-
-                        fn block_on<F: std::future::Future>(f: F) -> F::Output {
-                            tokio::runtime::Builder::new_current_thread()
-                                .enable_all()
-                                .build()
-                                .unwrap()
-                                .block_on(f)
-                        }
-
                         let dd_api_key = env::var("DD_API_KEY").unwrap();
                         let hostname = hostname::get().unwrap();
                         let mut ddtags = BTreeMap::new();
@@ -100,12 +90,12 @@ impl Poller {
                         };
 
                         // send stream event to datadog which forwards to pagerduty
-                        let stream_event = block_on(send_stream_event(&stream_event, dd_api_key));
+                        let stream_event = send_stream_event(&stream_event, dd_api_key).await;
                         match stream_event {
                             Ok(()) => {
                                 dbg!("event sent to datadog");
                             }
-                            Err(err) => {
+                            Err(_err) => {
                                 warn!("unable to sent event to datadog");
                             }
                         }
