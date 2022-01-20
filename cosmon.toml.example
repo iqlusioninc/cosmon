@@ -1,8 +1,5 @@
 # Example cosmon configuration file
 
-[agent]
-node_home = "/{your-gaiad-home}/cosmoshub-2" # path to e.g. gaiad's --home
-
 [collector.listen]
 addr = "127.0.0.1"
 port = 7322
@@ -11,4 +8,4 @@ protocol = "http"
 [[collector.networks.tendermint]]
 chain_id = "cosmoshub-4"
 validator_addr = "cosmosvaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03xfytvz7"
-# mintscan = { host = "api.cosmostation.io" }
+mintscan = { host = "api.cosmostation.io" }
