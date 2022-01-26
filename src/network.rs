@@ -6,7 +6,7 @@ mod id;
 mod state;
 
 pub use self::{id::Id, state::State};
-use crate::{config, message};
+use crate::{config, message, collector};
 
 /// Types of networks.
 #[derive(Debug, Clone)]
@@ -43,10 +43,19 @@ impl Network {
         }
     }
 
+    /// Handle an incoming poller info message from a monitor.
+    pub async fn handle_poll_event(&mut self, poll_event: collector::PollEvent) {
+        match self {
+            Network::Tendermint(tm) => tm.handle_poll_event(poll_event).await,
+        };
+    }
+
     /// Return a snapshot of the network state.
     pub fn state(&self) -> State {
         match self {
             Network::Tendermint(tm) => State::Tendermint(tm.state()),
         }
     }
+
+
 }

@@ -5,7 +5,7 @@ mod request;
 mod response;
 mod router;
 
-pub use self::{poller::Poller, request::Request, response::Response, router::Router};
+pub use self::{poller::Poller, request::{Request, PollEvent}, response::Response, router::Router};
 
 use crate::{
     config, message,
@@ -75,8 +75,14 @@ impl Collector {
     }
 
     /// Handle incoming poller info
-    fn poller_info(&self, info: request::PollEvent) -> Result<Response, Error> {
+    async fn poller_info(&mut self, info: PollEvent) -> Result<Response, Error> {
         info!("got {:?}", info);
+        match self.networks.get_mut(&info.network_id) {
+            Some(network) => {
+                network.handle_poll_event(info).await;
+            }
+            None => warn!("unable to send poll event: {:?}", info),
+        }
 
         // TODO(tarcieri): real response
         Ok(Response::Message)
@@ -96,7 +102,7 @@ impl Service<Request> for Collector {
         let result = match req {
             Request::Message(msg) => self.handle_message(msg),
             Request::NetworkState(id) => self.network_state(&id),
-            Request::PollEvent(info) => self.poller_info(info),
+            Request::PollEvent(info) => self.poller_info(info).await,
         };
 
         Box::pin(async { result })
