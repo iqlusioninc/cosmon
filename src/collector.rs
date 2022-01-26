@@ -5,7 +5,12 @@ mod request;
 mod response;
 mod router;
 
-pub use self::{poller::Poller, request::{Request, PollEvent}, response::Response, router::Router};
+pub use self::{
+    poller::Poller,
+    request::{PollEvent, Request},
+    response::Response,
+    router::Router,
+};
 
 use crate::{
     config, message,

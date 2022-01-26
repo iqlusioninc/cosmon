@@ -1,16 +1,15 @@
 //! Tendermint network types
 
-
-use datadog;
-use datadog::{send_stream_event, StreamEvent};
-use hostname;
 use super::Id;
 use crate::{
+    collector::PollEvent,
     message::{Envelope, Message},
     monitor::{net_info::Peer, status::ChainStatus},
     prelude::*,
-    collector::PollEvent
 };
+use datadog;
+use datadog::{send_stream_event, StreamEvent};
+use hostname;
 use serde::Serialize;
 use std::collections::BTreeMap;
 use std::env;
@@ -110,7 +109,6 @@ impl Network {
                 }
             }
         }
-
     }
 
     /// Update information about a particular node

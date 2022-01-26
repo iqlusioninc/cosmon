@@ -6,7 +6,7 @@ mod id;
 mod state;
 
 pub use self::{id::Id, state::State};
-use crate::{config, message, collector};
+use crate::{collector, config, message};
 
 /// Types of networks.
 #[derive(Debug, Clone)]
@@ -56,6 +56,4 @@ impl Network {
             Network::Tendermint(tm) => State::Tendermint(tm.state()),
         }
     }
-
-
 }
