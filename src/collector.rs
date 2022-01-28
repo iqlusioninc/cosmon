@@ -1,11 +1,13 @@
 //! HTTP collector
 
+mod pager;
 mod poller;
 mod request;
 mod response;
 mod router;
 
 pub use self::{
+    pager::Pager,
     poller::Poller,
     request::{PollEvent, Request},
     response::Response,
@@ -80,11 +82,11 @@ impl Collector {
     }
 
     /// Handle incoming poller info
-    async fn poller_info(&mut self, info: PollEvent) -> Result<Response, Error> {
+    fn poller_info(&mut self, info: PollEvent) -> Result<Response, Error> {
         info!("got {:?}", info);
         match self.networks.get_mut(&info.network_id) {
             Some(network) => {
-                network.handle_poll_event(info).await;
+                network.handle_poll_event(info);
             }
             None => warn!("unable to send poll event: {:?}", info),
         }
@@ -107,7 +109,7 @@ impl Service<Request> for Collector {
         let result = match req {
             Request::Message(msg) => self.handle_message(msg),
             Request::NetworkState(id) => self.network_state(&id),
-            Request::PollEvent(info) => self.poller_info(info).await,
+            Request::PollEvent(info) => self.poller_info(info),
         };
 
         Box::pin(async { result })

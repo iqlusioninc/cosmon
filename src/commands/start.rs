@@ -50,6 +50,11 @@ impl StartCommand {
                     }));
 
             tasks.push(
+                self.init_collector_pager(config.clone(), collector.clone())
+                    .await,
+            );
+
+            tasks.push(
                 self.init_collector_poller(config.clone(), collector.clone())
                     .await,
             );
@@ -62,6 +67,32 @@ impl StartCommand {
 
         tasks
     }
+
+    /// Inititalize collect pager (if configured/needed)
+    async fn init_collector_pager<S>(
+        &self,
+        config: config::collector::Config,
+        collector: S,
+    ) -> JoinHandle<()>
+        where
+            S: Service<collector::Request, Response = collector::Response, Error = BoxError>
+                + Send
+                + Sync
+                + Clone
+                + 'static,
+            S::Future: Send,
+    {
+        tokio::spawn(async move {
+            let pager = collector::Pager::new(&config).unwrap_or_else(|e| {
+                status_err!("couldn't initialize collector pager: {}", e);
+                process::exit(1);
+            });
+
+        pager.run(collector).await;
+
+        })
+    }
+
 
     /// Initialize collector poller (if configured/needed)
     async fn init_collector_poller<S>(
