@@ -74,13 +74,13 @@ impl StartCommand {
         config: config::collector::Config,
         collector: S,
     ) -> JoinHandle<()>
-        where
-            S: Service<collector::Request, Response = collector::Response, Error = BoxError>
-                + Send
-                + Sync
-                + Clone
-                + 'static,
-            S::Future: Send,
+    where
+        S: Service<collector::Request, Response = collector::Response, Error = BoxError>
+            + Send
+            + Sync
+            + Clone
+            + 'static,
+        S::Future: Send,
     {
         tokio::spawn(async move {
             let pager = collector::Pager::new(&config).unwrap_or_else(|e| {
@@ -88,11 +88,9 @@ impl StartCommand {
                 process::exit(1);
             });
 
-        pager.run(collector).await;
-
+            pager.run(&collector).await;
         })
     }
-
 
     /// Initialize collector poller (if configured/needed)
     async fn init_collector_poller<S>(

@@ -14,6 +14,9 @@ pub enum Request {
     /// Get the network state for a given network.
     NetworkState(network::Id),
 
+    /// Get any pager events to relay to e.g. PagerDuty
+    PagerEvents,
+
     /// Report information obtained from an external poller.
     PollEvent(PollEvent),
 }

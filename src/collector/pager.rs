@@ -1,11 +1,12 @@
 //! Collector pager
 
 use crate::{collector, config, prelude::*};
+use futures::future;
 use std::time::Duration;
 use std::time::SystemTime;
 use tokio::time;
 use tower::{Service, ServiceExt};
-use futures::future;
+use crate::collector::Response;
 
 /// The collector's [`Pager`] collects pageable events
 pub struct Pager {
@@ -27,9 +28,9 @@ impl Pager {
     }
 
     /// Route incoming requests.
-    pub async fn run<S>(self, collector: S)
-        where
-            S: Service<collector::Request, Response = collector::Response, Error = BoxError>
+    pub async fn run<S>(self, collector: &S)
+    where
+        S: Service<collector::Request, Response = collector::Response, Error = BoxError>
             + Send
             + Clone
             + 'static,
@@ -38,16 +39,16 @@ impl Pager {
 
         loop {
             interval.tick().await;
-            self.poll(&collector).await;
+            self.poll(collector.clone()).await;
             info!("waiting for {:?}", self.poll_interval);
         }
     }
 
     /// Poll sources.
     #[cfg_attr(not(feature = "mintscan"), allow(unused_variables))]
-    async fn poll<S>(&self, mut collector: &S)
-        where
-            S: Service<collector::Request, Response = collector::Response, Error = BoxError>
+    async fn poll<S>(&self, mut collector: S)
+    where
+        S: Service<collector::Request, Response = collector::Response, Error = BoxError>
             + Send
             + Clone
             + 'static,
@@ -56,17 +57,50 @@ impl Pager {
         loop {
             interval.tick().await;
 
-            collector
+            let response = collector
                 .ready()
                 .await
                 .expect("collector not ready")
-                .call(
-                    collector::request::GetPageEvents {}
-                        .into(),
-                )
+                .call(collector::Request::PagerEvents {})
                 .await
                 .expect("error sending poller info");
+
+            let events = match response {
+                Response::PagerEvents(ev) => ev,
+                _ => unreachable!("unexpected response: {:?}", response)
+            };
+
+            for event in events {
+                dbg!(&event);
+                // let dd_api_key = env::var("DD_API_KEY").unwrap();
+                // let hostname = hostname::get().unwrap();
+                // let mut ddtags = BTreeMap::new();
+                // ddtags.insert("env".to_owned(), "staging".to_owned());
+                // let stream_event = StreamEvent {
+                //     aggregation_key: None,
+                //     alert_type: Some(datadog::AlertType::Error),
+                //     date_happened: Some(SystemTime::now()),
+                //     device_name: None,
+                //     hostname: Some(hostname.to_string_lossy().to_string()),
+                //     priority: Some(datadog::Priority::Normal),
+                //     related_event_id: None,
+                //     tags: Some(ddtags),
+                //     // Text field must contain @pagerduty to trigger alert
+                //     text: format!("@pagerduty cosmon poll event: {:?}", &poll_event),
+                //     title: "cosmon poll event".to_owned(),
+                // };
+                //
+                // // send stream event to datadog which forwards to pagerduty
+                // let stream_event = send_stream_event(&stream_event, dd_api_key).await;
+                // match stream_event {
+                //     Ok(()) => {
+                //         dbg!("event sent to datadog");
+                //     }
+                //     Err(_err) => {
+                //         warn!("unable to sent event to datadog");
+                //     }
+                // }
+            }
         }
     }
-
 }

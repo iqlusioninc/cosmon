@@ -81,15 +81,21 @@ impl Collector {
         }
     }
 
+    fn get_pager_events(&mut self) -> Result<Response, Error> {
+        let mut events = Vec::new();
+
+        for (_, network) in &mut self.networks {
+            if let Some(event) = network.get_pager_events() {
+                events.push(event);
+            }
+        }
+
+        Ok(Response::PagerEvents(events))
+    }
+
     /// Handle incoming poller info
     fn poller_info(&mut self, info: PollEvent) -> Result<Response, Error> {
         info!("got {:?}", info);
-        match self.networks.get_mut(&info.network_id) {
-            Some(network) => {
-                network.handle_poll_event(info);
-            }
-            None => warn!("unable to send poll event: {:?}", info),
-        }
 
         // TODO(tarcieri): real response
         Ok(Response::Message)
@@ -109,6 +115,7 @@ impl Service<Request> for Collector {
         let result = match req {
             Request::Message(msg) => self.handle_message(msg),
             Request::NetworkState(id) => self.network_state(&id),
+            Request::PagerEvents => self.get_pager_events(),
             Request::PollEvent(info) => self.poller_info(info),
         };
 
