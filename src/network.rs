@@ -44,15 +44,14 @@ impl Network {
     }
 
     /// Handle an incoming pager info message from a monitor.
-    pub async fn handle_poll_event(&mut self, poll_event: collector::PollEvent) {
+    pub fn handle_poll_event(&mut self, event: collector::PollEvent) {
         match self {
-            Network::Tendermint(tm) => tm.handle_poll_event(poll_event).await,
-        };
+            Network::Tendermint(tm) => tm.handle_poll_event(event),
+        }
     }
 
     pub fn get_pager_events(&mut self) -> Option<String> {
         todo!("")
-
     }
 
     /// Return a snapshot of the network state.

@@ -94,11 +94,13 @@ impl Collector {
     }
 
     /// Handle incoming poller info
-    fn poller_info(&mut self, info: PollEvent) -> Result<Response, Error> {
-        info!("got {:?}", info);
+    fn handle_poll_event(&mut self, event: PollEvent) -> Result<Response, Error> {
+        self.networks
+            .get_mut(&event.network_id)
+            .expect("missing network") // TODO(tarcieri): don't panic
+            .handle_poll_event(event);
 
-        // TODO(tarcieri): real response
-        Ok(Response::Message)
+        Ok(Response::PollEvent)
     }
 }
 
@@ -116,7 +118,7 @@ impl Service<Request> for Collector {
             Request::Message(msg) => self.handle_message(msg),
             Request::NetworkState(id) => self.network_state(&id),
             Request::PagerEvents => self.get_pager_events(),
-            Request::PollEvent(info) => self.poller_info(info),
+            Request::PollEvent(info) => self.handle_poll_event(info),
         };
 
         Box::pin(async { result })

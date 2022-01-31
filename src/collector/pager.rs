@@ -1,12 +1,11 @@
 //! Collector pager
 
+use crate::collector::Response;
 use crate::{collector, config, prelude::*};
-use futures::future;
 use std::time::Duration;
 use std::time::SystemTime;
 use tokio::time;
 use tower::{Service, ServiceExt};
-use crate::collector::Response;
 
 /// The collector's [`Pager`] collects pageable events
 pub struct Pager {
@@ -67,7 +66,7 @@ impl Pager {
 
             let events = match response {
                 Response::PagerEvents(ev) => ev,
-                _ => unreachable!("unexpected response: {:?}", response)
+                _ => unreachable!("unexpected response: {:?}", response),
             };
 
             for event in events {
