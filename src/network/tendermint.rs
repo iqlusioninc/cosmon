@@ -7,13 +7,8 @@ use crate::{
     monitor::{net_info::Peer, status::ChainStatus},
     prelude::*,
 };
-use datadog;
-use datadog::{send_stream_event, StreamEvent};
-use hostname;
 use serde::Serialize;
-use std::collections::BTreeMap;
-use std::env;
-use std::time::SystemTime;
+use std::time::{Duration, SystemTime};
 
 /// Tendermint network
 #[derive(Debug, Clone)]
@@ -32,6 +27,12 @@ pub struct Network {
 
     /// Validators
     validators: Option<tendermint::validator::Info>,
+
+    /// Page events
+    page: Vec<String>,
+
+    ///Last sent page event to Datadog then forwarded to Pagerduty
+    last_paged_at: Option<SystemTime>,
 }
 
 impl Network {
@@ -43,6 +44,8 @@ impl Network {
             peers: vec![],
             chain: None,
             validators: None,
+            page: vec![],
+            last_paged_at: None,
         }
     }
 
@@ -77,11 +80,33 @@ impl Network {
     pub fn handle_poll_event(&mut self, poll_event: PollEvent) {
         dbg!(&poll_event);
         let last_signed_height = poll_event.last_signed_height.unwrap();
-        let page_threshold = last_signed_height + 20;
+        // todo add page_threshold to config
+        let page_threshold = 13;
         let current_height = poll_event.current_height;
-        if current_height > page_threshold {
-            todo!("store page event here");
+        if current_height > (last_signed_height + page_threshold) {
+            self.page.push(format!(
+                "'{}' missed blocks: {} of {}",
+                poll_event.network_id, last_signed_height, current_height
+            ));
         }
+    }
+
+    /// Get page events set by `PAGE_INTERVAL`
+    pub fn get_page_event(&mut self) -> Option<String> {
+        const PAGE_INTERVAL: Duration = Duration::from_secs(10 * 60);
+
+        if let Some(page) = self.page.pop() {
+            if let Some(last_paged_at) = self.last_paged_at {
+                if SystemTime::now().duration_since(last_paged_at).unwrap() < PAGE_INTERVAL {
+                    return None;
+                }
+            }
+
+            self.last_paged_at = Some(SystemTime::now());
+            return Some(page);
+        }
+
+        None
     }
 
     /// Update information about a particular node

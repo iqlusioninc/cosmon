@@ -50,8 +50,11 @@ impl Network {
         }
     }
 
+    /// Get pager events
     pub fn get_pager_events(&mut self) -> Option<String> {
-        todo!("")
+        match self {
+            Network::Tendermint(tm) => tm.get_page_event(),
+        }
     }
 
     /// Return a snapshot of the network state.

@@ -84,7 +84,7 @@ impl Collector {
     fn get_pager_events(&mut self) -> Result<Response, Error> {
         let mut events = Vec::new();
 
-        for (_, network) in &mut self.networks {
+        for network in self.networks.values_mut() {
             if let Some(event) = network.get_pager_events() {
                 events.push(event);
             }

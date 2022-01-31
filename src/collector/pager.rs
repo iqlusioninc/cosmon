@@ -1,7 +1,9 @@
 //! Collector pager
 
-use crate::collector::Response;
 use crate::{collector, config, prelude::*};
+use datadog::{send_stream_event, StreamEvent};
+use std::collections::BTreeMap;
+use std::env;
 use std::time::Duration;
 use std::time::SystemTime;
 use tokio::time;
@@ -11,18 +13,16 @@ use tower::{Service, ServiceExt};
 pub struct Pager {
     /// Interval at which to poll
     poll_interval: Duration,
-
-    ///Last sent page event to Datadog then forwarded to Pagerduty
-    last_paged_at: Option<SystemTime>,
 }
 
 impl Pager {
-    pub fn new(config: &config::collector::Config) -> Result<Self, Error> {
-        let now = SystemTime::now();
+    /// Initialize the pager from the config
+    /// todo(shella): add pager config
+    pub fn new(_config: &config::collector::Config) -> Result<Self, Error> {
+        let _now = SystemTime::now();
 
         Ok(Self {
             poll_interval: Duration::from_secs(1),
-            last_paged_at: None,
         })
     }
 
@@ -43,7 +43,7 @@ impl Pager {
         }
     }
 
-    /// Poll sources.
+    /// Poll sources. If a pageable event occurs, send event to Datadog then to Pagerduty.
     #[cfg_attr(not(feature = "mintscan"), allow(unused_variables))]
     async fn poll<S>(&self, mut collector: S)
     where
@@ -65,40 +65,40 @@ impl Pager {
                 .expect("error sending poller info");
 
             let events = match response {
-                Response::PagerEvents(ev) => ev,
+                collector::Response::PagerEvents(ev) => ev,
                 _ => unreachable!("unexpected response: {:?}", response),
             };
 
             for event in events {
                 dbg!(&event);
-                // let dd_api_key = env::var("DD_API_KEY").unwrap();
-                // let hostname = hostname::get().unwrap();
-                // let mut ddtags = BTreeMap::new();
-                // ddtags.insert("env".to_owned(), "staging".to_owned());
-                // let stream_event = StreamEvent {
-                //     aggregation_key: None,
-                //     alert_type: Some(datadog::AlertType::Error),
-                //     date_happened: Some(SystemTime::now()),
-                //     device_name: None,
-                //     hostname: Some(hostname.to_string_lossy().to_string()),
-                //     priority: Some(datadog::Priority::Normal),
-                //     related_event_id: None,
-                //     tags: Some(ddtags),
-                //     // Text field must contain @pagerduty to trigger alert
-                //     text: format!("@pagerduty cosmon poll event: {:?}", &poll_event),
-                //     title: "cosmon poll event".to_owned(),
-                // };
-                //
-                // // send stream event to datadog which forwards to pagerduty
-                // let stream_event = send_stream_event(&stream_event, dd_api_key).await;
-                // match stream_event {
-                //     Ok(()) => {
-                //         dbg!("event sent to datadog");
-                //     }
-                //     Err(_err) => {
-                //         warn!("unable to sent event to datadog");
-                //     }
-                // }
+                let dd_api_key = env::var("DD_API_KEY").unwrap();
+                let hostname = hostname::get().unwrap();
+                let mut ddtags = BTreeMap::new();
+                ddtags.insert("env".to_owned(), "staging".to_owned());
+                let stream_event = StreamEvent {
+                    aggregation_key: None,
+                    alert_type: Some(datadog::AlertType::Error),
+                    date_happened: Some(SystemTime::now()),
+                    device_name: None,
+                    hostname: Some(hostname.to_string_lossy().to_string()),
+                    priority: Some(datadog::Priority::Normal),
+                    related_event_id: None,
+                    tags: Some(ddtags),
+                    // Text field must contain @pagerduty to trigger alert
+                    text: format!("@pagerduty cosmon event: {:?}", &event),
+                    title: "cosmon event".to_owned(),
+                };
+
+                // send stream event to datadog which forwards to pagerduty
+                let stream_event = send_stream_event(&stream_event, dd_api_key).await;
+                match stream_event {
+                    Ok(()) => {
+                        dbg!("event sent to datadog");
+                    }
+                    Err(_err) => {
+                        warn!("unable to sent event to datadog");
+                    }
+                }
             }
         }
     }
