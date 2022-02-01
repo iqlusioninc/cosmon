@@ -57,12 +57,13 @@ impl Poller {
         };
 
         let mut last_signed_height = None;
-
         if let Some(addr) = &self.validator_addr {
             match self.client.validator_uptime(addr).await {
-                // TODO(tarcieri): do something with `uptime.uptime` (i.e. missed blocks)?
                 Ok(uptime) => {
+                    dbg!(&uptime);
                     last_signed_height = Some(uptime.latest_height.into());
+
+                    dbg!(uptime.uptime.len());
                 }
                 Err(err) => {
                     warn!(

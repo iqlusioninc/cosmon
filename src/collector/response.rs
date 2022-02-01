@@ -10,6 +10,12 @@ pub enum Response {
 
     /// Network state information.
     NetworkState(Box<network::State>),
+
+    /// Pager events
+    PagerEvents(Vec<String>),
+
+    /// Poll event
+    PollEvent,
 }
 
 impl From<network::State> for Response {

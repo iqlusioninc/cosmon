@@ -6,7 +6,7 @@ mod id;
 mod state;
 
 pub use self::{id::Id, state::State};
-use crate::{config, message};
+use crate::{collector, config, message};
 
 /// Types of networks.
 #[derive(Debug, Clone)]
@@ -40,6 +40,20 @@ impl Network {
     pub fn handle_message(&mut self, envelope: message::Envelope) {
         match self {
             Network::Tendermint(tm) => tm.handle_message(envelope),
+        }
+    }
+
+    /// Handle an incoming pager info message from a monitor.
+    pub fn handle_poll_event(&mut self, event: collector::PollEvent) {
+        match self {
+            Network::Tendermint(tm) => tm.handle_poll_event(event),
+        }
+    }
+
+    /// Get pager events
+    pub fn get_pager_events(&mut self) -> Option<String> {
+        match self {
+            Network::Tendermint(tm) => tm.get_page_event(),
         }
     }
 

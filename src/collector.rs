@@ -1,11 +1,18 @@
 //! HTTP collector
 
+mod pager;
 mod poller;
 mod request;
 mod response;
 mod router;
 
-pub use self::{poller::Poller, request::Request, response::Response, router::Router};
+pub use self::{
+    pager::Pager,
+    poller::Poller,
+    request::{PollEvent, Request},
+    response::Response,
+    router::Router,
+};
 
 use crate::{
     config, message,
@@ -74,12 +81,26 @@ impl Collector {
         }
     }
 
-    /// Handle incoming poller info
-    fn poller_info(&self, info: request::PollEvent) -> Result<Response, Error> {
-        info!("got {:?}", info);
+    fn get_pager_events(&mut self) -> Result<Response, Error> {
+        let mut events = Vec::new();
 
-        // TODO(tarcieri): real response
-        Ok(Response::Message)
+        for network in self.networks.values_mut() {
+            if let Some(event) = network.get_pager_events() {
+                events.push(event);
+            }
+        }
+
+        Ok(Response::PagerEvents(events))
+    }
+
+    /// Handle incoming poller info
+    fn handle_poll_event(&mut self, event: PollEvent) -> Result<Response, Error> {
+        self.networks
+            .get_mut(&event.network_id)
+            .expect("missing network") // TODO(tarcieri): don't panic
+            .handle_poll_event(event);
+
+        Ok(Response::PollEvent)
     }
 }
 
@@ -96,7 +117,8 @@ impl Service<Request> for Collector {
         let result = match req {
             Request::Message(msg) => self.handle_message(msg),
             Request::NetworkState(id) => self.network_state(&id),
-            Request::PollEvent(info) => self.poller_info(info),
+            Request::PagerEvents => self.get_pager_events(),
+            Request::PollEvent(info) => self.handle_poll_event(info),
         };
 
         Box::pin(async { result })
