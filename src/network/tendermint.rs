@@ -81,7 +81,7 @@ impl Network {
         dbg!(&poll_event);
         let last_signed_height = poll_event.last_signed_height.unwrap();
         // todo add page_threshold to config
-        let page_threshold = 13;
+        let page_threshold = 3;
         let current_height = poll_event.current_height;
         if current_height > (last_signed_height + page_threshold) {
             self.page.push(format!(

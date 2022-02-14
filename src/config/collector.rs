@@ -2,6 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
+use crate::config::alert;
 use crate::config::network;
 
 pub mod listen;
@@ -15,4 +16,7 @@ pub struct Config {
 
     /// Networks this collector is collecting information about
     pub networks: network::Config,
+
+    /// Alerting config
+    pub alerting: alert::Config,
 }
