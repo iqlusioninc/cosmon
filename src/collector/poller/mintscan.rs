@@ -56,12 +56,12 @@ impl Poller {
             }
         };
 
-        let mut last_signed_height = None;
+        let mut missed_blocks = None;
         if let Some(addr) = &self.validator_addr {
             match self.client.validator_uptime(addr).await {
                 Ok(uptime) => {
                     dbg!(&uptime);
-                    last_signed_height = Some(uptime.latest_height.into());
+                    missed_blocks = Some(uptime.uptime.len());
 
                     dbg!(uptime.uptime.len());
                 }
@@ -84,7 +84,7 @@ impl Poller {
                     source: Self::SOURCE_NAME,
                     network_id: network::Id::from(&self.chain_id),
                     current_height,
-                    last_signed_height,
+                    missed_blocks: missed_blocks,
                 }
                 .into(),
             )
