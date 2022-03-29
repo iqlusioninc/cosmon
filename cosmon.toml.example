@@ -9,3 +9,12 @@ protocol = "http"
 chain_id = "cosmoshub-4"
 validator_addr = "cosmosvaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03xfytvz7"
 mintscan = { host = "api.cosmostation.io" }
+
+[[collector.networks.tendermint]]
+chain_id = "osmosis-1"
+validator_addr = "osmovaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03x7uy20c"
+mintscan = { host = "api-osmosis.cosmostation.io" }
+
+[collector.alerting.datadog]
+dd_api_key = "YOUR_APIKEY_HERE"
+alert_threshold = 3
