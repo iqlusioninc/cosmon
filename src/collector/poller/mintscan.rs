@@ -84,7 +84,7 @@ impl Poller {
                     source: Self::SOURCE_NAME,
                     network_id: network::Id::from(&self.chain_id),
                     current_height,
-                    missed_blocks: missed_blocks,
+                    missed_blocks,
                 }
                 .into(),
             )
