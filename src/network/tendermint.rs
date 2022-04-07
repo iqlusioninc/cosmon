@@ -79,14 +79,13 @@ impl Network {
     /// Handle incoming poll event
     pub fn handle_poll_event(&mut self, poll_event: PollEvent) {
         dbg!(&poll_event);
-        let last_signed_height = poll_event.last_signed_height.unwrap();
+        let missed_blocks = poll_event.missed_blocks.unwrap();
         // todo add page_threshold to config
-        let page_threshold = 13;
-        let current_height = poll_event.current_height;
-        if current_height > (last_signed_height + page_threshold) {
+        let page_threshold = 10;
+        if missed_blocks > page_threshold {
             self.page.push(format!(
-                "'{}' missed blocks: {} of {}",
-                poll_event.network_id, last_signed_height, current_height
+                "'{}' missed {} blocks!",
+                poll_event.network_id, missed_blocks
             ));
         }
     }

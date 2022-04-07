@@ -86,7 +86,7 @@ impl Pager {
                     tags: Some(ddtags),
                     // Text field must contain @pagerduty to trigger alert
                     text: format!("@pagerduty cosmon event: {:?}", &event),
-                    title: "cosmon event".to_owned(),
+                    title: event,
                 };
 
                 // send stream event to datadog which forwards to pagerduty

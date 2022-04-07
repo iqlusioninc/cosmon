@@ -47,5 +47,5 @@ pub struct PollEvent {
     pub current_height: BlockHeight,
 
     /// Last block signed by the validator for this chain, if known.
-    pub last_signed_height: Option<BlockHeight>,
+    pub missed_blocks: Option<usize>,
 }

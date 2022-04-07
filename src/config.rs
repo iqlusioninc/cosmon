@@ -3,6 +3,7 @@
 use serde::{Deserialize, Serialize};
 
 pub mod agent;
+pub mod alert;
 pub mod collector;
 pub mod network;
 
