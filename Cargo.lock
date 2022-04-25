@@ -301,7 +301,7 @@ dependencies = [
  "futures",
  "home",
  "hostname",
- "iqhttp",
+ "iqhttp 0.2.0",
  "mintscan",
  "once_cell",
  "reqwest",
@@ -865,6 +865,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "iqhttp"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9dcd457bdaf7b82bdb82dd5fbfe9470dbe5f07f102d66534a9810871f0046ef3"
+dependencies = [
+ "hyper",
+ "hyper-rustls",
+ "serde",
+]
+
+[[package]]
 name = "itertools"
 version = "0.10.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -978,7 +989,7 @@ version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9b6809d3045bdce6e8768c48f6d96fad8d86fb31ea2efd5b5dd9a1ae81d07e56"
 dependencies = [
- "iqhttp",
+ "iqhttp 0.1.0",
  "serde",
  "tendermint",
 ]
