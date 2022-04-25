@@ -301,7 +301,7 @@ dependencies = [
  "futures",
  "home",
  "hostname",
- "iqhttp",
+ "iqhttp 0.1.0",
  "mintscan",
  "once_cell",
  "reqwest",
@@ -861,6 +861,17 @@ dependencies = [
  "hyper",
  "hyper-rustls",
  "serde",
+]
+
+[[package]]
+name = "iqhttp"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9dcd457bdaf7b82bdb82dd5fbfe9470dbe5f07f102d66534a9810871f0046ef3"
+dependencies = [
+ "hyper",
+ "hyper-rustls",
+ "serde",
  "serde_json",
 ]
 
@@ -974,11 +985,11 @@ dependencies = [
 
 [[package]]
 name = "mintscan"
-version = "0.3.0"
+version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9b6809d3045bdce6e8768c48f6d96fad8d86fb31ea2efd5b5dd9a1ae81d07e56"
+checksum = "c55ed5e083c2d5a894add57768cfc74090263c2cc06c5017b1097c5f3de64f6a"
 dependencies = [
- "iqhttp",
+ "iqhttp 0.2.0",
  "serde",
  "tendermint",
 ]
