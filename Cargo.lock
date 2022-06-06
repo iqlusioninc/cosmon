@@ -371,7 +371,7 @@ dependencies = [
 [[package]]
 name = "datadog"
 version = "0.1.0"
-source = "git+https://github.com/iqlusioninc/crates#385a632073f3006a24aead26038c8079829b790a"
+source = "git+https://github.com/iqlusioninc/crates#8fce4d9e704cf52ec1942b2f29bdc406ab0ee0e7"
 dependencies = [
  "hostname",
  "hyper",
