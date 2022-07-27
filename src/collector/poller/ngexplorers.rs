@@ -97,7 +97,6 @@ impl Poller {
                         "[{}] can't fetch validator uptime for {} from {}: {}",
                         &self.chain_id, addr, &self.host, err
                     );
-                    return;
                 }
             }
         }
