@@ -20,6 +20,10 @@ pub enum ErrorKind {
     #[error("I/O error")]
     IoError,
 
+    /// HTTP errors
+    #[error("HTTP error")]
+    HttpError,
+
     /// Error reporting events to the collector
     #[error("error reporting to collector")]
     ReportError,
@@ -64,6 +68,12 @@ impl std::error::Error for Error {
 
 impl From<io::Error> for Error {
     fn from(other: io::Error) -> Self {
+        ErrorKind::IoError.context(other).into()
+    }
+}
+
+impl From<iqhttp::Error> for Error {
+    fn from(other: iqhttp::Error) -> Self {
         ErrorKind::IoError.context(other).into()
     }
 }
