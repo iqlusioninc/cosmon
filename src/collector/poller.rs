@@ -9,8 +9,6 @@ use crate::{collector, config, prelude::*};
 use std::time::Duration;
 use tokio::time;
 use tower::Service;
-
-#[cfg(feature = "mintscan")]
 use futures::future;
 
 /// The collector's [`Poller`] collects information from external sources
