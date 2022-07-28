@@ -6,10 +6,10 @@ mod mintscan;
 mod ngexplorers;
 
 use crate::{collector, config, prelude::*};
+use futures::future;
 use std::time::Duration;
 use tokio::time;
 use tower::Service;
-use futures::future;
 
 /// The collector's [`Poller`] collects information from external sources
 /// which aren't capable of pushing data.
