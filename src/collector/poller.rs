@@ -3,13 +3,13 @@
 #[cfg(feature = "mintscan")]
 mod mintscan;
 
+mod ngexplorers;
+
 use crate::{collector, config, prelude::*};
+use futures::future;
 use std::time::Duration;
 use tokio::time;
 use tower::Service;
-
-#[cfg(feature = "mintscan")]
-use futures::future;
 
 /// The collector's [`Poller`] collects information from external sources
 /// which aren't capable of pushing data.
@@ -20,6 +20,8 @@ pub struct Poller {
     /// Mintscan API endpoints to poll
     #[cfg(feature = "mintscan")]
     mintscan: Vec<mintscan::Poller>,
+
+    ngexplorers: Vec<ngexplorers::Poller>,
 }
 
 impl Poller {
@@ -38,10 +40,18 @@ impl Poller {
             .flat_map(mintscan::Poller::new)
             .collect();
 
+        let ngexplorers = config
+            .networks
+            .tendermint
+            .iter()
+            .flat_map(ngexplorers::Poller::new)
+            .collect();
+
         Ok(Self {
             poll_interval,
             #[cfg(feature = "mintscan")]
             mintscan,
+            ngexplorers,
         })
     }
 
@@ -78,15 +88,23 @@ impl Poller {
             + 'static,
     {
         #[cfg(feature = "mintscan")]
-        let mut futures = vec![];
+        let mut mintscan_futures = vec![];
 
         #[cfg(feature = "mintscan")]
         for mintscan_poller in &self.mintscan {
-            futures.push(mintscan_poller.poll(collector.clone()));
+            mintscan_futures.push(mintscan_poller.poll(collector.clone()));
         }
 
         #[cfg(feature = "mintscan")]
-        future::join_all(futures).await;
+        future::join_all(mintscan_futures).await;
+
+        let mut ngexplorers_futures = vec![];
+
+        for ngexplorers_poller in &self.ngexplorers {
+            ngexplorers_futures.push(ngexplorers_poller.poll(collector.clone()));
+        }
+
+        future::join_all(ngexplorers_futures).await;
     }
 
     /// Are there any configured sources?

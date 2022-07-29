@@ -17,6 +17,9 @@ pub struct Config {
     /// Mintscan API endpoint.
     #[cfg(feature = "mintscan")]
     pub mintscan: Option<MintscanConfig>,
+
+    /// Explorers Guru API endpoint.
+    pub ngexplorers: Option<NgExplorersConfig>,
 }
 
 /// Mintscan configuration.
@@ -25,5 +28,13 @@ pub struct Config {
 #[serde(deny_unknown_fields)]
 pub struct MintscanConfig {
     /// API host (e.g. `api.cosmostation.io`)
+    pub host: String,
+}
+
+/// Ng Explorers configuration.
+#[derive(Clone, Debug, Deserialize, Serialize)]
+#[serde(deny_unknown_fields)]
+pub struct NgExplorersConfig {
+    /// API host (e.g. `agoric.api.explorers.guru`)
     pub host: String,
 }
