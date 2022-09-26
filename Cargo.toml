@@ -30,7 +30,7 @@ serde = { version = "1", features = ["serde_derive"] }
 serde_json = { version = "1" }
 tendermint = "=0.23.7"
 tendermint-config = "=0.23.7"
-tendermint-rpc = { version = "=0.23.7", features = ["http-client"] }
+tendermint-rpc = { version = "=0.25.0", features = ["http-client"] }
 tower = { version = "0.4", features = ["buffer", "util"] }
 reqwest = "0.11"
 thiserror = "1"
