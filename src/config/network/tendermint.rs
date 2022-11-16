@@ -29,6 +29,9 @@ pub struct Config {
 pub struct MintscanConfig {
     /// API host (e.g. `api.cosmostation.io`)
     pub host: String,
+
+    /// Network name (e.g. `cosmos`)
+    pub network: String,
 }
 
 /// Ng Explorers configuration.

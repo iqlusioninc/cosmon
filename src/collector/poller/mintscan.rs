@@ -18,6 +18,9 @@ pub struct Poller {
 
     /// Validator operator address (if configured)
     validator_addr: Option<Address>,
+
+    /// Network name
+    network: String,
 }
 
 impl Poller {
@@ -29,6 +32,7 @@ impl Poller {
     pub fn new(config: &config::network::tendermint::Config) -> Option<Self> {
         config.mintscan.as_ref().map(|mintscan_config| {
             let host = mintscan_config.host.clone();
+            let network = mintscan_config.network.clone();
             let client = Mintscan::new(&host);
 
             Self {
@@ -36,6 +40,7 @@ impl Poller {
                 client,
                 chain_id: config.chain_id.clone(),
                 validator_addr: config.validator_addr.clone(),
+                network,
             }
         })
     }
@@ -48,7 +53,7 @@ impl Poller {
             + Clone
             + 'static,
     {
-        let current_height = match self.client.status().await {
+        let current_height = match self.client.status(&self.network).await {
             Ok(status) => status.block_height.into(),
             Err(err) => {
                 warn!("[{}] error polling {}: {}", &self.chain_id, &self.host, err);
@@ -58,7 +63,7 @@ impl Poller {
 
         let mut missed_blocks = None;
         if let Some(addr) = &self.validator_addr {
-            match self.client.validator_uptime(addr).await {
+            match self.client.validator_uptime(&self.network, addr).await {
                 Ok(uptime) => {
                     dbg!(&uptime);
                     missed_blocks = Some(uptime.uptime.len());
