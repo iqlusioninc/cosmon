@@ -332,7 +332,7 @@ dependencies = [
  "serde",
  "serde_json",
  "tendermint 0.26.0",
- "tendermint-config",
+ "tendermint-config 0.26.0",
  "tendermint-rpc",
  "thiserror",
  "tokio",
@@ -1996,6 +1996,34 @@ dependencies = [
 ]
 
 [[package]]
+name = "tendermint"
+version = "0.27.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "eeb6f9c129bc9f1a3c38bc91c63a5e8d3c00ed998e7fa4ca44e06467466d0e77"
+dependencies = [
+ "bytes",
+ "ed25519",
+ "ed25519-dalek",
+ "flex-error",
+ "futures",
+ "num-traits",
+ "once_cell",
+ "prost",
+ "prost-types",
+ "serde",
+ "serde_bytes",
+ "serde_json",
+ "serde_repr",
+ "sha2",
+ "signature",
+ "subtle",
+ "subtle-encoding",
+ "tendermint-proto 0.27.0",
+ "time 0.3.11",
+ "zeroize",
+]
+
+[[package]]
 name = "tendermint-config"
 version = "0.26.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2005,6 +2033,20 @@ dependencies = [
  "serde",
  "serde_json",
  "tendermint 0.26.0",
+ "toml",
+ "url",
+]
+
+[[package]]
+name = "tendermint-config"
+version = "0.27.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "414d0e7b47e20accc2e950fa623e76269eb0daeb8a20b6d7af2a61211f2806bf"
+dependencies = [
+ "flex-error",
+ "serde",
+ "serde_json",
+ "tendermint 0.27.0",
  "toml",
  "url",
 ]
@@ -2046,10 +2088,28 @@ dependencies = [
 ]
 
 [[package]]
-name = "tendermint-rpc"
-version = "0.26.0"
+name = "tendermint-proto"
+version = "0.27.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b5d87fa5429bd2ee39c4809dd546096daf432de9b71157bc12c182ab5bae7ea7"
+checksum = "d5895470f28c530f8ae8c4071bf8190304ce00bd131d25e81730453124a3375c"
+dependencies = [
+ "bytes",
+ "flex-error",
+ "num-derive",
+ "num-traits",
+ "prost",
+ "prost-types",
+ "serde",
+ "serde_bytes",
+ "subtle-encoding",
+ "time 0.3.11",
+]
+
+[[package]]
+name = "tendermint-rpc"
+version = "0.27.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "367e0417ca8bb40edc0a7af65600840f7c199b0b6109fdb12c5827733bec155f"
 dependencies = [
  "async-trait",
  "bytes",
@@ -2067,9 +2127,8 @@ dependencies = [
  "serde_json",
  "subtle",
  "subtle-encoding",
- "tendermint 0.26.0",
- "tendermint-config",
- "tendermint-proto 0.26.0",
+ "tendermint 0.27.0",
+ "tendermint-config 0.27.0",
  "thiserror",
  "time 0.3.11",
  "tokio",
