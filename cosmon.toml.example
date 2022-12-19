@@ -8,12 +8,12 @@ protocol = "http"
 [[collector.networks.tendermint]]
 chain_id = "cosmoshub-4"
 validator_addr = "cosmosvaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03xfytvz7"
-mintscan = { host = "api.cosmostation.io" }
+mintscan = { host = "api.mintscan.io", network = "cosmos" }
 
 [[collector.networks.tendermint]]
 chain_id = "osmosis-1"
 validator_addr = "osmovaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03x7uy20c"
-mintscan = { host = "api-osmosis.cosmostation.io" }
+mintscan = { host = "api.mintscan.io", network = "osmosis" }
 
 [[collector.networks.tendermint]]
 chain_id = "agoric"
