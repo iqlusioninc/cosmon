@@ -16,9 +16,9 @@ categories = ["cryptography::cryptocurrencies"]
 keywords   = ["cosmos", "tendermint"]
 
 [dependencies]
-abscissa_core = "=0.6.0"
-abscissa_tokio = "=0.6.0"
-clap = "3"
+abscissa_core = "0.7"
+abscissa_tokio = "0.7"
+clap = "4"
 chrono = { version = "0.4", features = ["serde"] }
 datadog = { git = "https://github.com/iqlusioninc/crates" }
 futures = "0.3"
@@ -28,9 +28,9 @@ home = "0.5"
 iqhttp = { version = "0.2", features = ["json"] }
 serde = { version = "1", features = ["serde_derive"] }
 serde_json = { version = "1" }
-tendermint = "=0.26.0"
-tendermint-config = "=0.26.0"
-tendermint-rpc = { version = "=0.26.0", features = ["http-client"] }
+tendermint = "=0.28.0"
+tendermint-config = "=0.28.0"
+tendermint-rpc = { version = "=0.28.0", features = ["http-client"] }
 tower = { version = "0.4", features = ["buffer", "util"] }
 reqwest = "0.11"
 thiserror = "1"
@@ -46,7 +46,7 @@ mintscan = { git = "https://github.com/iqlusioninc/crates", optional = true }
 once_cell = "1"
 
 [dev-dependencies.abscissa_core]
-version = "=0.6.0"
+version = "0.7"
 features = ["testing"]
 
 [features]
