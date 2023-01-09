@@ -106,7 +106,7 @@ impl Poller {
             return true;
         }
 
-        if !self.ngexplorers.is_emtpy() {
+        if !self.ngexplorers.is_empty() {
             return true;
         }
 
