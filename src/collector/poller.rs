@@ -106,6 +106,10 @@ impl Poller {
             return true;
         }
 
+        if !self.ngexplorers.is_emtpy() {
+            return true;
+        }
+
         false
     }
 }
