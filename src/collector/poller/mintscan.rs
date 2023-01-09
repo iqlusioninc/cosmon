@@ -1,7 +1,7 @@
 //! Mintscan poller
 
 use crate::{collector, config, network, prelude::*};
-use mintscan::{Address, Mintscan};
+use crate::mintscan::{Address, Mintscan};
 use tendermint::chain;
 use tower::{util::ServiceExt, Service};
 

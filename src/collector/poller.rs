@@ -1,6 +1,5 @@
 //! Collector poller
 
-#[cfg(feature = "mintscan")]
 mod mintscan;
 
 mod ngexplorers;
@@ -18,7 +17,6 @@ pub struct Poller {
     poll_interval: Duration,
 
     /// Mintscan API endpoints to poll
-    #[cfg(feature = "mintscan")]
     mintscan: Vec<mintscan::Poller>,
 
     ngexplorers: Vec<ngexplorers::Poller>,
@@ -32,7 +30,6 @@ impl Poller {
         let poll_interval = Duration::from_secs(60);
 
         // Initialize Mintscan if configured
-        #[cfg(feature = "mintscan")]
         let mintscan = config
             .networks
             .tendermint
@@ -49,7 +46,6 @@ impl Poller {
 
         Ok(Self {
             poll_interval,
-            #[cfg(feature = "mintscan")]
             mintscan,
             ngexplorers,
         })
@@ -87,15 +83,12 @@ impl Poller {
             + Clone
             + 'static,
     {
-        #[cfg(feature = "mintscan")]
         let mut mintscan_futures = vec![];
 
-        #[cfg(feature = "mintscan")]
         for mintscan_poller in &self.mintscan {
             mintscan_futures.push(mintscan_poller.poll(collector.clone()));
         }
 
-        #[cfg(feature = "mintscan")]
         future::join_all(mintscan_futures).await;
 
         let mut ngexplorers_futures = vec![];
@@ -109,7 +102,6 @@ impl Poller {
 
     /// Are there any configured sources?
     fn has_sources(&self) -> bool {
-        #[cfg(feature = "mintscan")]
         if !self.mintscan.is_empty() {
             return true;
         }
