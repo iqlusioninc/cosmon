@@ -1,10 +1,6 @@
 #![doc = include_str!("../../README.md")]
 #![forbid(unsafe_code)]
-#![warn(
-clippy::unwrap_used,
-missing_docs,
-unused_qualifications
-)]
+#![warn(clippy::unwrap_used, missing_docs, unused_qualifications)]
 
 pub mod coin;
 pub mod v1;
