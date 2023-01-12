@@ -63,14 +63,9 @@ impl Poller {
         if let Some(addr) = &self.validator_addr {
             match self.validator_uptime(addr).await {
                 Ok(uptime) => {
-                    let mut current_height = 0;
                     let mut missed_blocks = 0;
 
                     for block in uptime {
-                        if current_height < block.height {
-                            current_height = block.height;
-                        }
-
                         if !block.signed {
                             missed_blocks += 1;
                         }
@@ -84,7 +79,6 @@ impl Poller {
                             collector::request::PollEvent {
                                 source: Self::SOURCE_NAME,
                                 network_id: network::Id::from(&self.chain_id),
-                                current_height,
                                 missed_blocks: Some(missed_blocks),
                             }
                             .into(),
@@ -106,8 +100,8 @@ impl Poller {
 #[derive(Clone, Debug, Deserialize)]
 pub struct Block {
     /// Height
-    height: u64,
+    pub height: u64,
 
     /// Signed
-    signed: bool,
+    pub signed: bool,
 }
