@@ -1,6 +1,4 @@
-#![doc = include_str!("../../README.md")]
-#![forbid(unsafe_code)]
-#![warn(clippy::unwrap_used, missing_docs, unused_qualifications)]
+//! Mintscan API client
 
 pub mod coin;
 pub mod v1;
@@ -35,13 +33,6 @@ impl Mintscan {
             .add_header(iqhttp::header::REFERER, "https://mintscan.io/")
             .expect("couldn't add referer header");
         Self { client }
-    }
-
-    /// Get `/v1/status` endpoint.
-    pub async fn status(&self, network: &str) -> Result<v1::Status> {
-        self.client
-            .get_json(&format!("/v1/{}/status", network), &Default::default())
-            .await
     }
 
     /// Get `/v1/staking/validator` endpoint.

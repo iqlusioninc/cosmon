@@ -2,9 +2,6 @@
 
 use crate::{message, network};
 
-/// Block height type
-pub type BlockHeight = u64;
-
 /// Requests to the collector.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Request {
@@ -42,9 +39,6 @@ pub struct PollEvent {
 
     /// Network ID the information is associated with.
     pub network_id: network::Id,
-
-    /// Current block height.
-    pub current_height: BlockHeight,
 
     /// Last block signed by the validator for this chain, if known.
     pub missed_blocks: Option<usize>,

@@ -53,14 +53,6 @@ impl Poller {
             + Clone
             + 'static,
     {
-        let current_height = match self.client.status(&self.network).await {
-            Ok(status) => status.block_height.into(),
-            Err(err) => {
-                warn!("[{}] error polling {}: {}", &self.chain_id, &self.host, err);
-                return;
-            }
-        };
-
         let mut missed_blocks = None;
         if let Some(addr) = &self.validator_addr {
             match self.client.validator_uptime(&self.network, addr).await {
@@ -88,7 +80,6 @@ impl Poller {
                 collector::request::PollEvent {
                     source: Self::SOURCE_NAME,
                     network_id: network::Id::from(&self.chain_id),
-                    current_height,
                     missed_blocks,
                 }
                 .into(),
