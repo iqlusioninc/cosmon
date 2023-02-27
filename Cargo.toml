@@ -28,7 +28,7 @@ home = "0.5"
 iqhttp = { version = "0.2", features = ["json"] }
 serde = { version = "1", features = ["serde_derive"] }
 serde_json = { version = "1" }
-tendermint = "=0.28.0"
+tendermint = "=0.29.1"
 tendermint-config = "=0.28.0"
 tendermint-rpc = { version = "=0.28.0", features = ["http-client"] }
 tower = { version = "0.4", features = ["buffer", "util"] }
