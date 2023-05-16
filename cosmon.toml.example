@@ -20,6 +20,16 @@ chain_id = "agoric"
 validator_addr = "D1CE9A9EF19196DA9BCEA8484791DC6BA28178B0"
 ngexplorers = { host = "agoric.api.explorers.guru" }
 
+[[collector.networks.tendermint]]
+chain_id = "noble"
+validator_addr = "noblevaloper1ft2sjkdx9w0qrzchu83mn4p0ujmv83ucuqxjls"
+mintscan = { host = "api.mintscan.io", network = "noble" }
+
+[[collector.networks.tendermint]]
+chain_id = "neutron"
+validator_addr = "neutronvaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03xjj0zjw"
+mintscan = { host = "api.mintscan.io", network = "neutron" }
+
 [collector.alerting.datadog]
 dd_api_key = "YOUR_APIKEY_HERE"
 alert_threshold = 3
